@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #333;
+  padding: 20px 0;
+}
+
+.welcome {
+  color: #fff;
+  padding: 0 20px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 80px);
+  text-align: center; /* Center the text for smaller screens or if the flex container has extra space */
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  align-items: center; /* Center buttons horizontally */
+  gap: 15px; /* Space between buttons */
+}
+
+.button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 15px 30px; /* Increase padding for a larger button */
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px; /* Increase font size for better readability */
+  border-radius: 8px; /* Rounded corners for the buttons */
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2); /* Add a subtle shadow to the buttons */
+  transition: all 0.2s ease-in-out; /* Smooth transition for hover effects */
+  width: 200px; /* Set a fixed width for all buttons */
+}
+
+.button:hover, .button:focus {
+  background-color: #0056b3;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+  transform: scale(1.05); /* Slightly increase the button size on hover */
+}
+
+.button:active {
+  background-color: #004494;
+  transform: scale(0.95); /* Slightly decrease the button size when clicked */
+}

@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    padding: 20px 0;
+}
+
+.welcome {
+    color: #fff;
+    padding: 0 20px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100vh - 80px);
+}
+
+.content-container {
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between text field and button */
+}
+
+.input-field {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    width: 250px; /* Fixed width for the input */
+    outline: none;
+}
+
+.input-field:focus {
+    border-color: #007BFF;
+}
+
+.save-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #28a745;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.save-button:hover {
+    background-color: #218838;
+}

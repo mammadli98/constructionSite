@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubzug Protokolle</title>
+  <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ username }}</span>
+    </div>
+  </header>
+
+  <main>
+    <table>
+      <tr class="protokol-container">
+        <a href='/userView/' class="back-button">Back</a>
+        <td class="protokol-name">{{ hubzug.protocol1.protocolName }}</td>
+        <td>
+          {% if hubzug.protocol1.isExported %}
+          <button class="protokol-button" disabled>Bearbeiten</button>
+          {% else %}
+          <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHost" hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
+          {% endif %}
+        </td>
+        <!--...
+        <td>
+          <form action="" method="post">
+            {% csrf_token %}
+            <button type="submit" class="protokol-button">Erstellen</button>
+          </form>
+        </td>
+        -->
+        <td class="status-indicator">
+          {% if hubzug.protocol1.isExported %}
+          <div class="circle green"></div>
+          {% elif hubzug.protocol1.isSaved %}
+          <div class="circle yellow"></div>
+          {% else %}
+          <div class="circle red"></div>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+  </main>
+</body>
+</html>

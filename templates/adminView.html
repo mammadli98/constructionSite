@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'myapp/adminView.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="header">
+            <h1>Welcome Admin</h1>
+        </header>
+        <div class="row">
+            <div class="col-md-4 baustellen-panel">
+                <h2>Baustellen</h2>
+                <!-- Trigger Modal for Baustelle -->
+                <button class="btn btn-primary add-btn" data-toggle="modal" data-target="#addBaustelleModal">+ Add Baustelle</button>
+                <!-- Modal for adding new Baustelle -->
+                <div class="modal fade" id="addBaustelleModal" tabindex="-1" role="dialog" aria-labelledby="addBaustelleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addBaustelleModalLabel">New Baustelle</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    {{ baustelle_form.as_p }}
+                                    <button type="submit" class="btn btn-success">Save Baustelle</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Baustelle Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for baustelle in baustellen_list %}
+                        <tr data-baustelle-id="{{ baustelle.id }}" onclick="selectBaustelle(this, {{ baustelle.id }})">
+                            <td>{{ baustelle.baustelleName }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No Baustellen found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 fahrzeuge-panel">
+                <h2>Fahrzeuge</h2>
+                <button class="btn btn-primary add-btn" id="addFahrzeugBtn" data-toggle="modal" data-target="#addFahrzeugModal">+ Add Fahrzeug</button>
+                <!-- Modal for adding new Fahrzeug -->
+                <div class="modal fade" id="addFahrzeugModal" tabindex="-1" role="dialog" aria-labelledby="addFahrzeugModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addFahrzeugModalLabel">New Fahrzeug</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="baustelle_id" value="" id="selectedBaustelleId">
+                                    {{ fahrzeug_form.as_p }}
+                                    <button type="submit" class="btn btn-success">Save Fahrzeug</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table" id="fahrzeugTable">
+                    <thead>
+                        <tr>
+                            <th>Fahrzeug Name</th>
+                            <th>Is Visible</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fahrzeug in fahrzeug_list %}
+                        <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}">
+                            <td>{{ fahrzeug.fahrzeugName }}</td>
+                            <td>
+                                <input type="checkbox" {% if fahrzeug.isVisible %}checked{% endif %} onchange="toggleVisibility({{ fahrzeug.id }}, this.checked)">
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="2">No Fahrzeuge found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 user-panel">
+                <h2>Users</h2>
+                <button class="btn btn-primary add-btn" data-toggle="modal" data-target="#addUserModal">+ Add User</button>
+                <!-- Modal for adding new User -->
+                <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addUserModalLabel">New User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" action="">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <label for="username">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password" required>
+                                    </div>
+                                    <button type="submit" class="btn btn-success">Save User</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in user_list %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No Users found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include external JavaScript file -->
+    <script src="{% static 'myapp/adminView.js' %}"></script>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

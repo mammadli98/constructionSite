@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <link rel="stylesheet" href="{% static 'myapp/menu.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ username }}</span>
+    </div>
+  </header>
+  
+  <div class="selection-info">
+    <p>Selected Baustelle: {{ baustelle.baustelle }}</p>
+    <p>Selected Fahrzeug: {{ fahrzeug.fahrzeug }}</p>
+  </div>
+
+  <main>
+    <div class="button-container">
+      <a href='/hubzug?baustelle={{ request.GET.baustelle }}&fahrzeug={{ request.GET.fahrzeug }}' class="button">Hubzug</a>
+      <a href='/mechanik?baustelle={{ request.GET.baustelle }}&fahrzeug={{ request.GET.fahrzeug }}' class="button">Mechanik</a>
+      <a href='/elektrik?baustelle={{ request.GET.baustelle }}&fahrzeug={{ request.GET.fahrzeug }}' class="button">Elektrik</a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,128 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    font-size: 18px; /* Increase the base font size */
+}
+
+.logo-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.logo-container img {
+    width: 200px; /* Adjusted for better fitting */
+    height: auto;
+}
+
+.container {
+    margin: 20px auto; /* Center the container */
+    max-width: 900px; /* Set a maximum width for better readability */
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.description-form {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto; /* Center the table */
+}
+
+.form-table td, .form-table th {
+    padding: 15px;
+    border: 1px solid #ddd;
+    vertical-align: top;
+    font-size: 18px; /* Increase font size */
+}
+
+.form-table th {
+    background-color: #f4f4f4;
+    text-align: left;
+}
+
+.form-table textarea, .form-table input {
+    font-size: 16px; /* Increase font size */
+}
+
+.form-table input[type="text"] {
+    height: 34px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Distribute space between the buttons */
+    align-items: center; /* Align buttons vertically */
+    margin-top: 20px; /* Add margin to the top of the container */
+  }
+  
+.btn-save {
+background-color: #1869e2;
+color: white;
+border: none;
+padding: 10px 15px;
+font-size: 18px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.btn-save-export {
+background-color: #4CAF50;
+color: white;
+border: none;
+padding: 10px 15px;
+font-size: 18px;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.3s;
+}
+
+.btn-save-export:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.btn-save:hover {
+background-color: #456ca0;
+}
+
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px; /* Increase font size */
+    border: none;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}
+
+.confirmation-box {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+.confirmation-box button {
+    margin-top: 10px;
+}

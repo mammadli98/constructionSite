@@ -1,0 +1,36 @@
+<!-- protocol_list.html -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocol List</title>
+    <link rel="stylesheet" href="{% static 'myapp/protocol_list.css' %}">
+</head>
+<body>
+    <h1>Protocol List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Baustelle</th>
+                <th>Fahrzeug</th>
+                <th>Teil</th>
+                <th>Protokol Type</th>
+                <th>Path</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for protocol in protocols %}
+                <tr>
+                    <td>{{ protocol.baustelle }}</td>
+                    <td>{{ protocol.fahrzeug }}</td>
+                    <td>{{ protocol.teil }}</td>
+                    <td>{{ protocol.protokolType }}</td>
+                    <td><a href="file://{{ protocol.path }}" target="_blank">{{ protocol.path }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

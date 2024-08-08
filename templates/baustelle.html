@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aktuelle Baustellen</title>
+  <link rel="stylesheet" href="{% static 'myapp/baustelle.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ request.user.username }}</span>
+    </div>
+  </header>
+  
+  <main>
+    <form method="GET" action=""> <!-- Update this action to the target URL -->
+      <div class="left-column">
+        <h1>Baustelle</h1>
+        <div class="dropdown-container">
+          <select id="baustelle-dropdown" class="dropdown" name="baustelle" onclick="this.form.submit()">
+            {% for baustelle in baustellen_list %}
+              <option value="{{ baustelle.id }}" {% if baustelle.id|stringformat:"s" == selected_baustelle_id|stringformat:"s" %}selected{% endif %}>
+                {{ baustelle.baustelle }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+      <div class="right-column">
+        <h1>Fahrzeug</h1>
+        <div class="dropdown-container">
+          <select id="fahrzeug-dropdown" class="dropdown" name="fahrzeug" onclick="this.form.submit()">
+            {% for fahrzeug in fahrzeug_list %}
+              <option value="{{ fahrzeug.id }}" {% if fahrzeug.id|stringformat:"s" == selected_fahrzeug_id|stringformat:"s" %}selected{% endif %}>
+                {{ fahrzeug.fahrzeug }}
+              </option>
+            {% endfor %}
+          </select>
+          <a href='/menu?baustelle={{ selected_baustelle_id }}&fahrzeug={{ selected_fahrzeug_id }}' class="button">Weiter</a>
+        </div>
+        <a href='/protocol_list' class="buttonDatenbank">Datenbank</a>
+      </div>
+    </form>
+  </main>
+</body>
+</html>

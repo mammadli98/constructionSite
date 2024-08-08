@@ -1,0 +1,111 @@
+/* General resets and base styles */
+* {
+    box-sizing: border-box;
+}
+body, html {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f2f2f2;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.container-fluid {
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.header {
+    background-color: #3498db; /* Softer blue */
+    color: white;
+    padding: 20px;
+    font-size: 28px;
+    text-align: center;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+/* Styling for each panel */
+.baustellen-panel, .fahrzeuge-panel {
+    flex: 1; /* each takes half of the row */
+    margin: 0 5px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Table styling */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.table th, .table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Button styles */
+.add-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.add-btn:hover {
+    background-color: #218838;
+}
+
+.selected {
+    background-color: #d3d3d3; /* Light gray background for selected row */
+}
+
+.selected-baustelle {
+    background-color: #d3d3d3; /* Light gray background for selected row */
+}
+.selected-fahrzeug {
+    background-color: #add8e6; /* Light blue background for selected row */
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* Responsive layout adjustments */
+@media (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .baustellen-panel, .fahrzeuge-panel {
+        width: 80%;
+        margin: 10px 0;
+    }
+}

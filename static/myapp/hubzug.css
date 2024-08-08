@@ -1,0 +1,108 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f4f4;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center; /* Center the welcome text */
+}
+
+/* Main Content Styles */
+main {
+    padding: 20px; /* Add padding around the main content area */
+    min-height: calc(100vh - 60px); /* Adjust based on header height */
+}
+
+/* Table Styles */
+table {
+    width: 90%; /* Reduce table width for better spacing */
+    margin: 20px auto; /* Center table horizontally and add vertical spacing */
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.protokol-container td {
+    padding: 12px; /* Increase padding for better spacing */
+    border: 1px solid #ddd; /* Lighter border for less visual weight */
+    text-align: left; /* Align text to the left for better readability */
+}
+
+.protokol-name {
+    font-weight: bold; /* Make protokol name bold */
+}
+
+/* Button Styles */
+.protokol-button {
+    background-color: #5C67F2; /* Pleasant blue for buttons */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px; /* Rounded corners for buttons */
+    cursor: pointer; /* Cursor pointer for better user experience */
+    transition: background 0.3s ease; /* Smooth transition for hover effects */
+    width: auto; /* Auto width based on content */
+}
+
+.protokol-button:hover {
+    background-color: #4048bf; /* Darker shade on hover */
+}
+
+.protokol-button:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+/* Utility Classes */
+.welcome {
+    font-size: 1.2em;
+}
+
+/* Status Indicator Styles */
+.status-indicator {
+    text-align: center;
+    padding: 12px;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.red {
+    background-color: red;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.green {
+    background-color: green;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px; /* Increase font size */
+    border: none;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+    text-decoration: none;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'myapp/userView.css' %}">
+</head>
+<body>
+    <div class="container-fluid">
+        <header class="header">
+            <h1>Welcome User</h1>
+        </header>
+        <div class="row">
+            <div class="col-md-4 baustellen-panel">
+                <h2>Baustellen</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Baustelle Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for baustelle in baustellen_list %}
+                        <tr data-baustelle-id="{{ baustelle.id }}" onclick="selectBaustelle(this, {{ baustelle.id }})">
+                            <td>{{ baustelle.baustelleName }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td>No Baustellen found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 fahrzeuge-panel">
+                <h2>Fahrzeuge</h2>
+                <table class="table" id="fahrzeugTable">
+                    <thead>
+                        <tr>
+                            <th>Fahrzeug Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for fahrzeug in fahrzeug_list %}
+                            {% if fahrzeug.isVisible %}
+                                <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}" data-fahrzeug-id="{{ fahrzeug.id }}" onclick="selectFahrzeug(this)">
+                                    <td>{{ fahrzeug.fahrzeugName }}</td>
+                                </tr>
+                            {% endif %}
+                        {% empty %}
+                            <tr>
+                                <td colspan="2">No Fahrzeuge found.</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-4 actions-panel text-center">
+                <h2>Actions</h2>
+                <button class="btn btn-primary action-btn disabled d-block mb-2 mx-auto" id="hubzugBtn" onclick="redirectTo('/hubzug/')">Hubzug</button>
+                <button class="btn btn-primary action-btn disabled d-block mb-2 mx-auto" id="mechanikBtn" onclick="redirectTo('/mechanik/')">Mechanik</button>
+                <button class="btn btn-primary action-btn disabled d-block mx-auto" id="elektrikBtn" onclick="redirectTo('/elektrik/')">Elektrik</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Include external JavaScript file -->
+    <script src="{% static 'myapp/userView.js' %}"></script>
+
+    <!-- Include Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

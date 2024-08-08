@@ -1,0 +1,93 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9; /* Lighter background for a modern look */
+}
+
+header {
+    background-color: #00457C; /* Dark blue for a professional look */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Align items vertically in the center */
+    min-height: calc(100vh - 60px); /* Adjust height calculation */
+    padding: 20px;
+}
+
+.left-column, .right-column {
+    flex: 1; /* Ensure flex items take equal space */
+    max-width: 300px; /* Set a max-width for better control */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-align the content */
+    margin: 10px; /* Add some margin for spacing */
+}
+
+h1 {
+    color: #333;
+    font-size: 20px; /* Slightly smaller font size for headings */
+    margin-bottom: 20px;
+}
+
+.dropdown-container {
+    width: 100%; /* Full width within column */
+    margin-bottom: 20px; /* Margin-bottom for spacing */
+}
+
+.dropdown {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    appearance: none;
+}
+
+.dropdown:hover, .dropdown:focus {
+    border-color: #007BFF; /* Highlight color on hover and focus */
+}
+
+.button {
+    background-color: #007BFF; /* Consistent button color */
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none; /* Remove underline from links styled as buttons */
+    display: inline-block; /* Align properly without line breaks */
+    margin-top: 10px; /* Spacing after dropdowns */
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+
+.buttonDatenbank {
+    background-color: #00aeff; /* Consistent button color */
+    color: white;
+    border: none;
+    padding: 40px 60px;
+    font-size: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none; /* Remove underline from links styled as buttons */
+    display: inline-block; /* Align properly without line breaks */
+    margin-top: 10px; /* Spacing after dropdowns */
+}
+
+.buttonDatenbank:hover {
+    background-color: #0065b3;
+}

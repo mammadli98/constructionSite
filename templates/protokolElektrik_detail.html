@@ -1,0 +1,53 @@
+<!-- protokol_detail.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ protokol.name }}</title>
+    <link rel="stylesheet" href="{% static 'myapp/protokol.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>{{ protokol.name }}</h1>
+        <form action="{% url 'protokolElektrik_update' protokol.id %}" method="post" class="description-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" class="textarea-control">{{ protokol.description }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="size">Size:</label>
+                <textarea id="size" name="size" class="textarea-control">{{ protokol.size }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="size">Last modified: {{ protokol.lastChanger }}</label>
+            </div>
+
+            {% if protokol.elektrikInside %}
+                {% for outer_key, inner_dict in protokol.elektrikInside.items %}
+                    <div class="nested-group">
+                        {% if outer_key == "Notizen" %}
+                            <h5><em>{{ inner_dict }}</em></h5>
+                        {% else %}
+                            <h3>{{ outer_key }}</h3>
+                        {% endif %}
+                        {% for key, value in inner_dict.items %}
+                            <div class="form-group">
+                                <label for="{{ outer_key }}_{{ key }}">{{ key }}</label>
+                                <textarea id="{{ outer_key }}_{{ key }}" name="{{ outer_key }}_{{ key }}" class="textarea-control">{{ value }}</textarea>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            
+            <button type="submit" class="btn-save">Save Changes</button>
+        </form>
+        <form action="{% url 'protokolElektrik_export_pdf' protokol.id %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn-export">Export as PDF</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EHB Fahrzeugnummer</title>
+  <link rel="stylesheet" href="{% static 'myapp/fahrzeugsnummer.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ username }}</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="content-container">
+      <h1>EHB Fahrzeugnummer</h1>
+      <div class="input-group">
+        <input type="text" id="fahrzeugnummer-input" class="input-field" placeholder="Fahrzeugnummer eingeben" name="fahrzeugnummer">
+        <button class="save-button">Speichern</button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome Page</title>
+  <link rel="stylesheet" href="{% static 'myapp/home.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ username }}</span>
+    </div>
+  </header>
+  
+  <main>
+    <div class="button-container">
+      <a href="/baustelle" class="button">Baustelle</a>
+    </div>
+  </main>
+</body>
+</html>

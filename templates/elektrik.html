@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubzug Protokolle</title>
+  <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ username }}</span>
+    </div>
+  </header>
+
+  <main>
+    <table>
+      {% for protokol in protokolnames %}
+        <tr class="protokol-container">
+          <td class="protokol-name">{{ protokol.name }}</td>
+          <td>
+            <button class="protokol-button" onclick="location.href='{% url 'protokolElektrik_detail' protokol.id %}'">Bearbeiten</button>
+          </td>
+          <td>
+            <form action="{% url 'protokolElektrik_reset' protokol.id %}" method="post">
+              {% csrf_token %}
+              <button type="submit" class="protokol-button">Erstellen</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </main>
+</body>
+</html>

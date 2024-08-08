@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ protokol.protocolName }}</title>
+    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+    </div>
+    <div class="container">
+        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>
+        <h1>{{ protokol.protocolName }}</h1>
+        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form">
+            {% csrf_token %}
+            <h4>Hubzug Lifting Hoist</h4>
+            <table class="form-table">
+                <tr>
+                    <th>Hubzug Lifting Hoist</th>
+                    <th>Ist</th>
+                    <th>Soll</th>
+                </tr>
+                <tr>
+                    <td>Zeichnung-Nr / Drawing No.:</td>
+                    <td><input type="text" id="drawing" name="drawing" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.drawing|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Rev:</td>
+                    <td><input type="text" id="rev" name="rev" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.rev|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr. / Order No.:</td>
+                    <td><input type="text" id="order" name="order" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.order|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr.-SAG / Order No.-SAG:</td>
+                    <td><input type="text" id="order_sag" name="order_sag" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.order_sag|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Geräte-Nr. / Device No:</td>
+                    <td><input type="text" id="device" name="device" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.device|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Hubzug-Nr. / Hoist No.:</td>
+                    <td><input type="text" id="hoist" name="hoist" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.hoist|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Firma / Company:</td>
+                    <td><input type="text" id="company" name="company" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.company|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Stückzahl / Quantity:</td>
+                    <td><input type="text" id="quantity" name="quantity" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.quantity|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <th colspan="2">Prüfmaße / Check Sizes:</th>
+                </tr>
+                <tr>
+                    <td><b>1.</b> Horizontaler Abstand der Anschlussbohrungen* / Horizontal distance of connecting holes*</td>
+                    <td>
+                        <input type="number" id="check_size_1" name="check_size_1" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_1|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>2.</b> Vertikaler Abstand der Anschlussbohrungen / Vertical distance of connecting holes*</td>
+                    <td>
+                        <input type="number" id="check_size_2" name="check_size_2" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_2|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>3.</b> Durchmesser 1.Anschlussbohrung / Diameter of 1st connecting hole</td>
+                    <td>
+                        <input type="number" id="check_size_3" name="check_size_3" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_3|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>4.</b> Durchmesser 2. Anschlussbohrung / Diameter of 2nd connecting hole</td>
+                    <td>
+                        <input type="number" id="check_size_4" name="check_size_4" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_4|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>4a.</b> Abstand zwischen Gehäuseseiten* / Distance between the frame sides *</td>
+                    <td>
+                        <input type="number" id="check_size_4a" name="check_size_4a" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_4a|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>5.</b> Horizontaler Abstand zu Lochkreismitte für Lageranbau* / Horizontal distance to centre of drum bearing*</td>
+                    <td>
+                        <input type="number" id="check_size_5" name="check_size_5" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_5|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>6.</b> Vertikaler Abstand zu Lochkreismitte für Lageranbau* / Vertical distance to centre of drum bearing*</td>
+                    <td>
+                        <input type="number" id="check_size_6" name="check_size_6" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_6|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>7.</b> Durchmesser der Lagerbohrung* / Diameter of the holes for the bearings*</td>
+                    <td>
+                        <input type="number" id="check_size_7" name="check_size_7" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_7|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>8.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
+                    <td>
+                        <input type="number" id="check_size_8" name="check_size_8" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_8|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>9.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
+                    <td>
+                        <input type="number" id="check_size_9" name="check_size_9" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_9|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <td><b>10.</b> Durchmesser der beiden Aufnahmebohrungen der Klinke / Diameter of both holes for the Catch lever</td>
+                    <td>
+                        <input type="number" id="check_size_10" name="check_size_10" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.check_size_10|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Lagetoleranzen / Position tolerances:</th>
+                </tr>
+                <tr>
+                    <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
+                    <td>
+                        <input type="number" id="position_tolerance_11" name="position_tolerance_11" 
+                               data-min="1270" data-max="1290" required class="textarea-control" 
+                               value="{{ protokol.position_tolerance_11|default_if_none:'' }}">
+                    </td>
+                    <td> 1280 ± 10</td>
+                </tr>
+                
+                <tr>
+                    <td><h4>Sonstiges / Miscellaneous</h4></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><label for="miscellaneous">Sonstiges / Miscellaneous:</label></td>
+                    <td><input type="text" id="miscellaneous" name="miscellaneous" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.miscellaneous|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Bemerkungen / Remarks:</td>
+                    <td><input type="text" id="remark" name="remark" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.remark|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Messgerät / Measure tools:</td>
+                    <td><input type="text" id="measure" name="measure" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.measure|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Datum / Date:</td>
+                    <td><input type="date" id="date" name="date" class="textarea-control" value="{{ protokol.date|default_if_none:'' }}" required></td>
+                  </tr>
+                <tr>
+                    <td>Prüfer / Inspector:</td>
+                    <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" required class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Abteilung / Department:</td>
+                    <td><input type="text" id="department" name="department" minlength="3" maxlength="20" required class="textarea-control" value="{{ protokol.department|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Last modified:</td>
+                    <td>{{ protokol.last_changer|default_if_none:"" }}</td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="btn-save">Save Changes</button>
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Export as PDF</button>
+            </div>
+        </form>
+        
+        <div id="confirmation-box" class="confirmation-box" data-fahrzeug-id="{{ fahrzeug_id }}">
+            <p>Your protocol will be saved in the given path:</p>
+            <p id="file-path"></p>
+            <button onclick="hideConfirmation()">OK</button>
+        </div>
+    </div>
+
+    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+</body>
+</html>
