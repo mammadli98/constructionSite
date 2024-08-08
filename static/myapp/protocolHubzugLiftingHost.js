@@ -10,6 +10,11 @@ function hideConfirmation() {
 }
 
 function submitExportForm(button) {
+    if (!validateInputsForExport()) {
+        console.log('Validation failed. Export process aborted.');
+        return; // Exit the function if validation fails
+    }
+
     const url = button.getAttribute('data-url');
 
     // Logging for debugging
@@ -26,23 +31,22 @@ function submitExportForm(button) {
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
-        return response.json().catch(() => {
-            throw new Error('Invalid JSON response');
-        });
+        return response.blob();
     })
-    .then(data => {
-        if (data.error) {
-            throw new Error(data.error);
-        }
-        // Show the confirmation message with the file path
-        console.log('Export successful, file path:', data.path);
-        document.getElementById('file-path').textContent = data.path;
+    .then(blob => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `exported_protokol.pdf`; // You can customize the filename here
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+        // Show the confirmation box
         const confirmationBox = document.getElementById('confirmation-box');
         confirmationBox.style.display = 'block';
         console.log('Confirmation box displayed');
-
-        // Disable form inputs
-        disableFormInputs(true);
     })
     .catch(error => {
         console.error('Error:', error);
@@ -53,45 +57,118 @@ function getCsrfToken() {
     return document.querySelector('[name=csrfmiddlewaretoken]').value;
 }
 
-function disableFormInputs(disable) {
-    const formElements = document.querySelectorAll('#protokol-form input, #protokol-form textarea, #protokol-form button');
-    formElements.forEach(element => {
-        element.disabled = disable;
-    });
-}
-
-document.getElementById('protokol-form').addEventListener('submit', function(event) {
-    const inputs = document.querySelectorAll('input[data-min][data-max]');
+function validateInputsForSave() {
+    const minMaxInputs = document.querySelectorAll('input[data-min][data-max]');
+    const textInputs = document.querySelectorAll('input[type="text"]');
     let isValid = true;
 
-    inputs.forEach(input => {
-        const value = parseFloat(input.value);
+    // Validate min-max inputs (empty fields are allowed)
+    for (const input of minMaxInputs) {
+        const value = input.value.trim();
+        const numericValue = parseFloat(value);
         const min = parseFloat(input.getAttribute('data-min'));
         const max = parseFloat(input.getAttribute('data-max'));
 
-        if (isNaN(value) || value < min || value > max) {
+        if (value !== "" && (isNaN(numericValue) || numericValue < min || numericValue > max)) {
             isValid = false;
             input.setCustomValidity(`Please enter a value between ${min} and ${max}.`);
             input.reportValidity();
+            break;
         } else {
             input.setCustomValidity(''); // Clear any previous custom validity message
         }
-    });
+    }
 
-    if (!isValid) {
+    // Validate text inputs for length (empty fields are allowed)
+    for (const input of textInputs) {
+        const value = input.value.trim();
+        const minLength = 3;
+        const maxLength = 20;
+
+        if (value !== "" && (value.length < minLength || value.length > maxLength)) {
+            isValid = false;
+            input.setCustomValidity(`Please enter a value between ${minLength} and ${maxLength} characters.`);
+            input.reportValidity();
+            break;
+        } else {
+            input.setCustomValidity(''); // Clear any previous custom validity message
+        }
+    }
+
+    return isValid; // Return whether the form inputs are valid
+}
+
+function validateInputsForExport() {
+    const minMaxInputs = document.querySelectorAll('input[data-min][data-max]');
+    const textInputs = document.querySelectorAll('input[type="text"]');
+    let isValid = true;
+
+    // Validate min-max inputs (fields cannot be empty)
+    for (const input of minMaxInputs) {
+        const value = input.value.trim();
+        const numericValue = parseFloat(value);
+        const min = parseFloat(input.getAttribute('data-min'));
+        const max = parseFloat(input.getAttribute('data-max'));
+
+        if (value === "" || isNaN(numericValue) || numericValue < min || numericValue > max) {
+            isValid = false;
+            input.setCustomValidity(`Please enter a value between ${min} and ${max}.`);
+            input.reportValidity();
+            break;
+        } else {
+            input.setCustomValidity(''); // Clear any previous custom validity message
+        }
+    }
+
+    // Validate text inputs for length (fields cannot be empty)
+    for (const input of textInputs) {
+        const value = input.value.trim();
+        const minLength = 3;
+        const maxLength = 20;
+
+        if (value.length < minLength || value.length > maxLength) {
+            isValid = false;
+            input.setCustomValidity(`Please enter a value between ${minLength} and ${maxLength} characters.`);
+            input.reportValidity();
+            break;
+        } else {
+            input.setCustomValidity(''); // Clear any previous custom validity message
+        }
+    }
+
+    return isValid; // Return whether the form inputs are valid
+}
+
+// Event listener for form submission for "Save"
+document.getElementById('protokol-form').addEventListener('submit', function(event) {
+    if (!validateInputsForSave()) {
         event.preventDefault();
     }
 });
 
-// Add an event listener for input changes to clear the custom validity message
+// Real-time validation for min-max inputs
 document.querySelectorAll('input[data-min][data-max]').forEach(input => {
     input.addEventListener('input', function() {
-        const value = parseFloat(this.value);
-        const min = parseFloat(this.getAttribute('data-min'));
-        const max = parseFloat(this.getAttribute('data-max'));
+        const value = input.value.trim();
+        const numericValue = parseFloat(value);
+        const min = parseFloat(input.getAttribute('data-min'));
+        const max = parseFloat(input.getAttribute('data-max'));
 
-        if (!isNaN(value) && value >= min && value <= max) {
-            this.setCustomValidity('');
+        if (value === '' || (!isNaN(numericValue) && numericValue >= min && numericValue <= max)) {
+            input.setCustomValidity('');
+        }
+    });
+});
+
+// Real-time validation for text inputs
+document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(input => {
+    input.addEventListener('input', function() {
+        const value = input.value.trim();
+        const minLength = 3;
+        const maxLength = 20;
+
+        if (value === '' || (value.length >= minLength && value.length <= maxLength)) {
+            input.setCustomValidity('');
         }
     });
 });
