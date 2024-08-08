@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-+q&p3a^=d%ac3ao@sz^2tj(1ss)ro2b%k7($v!z-1(te=in3hd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://siemens.pythonanywhere.com', '127.0.0.1' ]
+ALLOWED_HOSTS = ['siemens.pythonanywhere.com', '127.0.0.1' ]
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
