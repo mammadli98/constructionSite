@@ -161,7 +161,7 @@ document.querySelectorAll('input[data-min][data-max]').forEach(input => {
 });
 
 // Real-time validation for text inputs
-document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(input => {
+document.querySelectorAll('input[type="text"]').forEach(input => {
     input.addEventListener('input', function() {
         const value = input.value.trim();
         const minLength = 3;
