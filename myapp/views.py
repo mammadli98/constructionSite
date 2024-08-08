@@ -9,6 +9,7 @@ from .models import Protokol
 from django.views.decorators.http import require_http_methods
 
 import os
+import io
 import json
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -167,6 +168,39 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
 
 @require_http_methods(["POST"])
 def exportProtokolHubzugLiftingHost(request, protocol_id):
+    protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    
+    html_string = render_to_string('protokol_pdf_template.html', {'protokol': protokol})
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+    
+    # Create a byte stream to hold the PDF data
+    pdf_file = io.BytesIO()
+    html.write_pdf(target=pdf_file)
+    
+    # Update the database entries
+    protocol = AllProtocols(
+        baustelle=fahrzeug.baustelle.baustelleName,
+        fahrzeug=fahrzeug.fahrzeugName,
+        teil="Hubzug",
+        protokolType=protokol.protocolName,
+        path=""  # Not saving to path since we are sending directly
+    )
+    protocol.save()
+
+    protokol.isExported = True
+    protokol.save()
+
+    # Return the PDF as a response
+    pdf_file.seek(0)
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
+    return response
+
+
+    '''
     try:
         protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
         fahrzeug_id = request.GET.get('fahrzeugId', None)
@@ -193,6 +227,7 @@ def exportProtokolHubzugLiftingHost(request, protocol_id):
         return JsonResponse({'path': file_path})
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+        '''
 
 
 
