@@ -69,11 +69,11 @@ function validateInputsForSave() {
         const min = parseFloat(input.getAttribute('data-min'));
         const max = parseFloat(input.getAttribute('data-max'));
 
-        if (value !== "" && (isNaN(numericValue) || numericValue < min || numericValue > max)) {
+        if (value !== '' && (isNaN(numericValue) || numericValue < min || numericValue > max)) {
             isValid = false;
             input.setCustomValidity(`Please enter a value between ${min} and ${max}.`);
             input.reportValidity();
-            break;
+            return isValid;
         } else {
             input.setCustomValidity(''); // Clear any previous custom validity message
         }
@@ -85,7 +85,7 @@ function validateInputsForSave() {
         const minLength = 3;
         const maxLength = 20;
 
-        if (value !== "" && (value.length < minLength || value.length > maxLength)) {
+        if (value !== '' && (value.length < minLength || value.length > maxLength)) {
             isValid = false;
             input.setCustomValidity(`Please enter a value between ${minLength} and ${maxLength} characters.`);
             input.reportValidity();
@@ -110,11 +110,11 @@ function validateInputsForExport() {
         const min = parseFloat(input.getAttribute('data-min'));
         const max = parseFloat(input.getAttribute('data-max'));
 
-        if (value === "" || isNaN(numericValue) || numericValue < min || numericValue > max) {
+        if (value === '' || isNaN(numericValue) || numericValue < min || numericValue > max) {
             isValid = false;
             input.setCustomValidity(`Please enter a value between ${min} and ${max}.`);
             input.reportValidity();
-            break;
+            return isValid;
         } else {
             input.setCustomValidity(''); // Clear any previous custom validity message
         }

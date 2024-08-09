@@ -14,7 +14,7 @@
     <div class="container">
         <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>
         <h1>{{ protokol.protocolName }}</h1>
-        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form">
+        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
             {% csrf_token %}
             <h4>Hubzug Lifting Hoist</h4>
             <table class="form-table">
