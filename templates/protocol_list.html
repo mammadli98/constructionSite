@@ -17,20 +17,29 @@
                 <th>Fahrzeug</th>
                 <th>Teil</th>
                 <th>Protokol Type</th>
-                <th>Path</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
             {% for protocol in protocols %}
                 <tr>
                     <td>{{ protocol.baustelle }}</td>
-                    <td>{{ protocol.fahrzeug }}</td>
-                    <td>{{ protocol.teil }}</td>
-                    <td>{{ protocol.protokolType }}</td>
-                    <td><a href="file://{{ protocol.path }}" target="_blank">{{ protocol.path }}</a></td>
+                    <td>{{ protocol.fahrzeugName }}</td>
+                    <td>Hubzug</td>
+                    <td>{{ protocol.hubzug.protocol1.protocolName }}</td>
+                    <td>
+                        {% if protocol.hubzug.protocol1.isExported %}
+                            <div class="circle green"></div>
+                        {% elif protocol.hubzug.protocol1.isSaved %}
+                            <div class="circle yellow"></div>
+                        {% else %}
+                            <div class="circle red"></div>
+                        {% endif %}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
+        
     </table>
 </body>
 </html>

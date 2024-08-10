@@ -56,3 +56,11 @@ document.addEventListener('DOMContentLoaded', function() {
         row.style.display = 'none';
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    var modalElement = document.getElementById('passwordChangeModal');
+    var showModal = modalElement.getAttribute('data-show-modal');
+    if (showModal === 'true') {
+        $('#passwordChangeModal').modal('show');
+    }
+});

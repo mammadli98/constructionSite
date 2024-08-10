@@ -24,6 +24,8 @@ urlpatterns = [
     path('', views.login),
     path('adminView/', views.adminView, name='admin_view'),
     path('userView/', views.userView, name='user_view'),
+    path('change-password/', views.userView, name='change_password'),
+    
     path('update_fahrzeug_visibility/<int:fahrzeug_id>/', views.update_fahrzeug_visibility, name='update_fahrzeug_visibility'),
     path('reset/<int:fahrzeug_id>/<str:protokol>', views.reset, name='reset'),
 

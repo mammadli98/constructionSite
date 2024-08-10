@@ -7,6 +7,10 @@ from .helper.modelsHelper import *
 from django.shortcuts import render, get_object_or_404
 from .models import Protokol
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+
+
 
 import os
 import io
@@ -90,15 +94,27 @@ def adminView(request):
 
 @login_required(login_url="/")
 def userView(request):
-    baustellen_list = newBaustelle.objects.all()
-    fahrzeugen_list = newFahrzeug.objects.all()
+    modal_show = False  # Flag to control modal display
+    if request.method == 'POST':
+        userPasswordForm = PasswordChangeForm(request.user, request.POST)
+        if userPasswordForm.is_valid():
+            user = userPasswordForm.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('/')  # Adjust the redirect as needed
+        else:
+            modal_show = True  # Set the flag to keep the modal open
+    else:
+        userPasswordForm = PasswordChangeForm(request.user)
 
     context = {
-        'baustellen_list': baustellen_list,
-        'fahrzeug_list': fahrzeugen_list,
+        'baustellen_list': newBaustelle.objects.all(),
+        'fahrzeug_list': newFahrzeug.objects.all(),
+        'userPassword_form': userPasswordForm,
+        'modal_show': modal_show  # Pass this flag to the template
     }
     return render(request, "userView.html", context)
-
+    
 @csrf_exempt
 def update_fahrzeug_visibility(request, fahrzeug_id):
     if request.method == 'POST':
@@ -251,7 +267,7 @@ def exportProtokolHubzugLiftingHost(request, protocol_id):
 "---------------------------------------------------------------------------------"
 def protocol_list(request):
     # Retrieve and sort data from the AllProtocols model
-    protocols = AllProtocols.objects.all().order_by('baustelle', 'fahrzeug', 'teil', 'protokolType')
+    protocols = newFahrzeug.objects.all()
 
     return render(request, 'protocol_list.html', {'protocols': protocols})
 

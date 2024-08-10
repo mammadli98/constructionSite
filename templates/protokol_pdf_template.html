@@ -1,14 +1,173 @@
-<!-- protokol_pdf_template.html -->
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ protokol.name }} - PDF</title>
+    <title>{{ protokol.protocolName }}</title>
+    <link rel="stylesheet" href="{% static 'pdf/pdfProtocolHubzugLiftingHost.css' %}">
 </head>
 <body>
-    <h1>{{ protokol.name }}</h1>
-    <p>Description: {{ protokol.description }}</p>
-    <p>Size: {{ protokol.size }}</p>
-    <p>Last Modified by: {{ protokol.lastChanger }}</p>
+    <div class="header-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+    </div>
+
+    <table>
+        <tr>
+            <th colspan="4">{{ protokol.protocolName }}</th>
+        </tr>
+        <tr>
+            <td>Zeichnung-Nr. <br>
+                Drawing No.:</td>
+            <td>{{ protokol.drawing }}</td>
+            <td>Auftragsnr.: <br>
+                Order No.:</td>
+            <td>{{ protokol.order }}</td>
+        </tr>
+        <tr>
+            <td>Revision</td>
+            <td>{{ protokol.rev }}</td>
+            <td>Geräte-Nr.: <br>
+                Device No.</td>
+            <td>{{ protokol.device }}</td>
+        </tr>
+        <tr>
+            <td>Auftragsnr.-SAG: <br>
+                Order No.-SAG:</td>
+            <td>{{ protokol.order_sag }}</td>
+            <td>Hubzug-Nr. <br>
+                Hoist No.</td>
+            <td>{{ protokol.hoist }}</td>
+        </tr>
+        <tr>
+            <td>Firma: <br>
+                Company:</td>
+            <td>{{ protokol.company }}</td>
+            <td>Stückzahl: <br>
+                Quantity:</td>
+            <td>{{ protokol.quantity }}</td>
+        </tr>
+    </table>
+
+    <!-- Measurements Table -->
+    <table class="measurement-section">
+        <tr>
+            <th>No.</th>
+            <th>Beschreibung / Description</th>
+            <th>Soll-Maß <br>
+                desired size <br>
+                [mm]</th>
+            <th>Ist-Maß <br>
+                actual size <br>
+                [mm]</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b>Prüfmaße / Check sizes:</b><br></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Horizontaler Abstand der Anschlussbohrungen* <br>
+                Horizontal distance of connecting holes*</td>
+            <td>{{ protokol.check_size_1 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Vertikaler Abstand der Anschlussbohrungen<br>
+                Vertical distance of connecting holes*</td>
+            <td>{{ protokol.check_size_2 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Durchmesser 1. Anschlussbohrung<br>
+                Diameter of 1st connecting hole</td>
+            <td>{{ protokol.check_size_3 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Durchmesser 2. Anschlussbohrung<br>
+                Diameter of 2nd connecting hole</td>
+            <td>{{ protokol.check_size_4 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>4a</td>
+            <td>Abstand zwischen Gehäuseseiten*<br>
+                Distance between the frame sides *</td>
+            <td>{{ protokol.check_size_4a }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Horizontaler Abstand zu Lochkreismitte für Lageranbau*<br>
+                Horicontal distance to centre of drum bearing*</td>
+            <td>{{ protokol.check_size_5 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Vertikaler Abstand zu Lochkreismitte für Lageranbau*<br>
+                Vertical distance to centre of drum bearing*</td>
+            <td>{{ protokol.check_size_6 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Durchmesser der Lagerbohrung*<br>
+                Diameter of the holes for the bearings*</td>
+            <td>{{ protokol.check_size_7 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Abstand zwischen Trommelachse und Bohrung für Klinke<br>
+                Distance between centre of drum shaft and hole for catch lever</td>
+            <td>{{ protokol.check_size_8 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Abstand zwischen Trommelachse und Bohrung für Klinke<br>
+                Distance between centre of drum shaft and hole for catch lever</td>
+            <td>{{ protokol.check_size_9 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Durchmesser der beiden Aufnahmebohrungen der Klinke<br>
+                Diameter of both holes for the Catch lever</td>
+            <td>{{ protokol.check_size_10 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><b>Lagetoleranzen / position tolerances:</b><br></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Rechtwinkligkeit Trommellagerachse zu beiden Flächen der<br>
+                Seitenscheiben Pos. 1+2<br>
+                Right angle dram axle to both sides of the hoist frame Pos.<br>
+                1 and Pos. 2</td>
+            <td>{{ protokol.position_tolerance_11 }}</td>
+            <td>1280 ± 10</td>
+        </tr>
+    </table>
+
+    <!-- Footer Section -->
+    <div class="footer-section">
+        <p>Last Modified by: {{ protokol.last_changer }}</p>
+        <p>Date: {{ protokol.date }}</p>
+        <p>Inspector: {{ protokol.inspector }}</p>
+        <p>Remarks: {{ protokol.remark }}</p>
+        <p>Measurement Tools: {{ protokol.measure }}</p>
+        <p>Department: {{ protokol.department }}</p>
+    </div>
 </body>
 </html>

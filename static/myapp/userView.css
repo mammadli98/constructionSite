@@ -109,3 +109,28 @@ h2 {
         margin: 10px 0;
     }
 }
+
+
+.buttonDatenbank {
+    background-color: #00aeff; /* Consistent button color */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 32px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-decoration: none; /* Remove underline from links styled as buttons */
+    display: inline-block; /* Align properly without line breaks */
+    margin-top: 10px; /* Spacing after dropdowns */
+}
+
+.buttonDatenbank:hover {
+    background-color: #0065b3;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center the button horizontally */
+    padding: 20px 0; /* Add some padding above and below the button */
+}
