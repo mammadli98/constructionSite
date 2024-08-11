@@ -9,7 +9,8 @@ from .models import Protokol
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-
+from django.contrib.staticfiles import finders
+from siemens import settings
 
 
 import os
@@ -18,7 +19,6 @@ import json
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from weasyprint import HTML
-from django.conf import settings
 from django.views.decorators.http import require_http_methods
 from datetime import datetime
 
@@ -188,11 +188,17 @@ def exportProtokolHubzugLiftingHost(request, protocol_id):
     fahrzeug_id = request.GET.get('fahrzeugId', None)
     fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
     now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
-    
-    html_string = render_to_string('protokol_pdf_template.html', {'protokol': protokol})
+
+    # Finding the absolute path of the css file
+    css_path = finders.find('pdf/pdfProtocolHubzugLiftingHost.css')
+    css_url = request.build_absolute_uri(settings.STATIC_URL + 'pdf/pdfProtocolHubzugLiftingHost.css')
+
+    html_string = render_to_string('protokol_pdf_template.html', {
+        'protokol': protokol,
+        'css_url': css_url  # Pass the CSS URL to the template
+    })
+
     html = HTML(string=html_string, base_url=request.build_absolute_uri())
-    
-    # Create a byte stream to hold the PDF data
     pdf_file = io.BytesIO()
     html.write_pdf(target=pdf_file)
     
