@@ -177,6 +177,7 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     protokol.date = request.POST.get('date', '')
     protokol.inspector = request.POST.get('inspector', '')
     protokol.department = request.POST.get('department', '')
+    protokol.baustelle = request.POST.get('baustelle', '')
 
     protokol.isSaved = True
     protokol.save()

@@ -4,7 +4,7 @@ class ProtocolHubzugLiftingHost(models.Model):
     isSaved = models.BooleanField(default=False)
     isExported = models.BooleanField(default=False)
 
-    protocolName  = "Hubzug Lifting Hoist"
+    protocolName  = "Maßkontolle Rahmen"
     drawing = models.TextField(verbose_name="Zeichnung-Nr / Drawing No.", null=True, blank=True)
     rev = models.TextField(verbose_name="Rev", null=True, blank=True)
     order = models.TextField(verbose_name="Auftragsnr. / Order No.", null=True, blank=True)
@@ -32,4 +32,5 @@ class ProtocolHubzugLiftingHost(models.Model):
     inspector = models.CharField(verbose_name="Prüfer / Inspector", max_length=20, null=True, blank=True)
     department = models.TextField(verbose_name="Abteilung / Department", blank=True, null=True)
     last_changer = models.CharField(verbose_name="Last modified by", max_length=100, blank=True, null=True)
+    baustelle = models.CharField(verbose_name="Baustelle", max_length=100, blank=True, null=True)
     
