@@ -41,18 +41,24 @@ def login(request):
             request.session['username'] = username
             if username == 'admin':
                 return redirect("adminView/")
+            elif user.pruefer == True:
+                return redirect("prueferView/")
             return redirect("userView/")
         else:
             messages.info(request, "invalid credentials")
             return redirect("/")
-    else: 
+    else:
         return render(request, "login.html")
+
+def logout(request):
+    auth.logout(request)
+    return redirect("/")
 
 @login_required(login_url="/")
 def adminView(request):
     baustellen_list = newBaustelle.objects.all()
     fahrzeugen_list = newFahrzeug.objects.all()  # Initially, no Fahrzeuge displayed
-    user_list = User.objects.all()
+    user_list = CustomUser.objects.all()
     
     if request.method == 'POST':
         if 'baustelleName' in request.POST:
@@ -73,9 +79,19 @@ def adminView(request):
         elif 'username' in request.POST:
             username = request.POST.get('username')
             password = request.POST.get('password')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            email = request.POST.get('email')
+            adresse = request.POST.get('adresse')
+            pruefer = request.POST.get('pruefer')
             # Create the user
-            new_user = User(username=username)
+            new_user = CustomUser(username=username)
             new_user.set_password(password)
+            new_user.first_name = first_name
+            new_user.last_name = last_name
+            new_user.email = email
+            new_user.address = adresse
+            new_user.pruefer = pruefer
             new_user.save()
                 
         return redirect('/adminView/')
@@ -115,6 +131,20 @@ def userView(request):
     }
     return render(request, "userView.html", context)
     
+@login_required(login_url="/")
+def prueferView(request):
+    username = request.session.get('username', '')
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+
+    fahrzeug = newFahrzeug.objects.all()
+
+    context = {
+        'username': username,
+        'fahrzeug_id': fahrzeug_id,
+        'fahrzeugs': fahrzeug
+    }
+    return render(request, 'prueferView.html', context)
+
 @csrf_exempt
 def update_fahrzeug_visibility(request, fahrzeug_id):
     if request.method == 'POST':
@@ -141,16 +171,16 @@ def reset(request, fahrzeug_id, protokol):
 
 def protocolHubzugLiftingHostView(request, protocol_id):
     # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
-    return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id})
+    return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostUpdate(request, protocol_id):
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
-    
-    protokol.lastChanger = request.session.get('username', '')
+    protokol.last_changer = request.user.username
     protokol.drawing = request.POST.get('drawing', '')
     protokol.rev = request.POST.get('rev', '')
     protokol.order = request.POST.get('order', '')
@@ -180,6 +210,14 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     protokol.baustelle = request.POST.get('baustelle', '')
 
     protokol.isSaved = True
+    protokol.save()
+    return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id})
+
+@require_http_methods(["POST"])
+def protocolHubzugLiftingHostClose(request, protocol_id):
+    protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.isClosed = True
     protokol.save()
     return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id})
 

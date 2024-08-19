@@ -10,6 +10,7 @@
 </head>
 <body>
     <h1>Protocol List</h1>
+    <a href='/userView/' class="back-button">Back</a>
     <table>
         <thead>
             <tr>
@@ -30,11 +31,13 @@
                     <td>
                         {% if protocol.hubzug.protocol1.isExported %}
                             <div class="circle green"></div>
-                        {% elif protocol.hubzug.protocol1.isSaved %}
+                            {% elif protocol.hubzug.protocol1.isClosed %}
                             <div class="circle yellow"></div>
-                        {% else %}
-                            <div class="circle red"></div>
-                        {% endif %}
+                            {% elif protocol.hubzug.protocol1.isSaved %}
+                            <div class="circle blue"></div>
+                            {% else %}
+                            <div class="circle gray"></div>
+                            {% endif %}
                     </td>
                 </tr>
             {% endfor %}

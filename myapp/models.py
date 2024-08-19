@@ -1,7 +1,12 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from .helper.modelsHelper import *
     
+class CustomUser(AbstractUser):
+    age = models.IntegerField(null=True, blank=True)
+    address = models.CharField(max_length=255, null=True, blank=True)
+    pruefer = models.BooleanField(default=False)
+
 class newBaustelle(models.Model):
     baustelleName=models.CharField(max_length=30)
 

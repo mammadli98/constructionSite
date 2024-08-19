@@ -12,7 +12,11 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
     </div>
     <div class="container">
-        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>
+        {% if current_user.pruefer == True %}
+        <a href='/prueferView/' class="back-button">Back</a>    
+        {% else %}
+        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
+        {% endif %}
         <h1>{{ protokol.protocolName }}</h1>
         <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
             {% csrf_token %}
@@ -197,10 +201,12 @@
                     <td>Datum / Date:</td>
                     <td><input type="date" id="date" name="date" class="textarea-control" value="{{ protokol.date|default_if_none:'' }}" ></td>
                   </tr>
-                <tr>
-                    <td>Prüfer / Inspector:</td>
-                    <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
-                </tr>
+                {% if current_user.pruefer %}
+                    <tr>
+                        <td>Prüfer / Inspector:</td>
+                        <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
+                    </tr>
+                {% endif %}
                 <tr>
                     <td>Abteilung / Department:</td>
                     <td><input type="text" id="department" name="department" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.department|default_if_none:'' }}"></td>
@@ -211,8 +217,12 @@
                 </tr>
             </table>
             <div class="button-container">
-                <button type="submit" class="btn-save">Save Changes</button>
-                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Export as PDF</button>
+                <button type="submit" class="btn-save">Speichern</button>
+                {% if current_user.pruefer == True %}
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
+                {% else %}
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
+                {% endif %}
             </div>
         </form>
         

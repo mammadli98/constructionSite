@@ -2,6 +2,7 @@ from django.db import models
 
 class ProtocolHubzugLiftingHost(models.Model):
     isSaved = models.BooleanField(default=False)
+    isClosed = models.BooleanField(default=False)
     isExported = models.BooleanField(default=False)
 
     protocolName  = "Maßkontolle Rahmen"

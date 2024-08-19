@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hubzug Protokolle</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
 </head>
 <body>
@@ -18,29 +19,27 @@
     <table>
       <tr class="protokol-container">
         <a href='/userView/' class="back-button">Back</a>
+        <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Logout</button>
+        </form>
         <td class="protokol-name">{{ hubzug.protocol1.protocolName }}</td>
         <td>
-          {% if hubzug.protocol1.isExported %}
+          {% if hubzug.protocol1.isClosed %}
           <button class="protokol-button" disabled>Bearbeiten</button>
           {% else %}
           <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHost" hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
           {% endif %}
         </td>
-        <!--...
-        <td>
-          <form action="" method="post">
-            {% csrf_token %}
-            <button type="submit" class="protokol-button">Erstellen</button>
-          </form>
-        </td>
-        -->
         <td class="status-indicator">
           {% if hubzug.protocol1.isExported %}
           <div class="circle green"></div>
-          {% elif hubzug.protocol1.isSaved %}
+          {% elif hubzug.protocol1.isClosed %}
           <div class="circle yellow"></div>
+          {% elif hubzug.protocol1.isSaved %}
+          <div class="circle blue"></div>
           {% else %}
-          <div class="circle red"></div>
+          <div class="circle gray"></div>
           {% endif %}
         </td>
       </tr>
@@ -48,9 +47,11 @@
     <div class="color-legend">
       <h3>Status Explanation:</h3>
       <ul>
-        <li><div class="circle red"></div> Red - New</li>
-        <li><div class="circle yellow"></div> Yellow - In work</li>
-        <li><div class="circle green"></div> Green - Done</li>
+        <li><div class="circle gray"></div> Offen</li>
+        <li><div class="circle blue"></div> In Bearbeitung</li>
+        <li><div class="circle yellow"></div> Zur Überprüfung</li>
+        <li><div class="circle red"></div> Korrektur erforderlich</li>
+        <li><div class="circle green"></div> Abgeschlossen</li>
       </ul>
     </div>
   </main>

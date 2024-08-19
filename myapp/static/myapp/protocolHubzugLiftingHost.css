@@ -126,3 +126,18 @@ background-color: #456ca0;
 .confirmation-box button {
     margin-top: 10px;
 }
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}

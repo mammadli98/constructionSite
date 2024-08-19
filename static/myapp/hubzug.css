@@ -89,6 +89,14 @@ table {
     background-color: green;
 }
 
+.gray {
+    background-color: gray;
+}
+
+.blue {
+    background-color: blue;
+}
+
 .back-button {
     display: inline-block;
     margin-bottom: 20px;

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubzug Protokolle</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ username }}</span>
+    </div>
+  </header>
+
+  <main>
+    <table>
+      <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Logout</button>
+      </form>
+        {% for fahrzeug in fahrzeugs %}
+            {% if fahrzeug.hubzug.protocol1.isClosed %}
+            <tr class="protokol-container">
+              <td class="protokol-name">{{ fahrzeug.baustelle.baustelleName }}, {{ fahrzeug.fahrzeugName }}, {{ fahrzeug.hubzug.protocol1.protocolName }}</td>
+              <td>
+                  {% if fahrzeug.hubzug.protocol1.isExported %}
+                  <button class="protokol-button" disabled>Bearbeiten</button>
+                  {% else %}
+                  <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHost" fahrzeug.hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                  {% endif %}
+              </td>
+              <td class="status-indicator">
+                  {% if fahrzeug.hubzug.protocol1.isExported %}
+                  <div class="circle green"></div>
+                  {% elif fahrzeug.hubzug.protocol1.isClosed %}
+                  <div class="circle yellow"></div>
+                  {% elif fahrzeug.hubzug.protocol1.isSaved %}
+                  <div class="circle blue"></div>
+                  {% else %}
+                  <div class="circle gray"></div>
+                  {% endif %}
+              </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+
+    </table>
+    <div class="color-legend">
+      <h3>Status Explanation:</h3>
+      <ul>
+        <li><div class="circle gray"></div> Offen</li>
+        <li><div class="circle blue"></div> In Bearbeitung</li>
+        <li><div class="circle yellow"></div> Zur Überprüfung</li>
+        <li><div class="circle red"></div> Korrektur erforderlich</li>
+        <li><div class="circle green"></div> Abgeschlossen</li>
+      </ul>
+    </div>
+  </main>
+</body>
+</html>

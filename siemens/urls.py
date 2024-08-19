@@ -22,8 +22,10 @@ from myapp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.login),
+    path('logout/', views.logout, name='logout'),
     path('adminView/', views.adminView, name='admin_view'),
     path('userView/', views.userView, name='user_view'),
+    path('prueferView/', views.prueferView, name='pruefer_view'),
     path('change-password/', views.userView, name='change_password'),
     
     path('update_fahrzeug_visibility/<int:fahrzeug_id>/', views.update_fahrzeug_visibility, name='update_fahrzeug_visibility'),
@@ -31,6 +33,7 @@ urlpatterns = [
 
     path('protocolHubzugLiftingHost/<int:protocol_id>/', views.protocolHubzugLiftingHostView, name='protocolHubzugLiftingHost'),
     path('protocolHubzugLiftingHost/update/<int:protocol_id>/', views.protocolHubzugLiftingHostUpdate, name='protocolHubzugLiftingHostUpdate'),
+    path('protocolHubzugLiftingHost/close/<int:protocol_id>/', views.protocolHubzugLiftingHostClose, name='protocolHubzugLiftingHostClose'),
     path('exportProtokolHubzugLiftingHost/<int:protocol_id>/export_pdf/', views.exportProtokolHubzugLiftingHost, name='exportProtokolHubzugLiftingHost'),
 
 

@@ -16,6 +16,10 @@
             <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#passwordChangeModal">
                 Change Password
             </button>
+            <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
         </header>
         <!-- Modal for password change -->
         <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" aria-labelledby="passwordChangeModalLabel" aria-hidden="true" data-show-modal="{% if modal_show %}true{% else %}false{% endif %}">

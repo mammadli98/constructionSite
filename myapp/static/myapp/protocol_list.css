@@ -54,3 +54,24 @@ a:hover {
 .green {
     background-color: green;
 }
+
+.gray {
+    background-color: gray;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 16px; /* Increase font size */
+    border: none;
+    cursor: pointer;
+}
