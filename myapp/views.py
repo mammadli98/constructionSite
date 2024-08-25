@@ -123,7 +123,10 @@ def userView(request):
     else:
         userPasswordForm = PasswordChangeForm(request.user)
 
+    username = request.session.get('username', '')
+
     context = {
+        'username': username,
         'baustellen_list': newBaustelle.objects.all(),
         'fahrzeug_list': newFahrzeug.objects.all(),
         'userPassword_form': userPasswordForm,
@@ -178,6 +181,7 @@ def protocolHubzugLiftingHostView(request, protocol_id):
 
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostUpdate(request, protocol_id):
+    currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     protokol.last_changer = request.user.username
@@ -209,17 +213,32 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     protokol.department = request.POST.get('department', '')
     protokol.baustelle = request.POST.get('baustelle', '')
 
+    if request.POST.get('korrektur', '') == 'True':
+        protokol.isCorrecturNeeded = True
+    else:
+        protokol.isCorrecturNeeded = False
+
     protokol.isSaved = True
     protokol.save()
-    return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id})
+    return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostClose(request, protocol_id):
+    currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     protokol.isClosed = True
     protokol.save()
-    return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id})
+
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    context = {
+        'username': currentUser.username,
+        'fahrzeug_id': fahrzeug_id,
+        'hubzug': fahrzeug.hubzug
+    }
+    return render(request, 'hubzug.html', context)
+
 
 @require_http_methods(["POST"])
 def exportProtokolHubzugLiftingHost(request, protocol_id):

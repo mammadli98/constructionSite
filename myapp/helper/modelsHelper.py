@@ -4,6 +4,7 @@ class ProtocolHubzugLiftingHost(models.Model):
     isSaved = models.BooleanField(default=False)
     isClosed = models.BooleanField(default=False)
     isExported = models.BooleanField(default=False)
+    isCorrecturNeeded = models.BooleanField(default=False)
 
     protocolName  = "Maßkontolle Rahmen"
     drawing = models.TextField(verbose_name="Zeichnung-Nr / Drawing No.", null=True, blank=True)

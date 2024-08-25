@@ -36,6 +36,8 @@
           <div class="circle green"></div>
           {% elif hubzug.protocol1.isClosed %}
           <div class="circle yellow"></div>
+          {% elif hubzug.protocol1.isCorrecturNeeded %}
+          <div class="circle red"></div>
           {% elif hubzug.protocol1.isSaved %}
           <div class="circle blue"></div>
           {% else %}

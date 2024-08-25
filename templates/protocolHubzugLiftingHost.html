@@ -73,100 +73,123 @@
                     <td><b>1.</b> Horizontaler Abstand der Anschlussbohrungen* / Horizontal distance of connecting holes*</td>
                     <td>
                         <input type="number" id="check_size_1" name="check_size_1" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_1|default_if_none:'' }}">
+                               data-min="1228.8" data-max="1231.2" class="textarea-control" 
+                               step="0.1"
+                               value="{{ protokol.check_size_1|default_if_none:'' }}"
+                               oninput="validateInput(this, 'status_1')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 1230 +/- 1,2</td>
+                    <td id="status_1"></td>
                 </tr>
                 <tr>
                     <td><b>2.</b> Vertikaler Abstand der Anschlussbohrungen / Vertical distance of connecting holes*</td>
                     <td>
                         <input type="number" id="check_size_2" name="check_size_2" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_2|default_if_none:'' }}">
+                                data-min="244.5" data-max="245.5" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_2|default_if_none:'' }}" oninput="validateInput(this, 'status_2')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 245 +/- 0,5</td>
+                    <td id="status_2"></td>
                 </tr>
                 <tr>
-                    <td><b>3.</b> Durchmesser 1.Anschlussbohrung / Diameter of 1st connecting hole</td>
+                    <td><b>3.</b> Durchmesser 1. Anschlussbohrung / Diameter of 1st connecting hole</td>
                     <td>
                         <input type="number" id="check_size_3" name="check_size_3" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_3|default_if_none:'' }}">
+                                data-min="22.8" data-max="23.2" class="textarea-control"
+                                step="0.1" 
+                               value="{{ protokol.check_size_3|default_if_none:'' }}" oninput="validateInput(this, 'status_3')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> D23 +/- 0,2</td>
+                    <td id="status_3"></td>
                 </tr>
                 <tr>
                     <td><b>4.</b> Durchmesser 2. Anschlussbohrung / Diameter of 2nd connecting hole</td>
                     <td>
                         <input type="number" id="check_size_4" name="check_size_4" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_4|default_if_none:'' }}">
+                                data-min="22.8" data-max="23.2" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_4|default_if_none:'' }}" oninput="validateInput(this, 'status_4')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> D23 +/- 0,2</td>
+                    <td id="status_4"></td>
                 </tr>
                 <tr>
-                    <td><b>4a.</b> Abstand zwischen Gehäuseseiten* / Distance between the frame sides *</td>
+                    <td><b>4a.</b> Abstand zwischen Gehäuseseiten* / Distance between the frame sides*</td>
                     <td>
                         <input type="number" id="check_size_4a" name="check_size_4a" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_4a|default_if_none:'' }}">
+                                data-min="1155.5" data-max="1156.5" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_4a|default_if_none:'' }}" oninput="validateInput(this, 'status_4a')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 1156 +/- 0,5</td>
+                    <td id="status_4a"></td>
                 </tr>
                 <tr>
                     <td><b>5.</b> Horizontaler Abstand zu Lochkreismitte für Lageranbau* / Horizontal distance to centre of drum bearing*</td>
                     <td>
                         <input type="number" id="check_size_5" name="check_size_5" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_5|default_if_none:'' }}">
+                                data-min="300" data-max="300.5" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_5|default_if_none:'' }}" oninput="validateInput(this, 'status_5')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 300 + 0,5</td>
+                    <td id="status_5"></td>
                 </tr>
                 <tr>
                     <td><b>6.</b> Vertikaler Abstand zu Lochkreismitte für Lageranbau* / Vertical distance to centre of drum bearing*</td>
                     <td>
                         <input type="number" id="check_size_6" name="check_size_6" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_6|default_if_none:'' }}">
+                                data-min="203.5" data-max="204.5" class="textarea-control"
+                                step="0.1" 
+                               value="{{ protokol.check_size_6|default_if_none:'' }}" oninput="validateInput(this, 'status_6')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 204 +/- 0,5</td>
+                    <td id="status_6"></td>
                 </tr>
                 <tr>
                     <td><b>7.</b> Durchmesser der Lagerbohrung* / Diameter of the holes for the bearings*</td>
                     <td>
                         <input type="number" id="check_size_7" name="check_size_7" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_7|default_if_none:'' }}">
+                                 data-min="1270" data-max="1290" class="textarea-control" 
+                                 step="0.1"
+                               value="{{ protokol.check_size_7|default_if_none:'' }}" oninput="validateInput(this, 'status_7')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 150 +0.15/+0,05</td>
+                    <td id="status_7"></td>
                 </tr>
                 <tr>
                     <td><b>8.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
                     <td>
                         <input type="number" id="check_size_8" name="check_size_8" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_8|default_if_none:'' }}">
+                                data-min="114.9" data-max="115.1" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_8|default_if_none:'' }}" oninput="validateInput(this, 'status_8')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 115 +/- 0,1</td>
+                    <td id="status_8"></td>
                 </tr>
                 <tr>
                     <td><b>9.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
                     <td>
                         <input type="number" id="check_size_9" name="check_size_9" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_9|default_if_none:'' }}">
+                                data-min="149.9" data-max="150.1" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_9|default_if_none:'' }}" oninput="validateInput(this, 'status_9')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 150 +/- 0,1</td>
+                    <td id="status_9"></td>
                 </tr>
                 <tr>
                     <td><b>10.</b> Durchmesser der beiden Aufnahmebohrungen der Klinke / Diameter of both holes for the Catch lever</td>
                     <td>
                         <input type="number" id="check_size_10" name="check_size_10" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.check_size_10|default_if_none:'' }}">
+                                data-min="35" data-max="35.025" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_10|default_if_none:'' }}" oninput="validateInput(this, 'status_10')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 35 H7 +0.025</td>
+                    <td id="status_10"></td>
                 </tr>
                 <tr>
                     <th colspan="2">Lagetoleranzen / Position tolerances:</th>
@@ -175,10 +198,15 @@
                     <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
                     <td>
                         <input type="number" id="position_tolerance_11" name="position_tolerance_11" 
-                               data-min="1270" data-max="1290" class="textarea-control" 
-                               value="{{ protokol.position_tolerance_11|default_if_none:'' }}">
+                                data-min="1270" data-max="1290"  class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.position_tolerance_11|default_if_none:'' }}" oninput="validateInput(this, 'status_11')">
                     </td>
-                    <td> 1280 ± 10</td>
+                    <td> 0,3 mm zu B</td>
+                    <td id="status_11"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
                 </tr>
                 
                 <tr>
@@ -221,7 +249,7 @@
                 {% if current_user.pruefer == True %}
                 <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
                 {% else %}
-                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
+                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
                 {% endif %}
             </div>
         </form>
