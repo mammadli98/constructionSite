@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ protokol.protocolName }}</title>
+    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+    </div>
+    <div class="container">
+        {% if current_user.pruefer == True %}
+        <a href='/prueferView/' class="back-button">Back</a>    
+        {% else %}
+        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
+        {% endif %}
+        <h1>{{ protokol.protocolName }}</h1>
+        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
+            {% csrf_token %}
+            <table class="form-table">
+                <tr>
+                    <th>Beschreibung / Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Zeichnung-Nr / Drawing No.:</td>
+                    <td><input type="text" id="drawing" name="drawing" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.drawing|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Rev:</td>
+                    <td><input type="text" id="rev" name="rev" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.rev|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr. / Order No.:</td>
+                    <td><input type="text" id="order" name="order" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr.-SAG / Order No.-SAG:</td>
+                    <td><input type="text" id="order_sag" name="order_sag" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order_sag|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Geräte-Nr. / Device No:</td>
+                    <td><input type="text" id="device" name="device" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.device|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Benennung / Component:</td>
+                    <td><input type="text" id="component" name="component" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.component|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Firma / Company:</td>
+                    <td><input type="text" id="company" name="company" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.company|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Stückzahl / Quantity:</td>
+                    <td><input type="text" id="quantity" name="quantity" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.quantity|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Baustelle:</td>
+                    <td><input type="text" id="baustelle" name="baustelle" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.baustelle|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <th>Prüfmaße / Check Sizes:</th>
+                    <th>Ist-Maß actual size
+                        [mm]</th>
+                    <th>Soll-Maß desired size
+                        [mm]</th>
+                </tr>
+                <tr>
+                    <td><b>1.</b> Wellendurchmesser Antriebssitz rechts* / Shaft diameter on motor side RIGHT:</td>
+                    <td>
+                        <input type="number" id="check_size_1" name="check_size_1" 
+                               data-min="64.981" data-max="65.0" class="textarea-control" 
+                               step="0.1"
+                               value="{{ protokol.check_size_1|default_if_none:'' }}"
+                               oninput="validateInput(this, 'status_1')">
+                    </td>
+                    <td> 65 h6 -0.019</td>
+                    <td id="status_1"></td>
+                </tr>
+                <tr>
+                    <td><b>2.</b> Wellendurchmesser Lagersitz rechts* / Shaft diameter on bearing side RIGHT:</td>
+                    <td>
+                        <input type="number" id="check_size_2" name="check_size_2" 
+                                data-min="69.981" data-max="70.0" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_2|default_if_none:'' }}" 
+                               oninput="validateInput(this, 'status_2')">
+                    </td>
+                    <td> 70 h6 -0.019</td>
+                    <td id="status_2"></td>
+                </tr>
+                <tr>
+                    <td><b>3.</b> Wellendurchmesser Antriebssitz links* / Shaft diameter on motor side LEFT:</td>
+                    <td>
+                        <label>
+                            <input type="checkbox" id="relevant_3" name="relevant_3" 
+                                   onchange="toggleInput(this, 'check_size_3')"> Relevant
+                        </label>
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_3" name="check_size_3" 
+                               class="textarea-control"
+                               value="{{ protokol.check_size_3|default_if_none:'' }}" 
+                               disabled>
+                    </td>
+                    <td id="status_3"></td>
+                </tr>
+                
+                <script>
+                    function toggleInput(checkbox, inputId) {
+                        var inputField = document.getElementById(inputId);
+                        if (checkbox.checked) {
+                            inputField.disabled = false;
+                        } else {
+                            inputField.disabled = true;
+                            inputField.value = ''; // Clear the input if "Not Relevant"
+                        }
+                    }
+                </script>
+                
+                <tr>
+                    <td><b>4.</b> Wellendurchmesser Lagersitz links* / Shaft diameter on bearing side LEFT:</td>
+                    <td>
+                        <input type="number" id="check_size_4" name="check_size_4" 
+                                data-min="69.981" data-max="70.0" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_4|default_if_none:'' }}" oninput="validateInput(this, 'status_4')">
+                    </td>
+                    <td> 70 h6 -0.019</td>
+                    <td id="status_4"></td>
+                </tr>
+    
+                <tr>
+                    <td><b>5.</b> Durchmesser des Bremsringsitz / Diameter at brake ring location:</td>
+                    <td>
+                        <input type="number" id="check_size_5" name="check_size_5" 
+                                data-min="233.971" data-max="234" class="textarea-control" 
+                                step="0.1"
+                               value="{{ protokol.check_size_5|default_if_none:'' }}" oninput="validateInput(this, 'status_5')">
+                    </td>
+                    <td> 234 h6 -0.029</td>
+                    <td id="status_5"></td>
+                </tr>
+                <tr>
+                    <td><b>6.</b> Trommellänge gem. Zeichnung* / Length of rope drum (according to drawing):</td>
+                    <td>
+                        <input type="number" id="check_size_6" name="check_size_6" 
+                                data-min="1554" data-max="1555" class="textarea-control"
+                                step="0.1" 
+                               value="{{ protokol.check_size_6|default_if_none:'' }}" oninput="validateInput(this, 'status_6')">
+                    </td>
+                    <td> 1554,5 +/- 0,5</td>
+                    <td id="status_6"></td>
+                </tr>
+                <tr>
+                    <td><b>7.</b> Rillengeometrie gem. Zeichnung Einzelheit "Z" * / Rope groove dimensions according to Detail "Z"</td>
+                    <td>
+                        <select id="check_size_7" name="check_size_7" class="select-control">
+                            <option value="" {% if protokol.check_size_7 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_7 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_7 == 'NOK' %}selected{% endif %}>NOK</option>
+                        </select>
+                    </td>
+                    <td>R = 4,8 +0,2
+                        P = 10,5 +0,1</td>
+                    <td id="status_7"></td>
+                </tr>
+                <th colspan="2">Rautiefenmessung / Roughness Measurement:</th>
+                <tr>
+                    <td><b>8.</b> Trommelrillen / Rope grooves:</td>
+                    <td>
+                        <select id="check_size_8" name="check_size_8" class="select-control">
+                            <option value="" {% if protokol.check_size_8 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_8 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_8 == 'NOK' %}selected{% endif %}>NOK</option>
+                        </select>
+                    </td>
+                    <td>Rz 25</td>
+                    <td id="status_8"></td>
+                </tr>
+                <tr>
+                    <td><b>9.</b> Welle am Antriebssitz rechts / Shaft at motor location RIGHT:</td>
+                    <td>
+                        <select id="check_size_9" name="check_size_9" class="select-control">
+                            <option value="" {% if protokol.check_size_9 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_9 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_9 == 'NOK' %}selected{% endif %}>NOK</option>
+                        </select>
+                    </td>
+                    <td>Rz 6,3</td>
+                    <td id="status_9"></td>
+                </tr>
+                <tr>
+                    <td><b>10.</b> Welle am Antriebssitz links / Shaft at motor location LEFT:</td>
+                    <td>
+                        <select id="check_size_10" name="check_size_10" class="select-control">
+                            <option value="" {% if protokol.check_size_10 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_10 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_10 == 'NOK' %}selected{% endif %}>NOK</option>
+                        </select>
+                    </td>
+                    <td>Rz 6,3</td>
+                    <td id="status_10"></td>
+                </tr>
+                <tr>
+                    <td><b>11.</b> Welle am Lagersitz rechts / Shaft at bearing location RIGHT:</td>
+                    <td>
+                        <select id="check_size_11" name="check_size_11" class="select-control">
+                            <option value="" {% if protokol.check_size_11 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_11 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_11 == 'NOK' %}selected{% endif %}>NOK</option>
+                        </select>
+                    </td>
+                    <td>Rz 6,3</td>
+                    <td id="status_11"></td>
+                </tr>
+                <tr>
+                    <td><b>12.</b> Welle am Lagersitz links / Shaft at bearing location LEFT:</td>
+                    <td>
+                        <select id="check_size_12" name="check_size_12" class="select-control">
+                            <option value="" {% if protokol.check_size_12 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_12 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_12 == 'NOK' %}selected{% endif %}>NOK</option>
+                        </select>
+                    </td>
+                    <td>Rz 6,3</td>
+                    <td id="status_12"></td>
+                </tr>
+                <tr>
+                    <td><b>13.</b> Bremsringsitz, Detail "M" / Brake ring location, detail "M":</td>
+                    <td>
+                        <select id="check_size_13" name="check_size_13" class="select-control">
+                            <option value="" {% if protokol.check_size_13 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_13 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_13 == 'NOK' %}selected{% endif %}>NOK</option>
+                        </select>
+                    </td>
+                    <td>Rz 10</td>
+                    <td id="status_13"></td>
+                </tr>
+                <td><h5>* = Maß abhängig von Zeichnung / size depends on drawing</h5></td>
+                <tr>
+                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
+                </tr>
+                
+                <tr>
+                    <td><h4>Sonstiges / Miscellaneous</h4></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Bemerkungen / Remarks:</td>
+                    <td><input type="text" id="remark" name="remark" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.remark|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Messgerät / Measure tools:</td>
+                    <td><input type="text" id="measure" name="measure" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.measure|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Datum / Date:</td>
+                    <td><input type="date" id="date" name="date" class="textarea-control" value="{{ protokol.date|default_if_none:'' }}" ></td>
+                  </tr>
+                {% if current_user.pruefer %}
+                    <tr>
+                        <td>Prüfer / Inspector:</td>
+                        <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>Abteilung / Department:</td>
+                    <td><input type="text" id="department" name="department" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.department|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Last modified:</td>
+                    <td>{{ protokol.last_changer|default_if_none:"" }}</td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="btn-save">Speichern</button>
+                {% if current_user.pruefer == True %}
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
+                {% else %}
+                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
+                {% endif %}
+            </div>
+        </form>
+        
+        <div id="confirmation-box" class="confirmation-box" data-fahrzeug-id="{{ fahrzeug_id }}">
+            <p>Your protocol will be saved in the given path:</p>
+            <p id="file-path"></p>
+            <button onclick="hideConfirmation()">OK</button>
+        </div>
+    </div>
+
+    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+</body>
+</html>

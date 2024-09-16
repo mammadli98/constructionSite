@@ -15,6 +15,8 @@ class newBaustelle(models.Model):
 
 class newHubzug(models.Model):
     protocol1 = models.ForeignKey(ProtocolHubzugLiftingHost, on_delete = models.CASCADE)
+    protocol2 = models.ForeignKey(ProtocolHubzugLaufSeiltrommel, on_delete = models.CASCADE)
+    protocol3 = models.ForeignKey(ProtocolHubzugMassSeiltrommel, on_delete = models.CASCADE)
 
 class newFahrzeug(models.Model):
     baustelle = models.ForeignKey(newBaustelle, on_delete = models.CASCADE)

@@ -69,9 +69,15 @@ def adminView(request):
             fahrzeug_form = NewFahrzeugForm(request.POST)
             if fahrzeug_form.is_valid():
                 hubzug = newHubzug()
-                hubzugProtocol = ProtocolHubzugLiftingHost()
-                hubzugProtocol.save()
-                hubzug.protocol1 = hubzugProtocol
+                hubzugProtocol1 = ProtocolHubzugLiftingHost()
+                hubzugProtocol1.save()
+                hubzug.protocol1 = hubzugProtocol1
+                hubzugProtocol2 = ProtocolHubzugLaufSeiltrommel()
+                hubzugProtocol2.save()
+                hubzug.protocol2 = hubzugProtocol2
+                hubzugProtocol3 = ProtocolHubzugMassSeiltrommel()
+                hubzugProtocol3.save()
+                hubzug.protocol3 = hubzugProtocol3
                 hubzug.save()
                 fahrzeug_form = fahrzeug_form.save(commit=False)
                 fahrzeug_form.hubzug = hubzug
@@ -178,6 +184,20 @@ def protocolHubzugLiftingHostView(request, protocol_id):
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+def protocolHubzugLaufSeiltrommelView(request, protocol_id):
+    # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugLaufSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    return render(request, 'protocolHubzugLaufSeiltrommel.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+def protocolHubzugMassSeiltrommelView(request, protocol_id):
+    # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugMassSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    return render(request, 'protocolHubzugMassSeiltrommel.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostUpdate(request, protocol_id):

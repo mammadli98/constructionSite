@@ -45,6 +45,55 @@
           {% endif %}
         </td>
       </tr>
+      
+      <tr class="protokol-container">
+        <td class="protokol-name">{{ hubzug.protocol2.protocolName }}</td>
+        <td>
+          {% if hubzug.protocol2.isClosed %}
+          <button class="protokol-button" disabled>Bearbeiten</button>
+          {% else %}
+          <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLaufSeiltrommel" hubzug.protocol2.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
+          {% endif %}
+        </td>
+        <td class="status-indicator">
+          {% if hubzug.protocol2.isExported %}
+          <div class="circle green"></div>
+          {% elif hubzug.protocol2.isClosed %}
+          <div class="circle yellow"></div>
+          {% elif hubzug.protocol2.isCorrecturNeeded %}
+          <div class="circle red"></div>
+          {% elif hubzug.protocol2.isSaved %}
+          <div class="circle blue"></div>
+          {% else %}
+          <div class="circle gray"></div>
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr class="protokol-container">
+        <td class="protokol-name">{{ hubzug.protocol3.protocolName }}</td>
+        <td>
+          {% if hubzug.protocol3.isClosed %}
+          <button class="protokol-button" disabled>Bearbeiten</button>
+          {% else %}
+          <button class="protokol-button" onclick="location.href='{% url "protocolHubzugMassSeiltrommel" hubzug.protocol2.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
+          {% endif %}
+        </td>
+        <td class="status-indicator">
+          {% if hubzug.protocol3.isExported %}
+          <div class="circle green"></div>
+          {% elif hubzug.protocol3.isClosed %}
+          <div class="circle yellow"></div>
+          {% elif hubzug.protocol3.isCorrecturNeeded %}
+          <div class="circle red"></div>
+          {% elif hubzug.protocol3.isSaved %}
+          <div class="circle blue"></div>
+          {% else %}
+          <div class="circle gray"></div>
+          {% endif %}
+        </td>
+      </tr>
+
     </table>
     <div class="color-legend">
       <h3>Status Explanation:</h3>

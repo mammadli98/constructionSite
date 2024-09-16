@@ -36,6 +36,9 @@ urlpatterns = [
     path('protocolHubzugLiftingHost/close/<int:protocol_id>/', views.protocolHubzugLiftingHostClose, name='protocolHubzugLiftingHostClose'),
     path('exportProtokolHubzugLiftingHost/<int:protocol_id>/export_pdf/', views.exportProtokolHubzugLiftingHost, name='exportProtokolHubzugLiftingHost'),
 
+    path('protocolHubzugLaufSeiltrommel/<int:protocol_id>/', views.protocolHubzugLaufSeiltrommelView, name='protocolHubzugLaufSeiltrommel'),
+
+    path('protocolHubzugMassSeiltrommel/<int:protocol_id>/', views.protocolHubzugMassSeiltrommelView, name='protocolHubzugMassSeiltrommel'),
 
 
 
