@@ -151,11 +151,11 @@
                     <td><b>7.</b> Durchmesser der Lagerbohrung* / Diameter of the holes for the bearings*</td>
                     <td>
                         <input type="number" id="check_size_7" name="check_size_7" 
-                                 data-min="1270" data-max="1290" class="textarea-control" 
+                                 data-min="149.85" data-max="150.05" class="textarea-control" 
                                  step="0.1"
                                value="{{ protokol.check_size_7|default_if_none:'' }}" oninput="validateInput(this, 'status_7')">
                     </td>
-                    <td> 150 +0.15/+0,05</td>
+                    <td> 150 -0.15/+0,05</td>
                     <td id="status_7"></td>
                 </tr>
                 <tr>
@@ -198,7 +198,7 @@
                     <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
                     <td>
                         <input type="number" id="position_tolerance_11" name="position_tolerance_11" 
-                                data-min="1270" data-max="1290"  class="textarea-control" 
+                                data-min="0.3" data-max="0.3"  class="textarea-control" 
                                 step="0.1"
                                value="{{ protokol.position_tolerance_11|default_if_none:'' }}" oninput="validateInput(this, 'status_11')">
                     </td>

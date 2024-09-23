@@ -243,9 +243,63 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 @require_http_methods(["POST"])
+def protocolHubzugLaufSeiltrommelUpdate(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugLaufSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.last_changer = request.user.username
+    protokol.drawing = request.POST.get('drawing', '')
+    protokol.rev = request.POST.get('rev', '')
+    protokol.order = request.POST.get('order', '')
+    protokol.order_sag = request.POST.get('order_sag', '')
+    protokol.component = request.POST.get('component', '')
+    protokol.company = request.POST.get('company', '')
+    protokol.quantity = request.POST.get('quantity', '')
+    protokol.check_size_1 = request.POST.get('check_size_1', '')
+    protokol.check_size_2 = request.POST.get('check_size_2', '')
+    protokol.check_size_3 = request.POST.get('check_size_3', '')
+    protokol.check_size_4 = request.POST.get('check_size_4', '')
+    protokol.check_size_5 = request.POST.get('check_size_5', '')
+    protokol.check_size_6 = request.POST.get('check_size_6', '')
+    protokol.check_size_7 = request.POST.get('check_size_7', '')
+    protokol.check_size_8 = request.POST.get('check_size_8', '')
+    protokol.check_size_9 = request.POST.get('check_size_9', '')
+    protokol.remark = request.POST.get('remark', '')
+    protokol.date = request.POST.get('date', '')
+    protokol.inspector = request.POST.get('inspector', '')
+    protokol.department = request.POST.get('department', '')
+    protokol.baustelle = request.POST.get('baustelle', '')
+
+    if request.POST.get('korrektur', '') == 'True':
+        protokol.isCorrecturNeeded = True
+    else:
+        protokol.isCorrecturNeeded = False
+
+    protokol.isSaved = True
+    protokol.save()
+    return render(request, 'protocolHubzugLaufSeiltrommel.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+@require_http_methods(["POST"])
 def protocolHubzugLiftingHostClose(request, protocol_id):
     currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.isClosed = True
+    protokol.save()
+
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    context = {
+        'username': currentUser.username,
+        'fahrzeug_id': fahrzeug_id,
+        'hubzug': fahrzeug.hubzug
+    }
+    return render(request, 'hubzug.html', context)
+
+@require_http_methods(["POST"])
+def protocolHubzugLaufSeiltrommelClose(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugLaufSeiltrommel, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     protokol.isClosed = True
     protokol.save()
@@ -329,6 +383,44 @@ def exportProtokolHubzugLiftingHost(request, protocol_id):
         return JsonResponse({'error': str(e)}, status=500)
         '''
 
+@require_http_methods(["POST"])
+def exportProtokolHubzugLaufSeiltrommel(request, protocol_id):
+    protokol = get_object_or_404(ProtocolHubzugLaufSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    # Finding the absolute path of the css file
+    css_path = finders.find('pdf/pdfProtocolHubzugLiftingHost.css')
+    css_url = request.build_absolute_uri(settings.STATIC_URL + 'pdf/pdfProtocolHubzugLiftingHost.css')
+
+    html_string = render_to_string('protokolPDFHubzugLaufSeiltrommel.html', {
+        'protokol': protokol,
+        'css_url': css_url  # Pass the CSS URL to the template
+    })
+
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+    pdf_file = io.BytesIO()
+    html.write_pdf(target=pdf_file)
+    
+    # Update the database entries
+    protocol = AllProtocols(
+        baustelle=fahrzeug.baustelle.baustelleName,
+        fahrzeug=fahrzeug.fahrzeugName,
+        teil="Hubzug",
+        protokolType=protokol.protocolName,
+        path=""  # Not saving to path since we are sending directly
+    )
+    protocol.save()
+
+    protokol.isExported = True
+    protokol.save()
+
+    # Return the PDF as a response
+    pdf_file.seek(0)
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
+    return response
 
 
 

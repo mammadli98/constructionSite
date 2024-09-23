@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ protokol.protocolName }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 20px;
+        font-size: 12px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #CCCCCC;
+    }
+    .header-logo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .header-logo img {
+        width: 200px; /* Adjust the logo size as necessary */
+    }
+    .measurement-section th, .measurement-section td {
+        text-align: center;
+    }
+    .measurement-section th {
+        background-color: #E0E0E0;
+    }
+    .footer-section {
+        font-size: 10px;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .page-break {
+        page-break-before: always;
+    }
+</style>
+<body>
+    <div class="header-logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+    </div>
+
+    <table>
+        <tr>
+            <th colspan="4">{{ protokol.protocolName }}</th>
+        </tr>
+        <tr>
+            <td>Zeichnung-Nr. <br>
+                Drawing No.:</td>
+            <td>{{ protokol.drawing }}</td>
+            <td>Auftragsnr.: <br>
+                Order No.:</td>
+            <td>{{ protokol.order }}</td>
+        </tr>
+        <tr>
+            <td>Revision</td>
+            <td>{{ protokol.rev }}</td>
+            <td>Baustelle <br>
+                Building site</td>
+            <td>{{ protokol.baustelle }}</td>
+        </tr>
+        <tr>
+            <td>Auftragsnr.-SAG: <br>
+                Order No.-SAG:</td>
+            <td>{{ protokol.order_sag }}</td>
+            <td>Benennung: <br>
+                Component: </td>
+            <td>{{ protokol.component }}</td>
+        </tr>
+        <tr>
+            <td>Firma: <br>
+                Company:</td>
+            <td>{{ protokol.company }}</td>
+            <td>Stückzahl: <br>
+                Quantity:</td>
+            <td>{{ protokol.quantity }}</td>
+        </tr>
+    </table>
+
+    <!-- Measurements Table -->
+    <table class="measurement-section">
+        <tr>
+            <th>No.</th>
+            <th>Beschreibung / Description</th>
+            <th>O.K/N.O.K</th>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>Schweißnahtvorbereitung geprüft? 100% Sichtprüfung <br>
+                Are all weld preparation's visual inspected by 100%?</td>
+            <td>{{ protokol.check_size_1 }}</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Seiltrommel mit Geräte-Nr. stirnseitig gekennzeichnet (Schlagzahlen)<br>
+                Device Number hit on the front side of the rope drum</td>
+            <td>{{ protokol.check_size_2 }}</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Name des Schweißers <br>
+                Name of the welding operator <br>
+                (Qualifikation Klasse E, DIN EN 1090 (T1-3))</td>
+            <td>{{ protokol.check_size_3 }}</td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Alle Schweißnähte geprüft? 100% Sichtprüfung.<br>
+                Are all welding seams visual inspected by 100%?</td>
+            <td>{{ protokol.check_size_4 }}</td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Bei Serienhubzüge: Rissprüfung durchgeführt bei mind. 1 Seiltrommel je Serienauftrag <br>
+                Serial hoists: Crack test at least at one drum done?</td>
+            <td>{{ protokol.check_size_5 }}</td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Dokumentation zur Rissprüfung vorhanden?<br>
+                Documentation of crack test available?</td>
+            <td>{{ protokol.check_size_6 }}</td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Wurde die Trommel spannungsarm geglüht? Glühprotokoll<br>
+                Was the drum stress relief heat treated? Documentation?</td>
+            <td>{{ protokol.check_size_7 }}</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Wurde die Checkliste Maßkontrolle Seiltrommel ausgefüllt?<br>
+                Checklist "Rope drum dimension check" filled in?</td>
+            <td>{{ protokol.check_size_8 }}</td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>Wurden blanke Stellen, auf denen kein Seil läuft und kein Bremsring montiert wird, vor dem Einbau in das Gehäuse sorgfältig konserviert?<br>
+                Are all blank surfaces (eccept of location of brake ring and rope grooves) conserved accurately?</td>
+            <td>{{ protokol.check_size_9 }}</td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td>Last Modified by:</td>
+            <td>{{ protokol.last_changer }}</td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td>{{ protokol.date }}</td>
+        </tr>
+        <tr>
+            <td>Inspector:</td>
+            <td>{{ protokol.inspector }}</td>
+        </tr>
+        <tr>
+            <td>Remarks:</td>
+            <td>{{ protokol.remark }}</td>
+        </tr>
+        <tr>
+            <td>Measurement Tools:</td>
+            <td>{{ protokol.measure }}</td>
+        </tr>
+        <tr>
+            <td>Department:</td>
+            <td>{{ protokol.department }}</td>
+        </tr>
+    
+    </table>
+</body>
+</html>

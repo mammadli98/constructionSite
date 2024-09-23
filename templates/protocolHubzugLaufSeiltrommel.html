@@ -18,7 +18,7 @@
         <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
         {% endif %}
         <h1>{{ protokol.protocolName }}</h1>
-        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
+        <form id="protokol-form" action="{% url 'protocolHubzugLaufSeiltrommelUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
             {% csrf_token %}
             <table class="form-table">
                 <tr>
@@ -60,8 +60,7 @@
                 </tr>
                 <tr>
                     <th>Beschreibung / Description</th>
-                    <th> O.K</th>
-                    <th> N.O.K</th>
+                    <th> O.K / N.O.K</th>
                 </tr>
                 <tr>
                     <td><b>1.</b> Schweißnahtvorbereitung geprüft? 100% Sichtprüfung / Are all weld preparation's visual inspected by 100%? </td>
@@ -72,7 +71,6 @@
                             <option value="NOK" {% if protokol.check_size_1 == 'NOK' %}selected{% endif %}>NOK</option>
                         </select>
                     </td>
-                    <td id="status_1"></td>
                 </tr>
                 <tr>
                     <td><b>2.</b> Seiltrommel mit Geräte-Nr. stirnseitig gekennzeichnet (Schlagzahlen) / Device Number hit on the front side of the rope drum</td>
@@ -84,7 +82,6 @@
                         </select>
                     </td>
 
-                    <td id="status_2"></td>
                 </tr>
                 <tr>
                     <td><b>3.</b> Name des Schweißers / Name of the welding operator (Qualifikation Klasse E, DIN EN 1090 (T1-3))</td>
@@ -92,7 +89,6 @@
                         <input type="text" id="check_size_3" name="check_size_3" class="textarea-control" 
                                value="{{ protokol.check_size_3|default_if_none:'' }}">
                     </td>
-                    <td id="status_3"></td>
                 </tr>
                 <tr>
                     <td><b>4.</b> Alle Schweißnähte geprüft? 100% Sichtprüfung. / Are all welding seams visual inspected by 100%?</td>
@@ -103,7 +99,6 @@
                             <option value="NOK" {% if protokol.check_size_4 == 'NOK' %}selected{% endif %}>NOK</option>
                         </select>
                     </td>
-                    <td id="status_4"></td>
                 </tr>
                 <tr>
                     <td><b>5.</b> Bei Serienhubzüge: Rissprüfung durchgeführt bei mind. 1 Seiltrommel je Serienauftrag /Serial hoists: Crack test at least at one drum done?</td>
@@ -114,7 +109,6 @@
                             <option value="NOK" {% if protokol.check_size_5 == 'NOK' %}selected{% endif %}>NOK</option>
                         </select>
                     </td>
-                    <td id="status_5"></td>
                 </tr>
                 <tr>
                     <td><b>6.</b> Dokumentation zur Rissprüfung vorhanden? / Documentation of crack test available?</td>
@@ -125,7 +119,6 @@
                             <option value="NOK" {% if protokol.check_size_6 == 'NOK' %}selected{% endif %}>NOK</option>
                         </select>
                     </td>
-                    <td id="status_2"></td>
                 </tr>
                 
                 <tr>
@@ -137,7 +130,6 @@
                             <option value="NOK" {% if protokol.check_size_7 == 'NOK' %}selected{% endif %}>NOK</option>
                         </select>
                     </td>
-                    <td id="status_7"></td>
                 </tr>
                 <tr>
                     <td><b>8.</b> Wurde die Checkliste Maßkontrolle Seiltrommel ausgefüllt? / Checklist "Rope drum dimension check" filled in?</td>
@@ -148,7 +140,6 @@
                             <option value="NOK" {% if protokol.check_size_8 == 'NOK' %}selected{% endif %}>NOK</option>
                         </select>
                     </td>
-                    <td id="status_8"></td>
                 </tr>
                 <tr>
                     <td><b>9.</b> Wurden blanke Stellen, auf denen kein Seil läuft und kein Bremsring montiert wird, vor dem Einbau in das Gehäuse sorgfältig konserviert? / Are all blank surfaces (eccept of location of brake ring and rope grooves) conserved accurately?</td>
@@ -159,7 +150,6 @@
                             <option value="NOK" {% if protokol.check_size_9 == 'NOK' %}selected{% endif %}>NOK</option>
                         </select>
                     </td>
-                    <td id="status_9"></td>
                 </tr>
   
                 <tr>
@@ -196,9 +186,9 @@
             <div class="button-container">
                 <button type="submit" class="btn-save">Speichern</button>
                 {% if current_user.pruefer == True %}
-                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLaufSeiltrommel' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
                 {% else %}
-                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
+                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLaufSeiltrommelClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
                 {% endif %}
             </div>
         </form>

@@ -45,6 +45,31 @@
               </td>
             </tr>
             {% endif %}
+
+            {% if fahrzeug.hubzug.protocol2.isClosed %}
+            <tr class="protokol-container">
+              <td class="protokol-name">{{ fahrzeug.baustelle.baustelleName }}, {{ fahrzeug.fahrzeugName }}, {{ fahrzeug.hubzug.protocol2.protocolName }}</td>
+              <td>
+                  {% if fahrzeug.hubzug.protocol2.isExported %}
+                  <button class="protokol-button" disabled>Bearbeiten</button>
+                  {% else %}
+                  <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLaufSeiltrommel" fahrzeug.hubzug.protocol2.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                  {% endif %}
+              </td>
+              <td class="status-indicator">
+                  {% if fahrzeug.hubzug.protocol2.isExported %}
+                  <div class="circle green"></div>
+                  {% elif fahrzeug.hubzug.protocol2.isClosed %}
+                  <div class="circle yellow"></div>
+                  {% elif fahrzeug.hubzug.protocol2.isSaved %}
+                  <div class="circle blue"></div>
+                  {% else %}
+                  <div class="circle gray"></div>
+                  {% endif %}
+              </td>
+            </tr>
+            {% endif %}
+
         {% endfor %}
 
     </table>

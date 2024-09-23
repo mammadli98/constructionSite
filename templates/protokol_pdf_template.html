@@ -44,6 +44,9 @@
         text-align: center;
         margin-top: 20px;
     }
+    .page-break {
+        page-break-before: always;
+    }
 </style>
 <body>
     <div class="header-logo">
@@ -110,103 +113,122 @@
             <td>Horizontaler Abstand der Anschlussbohrungen* <br>
                 Horizontal distance of connecting holes*</td>
             <td>{{ protokol.check_size_1 }}</td>
-            <td>1280 ± 10</td>
+            <td>1230 +/- 1,2</td>
         </tr>
         <tr>
             <td>2</td>
             <td>Vertikaler Abstand der Anschlussbohrungen<br>
                 Vertical distance of connecting holes*</td>
             <td>{{ protokol.check_size_2 }}</td>
-            <td>1280 ± 10</td>
+            <td>245 +/- 0,5</td>
         </tr>
         <tr>
             <td>3</td>
             <td>Durchmesser 1. Anschlussbohrung<br>
                 Diameter of 1st connecting hole</td>
             <td>{{ protokol.check_size_3 }}</td>
-            <td>1280 ± 10</td>
+            <td>D23 +/- 0,2/td>
         </tr>
         <tr>
             <td>4</td>
             <td>Durchmesser 2. Anschlussbohrung<br>
                 Diameter of 2nd connecting hole</td>
             <td>{{ protokol.check_size_4 }}</td>
-            <td>1280 ± 10</td>
+            <td>D23 +/- 0,2</td>
         </tr>
         <tr>
             <td>4a</td>
             <td>Abstand zwischen Gehäuseseiten*<br>
                 Distance between the frame sides *</td>
             <td>{{ protokol.check_size_4a }}</td>
-            <td>1280 ± 10</td>
+            <td>1156 +/- 0,5</td>
         </tr>
         <tr>
             <td>5</td>
             <td>Horizontaler Abstand zu Lochkreismitte für Lageranbau*<br>
                 Horicontal distance to centre of drum bearing*</td>
             <td>{{ protokol.check_size_5 }}</td>
-            <td>1280 ± 10</td>
+            <td>300 + 0,5</td>
         </tr>
         <tr>
             <td>6</td>
             <td>Vertikaler Abstand zu Lochkreismitte für Lageranbau*<br>
                 Vertical distance to centre of drum bearing*</td>
             <td>{{ protokol.check_size_6 }}</td>
-            <td>1280 ± 10</td>
+            <td>204 +/- 0,5</td>
         </tr>
         <tr>
             <td>7</td>
             <td>Durchmesser der Lagerbohrung*<br>
                 Diameter of the holes for the bearings*</td>
             <td>{{ protokol.check_size_7 }}</td>
-            <td>1280 ± 10</td>
+            <td>150 +0.15/+0,05</td>
         </tr>
         <tr>
             <td>8</td>
             <td>Abstand zwischen Trommelachse und Bohrung für Klinke<br>
                 Distance between centre of drum shaft and hole for catch lever</td>
             <td>{{ protokol.check_size_8 }}</td>
-            <td>1280 ± 10</td>
+            <td>115 +/- 0,1</td>
         </tr>
         <tr>
             <td>9</td>
             <td>Abstand zwischen Trommelachse und Bohrung für Klinke<br>
                 Distance between centre of drum shaft and hole for catch lever</td>
             <td>{{ protokol.check_size_9 }}</td>
-            <td>1280 ± 10</td>
+            <td>150 +/- 0,1</td>
         </tr>
         <tr>
             <td>10</td>
             <td>Durchmesser der beiden Aufnahmebohrungen der Klinke<br>
                 Diameter of both holes for the Catch lever</td>
             <td>{{ protokol.check_size_10 }}</td>
-            <td>1280 ± 10</td>
+            <td>35 H7 +0.025</td>
         </tr>
-        <tr>
+        <tr class="page-break">
             <td></td>
             <td><b>Lagetoleranzen / position tolerances:</b><br></td>
             <td></td>
             <td></td>
         </tr>
         <tr>
-            <td>10</td>
+            <td>11</td>
             <td>Rechtwinkligkeit Trommellagerachse zu beiden Flächen der<br>
                 Seitenscheiben Pos. 1+2<br>
                 Right angle dram axle to both sides of the hoist frame Pos.<br>
                 1 and Pos. 2</td>
             <td>{{ protokol.position_tolerance_11 }}</td>
-            <td>1280 ± 10</td>
+            <td>0,3 mm zu B</td>
         </tr>
     </table>
 
-    <!-- Footer Section -->
-    <div class="footer-section">
-        <p>Last Modified by: {{ protokol.last_changer }}</p>
-        <p>Date: {{ protokol.date }}</p>
-        <p>Inspector: {{ protokol.inspector }}</p>
-        <p>Remarks: {{ protokol.remark }}</p>
-        <p>Measurement Tools: {{ protokol.measure }}</p>
-        <p>Department: {{ protokol.department }}</p>
-    </div>
+    <table>
+        <tr>
+            <td>Last Modified by:</td>
+            <td>{{ protokol.last_changer }}</td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td>{{ protokol.date }}</td>
+        </tr>
+        <tr>
+            <td>Inspector:</td>
+            <td>{{ protokol.inspector }}</td>
+        </tr>
+        <tr>
+            <td>Remarks:</td>
+            <td>{{ protokol.remark }}</td>
+        </tr>
+        <tr>
+            <td>Measurement Tools:</td>
+            <td>{{ protokol.measure }}</td>
+        </tr>
+        <tr>
+            <td>Department:</td>
+            <td>{{ protokol.department }}</td>
+        </tr>
+    
+    </table>
+
 </body>
 </html>
