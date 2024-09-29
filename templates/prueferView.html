@@ -16,11 +16,18 @@
   </header>
 
   <main>
+    <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+
+    <form class="myForm" method="get" class="filter-form">
+      {{ filter_form.as_p }}
+      <button type="submit" class="btn btn-primary">Filter</button>
+      <a href="{% url 'pruefer_view' %}">Clear Filters</a>
+  </form>
+  
     <table>
-      <form action="{% url 'logout' %}" method="post" style="margin: 0;">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Logout</button>
-      </form>
         {% for fahrzeug in fahrzeugs %}
             {% if fahrzeug.hubzug.protocol1.isClosed %}
             <tr class="protokol-container">
@@ -62,6 +69,30 @@
                   {% elif fahrzeug.hubzug.protocol2.isClosed %}
                   <div class="circle yellow"></div>
                   {% elif fahrzeug.hubzug.protocol2.isSaved %}
+                  <div class="circle blue"></div>
+                  {% else %}
+                  <div class="circle gray"></div>
+                  {% endif %}
+              </td>
+            </tr>
+            {% endif %}
+
+            {% if fahrzeug.hubzug.protocol3.isClosed %}
+            <tr class="protokol-container">
+              <td class="protokol-name">{{ fahrzeug.baustelle.baustelleName }}, {{ fahrzeug.fahrzeugName }}, {{ fahrzeug.hubzug.protocol3.protocolName }}</td>
+              <td>
+                  {% if fahrzeug.hubzug.protocol3.isExported %}
+                  <button class="protokol-button" disabled>Bearbeiten</button>
+                  {% else %}
+                  <button class="protokol-button" onclick="location.href='{% url "protocolHubzugMassSeiltrommel" fahrzeug.hubzug.protocol3.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                  {% endif %}
+              </td>
+              <td class="status-indicator">
+                  {% if fahrzeug.hubzug.protocol3.isExported %}
+                  <div class="circle green"></div>
+                  {% elif fahrzeug.hubzug.protocol3.isClosed %}
+                  <div class="circle yellow"></div>
+                  {% elif fahrzeug.hubzug.protocol3.isSaved %}
                   <div class="circle blue"></div>
                   {% else %}
                   <div class="circle gray"></div>

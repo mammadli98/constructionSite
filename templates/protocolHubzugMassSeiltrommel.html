@@ -18,7 +18,7 @@
         <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
         {% endif %}
         <h1>{{ protokol.protocolName }}</h1>
-        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
+        <form id="protokol-form" action="{% url 'protocolHubzugMassSeiltrommelUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
             {% csrf_token %}
             <table class="form-table">
                 <tr>
@@ -281,9 +281,9 @@
             <div class="button-container">
                 <button type="submit" class="btn-save">Speichern</button>
                 {% if current_user.pruefer == True %}
-                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugMassSeiltrommel' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
                 {% else %}
-                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
+                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugMassSeiltrommelClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
                 {% endif %}
             </div>
         </form>

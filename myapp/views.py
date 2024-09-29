@@ -145,12 +145,42 @@ def prueferView(request):
     username = request.session.get('username', '')
     fahrzeug_id = request.GET.get('fahrzeugId', None)
 
-    fahrzeug = newFahrzeug.objects.all()
+    protocols = newFahrzeug.objects.all()
+    filter_form = ProtocolFilterForm(request.GET or None)
+    # Apply filters based on form input
+    if filter_form.is_valid():
+        baustelle = filter_form.cleaned_data.get('baustelle')
+        fahrzeug = filter_form.cleaned_data.get('fahrzeug')
+        protocol_name = filter_form.cleaned_data.get('protocol_name')
+        status = filter_form.cleaned_data.get('status')
+        teil = filter_form.cleaned_data.get('teil')
+
+        if baustelle:
+            protocols = protocols.filter(baustelle__baustelleName__icontains=baustelle)
+        if fahrzeug:
+            protocols = protocols.filter(fahrzeugName__icontains=fahrzeug)
+        if protocol_name:
+            protocols = protocols.filter(hubzug__protocol1__protocolName__icontains=protocol_name)
+        if status:
+            if status == 'exported':
+                protocols = protocols.filter(hubzug__protocol1__isExported=True)
+            elif status == 'closed':
+                protocols = protocols.filter(hubzug__protocol1__isClosed=True)
+                protocols = protocols.filter(hubzug__protocol1__isExported=False)
+            elif status == 'saved':
+                protocols = protocols.filter(hubzug__protocol1__isSaved=True)
+                protocols = protocols.filter(hubzug__protocol1__isClosed=False)
+                protocols = protocols.filter(hubzug__protocol1__isExported=False)
+            elif status == 'offen':
+                protocols = protocols.filter(hubzug__protocol1__isSaved=False)
+            elif status == 'correction':
+                protocols = protocols.filter(hubzug__protocol1__isCorrecturNeeded=True)
 
     context = {
         'username': username,
         'fahrzeug_id': fahrzeug_id,
-        'fahrzeugs': fahrzeug
+        'fahrzeugs': protocols,
+        'filter_form': filter_form
     }
     return render(request, 'prueferView.html', context)
 
@@ -280,6 +310,49 @@ def protocolHubzugLaufSeiltrommelUpdate(request, protocol_id):
     return render(request, 'protocolHubzugLaufSeiltrommel.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 @require_http_methods(["POST"])
+def protocolHubzugMassSeiltrommelUpdate(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugMassSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.last_changer = request.user.username
+    protokol.drawing = request.POST.get('drawing', '')
+    protokol.rev = request.POST.get('rev', '')
+    protokol.order = request.POST.get('order', '')
+    protokol.order_sag = request.POST.get('order_sag', '')
+    protokol.device = request.POST.get('device', '')
+    protokol.component = request.POST.get('component', '')
+    protokol.company = request.POST.get('company', '')
+    protokol.quantity = request.POST.get('quantity', '')
+    protokol.check_size_1 = request.POST.get('check_size_1', '')
+    protokol.check_size_2 = request.POST.get('check_size_2', '')
+    protokol.check_size_3 = request.POST.get('check_size_3', '')
+    protokol.check_size_4 = request.POST.get('check_size_4', '')
+    protokol.check_size_5 = request.POST.get('check_size_5', '')
+    protokol.check_size_6 = request.POST.get('check_size_6', '')
+    protokol.check_size_7 = request.POST.get('check_size_7', '')
+    protokol.check_size_8 = request.POST.get('check_size_8', '')
+    protokol.check_size_9 = request.POST.get('check_size_9', '')
+    protokol.check_size_10 = request.POST.get('check_size_10', '')
+    protokol.check_size_11 = request.POST.get('check_size_11', '')
+    protokol.check_size_12 = request.POST.get('check_size_12', '')
+    protokol.check_size_13 = request.POST.get('check_size_13', '')
+    protokol.remark = request.POST.get('remark', '')
+    protokol.measure = request.POST.get('measure', '')
+    protokol.date = request.POST.get('date', '')
+    protokol.inspector = request.POST.get('inspector', '')
+    protokol.department = request.POST.get('department', '')
+    protokol.baustelle = request.POST.get('baustelle', '')
+
+    if request.POST.get('korrektur', '') == 'True':
+        protokol.isCorrecturNeeded = True
+    else:
+        protokol.isCorrecturNeeded = False
+
+    protokol.isSaved = True
+    protokol.save()
+    return render(request, 'protocolHubzugMassSeiltrommel.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+@require_http_methods(["POST"])
 def protocolHubzugLiftingHostClose(request, protocol_id):
     currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
@@ -300,6 +373,23 @@ def protocolHubzugLiftingHostClose(request, protocol_id):
 def protocolHubzugLaufSeiltrommelClose(request, protocol_id):
     currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLaufSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.isClosed = True
+    protokol.save()
+
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    context = {
+        'username': currentUser.username,
+        'fahrzeug_id': fahrzeug_id,
+        'hubzug': fahrzeug.hubzug
+    }
+    return render(request, 'hubzug.html', context)
+
+@require_http_methods(["POST"])
+def protocolHubzugMassSeiltrommelClose(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugMassSeiltrommel, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     protokol.isClosed = True
     protokol.save()
@@ -422,7 +512,44 @@ def exportProtokolHubzugLaufSeiltrommel(request, protocol_id):
     response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
     return response
 
+@require_http_methods(["POST"])
+def exportProtokolHubzugMassSeiltrommel(request, protocol_id):
+    protokol = get_object_or_404(ProtocolHubzugMassSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
+    # Finding the absolute path of the css file
+    css_path = finders.find('pdf/pdfProtocolHubzugLiftingHost.css')
+    css_url = request.build_absolute_uri(settings.STATIC_URL + 'pdf/pdfProtocolHubzugLiftingHost.css')
+
+    html_string = render_to_string('protokolPDFHubzugMassSeiltrommel.html', {
+        'protokol': protokol,
+        'css_url': css_url  # Pass the CSS URL to the template
+    })
+
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+    pdf_file = io.BytesIO()
+    html.write_pdf(target=pdf_file)
+    
+    # Update the database entries
+    protocol = AllProtocols(
+        baustelle=fahrzeug.baustelle.baustelleName,
+        fahrzeug=fahrzeug.fahrzeugName,
+        teil="Hubzug",
+        protokolType=protokol.protocolName,
+        path=""  # Not saving to path since we are sending directly
+    )
+    protocol.save()
+
+    protokol.isExported = True
+    protokol.save()
+
+    # Return the PDF as a response
+    pdf_file.seek(0)
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
+    return response
 
 
 
@@ -442,10 +569,39 @@ def exportProtokolHubzugLaufSeiltrommel(request, protocol_id):
 
 "---------------------------------------------------------------------------------"
 def protocol_list(request):
-    # Retrieve and sort data from the AllProtocols model
     protocols = newFahrzeug.objects.all()
+    filter_form = ProtocolFilterForm(request.GET or None)
 
-    return render(request, 'protocol_list.html', {'protocols': protocols})
+    # Apply filters based on form input
+    if filter_form.is_valid():
+        baustelle = filter_form.cleaned_data.get('baustelle')
+        fahrzeug = filter_form.cleaned_data.get('fahrzeug')
+        protocol_name = filter_form.cleaned_data.get('protocol_name')
+        status = filter_form.cleaned_data.get('status')
+        teil = filter_form.cleaned_data.get('teil')
+
+        if baustelle:
+            protocols = protocols.filter(baustelle__baustelleName__icontains=baustelle)
+        if fahrzeug:
+            protocols = protocols.filter(fahrzeugName__icontains=fahrzeug)
+        if protocol_name:
+            protocols = protocols.filter(hubzug__protocol1__protocolName__icontains=protocol_name)
+        if status:
+            if status == 'exported':
+                protocols = protocols.filter(hubzug__protocol1__isExported=True)
+            elif status == 'closed':
+                protocols = protocols.filter(hubzug__protocol1__isClosed=True)
+                protocols = protocols.filter(hubzug__protocol1__isExported=False)
+            elif status == 'saved':
+                protocols = protocols.filter(hubzug__protocol1__isSaved=True)
+                protocols = protocols.filter(hubzug__protocol1__isClosed=False)
+                protocols = protocols.filter(hubzug__protocol1__isExported=False)
+            elif status == 'offen':
+                protocols = protocols.filter(hubzug__protocol1__isSaved=False)
+            elif status == 'correction':
+                protocols = protocols.filter(hubzug__protocol1__isCorrecturNeeded=True)
+
+    return render(request, 'protocol_list.html', {'protocols': protocols, 'filter_form': filter_form})
 
 
 

@@ -11,13 +11,21 @@
 <body>
     <h1>Protocol List</h1>
     <a href='/userView/' class="back-button">Back</a>
+
+    <!-- Filter Form -->
+    <form method="get">
+        {{ filter_form.as_p }}
+        <button type="submit">Filter</button>
+        <a href="{% url 'protocol_list' %}">Clear Filters</a>
+    </form>
+
     <table>
         <thead>
             <tr>
                 <th>Baustelle</th>
                 <th>Fahrzeug</th>
                 <th>Teil</th>
-                <th>Protokol Type</th>
+                <th>Protocol Type</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -31,18 +39,63 @@
                     <td>
                         {% if protocol.hubzug.protocol1.isExported %}
                             <div class="circle green"></div>
-                            {% elif protocol.hubzug.protocol1.isClosed %}
+                        {% elif protocol.hubzug.protocol1.isClosed %}
                             <div class="circle yellow"></div>
-                            {% elif protocol.hubzug.protocol1.isSaved %}
+                        {% elif protocol.hubzug.protocol1.isSaved %}
                             <div class="circle blue"></div>
-                            {% else %}
+                        {% else %}
                             <div class="circle gray"></div>
-                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>{{ protocol.baustelle }}</td>
+                    <td>{{ protocol.fahrzeugName }}</td>
+                    <td>Hubzug</td>
+                    <td>{{ protocol.hubzug.protocol2.protocolName }}</td>
+                    <td>
+                        {% if protocol.hubzug.protocol2.isExported %}
+                            <div class="circle green"></div>
+                        {% elif protocol.hubzug.protocol2.isClosed %}
+                            <div class="circle yellow"></div>
+                        {% elif protocol.hubzug.protocol2.isSaved %}
+                            <div class="circle blue"></div>
+                        {% else %}
+                            <div class="circle gray"></div>
+                        {% endif %}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>{{ protocol.baustelle }}</td>
+                    <td>{{ protocol.fahrzeugName }}</td>
+                    <td>Hubzug</td>
+                    <td>{{ protocol.hubzug.protocol3.protocolName }}</td>
+                    <td>
+                        {% if protocol.hubzug.protocol3.isExported %}
+                            <div class="circle green"></div>
+                        {% elif protocol.hubzug.protocol3.isClosed %}
+                            <div class="circle yellow"></div>
+                        {% elif protocol.hubzug.protocol3.isSaved %}
+                            <div class="circle blue"></div>
+                        {% else %}
+                            <div class="circle gray"></div>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
         </tbody>
-        
     </table>
+    <div class="color-legend">
+        <h3>Status Explanation:</h3>
+        <ul>
+          <li><div class="circle gray"></div> Offen</li>
+          <li><div class="circle blue"></div> In Bearbeitung</li>
+          <li><div class="circle yellow"></div> Zur Überprüfung</li>
+          <li><div class="circle red"></div> Korrektur erforderlich</li>
+          <li><div class="circle green"></div> Abgeschlossen</li>
+        </ul>
+      </div>
 </body>
 </html>

@@ -76,7 +76,7 @@
           {% if hubzug.protocol3.isClosed %}
           <button class="protokol-button" disabled>Bearbeiten</button>
           {% else %}
-          <button class="protokol-button" onclick="location.href='{% url "protocolHubzugMassSeiltrommel" hubzug.protocol2.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
+          <button class="protokol-button" onclick="location.href='{% url "protocolHubzugMassSeiltrommel" hubzug.protocol3.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
           {% endif %}
         </td>
         <td class="status-indicator">

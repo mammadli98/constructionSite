@@ -6,7 +6,9 @@ function hideConfirmation() {
     confirmationBox.style.display = 'none';
     
     // Redirect to the specified URL
-    window.location.href = `/hubzug/?fahrzeugId=${fahrzeugId}`;
+    console.log('going toooooooo:', url);
+    //window.location.href = `/prueferView/`;
+    
 }
 
 function submitExportForm(button) {
@@ -44,9 +46,10 @@ function submitExportForm(button) {
         window.URL.revokeObjectURL(url);
 
         // Show the confirmation box
-        const confirmationBox = document.getElementById('confirmation-box');
-        confirmationBox.style.display = 'block';
+        //const confirmationBox = document.getElementById('confirmation-box');
+        //confirmationBox.style.display = 'block';
         console.log('Confirmation box displayed');
+        window.location.href = `/prueferView/`;
     })
     .catch(error => {
         console.error('Error:', error);
