@@ -586,20 +586,39 @@ def protocol_list(request):
             protocols = protocols.filter(fahrzeugName__icontains=fahrzeug)
         if protocol_name:
             protocols = protocols.filter(hubzug__protocol1__protocolName__icontains=protocol_name)
+            protocols = protocols.filter(hubzug__protocol2__protocolName__icontains=protocol_name)
+            protocols = protocols.filter(hubzug__protocol3__protocolName__icontains=protocol_name)
         if status:
             if status == 'exported':
                 protocols = protocols.filter(hubzug__protocol1__isExported=True)
+                protocols = protocols.filter(hubzug__protocol2__isExported=True)
+                protocols = protocols.filter(hubzug__protocol3__isExported=True)
             elif status == 'closed':
                 protocols = protocols.filter(hubzug__protocol1__isClosed=True)
                 protocols = protocols.filter(hubzug__protocol1__isExported=False)
+                protocols = protocols.filter(hubzug__protocol2__isClosed=True)
+                protocols = protocols.filter(hubzug__protocol2__isExported=False)
+                protocols = protocols.filter(hubzug__protocol3__isClosed=True)
+                protocols = protocols.filter(hubzug__protocol3__isExported=False)
             elif status == 'saved':
                 protocols = protocols.filter(hubzug__protocol1__isSaved=True)
                 protocols = protocols.filter(hubzug__protocol1__isClosed=False)
                 protocols = protocols.filter(hubzug__protocol1__isExported=False)
+                protocols = protocols.filter(hubzug__protocol2__isSaved=True)
+                protocols = protocols.filter(hubzug__protocol2__isClosed=False)
+                protocols = protocols.filter(hubzug__protocol2__isExported=False)
+                protocols = protocols.filter(hubzug__protocol3__isSaved=True)
+                protocols = protocols.filter(hubzug__protocol3__isClosed=False)
+                protocols = protocols.filter(hubzug__protocol3__isExported=False)
             elif status == 'offen':
                 protocols = protocols.filter(hubzug__protocol1__isSaved=False)
+                protocols = protocols.filter(hubzug__protocol2__isSaved=False)
+                protocols = protocols.filter(hubzug__protocol3__isSaved=False)
+
             elif status == 'correction':
                 protocols = protocols.filter(hubzug__protocol1__isCorrecturNeeded=True)
+                protocols = protocols.filter(hubzug__protocol2__isCorrecturNeeded=True)
+                protocols = protocols.filter(hubzug__protocol3__isCorrecturNeeded=True)
 
     return render(request, 'protocol_list.html', {'protocols': protocols, 'filter_form': filter_form})
 
