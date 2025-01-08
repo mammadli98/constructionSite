@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hubzug Protokolle</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
+</head>
+<body>
+  <header>
+    <div class="welcome">
+      Welcome, <span id="username">{{ username }}</span>
+    </div>
+  </header>
+
+  <main>
+    <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+
+    <form class="myForm" method="get" class="filter-form">
+      {{ filter_form.as_p }}
+      <button type="submit" class="btn btn-primary">Filter</button>
+      <a href="{% url 'pruefer_view' %}">Clear Filters</a>
+  </form>
+  
+    <table>
+        {% for fahrzeug in fahrzeugs %}
+            {% if not fahrzeug.hubzug.protocol1.isExported %}
+            <tr class="protokol-container">
+              <td class="protokol-name">{{ fahrzeug.baustelle.baustelleName }}, {{ fahrzeug.fahrzeugName }}, {{ fahrzeug.hubzug.protocol1.protocolName }}</td>
+              <td>
+                  {% if fahrzeug.hubzug.protocol1.isExported %}
+                  <button class="protokol-button" disabled>Bearbeiten</button>
+                  {% else %}
+                  <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHostSollWert" fahrzeug.hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                  {% endif %}
+              </td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+
+    </table>
+  </main>
+</body>
+</html>

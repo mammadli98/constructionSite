@@ -94,6 +94,54 @@
         </td>
       </tr>
 
+      <tr class="protokol-container">
+        <td class="protokol-name">{{ hubzug.protocol4.protocolName }}</td>
+        <td>
+          {% if hubzug.protocol4.isClosed %}
+          <button class="protokol-button" disabled>Bearbeiten</button>
+          {% else %}
+          <button class="protokol-button" onclick="location.href='{% url "protocolLaufHubzug" hubzug.protocol4.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
+          {% endif %}
+        </td>
+        <td class="status-indicator">
+          {% if hubzug.protocol4.isExported %}
+          <div class="circle green"></div>
+          {% elif hubzug.protocol4.isClosed %}
+          <div class="circle yellow"></div>
+          {% elif hubzug.protocol4.isCorrecturNeeded %}
+          <div class="circle red"></div>
+          {% elif hubzug.protocol4.isSaved %}
+          <div class="circle blue"></div>
+          {% else %}
+          <div class="circle gray"></div>
+          {% endif %}
+        </td>
+      </tr>
+
+      <tr class="protokol-container">
+        <td class="protokol-name">{{ hubzug.protocol5.protocolName }}</td>
+        <td>
+          {% if hubzug.protocol5.isClosed %}
+          <button class="protokol-button" disabled>Bearbeiten</button>
+          {% else %}
+          <button class="protokol-button" onclick="location.href='{% url "protocolEndkontrolle" hubzug.protocol5.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
+          {% endif %}
+        </td>
+        <td class="status-indicator">
+          {% if hubzug.protocol5.isExported %}
+          <div class="circle green"></div>
+          {% elif hubzug.protocol5.isClosed %}
+          <div class="circle yellow"></div>
+          {% elif hubzug.protocol5.isCorrecturNeeded %}
+          <div class="circle red"></div>
+          {% elif hubzug.protocol5.isSaved %}
+          <div class="circle blue"></div>
+          {% else %}
+          <div class="circle gray"></div>
+          {% endif %}
+        </td>
+      </tr>
+
     </table>
     <div class="color-legend">
       <h3>Status Explanation:</h3>

@@ -55,6 +55,49 @@ def logout(request):
     auth.logout(request)
     return redirect("/")
 
+def sollWertView(request):
+    username = request.session.get('username', '')
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+
+    protocols = newFahrzeug.objects.all()
+    filter_form = ProtocolFilterForm(request.GET or None)
+    # Apply filters based on form input
+    if filter_form.is_valid():
+        baustelle = filter_form.cleaned_data.get('baustelle')
+        fahrzeug = filter_form.cleaned_data.get('fahrzeug')
+        protocol_name = filter_form.cleaned_data.get('protocol_name')
+        status = filter_form.cleaned_data.get('status')
+        teil = filter_form.cleaned_data.get('teil')
+
+        if baustelle:
+            protocols = protocols.filter(baustelle__baustelleName__icontains=baustelle)
+        if fahrzeug:
+            protocols = protocols.filter(fahrzeugName__icontains=fahrzeug)
+        if protocol_name:
+            protocols = protocols.filter(hubzug__protocol1__protocolName__icontains=protocol_name)
+        if status:
+            if status == 'exported':
+                protocols = protocols.filter(hubzug__protocol1__isExported=True)
+            elif status == 'closed':
+                protocols = protocols.filter(hubzug__protocol1__isClosed=True)
+                protocols = protocols.filter(hubzug__protocol1__isExported=False)
+            elif status == 'saved':
+                protocols = protocols.filter(hubzug__protocol1__isSaved=True)
+                protocols = protocols.filter(hubzug__protocol1__isClosed=False)
+                protocols = protocols.filter(hubzug__protocol1__isExported=False)
+            elif status == 'offen':
+                protocols = protocols.filter(hubzug__protocol1__isSaved=False)
+            elif status == 'correction':
+                protocols = protocols.filter(hubzug__protocol1__isCorrecturNeeded=True)
+
+    context = {
+        'username': username,
+        'fahrzeug_id': fahrzeug_id,
+        'fahrzeugs': protocols,
+        'filter_form': filter_form
+    }
+    return render(request, 'sollWertView.html', context)
+
 @login_required(login_url="/")
 def adminView(request):
     baustellen_list = newBaustelle.objects.all()
@@ -67,22 +110,37 @@ def adminView(request):
             if baustelle_form.is_valid():
                 baustelle_form.save()
         elif 'fahrzeugName' in request.POST:
-            fahrzeug_form = NewFahrzeugForm(request.POST)
-            if fahrzeug_form.is_valid():
-                hubzug = newHubzug()
-                hubzugProtocol1 = ProtocolHubzugLiftingHost()
-                hubzugProtocol1.save()
-                hubzug.protocol1 = hubzugProtocol1
-                hubzugProtocol2 = ProtocolHubzugLaufSeiltrommel()
-                hubzugProtocol2.save()
-                hubzug.protocol2 = hubzugProtocol2
-                hubzugProtocol3 = ProtocolHubzugMassSeiltrommel()
-                hubzugProtocol3.save()
-                hubzug.protocol3 = hubzugProtocol3
-                hubzug.save()
-                fahrzeug_form = fahrzeug_form.save(commit=False)
-                fahrzeug_form.hubzug = hubzug
-                fahrzeug_form.save()
+            fahrzeug_names = newFahrzeug.objects.all().values_list('fahrzeugName', flat=True)
+            fahrzeugFrom = request.POST.get('fahrzeug_number_from')
+            fahrzeugTo = request.POST.get('fahrzeug_number_to')
+            if fahrzeugFrom <= fahrzeugTo:
+                for fahrzeug in range(int(fahrzeugFrom), int(fahrzeugTo) + 1):
+                    fahrzeug_form = NewFahrzeugForm(request.POST)
+                    if fahrzeug_form.is_valid():
+                        fahrzeugName = request.POST.get('fahrzeugName')
+                        if f"{fahrzeugName}_{fahrzeug:03}" in fahrzeug_names:
+                            continue
+                        hubzug = newHubzug()
+                        hubzugProtocol1 = ProtocolHubzugLiftingHost()
+                        hubzugProtocol1.save()
+                        hubzug.protocol1 = hubzugProtocol1
+                        hubzugProtocol2 = ProtocolHubzugLaufSeiltrommel()
+                        hubzugProtocol2.save()
+                        hubzug.protocol2 = hubzugProtocol2
+                        hubzugProtocol3 = ProtocolHubzugMassSeiltrommel()
+                        hubzugProtocol3.save()
+                        hubzug.protocol3 = hubzugProtocol3
+                        hubzugProtocol4 = ProtocolLaufHubzug()
+                        hubzugProtocol4.save()
+                        hubzug.protocol4 = hubzugProtocol4
+                        hubzugProtocol5 = ProtocolEndkontrolle()
+                        hubzugProtocol5.save()
+                        hubzug.protocol5 = hubzugProtocol5
+                        hubzug.save()
+                        fahrzeug_form = fahrzeug_form.save(commit=False)
+                        fahrzeug_form.hubzug = hubzug 
+                        fahrzeug_form.fahrzeugName = f"{fahrzeug_form.fahrzeugName}_{fahrzeug:03}"
+                        fahrzeug_form.save()
         elif 'username' in request.POST:
             username = request.POST.get('username')
             password = request.POST.get('password')
@@ -230,6 +288,20 @@ def protocolHubzugMassSeiltrommelView(request, protocol_id):
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     return render(request, 'protocolHubzugMassSeiltrommel.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
+def protocolLaufHubzugView(request, protocol_id):
+    # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolLaufHubzug, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    return render(request, 'protocolLaufHubzug.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+def protocolEndkontrolleView(request, protocol_id):
+    # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolEndkontrolle, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    return render(request, 'protocolEndkontrolle.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostUpdate(request, protocol_id):
     currentUser = request.user
@@ -354,6 +426,121 @@ def protocolHubzugMassSeiltrommelUpdate(request, protocol_id):
     return render(request, 'protocolHubzugMassSeiltrommel.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 @require_http_methods(["POST"])
+def protocolLaufHubzugUpdate(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolLaufHubzug, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.last_changer = request.user.username
+    protokol.drawing = request.POST.get('drawing', '')
+    protokol.rev = request.POST.get('rev', '')
+    protokol.order = request.POST.get('order', '')
+    protokol.order_sag = request.POST.get('order_sag', '')
+    protokol.device = request.POST.get('device', '')
+    protokol.component = request.POST.get('component', '')
+    protokol.company = request.POST.get('company', '')
+    protokol.quantity = request.POST.get('quantity', '')
+    protokol.hoist = request.POST.get('hoist', '')
+    protokol.loadTp = request.POST.get('loadTp', '')
+    protokol.check_size_1 = request.POST.get('check_size_1', '')
+    protokol.check_size_2 = request.POST.get('check_size_2', '')
+    protokol.check_size_3 = request.POST.get('check_size_3', '')
+    protokol.check_size_4 = request.POST.get('check_size_4', '')
+    protokol.check_size_4a = request.POST.get('check_size_4a', '')
+    protokol.check_size_5 = request.POST.get('check_size_5', '')
+    protokol.check_size_6 = request.POST.get('check_size_6', '')
+    protokol.check_size_7 = request.POST.get('check_size_7', '')
+    protokol.check_size_8 = request.POST.get('check_size_8', '')
+    protokol.check_size_9 = request.POST.get('check_size_9', '')
+    protokol.check_size_10 = request.POST.get('check_size_10', '')
+    protokol.check_size_11 = request.POST.get('check_size_11', '')
+    protokol.check_size_12 = request.POST.get('check_size_12', '')
+    protokol.check_size_13 = request.POST.get('check_size_13', '')
+    protokol.check_size_14 = request.POST.get('check_size_14', '')
+    protokol.check_size_15 = request.POST.get('check_size_15', '')
+    protokol.check_size_16 = request.POST.get('check_size_16', '')
+    protokol.check_size_17 = request.POST.get('check_size_17', '')
+    protokol.check_size_18 = request.POST.get('check_size_18', '')
+    protokol.check_size_19 = request.POST.get('check_size_19', '')
+    protokol.check_size_20 = request.POST.get('check_size_20', '')
+    protokol.check_size_21 = request.POST.get('check_size_21', '')
+    protokol.check_size_22 = request.POST.get('check_size_22', '')
+    protokol.check_size_23 = request.POST.get('check_size_23', '')
+    protokol.remark = request.POST.get('remark', '')
+    protokol.measure = request.POST.get('measure', '')
+    protokol.date = request.POST.get('date', '')
+    protokol.inspector = request.POST.get('inspector', '')
+    protokol.department = request.POST.get('department', '')
+    protokol.baustelle = request.POST.get('baustelle', '')
+
+    if request.POST.get('korrektur', '') == 'True':
+        protokol.isCorrecturNeeded = True
+    else:
+        protokol.isCorrecturNeeded = False
+
+    protokol.isSaved = True
+    protokol.save()
+    return render(request, 'protocolLaufHubzug.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+@require_http_methods(["POST"])
+def protocolEndkontrolleUpdate(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolEndkontrolle, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.last_changer = request.user.username
+    protokol.drawing = request.POST.get('drawing', '')
+    protokol.rev = request.POST.get('rev', '')
+    protokol.order = request.POST.get('order', '')
+    protokol.order_sag = request.POST.get('order_sag', '')
+    protokol.device = request.POST.get('device', '')
+    protokol.component = request.POST.get('component', '')
+    protokol.company = request.POST.get('company', '')
+    protokol.quantity = request.POST.get('quantity', '')
+    protokol.hoist = request.POST.get('hoist', '')
+    protokol.loadTp = request.POST.get('loadTp', '')
+    protokol.unitNO = request.POST.get('unitNO', '')
+    protokol.check_size_1 = request.POST.get('check_size_1', '')
+    protokol.check_size_2 = request.POST.get('check_size_2', '')
+    protokol.check_size_3 = request.POST.get('check_size_3', '')
+    protokol.check_size_4 = request.POST.get('check_size_4', '')
+    protokol.check_size_4a = request.POST.get('check_size_4a', '')
+    protokol.check_size_5 = request.POST.get('check_size_5', '')
+    protokol.check_size_5a = request.POST.get('check_size_5a', '')
+    protokol.check_size_6 = request.POST.get('check_size_6', '')
+    protokol.check_size_6a = request.POST.get('check_size_6a', '')
+    protokol.check_size_7 = request.POST.get('check_size_7', '')
+    protokol.check_size_8 = request.POST.get('check_size_8', '')
+    protokol.check_size_9 = request.POST.get('check_size_9', '')
+    protokol.check_size_10 = request.POST.get('check_size_10', '')
+    protokol.check_size_11 = request.POST.get('check_size_11', '')
+    protokol.check_size_12 = request.POST.get('check_size_12', '')
+    protokol.check_size_13 = request.POST.get('check_size_13', '')
+    protokol.check_size_14 = request.POST.get('check_size_14', '')
+    protokol.check_size_15 = request.POST.get('check_size_15', '')
+    protokol.check_size_16 = request.POST.get('check_size_16', '')
+    protokol.check_size_17 = request.POST.get('check_size_17', '')
+    protokol.check_size_18 = request.POST.get('check_size_18', '')
+    protokol.check_size_19 = request.POST.get('check_size_19', '')
+    protokol.check_size_20 = request.POST.get('check_size_20', '')
+    protokol.check_size_21 = request.POST.get('check_size_21', '')
+    protokol.check_size_22 = request.POST.get('check_size_22', '')
+    protokol.check_size_23 = request.POST.get('check_size_23', '')
+    protokol.remark = request.POST.get('remark', '')
+    protokol.measure = request.POST.get('measure', '')
+    protokol.date = request.POST.get('date', '')
+    protokol.inspector = request.POST.get('inspector', '')
+    protokol.department = request.POST.get('department', '')
+    protokol.baustelle = request.POST.get('baustelle', '')
+
+    if request.POST.get('korrektur', '') == 'True':
+        protokol.isCorrecturNeeded = True
+    else:
+        protokol.isCorrecturNeeded = False
+
+    protokol.isSaved = True
+    protokol.save()
+    return render(request, 'protocolEndkontrolle.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+@require_http_methods(["POST"])
 def protocolHubzugLiftingHostClose(request, protocol_id):
     currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
@@ -391,6 +578,40 @@ def protocolHubzugLaufSeiltrommelClose(request, protocol_id):
 def protocolHubzugMassSeiltrommelClose(request, protocol_id):
     currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugMassSeiltrommel, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.isClosed = True
+    protokol.save()
+
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    context = {
+        'username': currentUser.username,
+        'fahrzeug_id': fahrzeug_id,
+        'hubzug': fahrzeug.hubzug
+    }
+    return render(request, 'hubzug.html', context)
+
+@require_http_methods(["POST"])
+def protocolLaufHubzugClose(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolLaufHubzug, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    protokol.isClosed = True
+    protokol.save()
+
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    context = {
+        'username': currentUser.username,
+        'fahrzeug_id': fahrzeug_id,
+        'hubzug': fahrzeug.hubzug
+    }
+    return render(request, 'hubzug.html', context)
+
+@require_http_methods(["POST"])
+def protocolEndkontrolleClose(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolEndkontrolle, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     protokol.isClosed = True
     protokol.save()
@@ -552,7 +773,48 @@ def exportProtokolHubzugMassSeiltrommel(request, protocol_id):
     response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
     return response
 
+def protocolHubzugLiftingHostSollWert(request, protocol_id):
+    # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
+@require_http_methods(["POST"])
+def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    # Define the base names of your fields correctly according to the ones you provided
+    field_bases = [
+        ('check_size_1_soll', 'check_size_1_soll_avr'),
+        ('check_size_2_soll', 'check_size_2_soll_avr'),
+        ('check_size_3_soll', 'check_size_3_soll_avr'),
+        ('check_size_4_soll', 'check_size_4_soll_avr'),
+        ('check_size_4a_soll', 'check_size_4a_soll_avr'),
+        ('check_size_5_soll', 'check_size_5_soll_avr'),
+        ('check_size_6_soll', 'check_size_6_soll_avr'),
+        ('check_size_7_soll', 'check_size_7_soll_avr'),
+        ('check_size_8_soll', 'check_size_8_soll_avr'),
+        ('check_size_9_soll', 'check_size_9_soll_avr'),
+        ('check_size_10_soll', 'check_size_10_soll_avr'),
+        ('position_tolerance_11_soll', 'position_tolerance_11_soll_avr')
+    ]
+
+    # Loop through each pair of field names and update the model if there's a meaningful POST value
+    for soll_field, avr_field in field_bases:
+        # Update soll value if present
+        soll_value = request.POST.get(soll_field)
+        if soll_value:
+            setattr(protokol, soll_field, soll_value)
+
+        # Update average value if present
+        avr_value = request.POST.get(avr_field)
+        if avr_value:
+            setattr(protokol, avr_field, avr_value)
+            
+    protokol.save()
+    return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 
 
@@ -611,11 +873,19 @@ def protocol_list(request):
                     Q(hubzug__protocol3__isSaved=True, hubzug__protocol3__isClosed=False, hubzug__protocol3__isExported=False)
                 )
             elif status == 'offen':
-                protocols = protocols.filter(
-                    Q(hubzug__protocol1__isSaved=False) &
-                    Q(hubzug__protocol2__isSaved=False) &
-                    Q(hubzug__protocol3__isSaved=False)
-                )
+
+               
+
+                protocols = protocols.filter(hubzug__protocol3__isSaved=False)
+
+                print("--------------------------------------")
+
+                queryset = newFahrzeug.objects.select_related('newHubzug').all()
+                queryset1 = newFahrzeug.objects.all()
+
+                for x in queryset:
+                    print(x.protocol1)
+
             elif status == 'correction':
                 protocols = protocols.filter(
                     Q(hubzug__protocol1__isCorrecturNeeded=True) |

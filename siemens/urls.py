@@ -27,6 +27,7 @@ urlpatterns = [
     path('userView/', views.userView, name='user_view'),
     path('prueferView/', views.prueferView, name='pruefer_view'),
     path('change-password/', views.userView, name='change_password'),
+    path('sollWertView/', views.sollWertView, name='soll_wert_view'),
     
     path('update_fahrzeug_visibility/<int:fahrzeug_id>/', views.update_fahrzeug_visibility, name='update_fahrzeug_visibility'),
     path('reset/<int:fahrzeug_id>/<str:protokol>', views.reset, name='reset'),
@@ -35,6 +36,9 @@ urlpatterns = [
     path('protocolHubzugLiftingHost/update/<int:protocol_id>/', views.protocolHubzugLiftingHostUpdate, name='protocolHubzugLiftingHostUpdate'),
     path('protocolHubzugLiftingHost/close/<int:protocol_id>/', views.protocolHubzugLiftingHostClose, name='protocolHubzugLiftingHostClose'),
     path('exportProtokolHubzugLiftingHost/<int:protocol_id>/export_pdf/', views.exportProtokolHubzugLiftingHost, name='exportProtokolHubzugLiftingHost'),
+    path('protocolHubzugLiftingHostSollWert/<int:protocol_id>/', views.protocolHubzugLiftingHostSollWert, name='protocolHubzugLiftingHostSollWert'),
+    path('protocolHubzugLiftingHostSollWert/update/<int:protocol_id>/', views.protocolHubzugLiftingHostSollWertUpdate, name='protocolHubzugLiftingHostSollWertUpdate'),
+
 
     path('protocolHubzugLaufSeiltrommel/<int:protocol_id>/', views.protocolHubzugLaufSeiltrommelView, name='protocolHubzugLaufSeiltrommel'),
     path('protocolHubzugLaufSeiltrommel/update/<int:protocol_id>/', views.protocolHubzugLaufSeiltrommelUpdate, name='protocolHubzugLaufSeiltrommelUpdate'),
@@ -45,6 +49,17 @@ urlpatterns = [
     path('protocolHubzugMassSeiltrommel/update/<int:protocol_id>/', views.protocolHubzugMassSeiltrommelUpdate, name='protocolHubzugMassSeiltrommelUpdate'),
     path('protocolHubzugMassSeiltrommel/close/<int:protocol_id>/', views.protocolHubzugMassSeiltrommelClose, name='protocolHubzugMassSeiltrommelClose'),
     path('exportProtokolHubzugMassSeiltrommel/<int:protocol_id>/export_pdf/', views.exportProtokolHubzugMassSeiltrommel, name='exportProtokolHubzugMassSeiltrommel'),
+
+    path('protocolLaufHubzug/<int:protocol_id>/', views.protocolLaufHubzugView, name='protocolLaufHubzug'),
+    path('protocolLaufHubzug/update/<int:protocol_id>/', views.protocolLaufHubzugUpdate, name='protocolLaufHubzugUpdate'),
+    path('protocolLaufHubzug/close/<int:protocol_id>/', views.protocolLaufHubzugClose, name='protocolLaufHubzugClose'),
+
+    path('protocolEndkontrolle/<int:protocol_id>/', views.protocolEndkontrolleView, name='protocolEndkontrolle'),
+    path('protocolEndkontrolle/update/<int:protocol_id>/', views.protocolEndkontrolleUpdate, name='protocolEndkontrolleUpdate'),
+    path('protocolEndkontrolle/close/<int:protocol_id>/', views.protocolEndkontrolleClose, name='protocolEndkontrolleClose'),
+
+
+
 
 
 

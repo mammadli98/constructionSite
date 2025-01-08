@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ protokol.protocolName }}</title>
+    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+    </div>
+    <div class="container">
+        {% if current_user.pruefer == True %}
+        <a href='/prueferView/' class="back-button">Back</a>    
+        {% else %}
+        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
+        {% endif %}
+        <h1>{{ protokol.protocolName }}</h1>
+        <form id="protokol-form" action="{% url 'protocolEndkontrolleUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
+            {% csrf_token %}
+            <table class="form-table">
+                <tr>
+                    <th>Beschreibung / Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Zeichnung-Nr / Drawing No.:</td>
+                    <td><input type="text" id="drawing" name="drawing" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.drawing|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Rev:</td>
+                    <td><input type="text" id="rev" name="rev" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.rev|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr. / Order No.:</td>
+                    <td><input type="text" id="order" name="order" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr.-SAG / Order No.-SAG:</td>
+                    <td><input type="text" id="order_sag" name="order_sag" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order_sag|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Geräte-Nr. / Device No:</td>
+                    <td><input type="text" id="device" name="device" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.device|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Benennung / Component:</td>
+                    <td><input type="text" id="component" name="component" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.component|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Firma / Company:</td>
+                    <td><input type="text" id="company" name="company" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.company|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Stückzahl / Quantity:</td>
+                    <td><input type="text" id="quantity" name="quantity" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.quantity|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Device No. Catch / Detent Unit:</td>
+                    <td><input type="text" id="unitNO" name="unitNO" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.unitNO|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Baustelle:</td>
+                    <td><input type="text" id="baustelle" name="baustelle" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.baustelle|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <th>Erledigt / Executed</th>
+                    <th>Prüfwert / Test value</th>
+                </tr>
+                
+                <tr>
+                    <td><b>1.</b> Prüfung Gerätenummer: Ist Hubzug mit korrekter Gerätenummer versehen? / Identification Device-No.: Does the lifting hoist have the correct device No.?</td>
+                    <td>
+                        <input type="number" id="check_size_1" name="check_size_1" 
+                               value="{{ protokol.check_size_1|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_1')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_1"></td>
+                </tr>
+                <tr>
+                    <td><b>2.</b> Seiltrommel: Bremsfläche frei von Öl, Fett und Konservierungsmitteln / Rope drum: Braking area must be free of oil, grease and preservative agents</td>
+                    <td>
+                        <input type="number" id="check_size_2" name="check_size_2" 
+                               value="{{ protokol.check_size_2|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_2')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_2"></td>
+                </tr>
+                <tr>
+                    <td><b>3.</b> Bremsring: Bremsbelag von Öl, Fett, Konservierungsstoffen befreit und Gegenfläche gereinigt / Braking ring: Braking area must be free of oil, grease and preservative agents</td>
+                    <td>
+                        <input type="number" id="check_size_3" name="check_size_3" 
+                               value="{{ protokol.check_size_3|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_3')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_3"></td>
+                </tr>
+                <tr>
+                    <td><b>4.</b> Tellerfederpakete eingebaut wie in Zeichnung dargestellt? (40x20,4x2,25) / Spring washer block assembled and installed according drawing? Dimension of Spring washer: 40x20,4x2,25</td>
+                    <td>
+                        <input type="number" id="check_size_4" name="check_size_4" 
+                               value="{{ protokol.check_size_4|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_4')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_4"></td>
+                </tr>
+                
+                <tr>
+                    <td><b>5.</b> Bremskrafteinstellung des Bremsrings mit TECSIS Tool: Antrieb mit ca. 50Hz und ca. 5sec. betreiben. Bei Nicht-erreichen von Sollwert: Schrauben M10 in 5 Nm-Schritten fester anziehen. Startwert: Siehe "Parameterliste, Spalte C" / Adjustment Brake power of Braking ring with TECSIS tool:
+                        Drive unit have to run on appr. 50Hz and appr. 5seconds. Required set point not reached: Tighten screws M10 in 5 Nm steps. Initial value: Appr. see "Parameterliste, Column C"</td>
+                    <td>
+                        <table>
+                            <tr><td>Measurem. at Tooth 1</td></tr>
+                            <tr><td><input type="number" id="check_size_5" name="check_size_5" 
+                                value="{{ protokol.check_size_5|default_if_none:'' }}"
+                               ></td></tr>
+                            <tr><td>Measurem. at Tooth 7</td></tr>
+                            <tr><td><input type="number" id="check_size_5a" name="check_size_5a" 
+                                value="{{ protokol.check_size_5a|default_if_none:'' }}"
+                                ></td></tr>
+                        </table>
+                    </td>
+                    <td> 35 -2/+5 kN </td>
+                </tr>
+                <tr>
+                    <td><b>6.</b> Fangprüfung 2x / Check Catch situation 2 times:<br>
+                        a. Prüfgewicht anheben / lift up test load (Parameterliste: Column D) b. Start Absenken, bis ca. 1000 min-1 erreicht sind.<br>
+                            Start lowering until motor reaches 1000 min-1 <br>
+                        c. Für Messung t=0 sec. setzen<br>
+                            Starting Point for time t=0<br>
+                        d. Mit konstanter Geschw. für 187 ms weiter absenken.<br>
+                            Lowering down with constant speed for 187 ms <br>
+                        e. Hubmagnet stromlos schalten<br>
+                            Switch off the solenoid<br>
+                        f. Schalter S3 wird automatisch betätigt, Motor abgeschaltet<br>
+                            Switch S3 get signal, motor will be stopped.<br>
+                        g. Nach Abbremsen und Stillstand: Wegstrecke abfragen.<br>
+                            After stopping measure the braking distance.</td>
+                    <td>
+                        <table>
+                            <tr><td>Measurem. No. 1</td></tr>
+                            <tr><td><input type="number" id="check_size_6" name="check_size_6" 
+                                value="{{ protokol.check_size_6|default_if_none:'' }}"
+                               ></td></tr>
+                            <tr><td>Measurem. No. 2</td></tr>
+                            <tr><td><input type="number" id="check_size_6a" name="check_size_6a" 
+                                value="{{ protokol.check_size_6a|default_if_none:'' }}"
+                               ></td></tr>
+                        </table>
+                    </td>
+                    <td> < 200 mm</td>
+                </tr>
+                
+                <tr>
+                    <td><b>7.</b> 5x Heben und Senken mit 1,25-facher Nennlast. Ausgangswert: ca. Siehe "Parameterliste Spalte D" / 5 times lifting and lowering with 1,25 times of nominal load. Initial value: Appr. see "Parameterliste Column D"
+                        </td>
+                    <td>
+                        <input type="number" id="check_size_7" name="check_size_7" 
+                               value="{{ protokol.check_size_7|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_7')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_7"></td>
+                </tr>
+                <tr>
+                    <td><b>8.</b> NUR BEI 2 ANTRIEBEN / ONLY IN CASE OF2 MOTORS:
+                        Abschaltsignalprüfung Rechter Antrieb. 
+                        Prüfgewicht siehe Parameterliste. 3x wiederholen.
+                        Prüfung Endschalterabstand nach Zeichnung. 
+                        Power off signal check only right drive unit. 
+                        Testing weight see Parameter list. Repeating three times
+                        Check distance of limit switch according drawing.
+                        </td>
+                    <td>
+                        <label>
+                            <input type="checkbox" id="relevant_8" name="relevant_8" 
+                                   onchange="toggleInput(this, 'check_size_8')"> Relevant
+                        </label>
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_8" name="check_size_8" 
+                               class="textarea-control"
+                               value="{{ protokol.check_size_8|default_if_none:'' }}" 
+                               disabled>
+                    </td>
+                    <td id="status_8"></td>
+                </tr>
+                
+                <script>
+                    function toggleInput(checkbox, inputId) {
+                        var inputField = document.getElementById(inputId);
+                        if (checkbox.checked) {
+                            inputField.disabled = false;
+                        } else {
+                            inputField.disabled = true;
+                            inputField.value = ''; // Clear the input if "Not Relevant"
+                        }
+                    }
+                </script>
+                <tr>
+                    <td><b>9.</b> NUR BEI 2 ANTRIEBEN / ONLY IN CASE OF2 MOTORS:
+                        Abschaltsignalprüfung Linker Antrieb. 
+                        Prüfgewicht siehe Parameterliste. 3x wiederholen.
+                        Prüfung Endschalterabstand nach Zeichnung.
+                        Power off signal check only left drive unit. 
+                        Testing weight see Parameter list. Repeating three times.
+                        Check distance of limit switch according drawing. 
+                        </td>
+                    <td>
+                        <label>
+                            <input type="checkbox" id="relevant_9" name="relevant_9" 
+                                   onchange="toggleInput(this, 'check_size_9')"> Relevant
+                        </label>
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_9" name="check_size_9" 
+                               class="textarea-control"
+                               value="{{ protokol.check_size_9|default_if_none:'' }}" 
+                               disabled>
+                    </td>
+                    <td id="status_9"></td>
+                </tr>
+                
+                <script>
+                    function toggleInput(checkbox, inputId) {
+                        var inputField = document.getElementById(inputId);
+                        if (checkbox.checked) {
+                            inputField.disabled = false;
+                        } else {
+                            inputField.disabled = true;
+                            inputField.value = ''; // Clear the input if "Not Relevant"
+                        }
+                    }
+                </script>
+                <tr>
+                    <td><b>10.</b> Seillänge und Seilschlag nach Zeichnung und Stückliste geprüft? / Length and laying of rope has to be checked according drawing and BOM list?</td>
+                    <td>
+                        <input type="number" id="check_size_10" name="check_size_10" 
+                               value="{{ protokol.check_size_10|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_10')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_10"></td>
+                </tr>
+                <tr>
+                    <td><b>11.</b> Schraube an Motorwelle für Nothubtool angeschraubt? / Screw for Rescue kit mounted on motor shaft? </td>
+                    <td>
+                        <input type="number" id="check_size_11" name="check_size_11" 
+                               value="{{ protokol.check_size_11|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_11')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_11"></td>
+                </tr>
+                <tr>
+                    <td><b>12.</b> Bremslüfthebel beigepackt? / Brake release level on motor?</td>
+                    <td>
+                        <input type="number" id="check_size_12" name="check_size_12" 
+                               value="{{ protokol.check_size_12|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_12')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_12"></td>
+                </tr>
+                <th colspan="2">Messgerät     : Bremskraftmesseinrichtung, Anzeige für Sensoren
+                                Measuring tool: Braking power measuring device, Display for sensors</th>
+                <tr>
+                    <td><b>13.</b> Pos. 70: Sechskantmutter / Hex nut M16 </td>
+                    <td>
+                        <input type="number" id="check_size_13" name="check_size_13" 
+                               value="{{ protokol.check_size_13|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_13')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_13"></td>
+                </tr>
+                <tr>
+                    <td><b>14.</b> Pos. 51: Zylinderschraube / head screw M20 x 40 DIN 912</td>
+                    <td>
+                        <input type="number" id="check_size_14" name="check_size_14" 
+                               value="{{ protokol.check_size_14|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_14')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_14"></td>
+                </tr>
+                <tr>
+                    <td><b>15.</b> Pos. 71: Sechskantmutter / Hex nut M8 ISO 4032 </td>
+                    <td>
+                        <input type="number" id="check_size_15" name="check_size_15" 
+                               value="{{ protokol.check_size_15|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_15')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_15"></td>
+                </tr>
+                <tr>
+                    <td><b>16.</b> Pos. 55: Sechskantschraube / Hex bolt M8 x 60 ISO 4017</td>
+                    <td>
+                        <input type="number" id="check_size_16" name="check_size_16" 
+                               value="{{ protokol.check_size_16|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_16')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_16"></td>
+                </tr>
+                <tr>
+                    <td><b>17.</b> Pos. 53: Sechskantschraube / head screw M8 x 20 ISO 4017</td>
+                    <td>
+                        <input type="number" id="check_size_17" name="check_size_17" 
+                               value="{{ protokol.check_size_17|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_17')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_17"></td>
+                </tr>
+                <tr>
+                    <td><b>18.</b> Schrauben an den Schrumpfscheiben der Hubwerksantriebe / M10 bolts on the shrink disc the hoisting mechanism gearing</td>
+                    <td>
+                        <input type="number" id="check_size_18" name="check_size_18" 
+                               value="{{ protokol.check_size_18|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_18')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_18"></td>
+                </tr>
+                <tr>
+                    <td><b>19.</b> Muttern und Schraubenkopf mit Siegellack gekennzeichnet? / Nuts and screw head marked with sealing wax? </td>
+                    <td>
+                        <input type="number" id="check_size_19" name="check_size_19" 
+                               value="{{ protokol.check_size_19|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_19')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_19"></td>
+                </tr>
+                <tr>
+                    <td><b>20.</b> Sicherheitssiegel der Klinkeneinheit unbeschädigt? / Safety seal of the catch detent unit undamaged.</td>
+                    <td>
+                        <input type="number" id="check_size_20" name="check_size_20" 
+                               value="{{ protokol.check_size_20|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_20')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_20"></td>
+                </tr>
+                <tr>
+                    <td><b>21.</b> Blanke Teile konserviert? / unpainted surfaces with anti-corrosion</td>
+                    <td>
+                        <input type="number" id="check_size_21" name="check_size_21" 
+                               value="{{ protokol.check_size_21|default_if_none:'' }}"
+                               oninput="updateStatus(this, 'status_21')">
+                    </td>
+                    <td>Yes</td>
+                    <td id="status_21"></td>
+                </tr>
+                
+  
+                <tr>
+                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
+                </tr>
+                
+                <tr>
+                    <td><h4>Sonstiges / Miscellaneous</h4></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Datum / Date:</td>
+                    <td><input type="date" id="date" name="date" class="textarea-control" value="{{ protokol.date|default_if_none:'' }}" ></td>
+                  </tr>
+                {% if current_user.pruefer %}
+                    <tr>
+                        <td>Prüfer / Inspector:</td>
+                        <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>Abteilung / Department:</td>
+                    <td><input type="text" id="department" name="department" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.department|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Last modified:</td>
+                    <td>{{ protokol.last_changer|default_if_none:"" }}</td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="btn-save">Speichern</button>
+                {% if current_user.pruefer == True %}
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLaufSeiltrommel' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
+                {% else %}
+                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolEndkontrolleClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
+                {% endif %}
+            </div>
+        </form>
+        
+        <div id="confirmation-box" class="confirmation-box" data-fahrzeug-id="{{ fahrzeug_id }}">
+            <p>Your protocol will be saved in the given path:</p>
+            <p id="file-path"></p>
+            <button onclick="hideConfirmation()">OK</button>
+        </div>
+    </div>
+
+    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+</body>
+</html>

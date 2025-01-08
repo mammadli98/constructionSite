@@ -7,10 +7,12 @@ class NewBaustelleForm(forms.ModelForm):
         fields = ['baustelleName']
 
 class NewFahrzeugForm(forms.ModelForm):
+    fahrzeug_number_from = forms.IntegerField(label='Fahrzeug Number From')
+    fahrzeug_number_to = forms.IntegerField(label='Fahrzeug Number To')
     class Meta:
         model = newFahrzeug
         fields = ['fahrzeugName', 'isVisible', 'baustelle']
-    
+
 
 class ProtocolFilterForm(forms.Form):
     baustelle = forms.CharField(max_length=100, required=False, label='Baustelle')
@@ -20,7 +22,7 @@ class ProtocolFilterForm(forms.Form):
         choices=[('all', 'All'), 
                  ("hubzug", "Hubzug")],
         required=False,
-        label='Teil'
+        label='Role'
     )
     status = forms.ChoiceField(
         choices=[('all', 'All'), 

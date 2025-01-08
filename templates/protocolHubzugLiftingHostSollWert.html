@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ protokol.protocolName }}</title>
+    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+    </div>
+    <div class="container">
+        <a href='/sollWertView/' class="back-button">Back</a>
+        <h1>{{ protokol.protocolName }}</h1>
+        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostSollWertUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
+            {% csrf_token %}
+            <table class="form-table">
+                <tr>
+                    <th>Prüfmaße / Check Sizes:</th>
+                    <th>Soll-Maß Wert</th>
+                    <th>Soll-Maß Avarage</th>
+                    <th>Soll-Maß desired size
+                        [mm]</th>
+                </tr>
+                <tr>
+                    <td><b>1.</b> Horizontaler Abstand der Anschlussbohrungen* / Horizontal distance of connecting holes*</td>
+                    <td>
+                        <input type="number" id="check_size_1_soll" name="check_size_1_soll" style="width: 100px;" step="0.1">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_1_soll_avr" name="check_size_1_soll_avr" style="width: 100px;" step="0.1">
+                    </td>
+                    <td> {{ protokol.check_size_1_soll}} +/- {{ protokol.check_size_1_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>2.</b> Vertikaler Abstand der Anschlussbohrungen / Vertical distance of connecting holes*</td>
+                    <td>
+                        <input type="number" id="check_size_2_soll" name="check_size_2_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_2_soll_avr" name="check_size_2_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_2_soll}} +/- {{ protokol.check_size_2_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>3.</b> Durchmesser 1. Anschlussbohrung / Diameter of 1st connecting hole</td>
+                    <td>
+                        <input type="number" id="check_size_3_soll" name="check_size_3_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_3_soll_avr" name="check_size_3_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_3_soll}} +/- {{ protokol.check_size_3_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>4.</b> Durchmesser 2. Anschlussbohrung / Diameter of 2nd connecting hole</td>
+                    <td>
+                        <input type="number" id="check_size_4_soll" name="check_size_4_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_4_soll_avr" name="check_size_4_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_4_soll}} +/- {{ protokol.check_size_4_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>4a.</b> Abstand zwischen Gehäuseseiten* / Distance between the frame sides*</td>
+                    <td>
+                        <input type="number" id="check_size_4a_soll" name="check_size_4a_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_4a_soll_avr" name="check_size_4a_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_4a_soll}} +/- {{ protokol.check_size_4a_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>5.</b> Horizontaler Abstand zu Lochkreismitte für Lageranbau* / Horizontal distance to centre of drum bearing*</td>
+                    <td>
+                        <input type="number" id="check_size_5_soll" name="check_size_5_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_5_soll_avr" name="check_size_5_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_5_soll}} +/- {{ protokol.check_size_5_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>6.</b> Vertikaler Abstand zu Lochkreismitte für Lageranbau* / Vertical distance to centre of drum bearing*</td>
+                    <td>
+                        <input type="number" id="check_size_6_soll" name="check_size_6_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_6_soll_avr" name="check_size_6_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_6_soll}} +/- {{ protokol.check_size_6_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>7.</b> Durchmesser der Lagerbohrung* / Diameter of the holes for the bearings*</td>
+                    <td>
+                        <input type="number" id="check_size_7_soll" name="check_size_7_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_7_soll_avr" name="check_size_7_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_7_soll}} +/- {{ protokol.check_size_7_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>8.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
+                    <td>
+                        <input type="number" id="check_size_8_soll" name="check_size_8_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_8_soll_avr" name="check_size_8_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_8_soll}} +/- {{ protokol.check_size_8_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>9.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
+                    <td>
+                        <input type="number" id="check_size_9_soll" name="check_size_9_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_9_soll_avr" name="check_size_9_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_9_soll}} +/- {{ protokol.check_size_9_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><b>10.</b> Durchmesser der beiden Aufnahmebohrungen der Klinke / Diameter of both holes for the Catch lever</td>
+                    <td>
+                        <input type="number" id="check_size_10_soll" name="check_size_10_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="check_size_10_soll_avr" name="check_size_10_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.check_size_10_soll}} +/- {{ protokol.check_size_10_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Lagetoleranzen / Position tolerances:</th>
+                </tr>
+                <tr>
+                    <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
+                    <td>
+                        <input type="number" id="position_tolerance_11_soll" name="position_tolerance_11_soll", style="width: 100px;">
+                    </td>
+                    <td>
+                        <input type="number" id="position_tolerance_11_soll_avr" name="position_tolerance_11_soll_avr", style="width: 100px;">
+                    </td>
+                    <td> {{ protokol.position_tolerance_11_soll}} +/- {{ protokol.position_tolerance_11_soll_avr}}</td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="btn-save">Speichern</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+</body>
+</html>
