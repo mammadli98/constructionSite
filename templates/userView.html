@@ -93,26 +93,28 @@
             </div>
             <div class="col-md-4 fahrzeuge-panel">
                 <h2>Fahrzeuge</h2>
-                <table class="table" id="fahrzeugTable">
-                    <thead>
-                        <tr>
-                            <th>Fahrzeug Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for fahrzeug in fahrzeug_list %}
-                            {% if fahrzeug.isVisible %}
-                                <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}" data-fahrzeug-id="{{ fahrzeug.id }}" onclick="selectFahrzeug(this)">
-                                    <td>{{ fahrzeug.fahrzeugName }}</td>
-                                </tr>
-                            {% endif %}
-                        {% empty %}
+                <div style="overflow-y: auto; max-height: 500px; border: 1px solid #ddd;">
+                    <table class="table" id="fahrzeugTable">
+                        <thead>
                             <tr>
-                                <td colspan="2">No Fahrzeuge found.</td>
+                                <th>Fahrzeug Name</th>
                             </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {% for fahrzeug in fahrzeug_list %}
+                                {% if fahrzeug.isVisible %}
+                                    <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}" data-fahrzeug-id="{{ fahrzeug.id }}" onclick="selectFahrzeug(this)">
+                                        <td>{{ fahrzeug.fahrzeugName }}</td>
+                                    </tr>
+                                {% endif %}
+                            {% empty %}
+                                <tr>
+                                    <td colspan="2">No Fahrzeuge found.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-4 actions-panel text-center">
                 <h2>Actions</h2>

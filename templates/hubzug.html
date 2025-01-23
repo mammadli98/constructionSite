@@ -110,6 +110,8 @@
           <div class="circle yellow"></div>
           {% elif hubzug.protocol4.isCorrecturNeeded %}
           <div class="circle red"></div>
+          {% elif hubzug.protocol4.isNacharbeiterNeeded %}
+          <div class="circle orange"></div>
           {% elif hubzug.protocol4.isSaved %}
           <div class="circle blue"></div>
           {% else %}
@@ -150,6 +152,7 @@
         <li><div class="circle blue"></div> In Bearbeitung</li>
         <li><div class="circle yellow"></div> Zur Überprüfung</li>
         <li><div class="circle red"></div> Korrektur erforderlich</li>
+        <li><div class="circle orange"></div> Nacharbeiter erforderlich</li>
         <li><div class="circle green"></div> Abgeschlossen</li>
       </ul>
     </div>

@@ -108,12 +108,14 @@
                   {% if fahrzeug.hubzug.protocol4.isExported %}
                   <button class="protokol-button" disabled>Bearbeiten</button>
                   {% else %}
-                  <button class="protokol-button" onclick="location.href='{% url "protocolHubzugMassSeiltrommel" fahrzeug.hubzug.protocol4.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                  <button class="protokol-button" onclick="location.href='{% url "protocolLaufHubzug" fahrzeug.hubzug.protocol4.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
                   {% endif %}
               </td>
               <td class="status-indicator">
                   {% if fahrzeug.hubzug.protocol4.isExported %}
                   <div class="circle green"></div>
+                  {% elif fahrzeug.hubzug.protocol4.isNacharbeiterNeeded %}
+                  <div class="circle orange"></div>
                   {% elif fahrzeug.hubzug.protocol4.isClosed %}
                   <div class="circle yellow"></div>
                   {% elif fahrzeug.hubzug.protocol4.isSaved %}
@@ -159,6 +161,7 @@
         <li><div class="circle blue"></div> In Bearbeitung</li>
         <li><div class="circle yellow"></div> Zur Überprüfung</li>
         <li><div class="circle red"></div> Korrektur erforderlich</li>
+        <li><div class="circle orange"></div> Nacharbeiter erforderlich</li>
         <li><div class="circle green"></div> Abgeschlossen</li>
       </ul>
     </div>

@@ -113,12 +113,13 @@ def adminView(request):
             fahrzeug_names = newFahrzeug.objects.all().values_list('fahrzeugName', flat=True)
             fahrzeugFrom = request.POST.get('fahrzeug_number_from')
             fahrzeugTo = request.POST.get('fahrzeug_number_to')
+            fahrzeugType = request.POST.get('fahrzeug_type')
             if fahrzeugFrom <= fahrzeugTo:
                 for fahrzeug in range(int(fahrzeugFrom), int(fahrzeugTo) + 1):
                     fahrzeug_form = NewFahrzeugForm(request.POST)
                     if fahrzeug_form.is_valid():
                         fahrzeugName = request.POST.get('fahrzeugName')
-                        if f"{fahrzeugName}_{fahrzeug:03}" in fahrzeug_names:
+                        if f"{fahrzeugName}_{fahrzeug:03} ({fahrzeugType})" in fahrzeug_names:
                             continue
                         hubzug = newHubzug()
                         hubzugProtocol1 = ProtocolHubzugLiftingHost()
@@ -139,7 +140,7 @@ def adminView(request):
                         hubzug.save()
                         fahrzeug_form = fahrzeug_form.save(commit=False)
                         fahrzeug_form.hubzug = hubzug 
-                        fahrzeug_form.fahrzeugName = f"{fahrzeug_form.fahrzeugName}_{fahrzeug:03}"
+                        fahrzeug_form.fahrzeugName = f"{fahrzeug_form.fahrzeugName}_{fahrzeug:03} ({fahrzeugType})"
                         fahrzeug_form.save()
         elif 'username' in request.POST:
             username = request.POST.get('username')
@@ -476,6 +477,11 @@ def protocolLaufHubzugUpdate(request, protocol_id):
         protokol.isCorrecturNeeded = True
     else:
         protokol.isCorrecturNeeded = False
+
+    if request.POST.get('nacharbeit', '') == 'True':
+        protokol.isNacharbeiterNeeded = True
+    else:
+        protokol.isNacharbeiterNeeded = False
 
     protokol.isSaved = True
     protokol.save()

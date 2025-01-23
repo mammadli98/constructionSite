@@ -89,28 +89,30 @@
                         </div>
                     </div>
                 </div>
-                <table class="table" id="fahrzeugTable">
-                    <thead>
-                        <tr>
-                            <th>Fahrzeug Name</th>
-                            <th>Is Visible</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for fahrzeug in fahrzeug_list %}
-                        <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}">
-                            <td>{{ fahrzeug.fahrzeugName }}</td>
-                            <td>
-                                <input type="checkbox" {% if fahrzeug.isVisible %}checked{% endif %} onchange="toggleVisibility({{ fahrzeug.id }}, this.checked)">
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="2">No Fahrzeuge found.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+                <div style="overflow-y: auto; max-height: 500px; border: 1px solid #ddd;">
+                    <table class="table" id="fahrzeugTable">
+                        <thead>
+                            <tr>
+                                <th>Fahrzeug Name</th>
+                                <th>Is Visible</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for fahrzeug in fahrzeug_list %}
+                            <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}">
+                                <td>{{ fahrzeug.fahrzeugName }}</td>
+                                <td>
+                                    <input type="checkbox" {% if fahrzeug.isVisible %}checked{% endif %} onchange="toggleVisibility({{ fahrzeug.id }}, this.checked)">
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="2">No Fahrzeuge found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <div class="col-md-4 user-panel">
                 <h2>Users</h2>

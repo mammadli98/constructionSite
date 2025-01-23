@@ -133,6 +133,7 @@ class ProtocolLaufHubzug(models.Model):
     isClosed = models.BooleanField(default=False)
     isExported = models.BooleanField(default=False)
     isCorrecturNeeded = models.BooleanField(default=False)
+    isNacharbeiterNeeded = models.BooleanField(default=False)
 
     protocolName  = models.CharField(max_length=255, default="Laufschein Hubzug")
     drawing = models.TextField(verbose_name="Zeichnung-Nr / Drawing No.", null=True, blank=True)
