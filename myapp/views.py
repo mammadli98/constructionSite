@@ -61,6 +61,7 @@ def sollWertView(request):
 
     protocols = newFahrzeug.objects.all()
     filter_form = ProtocolFilterForm(request.GET or None)
+    newPermanentProtocol = PermanentProtocol.objects.all()
     # Apply filters based on form input
     if filter_form.is_valid():
         baustelle = filter_form.cleaned_data.get('baustelle')
@@ -94,7 +95,8 @@ def sollWertView(request):
         'username': username,
         'fahrzeug_id': fahrzeug_id,
         'fahrzeugs': protocols,
-        'filter_form': filter_form
+        'filter_form': filter_form,
+        'permanentProtocol' : newPermanentProtocol
     }
     return render(request, 'sollWertView.html', context)
 
@@ -111,9 +113,16 @@ def adminView(request):
                 baustelle_form.save()
         elif 'fahrzeugName' in request.POST:
             fahrzeug_names = newFahrzeug.objects.all().values_list('fahrzeugName', flat=True)
-            fahrzeugFrom = request.POST.get('fahrzeug_number_from')
-            fahrzeugTo = request.POST.get('fahrzeug_number_to')
+            fahrzeugFrom = int(request.POST.get('fahrzeug_number_from'))
+            fahrzeugTo = int(request.POST.get('fahrzeug_number_to'))
             fahrzeugType = request.POST.get('fahrzeug_type')
+            fahrzeugName = request.POST.get('fahrzeugName')
+
+            newPermanentProtocol = PermanentProtocol.objects.create(
+                permanentProtocolName=f"{fahrzeugName}_{fahrzeugFrom:03}_{fahrzeugTo:03} ({fahrzeugType})"
+            )
+            newPermanentProtocol.save() 
+
             if fahrzeugFrom <= fahrzeugTo:
                 for fahrzeug in range(int(fahrzeugFrom), int(fahrzeugTo) + 1):
                     fahrzeug_form = NewFahrzeugForm(request.POST)
@@ -121,27 +130,41 @@ def adminView(request):
                         fahrzeugName = request.POST.get('fahrzeugName')
                         if f"{fahrzeugName}_{fahrzeug:03} ({fahrzeugType})" in fahrzeug_names:
                             continue
-                        hubzug = newHubzug()
+                        
+                        # Create unique protocol instances for this fahrzeug
                         hubzugProtocol1 = ProtocolHubzugLiftingHost()
                         hubzugProtocol1.save()
-                        hubzug.protocol1 = hubzugProtocol1
+
                         hubzugProtocol2 = ProtocolHubzugLaufSeiltrommel()
                         hubzugProtocol2.save()
-                        hubzug.protocol2 = hubzugProtocol2
+
                         hubzugProtocol3 = ProtocolHubzugMassSeiltrommel()
                         hubzugProtocol3.save()
-                        hubzug.protocol3 = hubzugProtocol3
+
                         hubzugProtocol4 = ProtocolLaufHubzug()
                         hubzugProtocol4.save()
-                        hubzug.protocol4 = hubzugProtocol4
+
                         hubzugProtocol5 = ProtocolEndkontrolle()
                         hubzugProtocol5.save()
+
+                        # Create hubzug and associate unique protocols
+                        hubzug = newHubzug()
+                        hubzug.protocol1 = hubzugProtocol1
+                        hubzug.protocol2 = hubzugProtocol2
+                        hubzug.protocol3 = hubzugProtocol3
+                        hubzug.protocol4 = hubzugProtocol4
                         hubzug.protocol5 = hubzugProtocol5
                         hubzug.save()
+
+                        # Save fahrzeug with hubzug association
                         fahrzeug_form = fahrzeug_form.save(commit=False)
                         fahrzeug_form.hubzug = hubzug 
                         fahrzeug_form.fahrzeugName = f"{fahrzeug_form.fahrzeugName}_{fahrzeug:03} ({fahrzeugType})"
                         fahrzeug_form.save()
+
+                        # Add only the unique protocol to the current PermanentProtocol
+                        newPermanentProtocol.protocol1.add(hubzugProtocol1)
+            newPermanentProtocol.save()
         elif 'username' in request.POST:
             username = request.POST.get('username')
             password = request.POST.get('password')
@@ -172,6 +195,10 @@ def adminView(request):
         'baustelle_form': baustelle_form,
         'fahrzeug_form': fahrzeug_form
     }
+    
+    permanent_protocol_a = PermanentProtocol.objects.get(permanentProtocolName="C_001_003 (H)")
+    print(permanent_protocol_a.id)
+
     return render(request, "adminView.html", context)
 
 @login_required(login_url="/")

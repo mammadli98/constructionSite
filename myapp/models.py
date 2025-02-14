@@ -28,7 +28,23 @@ class newFahrzeug(models.Model):
 
     def __str__(self):
         return self.fahrzeugName
-    
+
+class PermanentProtocol(models.Model):
+    permanentProtocolName = models.CharField(max_length=30)
+    protocol1 = models.ManyToManyField(
+        'ProtocolHubzugLiftingHost',
+        related_name="permanent_protocols"
+    )
+
+    def __str__(self):
+        return self.permanentProtocolName
+'''
+    protocol1 = models.ForeignKey(ProtocolHubzugLiftingHost, on_delete = models.CASCADE)
+    protocol2 = models.ForeignKey(ProtocolHubzugLaufSeiltrommel, on_delete = models.CASCADE)
+    protocol3 = models.ForeignKey(ProtocolHubzugMassSeiltrommel, on_delete = models.CASCADE)
+    protocol4 = models.ForeignKey(ProtocolLaufHubzug, on_delete = models.CASCADE)
+    protocol5 = models.ForeignKey(ProtocolEndkontrolle, on_delete = models.CASCADE)
+'''
 
 
 
