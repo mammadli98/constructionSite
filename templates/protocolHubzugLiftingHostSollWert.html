@@ -153,6 +153,7 @@
             </table>
             <div class="button-container">
                 <button type="submit" class="btn-save">Speichern</button>
+                <button type="button" class="btn-save-export" onclick="submitPermanentClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostSollWertClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">Bestätigen</button>
             </div>
         </form>
     </div>

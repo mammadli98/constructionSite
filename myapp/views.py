@@ -27,6 +27,7 @@ from datetime import datetime
 from .forms import *
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import copy
 
 GLOBAL_DIR = "/home/mammadli98/Documents/huseynSiemens/Protokols/"
 
@@ -118,8 +119,11 @@ def adminView(request):
             fahrzeugType = request.POST.get('fahrzeug_type')
             fahrzeugName = request.POST.get('fahrzeugName')
 
+            permanentHubzugProtocol1 = ProtocolHubzugLiftingHost()
+            permanentHubzugProtocol1.save()
             newPermanentProtocol = PermanentProtocol.objects.create(
-                permanentProtocolName=f"{fahrzeugName}_{fahrzeugFrom:03}_{fahrzeugTo:03} ({fahrzeugType})"
+                permanentProtocolName=f"{fahrzeugName}_{fahrzeugFrom:03}_{fahrzeugTo:03} ({fahrzeugType})",
+                permanentProtocol1 = permanentHubzugProtocol1
             )
             newPermanentProtocol.save() 
 
@@ -196,8 +200,8 @@ def adminView(request):
         'fahrzeug_form': fahrzeug_form
     }
     
-    permanent_protocol_a = PermanentProtocol.objects.get(permanentProtocolName="C_001_003 (H)")
-    print(permanent_protocol_a.id)
+    #permanent_protocol_a = PermanentProtocol.objects.get(permanentProtocolName="C_001_003 (H)")
+    #print(permanent_protocol_a.id)
 
     return render(request, "adminView.html", context)
 
@@ -849,7 +853,54 @@ def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
     protokol.save()
     return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
+@require_http_methods(["POST"])
+def protocolHubzugLiftingHostSollWertClose(request, protocol_id):
+    protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    protokol.isPermanentDone = True
+    protokol.save()
+    return sollWertView(request)
 
+#@require_http_methods(["POST"])
+def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
+    permanentProtokol = get_object_or_404(PermanentProtocol, pk=protocol_id)
+    protokol1 = permanentProtokol.permanentProtocol1
+    print(protokol1.isPermanentDone)
+
+    for protocol in permanentProtokol.protocol1.all():
+        protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol.id)
+        print(protokol.isPermanentDone)
+        protokol.isPermanentDone = protokol1.isPermanentDone
+        protokol.check_size_1_soll = protokol1.check_size_1_soll
+        protokol.check_size_1_soll_avr = protokol1.check_size_1_soll_avr
+        protokol.check_size_2_soll = protokol1.check_size_2_soll
+        protokol.check_size_2_soll_avr = protokol1.check_size_2_soll_avr
+        protokol.check_size_3_soll = protokol1.check_size_3_soll
+        protokol.check_size_3_soll_avr = protokol1.check_size_3_soll_avr
+        protokol.check_size_4_soll = protokol1.check_size_4_soll
+        protokol.check_size_4_soll_avr = protokol1.check_size_4_soll_avr
+        protokol.check_size_4a_soll = protokol1.check_size_4a_soll
+        protokol.check_size_4a_soll_avr = protokol1.check_size_4a_soll_avr
+        protokol.check_size_5_soll = protokol1.check_size_5_soll
+        protokol.check_size_5_soll_avr = protokol1.check_size_5_soll_avr
+        protokol.check_size_6_soll = protokol1.check_size_6_soll
+        protokol.check_size_6_soll_avr = protokol1.check_size_6_soll_avr
+        protokol.check_size_7_soll = protokol1.check_size_7_soll
+        protokol.check_size_7_soll_avr = protokol1.check_size_7_soll_avr
+        protokol.check_size_8_soll = protokol1.check_size_8_soll
+        protokol.check_size_8_soll_avr = protokol1.check_size_8_soll_avr
+        protokol.check_size_9_soll = protokol1.check_size_9_soll
+        protokol.check_size_9_soll_avr = protokol1.check_size_9_soll_avr
+        protokol.check_size_10_soll = protokol1.check_size_10_soll
+        protokol.check_size_10_soll_avr = protokol1.check_size_10_soll_avr
+        protokol.position_tolerance_11_soll = protokol1.position_tolerance_11_soll
+        protokol.position_tolerance_11_soll_avr = protokol1.position_tolerance_11_soll_avr
+        protokol.save()
+        print(protokol.isPermanentDone)
+        
+    protokol1.delete()
+    permanentProtokol.delete()
+
+    return sollWertView(request)
 
 
 

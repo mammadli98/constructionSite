@@ -89,6 +89,27 @@ function submitClosedForm(button) {
     form.submit(); // Submit the form
 }
 
+function submitPermanentClosedForm(button) {
+    // If validation passes, proceed to submit the form
+    const url = button.getAttribute('data-url');
+    
+    // Create a form element to submit the POST request
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = url;
+    
+    // Add CSRF token for Django
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = 'csrfmiddlewaretoken';
+    csrfInput.value = csrfToken;
+    form.appendChild(csrfInput);
+
+    document.body.appendChild(form);
+    form.submit(); // Submit the form
+}
+
 function getCsrfToken() {
     return document.querySelector('[name=csrfmiddlewaretoken]').value;
 }

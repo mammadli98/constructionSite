@@ -17,22 +17,25 @@
 
   <main>
     <table>
+      <a href='/userView/' class="back-button">Back</a>
+          <form action="{% url 'logout' %}" method="post" style="margin: 0;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
+
       <tr class="protokol-container">
-        <a href='/userView/' class="back-button">Back</a>
-        <form action="{% url 'logout' %}" method="post" style="margin: 0;">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-danger">Logout</button>
-        </form>
         <td class="protokol-name">{{ hubzug.protocol1.protocolName }}</td>
         <td>
-          {% if hubzug.protocol1.isClosed %}
+          {% if hubzug.protocol1.isClosed or not hubzug.protocol1.isPermanentDone %}
           <button class="protokol-button" disabled>Bearbeiten</button>
           {% else %}
           <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHost" hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
           {% endif %}
         </td>
         <td class="status-indicator">
-          {% if hubzug.protocol1.isExported %}
+          {% if not hubzug.protocol1.isPermanentDone %}
+          <div class="circle black"></div>
+          {% elif hubzug.protocol1.isExported %}
           <div class="circle green"></div>
           {% elif hubzug.protocol1.isClosed %}
           <div class="circle yellow"></div>
@@ -45,7 +48,7 @@
           {% endif %}
         </td>
       </tr>
-      
+      <!--
       <tr class="protokol-container">
         <td class="protokol-name">{{ hubzug.protocol2.protocolName }}</td>
         <td>
@@ -143,10 +146,16 @@
           {% endif %}
         </td>
       </tr>
+    -->
 
     </table>
     <div class="color-legend">
       <h3>Status Explanation:</h3>
+      {% if not hubzug.protocol1.isPermanentDone %}
+      <ul>
+        <li><div class="circle black"></div> Protokol wartet auf Bestätigung durch den Admin</li>
+      </ul>
+      {% else %}
       <ul>
         <li><div class="circle gray"></div> Offen</li>
         <li><div class="circle blue"></div> In Bearbeitung</li>
@@ -155,6 +164,7 @@
         <li><div class="circle orange"></div> Nacharbeiter erforderlich</li>
         <li><div class="circle green"></div> Abgeschlossen</li>
       </ul>
+      {% endif %}
     </div>
   </main>
 </body>

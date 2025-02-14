@@ -16,6 +16,7 @@
   </header>
 
   <main>
+    <a href='/adminView/' class="back-button">Back</a>
     <form action="{% url 'logout' %}" method="post" style="margin: 0;">
       {% csrf_token %}
       <button type="submit" class="btn btn-danger">Logout</button>
@@ -55,43 +56,35 @@
     </head>
     <body>
     
-    <h2>Accordion</h2>
+    <h2>Protocols</h2>
     
-    <button class="accordion">Section 1</button>
-    <div class="panel">
-      <table>
-        {% for fahrzeug in fahrzeugs %}
-            {% if not fahrzeug.hubzug.protocol1.isExported %}
-            <tr class="protokol-container">
-              <td class="protokol-name">{{ fahrzeug.baustelle.baustelleName }}, {{ fahrzeug.fahrzeugName }}, {{ fahrzeug.hubzug.protocol1.protocolName }}</td>
-              <td>
-                  {% if fahrzeug.hubzug.protocol1.isExported %}
-                  <button class="protokol-button" disabled>Bearbeiten</button>
-                  {% else %}
-                  <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHostSollWert" fahrzeug.hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
-                  {% endif %}
-              </td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-
-    </table>    
-  </div>  
-    <button class="accordion">Section 2</button>
-    <div class="panel">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-    
-    <button class="accordion">Section 3</button>
-    <div class="panel">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-    </div>
-
     {% for permanent in permanentProtocol %}
       <button class="accordion">{{permanent.permanentProtocolName}}</button>
-      <div class="panel">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      <div class="container" style="display: none;">
+        <table>
+          <tr class="protokol-container">
+            <td class="protokol-name">{{ permanent.permanentProtocol1.protocolName }}</td>
+            <td>
+                {% if permanent.permanentProtocol1.isPermanentDone %}
+                <button class="protokol-button" disabled>Bearbeiten</button>
+                {% else %}
+                <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHostSollWert" permanent.permanentProtocol1.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                {% endif %}
+            </td>
+            <td class="status-indicator">
+              {% if permanent.permanentProtocol1.isPermanentDone %}
+              <div class="circle green"></div>
+              {% else %}
+              <div class="circle red"></div>
+              {% endif %}
+          </td>
+          </tr>     
+        </table> 
+        <div class="button-container">
+          <button type="button" class="btn-save-export" onclick="location.href='{% url "protocolHubzugLiftingHostSollWertOffentlich" permanent.id %}?fahrzeugId={{ fahrzeug.id }}'" {% if not permanent.permanentProtocol1.isPermanentDone %}disabled{% endif %}>Bestätitgen</button>
+        </div>
       </div>
+
     {% endfor %}
 
 
