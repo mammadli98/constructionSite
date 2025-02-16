@@ -121,9 +121,12 @@ def adminView(request):
 
             permanentHubzugProtocol1 = ProtocolHubzugLiftingHost()
             permanentHubzugProtocol1.save()
+            permanentHubzugProtocol4 = ProtocolLaufHubzug()
+            permanentHubzugProtocol4.save()
             newPermanentProtocol = PermanentProtocol.objects.create(
                 permanentProtocolName=f"{fahrzeugName}_{fahrzeugFrom:03}_{fahrzeugTo:03} ({fahrzeugType})",
-                permanentProtocol1 = permanentHubzugProtocol1
+                permanentProtocol1 = permanentHubzugProtocol1,
+                permanentProtocol4 = permanentHubzugProtocol4
             )
             newPermanentProtocol.save() 
 
@@ -168,6 +171,7 @@ def adminView(request):
 
                         # Add only the unique protocol to the current PermanentProtocol
                         newPermanentProtocol.protocol1.add(hubzugProtocol1)
+                        newPermanentProtocol.protocol4.add(hubzugProtocol4)
             newPermanentProtocol.save()
         elif 'username' in request.POST:
             username = request.POST.get('username')
@@ -817,6 +821,14 @@ def protocolHubzugLiftingHostSollWert(request, protocol_id):
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
+def protocolLaufHubzugSollWert(request, protocol_id):
+    # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolLaufHubzug, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    return render(request, 'protocolLaufHubzugSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
     currentUser = request.user
@@ -860,10 +872,18 @@ def protocolHubzugLiftingHostSollWertClose(request, protocol_id):
     protokol.save()
     return sollWertView(request)
 
+@require_http_methods(["POST"])
+def protocolLaufHubzugSollWertClose(request, protocol_id):
+    protokol = get_object_or_404(ProtocolLaufHubzug, pk=protocol_id)
+    protokol.isPermanentDone = True
+    protokol.save()
+    return sollWertView(request)
+
 #@require_http_methods(["POST"])
 def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
     permanentProtokol = get_object_or_404(PermanentProtocol, pk=protocol_id)
     protokol1 = permanentProtokol.permanentProtocol1
+    protokol4 = permanentProtokol.permanentProtocol4
     print(protokol1.isPermanentDone)
 
     for protocol in permanentProtokol.protocol1.all():
@@ -896,8 +916,14 @@ def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
         protokol.position_tolerance_11_soll_avr = protokol1.position_tolerance_11_soll_avr
         protokol.save()
         print(protokol.isPermanentDone)
-        
+    
+    for protocol in permanentProtokol.protocol4.all():
+        protokol = get_object_or_404(ProtocolLaufHubzug, pk=protocol.id)
+        protokol.isPermanentDone = protokol4.isPermanentDone
+        protokol.save()
+
     protokol1.delete()
+    protokol4.delete()
     permanentProtokol.delete()
 
     return sollWertView(request)

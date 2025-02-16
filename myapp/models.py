@@ -32,8 +32,13 @@ class newFahrzeug(models.Model):
 class PermanentProtocol(models.Model):
     permanentProtocolName = models.CharField(max_length=30)
     permanentProtocol1 = models.ForeignKey(ProtocolHubzugLiftingHost, on_delete = models.CASCADE)
+    permanentProtocol4 = models.ForeignKey(ProtocolLaufHubzug, on_delete = models.CASCADE)
     protocol1 = models.ManyToManyField(
         'ProtocolHubzugLiftingHost',
+        related_name="permanent_protocols"
+    )
+    protocol4 = models.ManyToManyField(
+        'ProtocolLaufHubzug',
         related_name="permanent_protocols"
     )
 

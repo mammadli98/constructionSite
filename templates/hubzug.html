@@ -96,18 +96,20 @@
           {% endif %}
         </td>
       </tr>
-
+    -->
       <tr class="protokol-container">
         <td class="protokol-name">{{ hubzug.protocol4.protocolName }}</td>
         <td>
-          {% if hubzug.protocol4.isClosed %}
+          {% if hubzug.protocol4.isClosed or not hubzug.protocol4.isPermanentDone %}
           <button class="protokol-button" disabled>Bearbeiten</button>
           {% else %}
           <button class="protokol-button" onclick="location.href='{% url "protocolLaufHubzug" hubzug.protocol4.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
           {% endif %}
         </td>
         <td class="status-indicator">
-          {% if hubzug.protocol4.isExported %}
+          {% if not hubzug.protocol4.isPermanentDone %}
+          <div class="circle black"></div>
+          {% elif hubzug.protocol4.isExported %}
           <div class="circle green"></div>
           {% elif hubzug.protocol4.isClosed %}
           <div class="circle yellow"></div>
@@ -122,7 +124,7 @@
           {% endif %}
         </td>
       </tr>
-
+<!--
       <tr class="protokol-container">
         <td class="protokol-name">{{ hubzug.protocol5.protocolName }}</td>
         <td>

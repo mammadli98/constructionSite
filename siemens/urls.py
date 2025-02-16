@@ -55,6 +55,8 @@ urlpatterns = [
     path('protocolLaufHubzug/<int:protocol_id>/', views.protocolLaufHubzugView, name='protocolLaufHubzug'),
     path('protocolLaufHubzug/update/<int:protocol_id>/', views.protocolLaufHubzugUpdate, name='protocolLaufHubzugUpdate'),
     path('protocolLaufHubzug/close/<int:protocol_id>/', views.protocolLaufHubzugClose, name='protocolLaufHubzugClose'),
+    path('protocolLaufHubzugSollWert/<int:protocol_id>/', views.protocolLaufHubzugSollWert, name='protocolLaufHubzugSollWert'),
+    path('protocolLaufHubzugSollWert/close/<int:protocol_id>/', views.protocolLaufHubzugSollWertClose, name='protocolLaufHubzugSollWertClose'),
 
     path('protocolEndkontrolle/<int:protocol_id>/', views.protocolEndkontrolleView, name='protocolEndkontrolle'),
     path('protocolEndkontrolle/update/<int:protocol_id>/', views.protocolEndkontrolleUpdate, name='protocolEndkontrolleUpdate'),
