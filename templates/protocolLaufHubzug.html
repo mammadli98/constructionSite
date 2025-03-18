@@ -73,7 +73,9 @@
                             <option value="" {% if protokol.check_size_1 is none %}selected{% endif %}></option>
                             <option value="OK" {% if protokol.check_size_1 == 'OK' %}selected{% endif %}>OK</option>
                             <option value="NOK" {% if protokol.check_size_1 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_1 == 'NAE' %}selected{% endif %}>NAE</option>
+                            {% if current_user.pruefer == True %}
+                                <option value="NAE" {% if protokol.check_size_1 == 'NAE' %}selected{% endif %}>NAE</option>
+                            {% endif %}
                         </select>
                     </td>
                 </tr>

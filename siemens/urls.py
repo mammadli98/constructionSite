@@ -40,6 +40,7 @@ urlpatterns = [
     path('protocolHubzugLiftingHostSollWert/update/<int:protocol_id>/', views.protocolHubzugLiftingHostSollWertUpdate, name='protocolHubzugLiftingHostSollWertUpdate'),
     path('protocolHubzugLiftingHostSollWert/close/<int:protocol_id>/', views.protocolHubzugLiftingHostSollWertClose, name='protocolHubzugLiftingHostSollWertClose'),
     path('protocolHubzugLiftingHostSollWert/offentlich/<int:protocol_id>/', views.protocolHubzugLiftingHostSollWertOffentlich, name='protocolHubzugLiftingHostSollWertOffentlich'),
+    path('protocolHubzugLiftingHostAddNewField/<int:protocol_id>/', views.protocolHubzugLiftingHostAddNewField, name='protocolHubzugLiftingHostAddNewField'),
 
 
     path('protocolHubzugLaufSeiltrommel/<int:protocol_id>/', views.protocolHubzugLaufSeiltrommelView, name='protocolHubzugLaufSeiltrommel'),

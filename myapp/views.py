@@ -372,6 +372,12 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     protokol.department = request.POST.get('department', '')
     protokol.baustelle = request.POST.get('baustelle', '')
 
+    for number in protokol.additional_data:
+        soll_value = request.POST.get(f'check_size_{number}')
+        if soll_value:
+            protokol.additional_data[number]["aktuellWert"] = soll_value
+        
+
     if request.POST.get('korrektur', '') == 'True':
         protokol.isCorrecturNeeded = True
     else:
@@ -861,6 +867,16 @@ def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
         avr_value = request.POST.get(avr_field)
         if avr_value:
             setattr(protokol, avr_field, avr_value)
+    
+    for number in protokol.additional_data:
+        soll_value = request.POST.get(f'check_size_{number}_soll')
+        if soll_value:
+            protokol.additional_data[number]["wert"] = soll_value
+        
+        avr_value = request.POST.get(f'check_size_{number}_soll_avr')
+        if avr_value:
+            protokol.additional_data[number]["avr"] = avr_value
+
             
     protokol.save()
     return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
@@ -914,6 +930,7 @@ def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
         protokol.check_size_10_soll_avr = protokol1.check_size_10_soll_avr
         protokol.position_tolerance_11_soll = protokol1.position_tolerance_11_soll
         protokol.position_tolerance_11_soll_avr = protokol1.position_tolerance_11_soll_avr
+        protokol.additional_data = protokol1.additional_data
         protokol.save()
         print(protokol.isPermanentDone)
     
@@ -928,10 +945,37 @@ def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
 
     return sollWertView(request)
 
+def protocolHubzugLiftingHostAddNewField(request, protocol_id):
+    if request.method == "POST":
+        currentUser = request.user
+        protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
 
+        # Get fahrzeug_id from URL query parameters
+        fahrzeug_id = request.GET.get("fahrzeugId", "")
 
+        # Retrieve POST data
+        new_number = request.POST.get("new_number", "")  # Must match name="new_field"
+        new_field = request.POST.get("new_field", "")  # Must match name="new_field"
+        new_type = request.POST.get("new_type", "")  # Must match name="new_type"
 
+        print("🚀 Received POST request!")
+        print(f"New Number: {new_number}")
+        print(f"New Field: {new_field}")
+        print(f"New Type: {new_type}")
+        print(f"Fahrzeug ID: {fahrzeug_id}")
+        if new_field:
+            protokol.additional_data[new_number] = {"name": new_field, 
+                                                    "type": new_type,
+                                                    "wert": 0,
+                                                    "avr": 0}
+            protokol.save()
+        print(protokol.additional_data)
 
+        # Return JSON response for debugging
+        return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+    
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 
 

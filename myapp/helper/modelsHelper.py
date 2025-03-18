@@ -60,6 +60,8 @@ class ProtocolHubzugLiftingHost(models.Model):
     department = models.TextField(verbose_name="Abteilung / Department", blank=True, null=True)
     last_changer = models.CharField(verbose_name="Last modified by", max_length=100, blank=True, null=True)
     baustelle = models.CharField(verbose_name="Baustelle", max_length=100, blank=True, null=True)
+
+    additional_data = models.JSONField(default=dict, blank=True, null=True)
     
 class ProtocolHubzugLaufSeiltrommel(models.Model):
     isSaved = models.BooleanField(default=False)

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load convert_tags %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -147,9 +148,69 @@
                     </td>
                     <td> {{ protokol.position_tolerance_11_soll}} +/- {{ protokol.position_tolerance_11_soll_avr}}</td>
                 </tr>
+
+                {% for newNumber in protokol.additional_data %}
+                    <tr>
+                        {% if protokol.additional_data|get_type:newNumber == "Toleranz" %}
+                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
+                            <td>
+                                <input type="number" id="check_size_{{newNumber}}_soll" name="check_size_{{newNumber}}_soll", style="width: 100px;">
+                            </td>
+                            <td>
+                                <input type="number" id="check_size_{{newNumber}}_soll_avr" name="check_size_{{newNumber}}_soll_avr", style="width: 100px;">
+                            </td>
+                            <td> {{ protokol.additional_data|get_wert:newNumber }} +/- {{protokol.additional_data|get_avr:newNumber}}</td>
+                        {% else %}
+                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
+                            <td>
+                                <select id="check_size_{{newNumber}}" name="check_size_{{newNumber}}" class="select-control">
+                                    <option value="" {% if protokol.check_size_2 is none %}selected{% endif %}></option>
+                                    <option value="OK" {% if protokol.check_size_2 == 'OK' %}selected{% endif %}>OK</option>
+                                    <option value="NOK" {% if protokol.check_size_2 == 'NOK' %}selected{% endif %}>NOK</option>
+                                    <option value="NAE" {% if protokol.check_size_2 == 'NAE' %}selected{% endif %}>NAE</option>
+                                </select>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
                 <tr>
                     <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
                 </tr>
+
+                <tr>
+                    <td><b>Neues Feld hinzufügen</b></td>
+                </tr>
+
+                <tr style="border-bottom: 1px solid #ddd; height: 50px;">
+                    <!-- Input field that allows any text -->
+                    <td>
+                        <input type="number" id="new_number" name="new_number"
+                            style="width: 40px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    
+                        <input type="text" id="new_field" name="new_field"
+                            style="width: 380px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                    
+                    <!-- Dropdown selection -->
+                    <td>
+                        <select id="new_type" name="new_type" class="select-control"
+                            style="width: 130px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; background-color: #fff;">
+                            <option value="OK/NOK/NAE">Boolean</option>
+                            <option value="Toleranz">Toleranz</option>
+                        </select>
+                    </td>
+                    
+                    <!-- Button with improved styling -->
+                    <td>
+                        <button type="button" class="btn-save-export"
+                            style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;"
+                            onclick="submitAddNewFieldForm(this)" data-url="{% url 'protocolHubzugLiftingHostAddNewField' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">
+                            Hinzufügen
+                        </button>
+                    </td>
+                </tr>
+                
             </table>
             <div class="button-container">
                 <button type="submit" class="btn-save">Speichern</button>

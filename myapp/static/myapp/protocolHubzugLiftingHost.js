@@ -110,6 +110,52 @@ function submitPermanentClosedForm(button) {
     form.submit(); // Submit the form
 }
 
+function submitAddNewFieldForm(button) {
+    const row = button.closest("tr");
+
+    // Get values from inputs
+    const newNumber = row.querySelector("#new_number").value;
+    const newField = row.querySelector("#new_field").value;
+    const newType = row.querySelector("#new_type").value;
+    const url = button.getAttribute("data-url");
+
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = url;
+
+    // CSRF Token
+    const csrfToken = document.querySelector("[name=csrfmiddlewaretoken]").value;
+    const csrfInput = document.createElement("input");
+    csrfInput.type = "hidden";
+    csrfInput.name = "csrfmiddlewaretoken";
+    csrfInput.value = csrfToken;
+    form.appendChild(csrfInput);
+
+    // Create hidden input fields
+    const newNumberInput = document.createElement("input");
+    newNumberInput.type = "hidden";
+    newNumberInput.name = "new_number";
+    newNumberInput.value = newNumber;
+    form.appendChild(newNumberInput);
+
+    const newFieldInput = document.createElement("input");
+    newFieldInput.type = "hidden";
+    newFieldInput.name = "new_field";
+    newFieldInput.value = newField;
+    form.appendChild(newFieldInput);
+
+    const newTypeInput = document.createElement("input");
+    newTypeInput.type = "hidden";
+    newTypeInput.name = "new_type";
+    newTypeInput.value = newType;
+    form.appendChild(newTypeInput);
+
+    document.body.appendChild(form);
+    form.submit();
+}
+
+
+
 function getCsrfToken() {
     return document.querySelector('[name=csrfmiddlewaretoken]').value;
 }

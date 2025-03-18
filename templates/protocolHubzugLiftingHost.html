@@ -219,6 +219,38 @@
                     <td> {{ protokol.position_tolerance_11_soll}} mm zu B</td>
                     <td id="status_11"></td>
                 </tr>
+
+                {% for newNumber in protokol.additional_data %}
+                    <tr>
+                        {% if protokol.additional_data|get_type:newNumber == "Toleranz" %}
+                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
+                            {% with wert=protokol.additional_data|get_wert:newNumber avr=protokol.additional_data|get_avr:newNumber %}
+                                <td>
+                                    <input type="number" id="check_size_{{ newNumber }}" name="check_size_{{ newNumber }}" 
+                                        data-min="{{ wert|substract:avr }}" 
+                                        data-max="{{ wert|adding:avr }}"  
+                                        class="textarea-control" 
+                                        step="0.1"
+                                        value="{{ protokol.additional_data|get_aktuell_wert:newNumber|default_if_none:'' }}" 
+                                        oninput="validateInput(this, 'status_{{ newNumber }}')">
+                                </td>
+                            {% endwith %}
+                            <td> {{ protokol.additional_data|get_wert:newNumber }} +/- {{protokol.additional_data|get_avr:newNumber}}</td>
+                            <td id="status_{{ newNumber }}"></td>
+                        {% else %}
+                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
+                            <td>
+                                <select id="check_size_{{newNumber}}" name="check_size_{{newNumber}}" class="select-control">
+                                    <option value="" {% if protokol.check_size_2 is none %}selected{% endif %}></option>
+                                    <option value="OK" {% if protokol.check_size_2 == 'OK' %}selected{% endif %}>OK</option>
+                                    <option value="NOK" {% if protokol.check_size_2 == 'NOK' %}selected{% endif %}>NOK</option>
+                                    <option value="NAE" {% if protokol.check_size_2 == 'NAE' %}selected{% endif %}>NAE</option>
+                                </select>
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+
                 <tr>
                     <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
                 </tr>
