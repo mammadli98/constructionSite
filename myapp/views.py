@@ -31,6 +31,14 @@ import copy
 
 GLOBAL_DIR = "/home/mammadli98/Documents/huseynSiemens/Protokols/"
 
+def update_baustellen(request, user_id):
+    if request.method == 'POST':
+        user = get_object_or_404(CustomUser, id=user_id)
+        baustellen_ids = request.POST.getlist('baustellen')
+        baustellen = newBaustelle.objects.filter(id__in=baustellen_ids)
+        user.baustellen.set(baustellen)
+        return redirect("/adminView/")
+
 def login(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -41,6 +49,7 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             request.session['username'] = username
+            request.session['id'] = user.id
             if username == 'admin':
                 return redirect("adminView/")
             elif user.pruefer == True:
@@ -181,6 +190,7 @@ def adminView(request):
             email = request.POST.get('email')
             adresse = request.POST.get('adresse')
             pruefer = request.POST.get('pruefer')
+            baustellen_ids = request.POST.getlist('baustellen')
             # Create the user
             new_user = CustomUser(username=username)
             new_user.set_password(password)
@@ -189,6 +199,10 @@ def adminView(request):
             new_user.email = email
             new_user.address = adresse
             new_user.pruefer = pruefer
+            new_user.save()
+            for baustelle_id in baustellen_ids:
+                baustelle = newBaustelle.objects.get(id=baustelle_id)
+                new_user.baustellen.add(baustelle)
             new_user.save()
                 
         return redirect('/adminView/')
@@ -225,10 +239,12 @@ def userView(request):
         userPasswordForm = PasswordChangeForm(request.user)
 
     username = request.session.get('username', '')
+    id = request.session.get('id', '')
+    baustelle = CustomUser.objects.get(id=id).baustellen.all()
 
     context = {
         'username': username,
-        'baustellen_list': newBaustelle.objects.all(),
+        'baustellen_list': baustelle,
         'fahrzeug_list': newFahrzeug.objects.all(),
         'userPassword_form': userPasswordForm,
         'modal_show': modal_show  # Pass this flag to the template
@@ -240,7 +256,12 @@ def prueferView(request):
     username = request.session.get('username', '')
     fahrzeug_id = request.GET.get('fahrzeugId', None)
 
-    protocols = newFahrzeug.objects.all()
+    user_id = request.session.get('id', '')
+    user = CustomUser.objects.get(id=user_id)
+    user_baustellen = user.baustellen.all()
+
+    # Filter newFahrzeug objects where baustelle is in user's baustellen
+    protocols = newFahrzeug.objects.filter(baustelle__in=user_baustellen)
     filter_form = ProtocolFilterForm(request.GET or None)
     # Apply filters based on form input
     if filter_form.is_valid():

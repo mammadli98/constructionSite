@@ -6,6 +6,10 @@ class CustomUser(AbstractUser):
     age = models.IntegerField(null=True, blank=True)
     address = models.CharField(max_length=255, null=True, blank=True)
     pruefer = models.BooleanField(default=False)
+    baustellen = models.ManyToManyField(
+        'newBaustelle',
+        related_name="baustellen"
+    )
 
 class newBaustelle(models.Model):
     baustelleName=models.CharField(max_length=30)
