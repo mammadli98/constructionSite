@@ -227,6 +227,12 @@
                   </option>
                   {% endfor %}
                 </select>
+                <label>Select Protokolle</label>
+                <select class="form-control" name="protokolle" multiple>
+                    <option value="h" {% if user.hubzug %}selected{% endif %}>Hubzug</option>
+                    <option value="e" {% if user.elektrik %}selected{% endif %}>Elektrik</option>
+                    <option value="m" {% if user.mechanik %}selected{% endif %}>Mechanik</option>
+                  </select>
               </div>
             </div>
             <div class="modal-footer">

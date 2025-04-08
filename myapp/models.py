@@ -10,6 +10,9 @@ class CustomUser(AbstractUser):
         'newBaustelle',
         related_name="baustellen"
     )
+    hubzug = models.BooleanField(default=False)
+    elektrik = models.BooleanField(default=False)
+    mechanik = models.BooleanField(default=False)
 
 class newBaustelle(models.Model):
     baustelleName=models.CharField(max_length=30)

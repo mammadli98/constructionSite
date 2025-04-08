@@ -37,6 +37,25 @@ def update_baustellen(request, user_id):
         baustellen_ids = request.POST.getlist('baustellen')
         baustellen = newBaustelle.objects.filter(id__in=baustellen_ids)
         user.baustellen.set(baustellen)
+        protokollen_list = request.POST.getlist('protokolle')
+
+        if "h" in protokollen_list:
+            user.hubzug = True
+        else:
+            user.hubzug = False
+        
+        if "m" in protokollen_list:
+            user.mechanik = True
+        else:
+            user.mechanik = False
+        
+        if "e" in protokollen_list:
+            user.elektrik = True
+        else:
+            user.elektrik = False
+        
+        user.save()
+
         return redirect("/adminView/")
 
 def login(request):
@@ -241,8 +260,10 @@ def userView(request):
     username = request.session.get('username', '')
     id = request.session.get('id', '')
     baustelle = CustomUser.objects.get(id=id).baustellen.all()
+    user = get_object_or_404(CustomUser, id=id)
 
     context = {
+        'user':user,
         'username': username,
         'baustellen_list': baustelle,
         'fahrzeug_list': newFahrzeug.objects.all(),

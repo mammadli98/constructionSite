@@ -118,9 +118,15 @@
             </div>
             <div class="col-md-4 actions-panel text-center">
                 <h2>Actions</h2>
+                {% if user.hubzug %}
                 <button class="btn btn-primary action-btn disabled d-block mb-2 mx-auto" id="hubzugBtn" onclick="redirectTo('/hubzug/')">Hubzug</button>
+                {% endif %}
+                {% if user.mechanik %}
                 <button class="btn btn-primary action-btn disabled d-block mb-2 mx-auto" id="mechanikBtn" onclick="redirectTo('/mechanik/')">Mechanik</button>
+                {% endif %}
+                {% if user.elektrik %}
                 <button class="btn btn-primary action-btn disabled d-block mx-auto" id="elektrikBtn" onclick="redirectTo('/elektrik/')">Elektrik</button>
+                {% endif %}
             </div>
         </div>
     </div>
