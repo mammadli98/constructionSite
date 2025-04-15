@@ -114,7 +114,7 @@ function submitAddNewFieldForm(button) {
     const row = button.closest("tr");
 
     // Get values from inputs
-    const newNumber = row.querySelector("#new_number").value;
+    //const newNumber = row.querySelector("#new_number").value;
     const newField = row.querySelector("#new_field").value;
     const newType = row.querySelector("#new_type").value;
     const url = button.getAttribute("data-url");
@@ -132,11 +132,11 @@ function submitAddNewFieldForm(button) {
     form.appendChild(csrfInput);
 
     // Create hidden input fields
-    const newNumberInput = document.createElement("input");
-    newNumberInput.type = "hidden";
-    newNumberInput.name = "new_number";
-    newNumberInput.value = newNumber;
-    form.appendChild(newNumberInput);
+    // const newNumberInput = document.createElement("input");
+    // newNumberInput.type = "hidden";
+    // newNumberInput.name = "new_number";
+    // newNumberInput.value = newNumber;
+    // form.appendChild(newNumberInput);
 
     const newFieldInput = document.createElement("input");
     newFieldInput.type = "hidden";

@@ -7,17 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Protocol List</title>
     <link rel="stylesheet" href="{% static 'myapp/protocol_list.css' %}">
+    <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
 </head>
 <body>
     <h1>Protocol List</h1>
-    <a href='/userView/' class="back-button">Back</a>
+    <a href='/adminView/' class="back-button">Back</a>
 
     <!-- Filter Form -->
-    <form method="get">
+    {% comment %} <form method="get">
         {{ filter_form.as_p }}
         <button type="submit">Filter</button>
         <a href="{% url 'protocol_list' %}">Clear Filters</a>
-    </form>
+    </form> {% endcomment %}
 
     <table>
         <thead>
@@ -27,6 +28,7 @@
                 <th>Role</th>
                 <th>Protocol Type</th>
                 <th>Status</th>
+                <th>Bearbeiten</th>
             </tr>
         </thead>
         <tbody>
@@ -47,9 +49,16 @@
                             <div class="circle gray"></div>
                         {% endif %}
                     </td>
+                    <td>
+                        {% if not protocol.hubzug.protocol1.isExported%}
+                        <button class="protokol-button" disabled>Bearbeiten</button>
+                        {% else %}
+                        <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHostAdmin" protocol.hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
+                        {% endif %}
+                    </td>
                 </tr>
 
-                <tr>
+                {% comment %} <tr>
                     <td>{{ protocol.baustelle }}</td>
                     <td>{{ protocol.fahrzeugName }}</td>
                     <td>Hubzug</td>
@@ -119,7 +128,7 @@
                             <div class="circle gray"></div>
                         {% endif %}
                     </td>
-                </tr>
+                </tr> {% endcomment %}
             {% endfor %} 
         </tbody>
     </table>

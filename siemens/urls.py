@@ -34,6 +34,7 @@ urlpatterns = [
     path('reset/<int:fahrzeug_id>/<str:protokol>', views.reset, name='reset'),
 
     path('protocolHubzugLiftingHost/<int:protocol_id>/', views.protocolHubzugLiftingHostView, name='protocolHubzugLiftingHost'),
+    path('protocolHubzugLiftingHostAdmin/<int:protocol_id>/', views.protocolHubzugLiftingHostAdminView, name='protocolHubzugLiftingHostAdmin'),
     path('protocolHubzugLiftingHost/update/<int:protocol_id>/', views.protocolHubzugLiftingHostUpdate, name='protocolHubzugLiftingHostUpdate'),
     path('protocolHubzugLiftingHost/close/<int:protocol_id>/', views.protocolHubzugLiftingHostClose, name='protocolHubzugLiftingHostClose'),
     path('exportProtokolHubzugLiftingHost/<int:protocol_id>/export_pdf/', views.exportProtokolHubzugLiftingHost, name='exportProtokolHubzugLiftingHost'),

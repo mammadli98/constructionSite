@@ -352,6 +352,13 @@ def protocolHubzugLiftingHostView(request, protocol_id):
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
+def protocolHubzugLiftingHostAdminView(request, protocol_id):
+    # Assume `get_protokol` is a function that retrieves the protocol data by ID
+    currentUser = request.user
+    protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    fahrzeug_id = request.GET.get('fahrzeugId', '')
+    return render(request, 'protocolHubzugLiftingHostAdmin.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
 def protocolHubzugLaufSeiltrommelView(request, protocol_id):
     # Assume `get_protokol` is a function that retrieves the protocol data by ID
     currentUser = request.user
@@ -427,6 +434,8 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
 
     protokol.isSaved = True
     protokol.save()
+    if str(currentUser) == "admin":
+        return render(request, 'protocolHubzugLiftingHostAdmin.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
     return render(request, 'protocolHubzugLiftingHost.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
 @require_http_methods(["POST"])
@@ -996,7 +1005,7 @@ def protocolHubzugLiftingHostAddNewField(request, protocol_id):
         fahrzeug_id = request.GET.get("fahrzeugId", "")
 
         # Retrieve POST data
-        new_number = request.POST.get("new_number", "")  # Must match name="new_field"
+        new_number = protokol.count  # Must match name="new_field"
         new_field = request.POST.get("new_field", "")  # Must match name="new_field"
         new_type = request.POST.get("new_type", "")  # Must match name="new_type"
 
@@ -1013,7 +1022,12 @@ def protocolHubzugLiftingHostAddNewField(request, protocol_id):
             protokol.save()
         print(protokol.additional_data)
 
+        protokol.count+=1
+        protokol.save()
+
         # Return JSON response for debugging
+        if str(currentUser) == "admin":
+            return render(request, 'protocolHubzugLiftingHostAdmin.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
         return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
     

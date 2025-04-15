@@ -1,6 +1,8 @@
 from django.db import models
 
 class ProtocolHubzugLiftingHost(models.Model):
+    count = models.PositiveIntegerField(default=12)
+    
     isSaved = models.BooleanField(default=False)
     isClosed = models.BooleanField(default=False)
     isExported = models.BooleanField(default=False)
