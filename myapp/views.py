@@ -1026,9 +1026,42 @@ def protocolHubzugLiftingHostAddNewField(request, protocol_id):
         protokol.save()
 
         # Return JSON response for debugging
-        if str(currentUser) == "admin":
-            return render(request, 'protocolHubzugLiftingHostAdmin.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
         return render(request, 'protocolHubzugLiftingHostSollWert.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
+
+    
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+def protocolHubzugLiftingHostAdminAddNewField(request, protocol_id):
+    if request.method == "POST":
+        currentUser = request.user
+        protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+
+        # Get fahrzeug_id from URL query parameters
+        fahrzeug_id = request.GET.get("fahrzeugId", "")
+
+        # Retrieve POST data
+        new_number = protokol.count  # Must match name="new_field"
+        new_field = request.POST.get("new_field", "")  # Must match name="new_field"
+        new_type = request.POST.get("new_type", "")  # Must match name="new_type"
+
+        print("🚀 Received POST request!")
+        print(f"New Number: {new_number}")
+        print(f"New Field: {new_field}")
+        print(f"New Type: {new_type}")
+        print(f"Fahrzeug ID: {fahrzeug_id}")
+        if new_field:
+            protokol.additional_data[new_number] = {"name": new_field, 
+                                                    "type": new_type,
+                                                    "wert": 0,
+                                                    "avr": 0}
+            protokol.save()
+        print(protokol.additional_data)
+
+        protokol.count+=1
+        protokol.save()
+
+        # Return JSON response for debugging
+        return render(request, 'protocolHubzugLiftingHostAdmin.html', {'protokol': protokol, 'fahrzeug_id': fahrzeug_id, 'current_user': currentUser})
 
     
     return JsonResponse({"error": "Invalid request"}, status=400)
