@@ -12,6 +12,7 @@ from django.contrib.auth import update_session_auth_hash
 from django.contrib.staticfiles import finders
 from siemens import settings
 from django.db.models import Q
+from django.views.decorators.http import require_POST
 
 
 import os
@@ -640,10 +641,53 @@ def protocolEndkontrolleUpdate(request, protocol_id):
 
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostClose(request, protocol_id):
+
+
+    def get_post_or_zero(key):
+        return request.POST.get(key, '').strip() or '0'
+
     currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     protokol.isClosed = True
+
+    # Assign POST data to protocol
+    protokol.check_size_1 = request.POST.get('check_size_1', '')
+    protokol.check_size_2 = request.POST.get('check_size_2', '')
+    protokol.check_size_3 = request.POST.get('check_size_3', '')
+    protokol.check_size_4 = request.POST.get('check_size_4', '')
+    protokol.check_size_4a = request.POST.get('check_size_4a', '')
+    protokol.check_size_5 = request.POST.get('check_size_5', '')
+    protokol.check_size_6 = request.POST.get('check_size_6', '')
+    protokol.check_size_7 = request.POST.get('check_size_7', '')
+    protokol.check_size_8 = request.POST.get('check_size_8', '')
+    protokol.check_size_9 = request.POST.get('check_size_9', '')
+    protokol.check_size_10 = request.POST.get('check_size_10', '')
+    protokol.check_size_11 = request.POST.get('check_size_11', '')
+
+    # Check if any are empty
+    fields_to_check = [
+        protokol.check_size_1, protokol.check_size_2, protokol.check_size_3,
+        protokol.check_size_4, protokol.check_size_4a, protokol.check_size_5,
+        protokol.check_size_6, protokol.check_size_7, protokol.check_size_8,
+        protokol.check_size_9, protokol.check_size_10
+    ]
+
+    protokol.isCorrecturNeeded = any(field == '' for field in fields_to_check)
+
+    protokol.check_size_1 = get_post_or_zero('check_size_1')
+    protokol.check_size_2 = get_post_or_zero('check_size_2')
+    protokol.check_size_3 = get_post_or_zero('check_size_3')
+    protokol.check_size_4 = get_post_or_zero('check_size_4')
+    protokol.check_size_4a = get_post_or_zero('check_size_4a')
+    protokol.check_size_5 = get_post_or_zero('check_size_5')
+    protokol.check_size_6 = get_post_or_zero('check_size_6')
+    protokol.check_size_7 = get_post_or_zero('check_size_7')
+    protokol.check_size_8 = get_post_or_zero('check_size_8')
+    protokol.check_size_9 = get_post_or_zero('check_size_9')
+    protokol.check_size_10 = get_post_or_zero('check_size_10')
+    protokol.check_size_11 = get_post_or_zero('check_size_11')
+
     protokol.save()
 
     fahrzeug_id = request.GET.get('fahrzeugId', None)
@@ -654,6 +698,7 @@ def protocolHubzugLiftingHostClose(request, protocol_id):
         'hubzug': fahrzeug.hubzug
     }
     return render(request, 'hubzug.html', context)
+
 
 @require_http_methods(["POST"])
 def protocolHubzugLaufSeiltrommelClose(request, protocol_id):
@@ -1067,7 +1112,22 @@ def protocolHubzugLiftingHostAdminAddNewField(request, protocol_id):
     return JsonResponse({"error": "Invalid request"}, status=400)
 
 
+@require_POST
+def toggle_nacharbeit_status(request, protocol_id):
+    protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    protokol.isNacharbeitNeeded = not protokol.isNacharbeitNeeded
+    protokol.save()
+    currentUser = request.user
 
+
+    fahrzeug_id = request.GET.get('fahrzeugId', None)
+    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    context = {
+        'username': currentUser.username,
+        'fahrzeug_id': fahrzeug_id,
+        'hubzug': fahrzeug.hubzug
+    }
+    return redirect("/prueferView/")
 
 
 
@@ -1269,18 +1329,17 @@ def mechanik_view(request):
     baustelle = request.GET.get('baustelle', None)
     fahrzeug = request.GET.get('fahrzeug', None)
 
-    if not baustelle or not fahrzeug:
+    """ if not baustelle or not fahrzeug:
         return redirect('/baustelle/') 
-    
-    mechanik = Mechanik.objects.get(baustelle=baustelle, fahrzeug=fahrzeug)
+     """
+    """ mechanik = Mechanik.objects.get(baustelle=baustelle, fahrzeug=fahrzeug)
     
 
     # Fetch Protokolnames linked with Hubzug ID from the database
     protokolnames = ProtokolMechanik.objects.filter(mechanik=mechanik)
-
+ """
     context = {
         'username': username,
-        'protokolnames': protokolnames,
     }
     return render(request, 'mechanik.html', context)
 

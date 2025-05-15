@@ -39,14 +39,20 @@
                     <td>Hubzug</td>
                     <td>{{ protocol.hubzug.protocol1.protocolName }}</td>
                     <td>
-                        {% if protocol.hubzug.protocol1.isExported %}
-                            <div class="circle green"></div>
+                        {% if not protocol.hubzug.protocol1.isPermanentDone %}
+                        <div class="circle black"></div>
+                        {% elif protocol.hubzug.protocol1.isExported %}
+                        <div class="circle green"></div>
+                        {% elif protocol.hubzug.protocol1.isNacharbeitNeeded %}
+                        <div class="circle orange"></div>  
+                        {% elif protocol.hubzug.protocol1.isCorrecturNeeded %}
+                        <div class="circle red"></div>
                         {% elif protocol.hubzug.protocol1.isClosed %}
-                            <div class="circle yellow"></div>
+                        <div class="circle yellow"></div>
                         {% elif protocol.hubzug.protocol1.isSaved %}
-                            <div class="circle blue"></div>
+                        <div class="circle blue"></div>
                         {% else %}
-                            <div class="circle gray"></div>
+                        <div class="circle gray"></div>
                         {% endif %}
                     </td>
                     <td>
@@ -135,12 +141,13 @@
     <div class="color-legend">
         <h3>Status Explanation:</h3>
         <ul>
-          <li><div class="circle gray"></div> Offen</li>
-          <li><div class="circle blue"></div> In Bearbeitung</li>
-          <li><div class="circle yellow"></div> Zur Überprüfung</li>
-          <li><div class="circle red"></div> Korrektur erforderlich</li>
-          <li><div class="circle green"></div> Abgeschlossen</li>
-        </ul>
+            <li><div class="circle gray"></div> Offen</li>
+            <li><div class="circle blue"></div> In Bearbeitung</li>
+            <li><div class="circle yellow"></div> Zur Überprüfung</li>
+            <li><div class="circle red"></div> Korrektur erforderlich</li>
+            <li><div class="circle orange"></div> Nacharbeiter erforderlich</li>
+            <li><div class="circle green"></div> Abgeschlossen</li>
+          </ul>
       </div>
 </body>
 </html>

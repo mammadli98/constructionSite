@@ -8,6 +8,7 @@ class ProtocolHubzugLiftingHost(models.Model):
     isExported = models.BooleanField(default=False)
     isCorrecturNeeded = models.BooleanField(default=False)
     isPermanentDone = models.BooleanField(default=False)
+    isNacharbeitNeeded = models.BooleanField(default=False)
 
     protocolName = models.CharField(max_length=255, default="Maßkontrolle Rahmen")
     drawing = models.TextField(verbose_name="Zeichnung-Nr / Drawing No.", null=True, blank=True)

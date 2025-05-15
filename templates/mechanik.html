@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hubzug Protokolle</title>
   <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
+  <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
 </head>
 <body>
   <header>
@@ -15,22 +16,125 @@
   </header>
 
   <main>
-    <table>
-      {% for protokol in protokolnames %}
-        <tr class="protokol-container">
-          <td class="protokol-name">{{ protokol.name }}</td>
+    <table class="form-table" border="1" cellpadding="8" cellspacing="0">
+      <tr>
+          <th>Datum</th>
+          <th>Uhrzeit</th>
+          <th>Problem Beschreibung</th>
+          <th>Status</th>
+      </tr>
+      <tr>
+          <td><input type="date" name="datum"></td>
+          <td><input type="time" name="uhrzeit"></td>
+          <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
           <td>
-            <button class="protokol-button" onclick="location.href='{% url 'protokolMechanik_detail' protokol.id %}'">Bearbeiten</button>
+              <select name="status">
+                  <option value="ok">OK</option>
+                  <option value="nok">NOK</option>
+              </select>
           </td>
-          <td>
-            <form action="{% url 'protokolMechanik_reset' protokol.id %}" method="post">
-              {% csrf_token %}
-              <button type="submit" class="protokol-button">Erstellen</button>
-            </form>
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
+      </tr>
+      <tr>
+        <td><input type="date" name="datum"></td>
+        <td><input type="time" name="uhrzeit"></td>
+        <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+        <td>
+            <select name="status">
+                <option value="ok">OK</option>
+                <option value="nok">NOK</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+      <td><input type="date" name="datum"></td>
+      <td><input type="time" name="uhrzeit"></td>
+      <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+      <td>
+          <select name="status">
+              <option value="ok">OK</option>
+              <option value="nok">NOK</option>
+          </select>
+      </td>
+  </tr>
+  <tr>
+    <td><input type="date" name="datum"></td>
+    <td><input type="time" name="uhrzeit"></td>
+    <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+    <td>
+        <select name="status">
+            <option value="ok">OK</option>
+            <option value="nok">NOK</option>
+        </select>
+    </td>
+</tr>
+<tr>
+  <td><input type="date" name="datum"></td>
+  <td><input type="time" name="uhrzeit"></td>
+  <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+  <td>
+      <select name="status">
+          <option value="ok">OK</option>
+          <option value="nok">NOK</option>
+      </select>
+  </td>
+</tr>
+<tr>
+  <td><input type="date" name="datum"></td>
+  <td><input type="time" name="uhrzeit"></td>
+  <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+  <td>
+      <select name="status">
+          <option value="ok">OK</option>
+          <option value="nok">NOK</option>
+      </select>
+  </td>
+</tr>
+<tr>
+  <td><input type="date" name="datum"></td>
+  <td><input type="time" name="uhrzeit"></td>
+  <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+  <td>
+      <select name="status">
+          <option value="ok">OK</option>
+          <option value="nok">NOK</option>
+      </select>
+  </td>
+</tr>
+<tr>
+  <td><input type="date" name="datum"></td>
+  <td><input type="time" name="uhrzeit"></td>
+  <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+  <td>
+      <select name="status">
+          <option value="ok">OK</option>
+          <option value="nok">NOK</option>
+      </select>
+  </td>
+</tr>
+<tr>
+  <td><input type="date" name="datum"></td>
+  <td><input type="time" name="uhrzeit"></td>
+  <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+  <td>
+      <select name="status">
+          <option value="ok">OK</option>
+          <option value="nok">NOK</option>
+      </select>
+  </td>
+</tr>
+<tr>
+  <td><input type="date" name="datum"></td>
+  <td><input type="time" name="uhrzeit"></td>
+  <td><input type="text" name="problem_beschreibung" style="width: 100%;"></td>
+  <td>
+      <select name="status">
+          <option value="ok">OK</option>
+          <option value="nok">NOK</option>
+      </select>
+  </td>
+</tr>
+  </table>
+
   </main>
 </body>
 </html>

@@ -44,6 +44,7 @@ urlpatterns = [
     path('protocolHubzugLiftingHostSollWert/offentlich/<int:protocol_id>/', views.protocolHubzugLiftingHostSollWertOffentlich, name='protocolHubzugLiftingHostSollWertOffentlich'),
     path('protocolHubzugLiftingHostAddNewField/<int:protocol_id>/', views.protocolHubzugLiftingHostAddNewField, name='protocolHubzugLiftingHostAddNewField'),
     path('protocolHubzugLiftingHostAdminAddNewField/<int:protocol_id>/', views.protocolHubzugLiftingHostAdminAddNewField, name='protocolHubzugLiftingHostAdminAddNewField'),
+    path('protocol/<int:protocol_id>/toggle_nacharbeit/', views.toggle_nacharbeit_status, name='toggle_nacharbeit'),
 
 
     path('protocolHubzugLaufSeiltrommel/<int:protocol_id>/', views.protocolHubzugLaufSeiltrommelView, name='protocolHubzugLaufSeiltrommel'),

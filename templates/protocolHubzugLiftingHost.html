@@ -208,7 +208,7 @@
                 <tr>
                     <th colspan="2">Lagetoleranzen / Position tolerances:</th>
                 </tr>
-                <tr>
+{% comment %}                 <tr>
                     <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
                     <td>
                         <input type="number" id="position_tolerance_11" name="position_tolerance_11" 
@@ -218,7 +218,7 @@
                     </td>
                     <td> {{ protokol.position_tolerance_11_soll}} mm zu B</td>
                     <td id="status_11"></td>
-                </tr>
+                </tr> {% endcomment %}
 
                 {% for newNumber in protokol.additional_data %}
                     <tr>
@@ -293,8 +293,12 @@
             <div class="button-container">
                 <button type="submit" class="btn-save">Speichern</button>
                 {% if current_user.pruefer == True %}
-                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
-                {% else %}
+                <button id="export-button" type="button" class="btn-save-export" 
+                    onclick="submitExportForm(this)" 
+                    data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}"
+                    disabled>
+                    Protokol zustimmen
+                </button>           {% else %}
                 <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
                 {% endif %}
             </div>

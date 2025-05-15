@@ -66,7 +66,7 @@ function submitClosedForm(button) {
     const url = button.getAttribute('data-url');
     
     // Create a form element to submit the POST request
-    const form = document.createElement('form');
+    const form = document.getElementById('protokol-form');
     form.method = 'POST';
     form.action = url;
     
@@ -213,15 +213,21 @@ function validateInputsForExport() {
         const min = parseFloat(input.getAttribute('data-min'));
         const max = parseFloat(input.getAttribute('data-max'));
 
-        if (value === '' || isNaN(numericValue) || numericValue < min || numericValue > max) {
+
+        /* if (value === '' || isNaN(numericValue) || numericValue < min || numericValue > max) {
             isValid = false;
             input.setCustomValidity(`Please enter a value between ${min} and ${max}.`);
             input.reportValidity();
             return isValid;
         } else {
             input.setCustomValidity(''); // Clear any previous custom validity message
-        }
+        } */
+
+        if (isNaN(numericValue)) {
+            input.reportValidity();
+        } 
     }
+
 
     // Validate text inputs for length (fields cannot be empty)
     for (const input of textInputs) {
@@ -238,6 +244,8 @@ function validateInputsForExport() {
             input.setCustomValidity(''); // Clear any previous custom validity message
         }
     }
+
+    checkKorrektur();
 
     return isValid; // Return whether the form inputs are valid
 }
@@ -320,17 +328,24 @@ function validateInput(input, statusId) {
 function checkKorrektur() {
     const statusCells = document.querySelectorAll('[id^="status_"]');
     let anyRed = false;
+    let anyEmpty = false;
 
     statusCells.forEach(cell => {
         if (cell.innerHTML.includes('red')) {
             anyRed = true;
+        } else if (!cell.innerHTML.includes('green')) {
+            anyEmpty = true;
         }
     });
 
     const korrekturCell = document.getElementById('korrektur');
-    if (anyRed) {
+    const exportButton = document.getElementById('export-button');
+
+    if (anyRed || anyEmpty) {
         korrekturCell.setAttribute('value', 'True');
+        if (exportButton) exportButton.setAttribute('disabled', 'disabled');
     } else {
         korrekturCell.setAttribute('value', 'False');
+        if (exportButton) exportButton.removeAttribute('disabled');
     }
 }
