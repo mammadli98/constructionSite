@@ -1,22 +1,32 @@
-/* General resets and base styles */
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 * {
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-body, html {
-    width: 100%;
-    height: 100%;
+
+body {
     margin: 0;
     padding: 0;
+    background-color: #000028; /* ✅ Moved here */
+  }
+
+.container {
+    min-height: calc(100vh - 60px); /* leave space for header */
+    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f2f2f2;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
+    row-gap: 30px;
+    padding-top: 30px;
+  }
 
 .container-fluid {
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    background: #fff;
+    background: #23233C;
     border-radius: 8px;
     overflow: hidden;
     width: 90%;
@@ -45,23 +55,23 @@ body, html {
     margin: 0 5px;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-}
+
 
 /* Table styling */
 .table {
-    width: 100%;
+    color: #ffffff;
     border-collapse: collapse;
-    margin-top: 10px;
+    width: 100%;
+    background: transparent;
 }
 
 .table th, .table td {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+    border: none;             /* ✅ Remove cell borders */
+    color: #ffffff;           /* Optional: Light text for dark theme */
+    padding: 8px 12px;
+}
+.table thead th {
+    border-bottom: 1px solid #8b8b8b;
 }
 
 /* Button styles */
@@ -116,3 +126,137 @@ h2 {
 .buttonDatenbank:hover {
     background-color: #0065b3;
 }
+
+.siemens-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1f1f39;
+    color: white;
+    padding: 10px 20px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  
+  .siemens-logo {
+    font-weight: 700;
+    font-size: 18px;
+  }
+  
+  .siemens-center {
+    flex: 1;
+    min-width: 200px;
+    text-align: center;
+  }
+  
+  .siemens-title {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .welcome-text {
+    font-size: 14px;
+    color: #ccc;
+  }
+  
+  /* Dropdown menu */
+  .siemens-menu {
+    flex-shrink: 0;
+    position: relative;
+  }
+  .menu-button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;              /* ⬅️ exactly below the button */
+    right: 0;               /* ⬅️ align right edge */
+    left: auto;
+    background: #2c2c4a;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    min-width: 200px;
+    z-index: 100;
+    margin-top: 8px;        /* ⬅️ slight spacing from button */
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #3e3e5e;
+  }
+  
+  /* Show menu on button click (using JS below) */
+  .siemens-menu.active .dropdown-menu {
+    display: block;
+  }
+
+
+/* Flex layout for title + button */
+.panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  /* Fix spacing issue on h2 */
+  .panel-header h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  /* Stylish + Button */
+  .add-icon-btn {
+    background-color: #00a3a3;     /* Siemens-style cyan */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 36px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .add-icon-btn:hover {
+    background-color: #00a3a3;
+  }
+
+  .edit-icon-btn {
+    background-color: #00a3a3;  /* match Siemens-style cyan */
+    border: none;
+    border-radius: 4px;
+    padding: 3px 8px;
+    font-size: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 8px;
+  }
+  
+  .edit-icon-btn:hover {
+    background-color: #0099aa;
+  }
+  
+  .edit-icon-btn i {
+    pointer-events: none; /* prevents accidental icon-only click misses */
+  }

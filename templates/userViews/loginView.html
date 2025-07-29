@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<!-- Coding by CodingLab | www.codinglabweb.com-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Responsive Login and Signup Form </title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="{% static 'myapp/userViewCss/loginView.css' %}">
+  <!-- Boxicons CSS -->
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <!-- Top Header -->
+  <header class="siemens-header">
+    <div class="siemens-logo">SIEMENS</div>
+    <div class="siemens-title">Construction App</div>
+  </header>
+  <section class="container forms">
+    <div class="form login">
+      <div class="form-content">
+        <header>Login</header>
+        <form action="#" method="post">
+        {% csrf_token %}
+          <div class="field input-field">
+            <input type="text" id="username" name="username" placeholder="Username" class="input"required>
+          </div>
+          <div class="field input-field">
+            <input type="password" id="password" name="password" placeholder="Password" class="password" required>
+            <i class='bx bx-hide eye-icon'></i>
+          </div>
+          {% if messages %}
+                <div class="error-message">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+          <div class="field button-field">
+            <button type="submit" >Login</button>
+          </div>
+        </form>
+      </div>
+      <div class="line">
+        <span class="line-text">OR</span>
+      </div>
+      <div class="media-options">
+        <a href="#" class="field facebook">
+          <span>Login with Siemens ID</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- JavaScript -->
+  <script src="{% static 'myapp/userViewJs/loginView.js' %}"></script>
+</body>
+</html>
