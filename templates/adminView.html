@@ -49,7 +49,7 @@
                                     <form method="post" action="">
                                         {% csrf_token %}
                                         {{ baustelle_form.as_p }}
-                                        <button type="submit" class="btn btn-success">Save Baustelle</button>
+                                        <button type="submit" class="btn btn-siemens">Save Baustelle</button>
                                     </form>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="baustelle_id" value="" id="selectedBaustelleId">
                                         {{ fahrzeug_form.as_p }}
-                                        <button type="submit" class="btn btn-success">Save Fahrzeug</button>
+                                        <button type="submit" class="btn btn-siemens">Save Fahrzeug</button>
                                     </form>
                                 </div>
                             </div>
@@ -179,7 +179,7 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
-                                        <button type="submit" class="btn btn-success">Save User</button>
+                                        <button type="submit" class="btn btn-siemens">Save User</button>
                                     </form>
                                 </div>
                             </div>

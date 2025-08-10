@@ -260,3 +260,51 @@ body {
   .edit-icon-btn i {
     pointer-events: none; /* prevents accidental icon-only click misses */
   }
+
+  /* Dark theme modal */
+.modal-content {
+  background-color: #23233C; /* match container background */
+  color: white;
+  border-radius: 8px;
+  border: none;
+}
+
+.modal-header {
+  background-color: #1f1f39; /* match header bar */
+  border-bottom: 1px solid #3e3e5e;
+}
+
+.modal-title {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.modal-body label {
+  color: #cccccc; /* lighter labels */
+}
+
+.modal-footer {
+  border-top: 1px solid #3e3e5e;
+}
+
+/* Close button in header */
+.modal-header .close {
+  color: white;
+  opacity: 0.8;
+}
+.modal-header .close:hover {
+  opacity: 1;
+}
+
+/* Siemens-style submit button */
+.btn-siemens {
+  background-color: #00a3a3;
+  color: white;
+  border: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.btn-siemens:hover {
+  background-color: #009090;
+}
