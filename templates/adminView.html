@@ -2,281 +2,300 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'myapp/adminView.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+
+  <!-- CSRF for JS -->
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+  <!-- Bootstrap 4.5.2 (one include only) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Your styles -->
+  <link rel="stylesheet" href="{% static 'myapp/adminView.css' %}">
 </head>
 <body>
-    <header class="siemens-header">
-        <div class="siemens-logo">SIEMENS</div>
-      
-        <div class="siemens-center">
-          <div class="siemens-title">Construction App</div>
-          <div class="welcome-text">Welcome, Admin</div>
-        </div>
-      
-        <div class="siemens-menu">
-          <button class="menu-button">☰</button>
-          <div class="dropdown-menu">
-            <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-            <a href="{% url 'soll_wert_view' %}"><i class="fas fa-sliders-h"></i> Soll Werte Bearbeiten</a>
-            <a href="/protocol_list"><i class="fas fa-database"></i> Datenbank</a>
-          </div>
-        </div>
-      </header>
-    <section class="container">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4 baustellen-panel">
-                    <div class="panel-header">
-                        <h2>Baustellen</h2>
-                        <button class="add-icon-btn" data-toggle="modal" data-target="#addBaustelleModal">+</button>
-                    </div>
-                    <div class="modal fade" id="addBaustelleModal" tabindex="-1" role="dialog" aria-labelledby="addBaustelleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addBaustelleModalLabel">New Baustelle</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" action="">
-                                        {% csrf_token %}
-                                        {{ baustelle_form.as_p }}
-                                        <button type="submit" class="btn btn-siemens">Save Baustelle</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Baustelle Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for baustelle in baustellen_list %}
-                            <tr data-baustelle-id="{{ baustelle.id }}" onclick="selectBaustelle(this, {{ baustelle.id }})">
-                                <td>{{ baustelle.baustelleName }}</td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td>No Baustellen found.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-4 fahrzeuge-panel">
-                    <div class="panel-header">
-                        <h2>Fahrzeuge</h2>
-                        <button class="add-icon-btn" id="addFahrzeugBtn" data-toggle="modal" data-target="#addFahrzeugModal">+</button>
-                    </div>
+  <header class="siemens-header">
+    <div class="siemens-logo">SIEMENS</div>
 
-                    <div class="modal fade" id="addFahrzeugModal" tabindex="-1" role="dialog" aria-labelledby="addFahrzeugModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addFahrzeugModalLabel">New Fahrzeug</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" action="">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="baustelle_id" value="" id="selectedBaustelleId">
-                                        {{ fahrzeug_form.as_p }}
-                                        <button type="submit" class="btn btn-siemens">Save Fahrzeug</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div style="overflow-y: auto; max-height: 500px;">
-                        <table class="table" id="fahrzeugTable">
-                            <thead>
-                                <tr>
-                                    <th>Fahrzeug Name</th>
-                                    <th>Is Visible</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for fahrzeug in fahrzeug_list %}
-                                <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}">
-                                    <td>{{ fahrzeug.fahrzeugName }}</td>
-                                    <td>
-                                        <input type="checkbox" {% if fahrzeug.isVisible %}checked{% endif %} onchange="toggleVisibility({{ fahrzeug.id }}, this.checked)">
-                                    </td>
-                                </tr>
-                                {% empty %}
-                                <tr>
-                                    <td colspan="2">No Fahrzeuge found.</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="col-md-4 user-panel">
-                    <div class="panel-header">
-                        <h2>Users</h2>
-                        <button class="add-icon-btn" data-toggle="modal" data-target="#addUserModal">+</button>
-                    </div>
-                    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="addUserModalLabel">New User</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form method="post" action="">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" name="username" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="first_name">Vorname</label>
-                                            <input type="text" class="form-control" id="first_name" name="first_name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="last_name">Nachname</label>
-                                            <input type="text" class="form-control" id="last_name" name="last_name" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="email">E-mail</label>
-                                            <input type="text" class="form-control" id="email" name="email" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="adresse">Adresse</label>
-                                            <input type="text" class="form-control" id="adresse" name="adresse" required>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="pruefer">Pruefer</label>
-                                            <input type="hidden" name="pruefer" value="False">
-                                            <input type="checkbox" id="pruefer" name="pruefer" value="True">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="baustellen">Baustellen auswählen</label>
-                                            <select class="form-control" id="baustellen" name="baustellen" multiple required>
-                                                {% for baustelle in baustellen_list %}
-                                                    <option value="{{ baustelle.id }}">{{ baustelle.baustelleName }}</option>
-                                                {% endfor %}
-                                            </select>
-                                        </div>
-                                        <button type="submit" class="btn btn-siemens">Save User</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Edit</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for user in user_list %}
-                            <tr>
-                                <td>{{ user.username }}</td>
-                                <td>
-                                    <!-- Button to open modal -->
-                                    <button type="button"
-                                            class="edit-icon-btn"
-                                            data-toggle="modal"
-                                            data-target="#editModal{{ user.id }}"
-                                            title="Edit Baustellen">
-                                    <i class="fas fa-edit fa-sm"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            {% empty %}
-                            <tr>
-                                <td colspan="2">No users found.</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="siemens-center">
+      <div class="siemens-title">Construction App</div>
+      <div class="welcome-text">Welcome, Admin</div>
+    </div>
 
-
-    <!-- Modals for each user -->
-    {% for user in user_list %}
-    <div class="modal fade" id="editModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ user.id }}" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <form method="post" action="{% url 'update_baustellen' user.id %}">
-          {% csrf_token %}
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel{{ user.id }}">Edit Baustellen for {{ user.username }}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Select Baustellen</label>
-                <select class="form-control" name="baustellen" multiple>
-                  {% for baustelle in baustellen_list %}
-                  <option value="{{ baustelle.id }}"
-                    {% if baustelle in user.baustellen.all %}selected{% endif %}>
-                    {{ baustelle.baustelleName }}
-                  </option>
-                  {% endfor %}
-                </select>
-                <label>Select Protokolle</label>
-                <select class="form-control" name="protokolle" multiple>
-                    <option value="h" {% if user.hubzug %}selected{% endif %}>Hubzug</option>
-                    <option value="e" {% if user.elektrik %}selected{% endif %}>Elektrik</option>
-                    <option value="m" {% if user.mechanik %}selected{% endif %}>Mechanik</option>
-                  </select>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-success">Save</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </form>
+    <div class="siemens-menu">
+      <button class="menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu">☰</button>
+      <div id="mainMenu" class="dropdown-menu">
+        <a href="{% url 'soll_wert_view' %}"><i class="fas fa-sliders-h"></i> Soll Werte Bearbeiten</a>
+        <a href="/protocol_list"><i class="fas fa-database"></i> Datenbank</a>
+        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
       </div>
     </div>
-    {% endfor %}
+  </header>
 
-    <!-- Include external JavaScript file -->
-    <script src="{% static 'myapp/adminView.js' %}"></script>
+  <section class="container">
+    <div class="container-fluid">
+      <div class="row">
 
-    <!-- Include Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Baustellen -->
+        <div class="col-md-4 baustellen-panel">
+          <div class="panel-header">
+            <h2>Baustellen</h2>
+            <button class="add-icon-btn" data-toggle="modal" data-target="#addBaustelleModal" aria-label="Add Baustelle">+</button>
+          </div>
 
-     <!-- Bootstrap JS (for modal functionality) -->
-     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+          <!-- Modal: Add Baustelle -->
+          <div class="modal fade" id="addBaustelleModal" tabindex="-1" role="dialog" aria-labelledby="addBaustelleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addBaustelleModalLabel">New Baustelle</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    {{ baustelle_form.as_p }}
+                    <button type="submit" class="btn btn-siemens">Save Baustelle</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
-     <script>
-        document.querySelector('.menu-button').addEventListener('click', function () {
-          document.querySelector('.siemens-menu').classList.toggle('active');
-        });
-      </script>
- 
+          <table class="table" id="baustellenTable">
+            <thead>
+              <tr>
+                <th>Baustelle Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for baustelle in baustellen_list %}
+              <tr data-baustelle-id="{{ baustelle.id }}" class="baustelle-row" tabindex="0" role="button" aria-pressed="false">
+                <td>{{ baustelle.baustelleName }}</td>
+              </tr>
+              {% empty %}
+              <tr><td>No Baustellen found.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Fahrzeuge -->
+        <div class="col-md-4 fahrzeuge-panel">
+          <div class="panel-header">
+            <h2>Fahrzeuge</h2>
+            <button class="add-icon-btn" id="addFahrzeugBtn" data-toggle="modal" data-target="#addFahrzeugModal" aria-label="Add Fahrzeug" disabled>+</button>
+          </div>
+
+          <!-- Modal: Add Fahrzeug -->
+          <div class="modal fade" id="addFahrzeugModal" tabindex="-1" role="dialog" aria-labelledby="addFahrzeugModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addFahrzeugModalLabel">New Fahrzeug</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="baustelle_id" value="" id="selectedBaustelleId">
+                    {{ fahrzeug_form.as_p }}
+                    <button type="submit" class="btn btn-siemens">Save Fahrzeug</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="overflow-y:auto; max-height:500px;">
+            <table class="table" id="fahrzeugTable">
+              <thead>
+                <tr>
+                  <th>Fahrzeug Name</th>
+                  <th>Is Visible</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for fahrzeug in fahrzeug_list %}
+                <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}">
+                  <td>{{ fahrzeug.fahrzeugName }}</td>
+                  <td>
+                    <input class="visibility-toggle"
+                           type="checkbox"
+                           data-fahrzeug-id="{{ fahrzeug.id }}"
+                           {% if fahrzeug.isVisible %}checked{% endif %}>
+                  </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="2">No Fahrzeuge found.</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Users -->
+        <div class="col-md-4 user-panel">
+          <div class="panel-header">
+            <h2>Users</h2>
+            <button class="add-icon-btn" data-toggle="modal" data-target="#addUserModal" aria-label="Add User">+</button>
+          </div>
+
+          <!-- Modal: Add User -->
+          <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="addUserModalLabel">New User</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form method="post" action="">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="first_name">Vorname</label>
+                      <input type="text" class="form-control" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="last_name">Nachname</label>
+                      <input type="text" class="form-control" id="last_name" name="last_name" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="email">E-mail</label>
+                      <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="adresse">Adresse</label>
+                      <input type="text" class="form-control" id="adresse" name="adresse" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="pruefer">Pruefer</label>
+                      <input type="hidden" name="pruefer" value="False">
+                      <input type="checkbox" id="pruefer" name="pruefer" value="True">
+                    </div>
+                    <div class="form-group">
+                      <label for="baustellen">Baustellen auswählen</label>
+                      <select class="form-control" id="baustellen" name="baustellen" multiple required>
+                        {% for baustelle in baustellen_list %}
+                        <option value="{{ baustelle.id }}">{{ baustelle.baustelleName }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    <button type="submit" class="btn btn-siemens">Save User</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in user_list %}
+              <tr>
+                <td>{{ user.username }}</td>
+                <td>
+                  <button type="button"
+                          class="edit-icon-btn"
+                          data-toggle="modal"
+                          data-target="#editModal{{ user.id }}"
+                          title="Edit Baustellen">
+                    <i class="fas fa-edit fa-sm"></i>
+                  </button>
+                </td>
+              </tr>
+              {% empty %}
+              <tr><td colspan="2">No users found.</td></tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Modals for each user -->
+  {% for user in user_list %}
+  <div class="modal fade" id="editModal{{ user.id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ user.id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form method="post" action="{% url 'update_baustellen' user.id %}">
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalLabel{{ user.id }}">Edit Baustellen for {{ user.username }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label>Select Baustellen</label>
+              <select class="form-control" name="baustellen" multiple>
+                {% for baustelle in baustellen_list %}
+                <option value="{{ baustelle.id }}" {% if baustelle in user.baustellen.all %}selected{% endif %}>
+                  {{ baustelle.baustelleName }}
+                </option>
+                {% endfor %}
+              </select>
+
+              <label class="mt-3">Select Protokolle</label>
+              <select class="form-control" name="protokolle" multiple>
+                <option value="h" {% if user.hubzug %}selected{% endif %}>Hubzug</option>
+                <option value="e" {% if user.elektrik %}selected{% endif %}>Elektrik</option>
+                <option value="m" {% if user.mechanik %}selected{% endif %}>Mechanik</option>
+              </select>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-siemens">Save</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {% endfor %}
+
+  <!-- Scripts (one of each, in order) -->
+  <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Your JS (after jQuery/Bootstrap) -->
+  <script defer src="{% static 'myapp/adminView.js' %}"></script>
+
+  <script>
+    // tiny menu toggle without inline JS
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.querySelector('.menu-button');
+      const menu = document.querySelector('.siemens-menu');
+      btn.addEventListener('click', function () {
+        const active = menu.classList.toggle('active');
+        btn.setAttribute('aria-expanded', String(active));
+      });
+    });
+  </script>
 </body>
 </html>

@@ -2,142 +2,189 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'myapp/userView.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard</title>
+
+  <!-- Bootstrap (one include) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="{% static 'myapp/userView.css' %}"/>
 </head>
 <body>
-    <div class="container-fluid">
-        <header class="header">
-            <h1>Welcome, {{ username }}</h1>
-            <!-- Button to open the password change modal -->
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#passwordChangeModal">
-                Change Password
-            </button>
-            <form action="{% url 'logout' %}" method="post" style="margin: 0;">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
-        </header>
-        <!-- Modal for password change -->
-        <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" aria-labelledby="passwordChangeModalLabel" aria-hidden="true" data-show-modal="{% if modal_show %}true{% else %}false{% endif %}">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="passwordChangeModalLabel">Change Password</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" action="{% url 'change_password' %}">
-                            {% csrf_token %}
-                            {% if userPassword_form.non_field_errors %}
-                                <div class="alert alert-danger">
-                                    {{ userPassword_form.non_field_errors }}
-                                </div>
-                            {% endif %}
-                            <div class="form-group">
-                                <label for="id_old_password">Old Password</label>
-                                <input type="password" class="form-control" id="id_old_password" name="old_password" required>
-                                {% for error in userPassword_form.old_password.errors %}
-                                    <div class="alert alert-danger">{{ error }}</div>
-                                {% endfor %}
-                            </div>
-                            <div class="form-group">
-                                <label for="id_new_password1">New Password</label>
-                                <input type="password" class="form-control" id="id_new_password1" name="new_password1" required>
-                                {% for error in userPassword_form.new_password1.errors %}
-                                    <div class="alert alert-danger">{{ error }}</div>
-                                {% endfor %}
-                            </div>
-                            <div class="form-group">
-                                <label for="id_new_password2">Confirm New Password</label>
-                                <input type="password" class="form-control" id="id_new_password2" name="new_password2" required>
-                                {% for error in userPassword_form.new_password2.errors %}
-                                    <div class="alert alert-danger">{{ error }}</div>
-                                {% endfor %}
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn btn-success">Change Password</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4 baustellen-panel">
-                <h2>Baustellen</h2>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Baustelle Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for baustelle in baustellen_list %}
-                        <tr data-baustelle-id="{{ baustelle.id }}" onclick="selectBaustelle(this, {{ baustelle.id }})">
-                            <td>{{ baustelle.baustelleName }}</td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td>No Baustellen found.</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-4 fahrzeuge-panel">
-                <h2>Fahrzeuge</h2>
-                <div style="overflow-y: auto; max-height: 500px; border: 1px solid #ddd;">
-                    <table class="table" id="fahrzeugTable">
-                        <thead>
-                            <tr>
-                                <th>Fahrzeug Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for fahrzeug in fahrzeug_list %}
-                                {% if fahrzeug.isVisible %}
-                                    <tr data-baustelle-id="{{ fahrzeug.baustelle.id }}" data-fahrzeug-id="{{ fahrzeug.id }}" onclick="selectFahrzeug(this)">
-                                        <td>{{ fahrzeug.fahrzeugName }}</td>
-                                    </tr>
-                                {% endif %}
-                            {% empty %}
-                                <tr>
-                                    <td colspan="2">No Fahrzeuge found.</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4 actions-panel text-center">
-                <h2>Actions</h2>
-                {% if user.hubzug %}
-                <button class="btn btn-primary action-btn disabled d-block mb-2 mx-auto" id="hubzugBtn" onclick="redirectTo('/hubzug/')">Hubzug</button>
-                {% endif %}
-                {% if user.mechanik %}
-                <button class="btn btn-primary action-btn disabled d-block mb-2 mx-auto" id="mechanikBtn" onclick="redirectTo('/mechanik/')">Mechanik</button>
-                {% endif %}
-                {% if user.elektrik %}
-                <button class="btn btn-primary action-btn disabled d-block mx-auto" id="elektrikBtn" onclick="redirectTo('/elektrik/')">Elektrik</button>
-                {% endif %}
-            </div>
-        </div>
+  <!-- Siemens header (shared with admin) -->
+  <header class="siemens-header">
+    <div class="siemens-logo">SIEMENS</div>
+
+    <div class="siemens-center">
+      <div class="siemens-title">Construction App</div>
+      <div class="welcome-text">Welcome, {{ username }}</div>
     </div>
-    
 
-    <!-- Include external JavaScript file -->
-    <script src="{% static 'myapp/userView.js' %}"></script>
+    <div class="siemens-menu">
+      <button class="menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu">☰</button>
+      <div id="mainMenu" class="dropdown-menu">
+        <a href="#" data-toggle="modal" data-target="#passwordChangeModal">
+          <i class="fas fa-key"></i> Change Password
+        </a>
+        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </header>
 
-    <!-- Include Bootstrap JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Centered content (same structure as admin) -->
+  <section class="container">
+    <div class="container-fluid">
+      <div class="row py-3 px-3">
+        <!-- Baustellen -->
+        <div class="col-12 col-md-4 mb-3 baustellen-panel">
+          <h2>Baustellen</h2>
+          <table class="table" id="baustellenTable">
+            <thead>
+            <tr><th>Baustelle Name</th></tr>
+            </thead>
+            <tbody>
+            {% for baustelle in baustellen_list %}
+              <tr class="baustelle-row"
+                  data-baustelle-id="{{ baustelle.id }}"
+                  tabindex="0" role="button" aria-pressed="false">
+                <td>{{ baustelle.baustelleName }}</td>
+              </tr>
+            {% empty %}
+              <tr><td>No Baustellen found.</td></tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Fahrzeuge -->
+        <div class="col-12 col-md-4 mb-3 fahrzeuge-panel">
+          <h2>Fahrzeuge</h2>
+          <div class="scroll-area">
+            <table class="table" id="fahrzeugTable">
+              <thead>
+              <tr><th>Fahrzeug Name</th></tr>
+              </thead>
+              <tbody>
+              {% for fahrzeug in fahrzeug_list %}
+                {% if fahrzeug.isVisible %}
+                <tr class="fahrzeug-row"
+                    data-baustelle-id="{{ fahrzeug.baustelle.id }}"
+                    data-fahrzeug-id="{{ fahrzeug.id }}"
+                    tabindex="0" role="button" aria-pressed="false">
+                  <td>{{ fahrzeug.fahrzeugName }}</td>
+                </tr>
+                {% endif %}
+              {% empty %}
+                <tr><td>No Fahrzeuge found.</td></tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="col-12 col-md-4 mb-3 actions-panel text-center">
+          <h2>Actions</h2>
+          {% if user.hubzug %}
+            <button class="btn btn-siemens action-btn d-block mb-2 mx-auto"
+                    data-url="/hubzug/" disabled aria-disabled="true">
+              Hubzug
+            </button>
+          {% endif %}
+          {% if user.mechanik %}
+            <button class="btn btn-siemens action-btn d-block mb-2 mx-auto"
+                    data-url="/mechanik/" disabled aria-disabled="true">
+              Mechanik
+            </button>
+          {% endif %}
+          {% if user.elektrik %}
+            <button class="btn btn-siemens action-btn d-block mx-auto"
+                    data-url="/elektrik/" disabled aria-disabled="true">
+              Elektrik
+            </button>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Password change modal -->
+  <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog"
+       aria-labelledby="passwordChangeModalLabel" aria-hidden="true"
+       data-show-modal="{% if modal_show %}true{% else %}false{% endif %}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="passwordChangeModalLabel">Change Password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <form method="post" action="{% url 'change_password' %}">
+            {% csrf_token %}
+
+            {% if userPassword_form.non_field_errors %}
+            <div class="alert alert-danger">{{ userPassword_form.non_field_errors }}</div>
+            {% endif %}
+
+            <div class="form-group">
+              <label for="id_old_password">Old Password</label>
+              <input type="password" class="form-control" id="id_old_password" name="old_password" required>
+              {% for error in userPassword_form.old_password.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              <label for="id_new_password1">New Password</label>
+              <input type="password" class="form-control" id="id_new_password1" name="new_password1" required>
+              {% for error in userPassword_form.new_password1.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="form-group">
+              <label for="id_new_password2">Confirm New Password</label>
+              <input type="password" class="form-control" id="id_new_password2" name="new_password2" required>
+              {% for error in userPassword_form.new_password2.errors %}
+                <div class="alert alert-danger">{{ error }}</div>
+              {% endfor %}
+            </div>
+
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-siemens">Change Password</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // tiny menu toggle without inline JS
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.querySelector('.menu-button');
+      const menu = document.querySelector('.siemens-menu');
+      btn.addEventListener('click', function () {
+        const active = menu.classList.toggle('active');
+        btn.setAttribute('aria-expanded', String(active));
+      });
+    });
+  </script>
+
+
+  <!-- Scripts -->
+  <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script defer src="{% static 'myapp/userView.js' %}"></script>
 </body>
 </html>

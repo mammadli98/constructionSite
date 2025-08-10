@@ -1,136 +1,131 @@
-/* General resets and base styles */
-* {
-    box-sizing: border-box;
+/* Poppins everywhere */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-page:#000028;
+  --bg-card:#23233C;
+  --bg-header:#1f1f39;
+  --text:#ffffff;
+  --text-dim:#cccccc;
+  --line:#3e3e5e;
+  --line-th:#8b8b8b;
+  --siemens:#00a3a3;
+  --siemens-hover:#009090;
 }
-body, html {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f2f2f2;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+* { box-sizing: border-box; }
+html, body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg-page);
+  color: var(--text);
+  font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif;
+}
+
+/* Center card like admin */
+.container {
+  min-height: calc(100vh - 60px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 30px;
+  padding-top: 30px;
 }
 
 .container-fluid {
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 90%;
-    max-width: 1000px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  background: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto; /* let .container do the vertical centering */
 }
 
-.header {
-    background-color: #3498db; /* Softer blue */
-    color: white;
-    padding: 20px;
-    font-size: 28px;
-    text-align: center;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: bold;
+/* Siemens header */
+.siemens-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-header);
+  color: var(--text);
+  padding: 10px 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
+.siemens-logo { font-weight: 700; font-size: 18px; }
+.siemens-center { flex: 1; min-width: 200px; text-align: center; }
+.siemens-title { font-size: 16px; font-weight: 600; }
+.welcome-text { font-size: 14px; color: var(--text-dim); }
 
-.row {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-/* Styling for each panel */
-.baustellen-panel, .fahrzeuge-panel {
-    flex: 1; /* each takes half of the row */
-    margin: 0 5px;
-}
-
-h2 {
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-/* Table styling */
-.table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-.table th, .table td {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
-}
-
-/* Button styles */
-.add-btn {
-    background-color: #28a745;
-    color: white;
+/* Header menu */
+.siemens-menu { flex-shrink: 0; position: relative; }
+.menu-button {
+    background: transparent;
     border: none;
-    padding: 8px 16px;
-    font-size: 16px;
+    color: white;
+    font-size: 20px;
     cursor: pointer;
+  }
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: auto;
+    background: #2c2c4a;
     border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    min-width: 200px;
+    z-index: 100;
+    margin-top: 8px;
+  }
+  .dropdown-menu a {
     display: block;
-    margin: 10px auto;
-    text-align: center;
-}
-
-.add-btn:hover {
-    background-color: #218838;
-}
-
-.selected {
-    background-color: #d3d3d3; /* Light gray background for selected row */
-}
-
-.selected-baustelle {
-    background-color: #d3d3d3; /* Light gray background for selected row */
-}
-.selected-fahrzeug {
-    background-color: #add8e6; /* Light blue background for selected row */
-}
-.disabled {
-    pointer-events: none;
-    opacity: 0.6;
-}
-
-/* Responsive layout adjustments */
-@media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .baustellen-panel, .fahrzeuge-panel {
-        width: 80%;
-        margin: 10px 0;
-    }
-}
-
-
-.buttonDatenbank {
-    background-color: #00aeff; /* Consistent button color */
+    padding: 10px 15px;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 32px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-decoration: none; /* Remove underline from links styled as buttons */
-    display: inline-block; /* Align properly without line breaks */
-    margin-top: 10px; /* Spacing after dropdowns */
-}
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .dropdown-menu a:hover { background-color: #3e3e5e; }
+  .siemens-menu.active .dropdown-menu { display: block; }
 
-.buttonDatenbank:hover {
-    background-color: #0065b3;
-}
+/* Layout */
+.row { padding: 10px 0 20px; justify-content: center; }
+.baustellen-panel, .fahrzeuge-panel, .actions-panel { margin: 10px 0; }
 
-.button-container {
-    display: flex;
-    justify-content: center; /* Center the button horizontally */
-    padding: 20px 0; /* Add some padding above and below the button */
+h2 { color: var(--text); margin: 10px 0 16px; text-align: center; font-weight: 600; }
+
+/* Tables */
+.table { color: var(--text); background: transparent; border-collapse: collapse; margin: 0; }
+.table thead th { border-bottom: 1px solid var(--line-th); color: #eaeaea; }
+.table td, .table th { border: none; padding: 10px 12px; }
+
+/* Fahrzeuge scroll */
+.scroll-area { max-height: 500px; overflow-y: auto; border: none; border-radius: 6px; }
+
+/* Selection styles */
+.baustelle-row.selected, .fahrzeug-row.selected { background: rgba(0,163,163,0.18); }
+.baustelle-row:focus, .fahrzeug-row:focus { outline: 2px dashed var(--siemens); outline-offset: 2px; }
+
+/* Buttons */
+.btn-siemens {
+  background: var(--siemens); color: #fff; border: none;
+  font-weight: 500; padding: 8px 16px;
 }
+.btn-siemens:hover { background: var(--siemens-hover); }
+.action-btn[disabled] { opacity: .6; cursor: not-allowed; }
+
+/* Modal (dark) */
+.modal-content { background: var(--bg-card); color: var(--text); border-radius: 8px; border: none; }
+.modal-header { background: var(--bg-header); border-bottom: 1px solid var(--line); }
+.modal-title { color: var(--text); font-weight: 600; }
+.modal-body label { color: var(--text-dim); }
+.modal-footer { border-top: 1px solid var(--line); }
+.modal-header .close { color: #fff; opacity: .8; }
+.modal-header .close:hover { opacity: 1; }
+
+/* Responsive */
+@media (max-width: 768px) { .container-fluid { width: 95%; } }
