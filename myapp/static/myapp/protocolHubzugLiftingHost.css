@@ -1,150 +1,129 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    font-size: 18px; /* Increase the base font size */
-}
+/* Poppins for consistency */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-.logo-container {
-    text-align: center;
-    margin-top: 20px;
-}
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
-.logo-container img {
-    width: 200px; /* Adjusted for better fitting */
-    height: auto;
-}
+html, body { height: 100%; margin: 0; background: #000028; color: #fff; }
 
-.container {
-    margin: 20px auto; /* Center the container */
-    max-width: 100%; /* Set a maximum width for better readability */
-    padding: 20px;
-    background-color: #ffffff;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+/* ===== Siemens Header (same as other pages) ===== */
+.siemens-header {
+  display: flex; align-items: center; justify-content: space-between;
+  background-color: #1f1f39; color: white; padding: 10px 20px; width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
+.siemens-logo { font-weight: 700; font-size: 18px; }
+.siemens-center { flex: 1; min-width: 200px; text-align: center; }
+.siemens-title { font-size: 16px; font-weight: 600; }
+.welcome-text { font-size: 14px; color: #ccc; }
 
-.description-form {
-    width: 100%;
-    margin-top: 20px;
+.back-link{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:40px; height:40px; border-radius:50%; color:#fff; text-decoration:none;
+  background:transparent; transition:background-color .2s ease, box-shadow .2s ease;
 }
+.back-link i{ font-size:18px; line-height:1; }
+.back-link:hover{ background:#2c2c4a; }
+.back-link:focus{ outline:none; box-shadow:0 0 0 3px rgba(0,163,163,.35); }
+
+/* Dropdown */
+.siemens-menu { position: relative; flex-shrink: 0; }
+.menu-button { background: transparent; border: none; color: white; font-size: 20px; cursor: pointer; }
+.dropdown-menu {
+  display: none; position: absolute; top: 100%; right: 0; left: auto;
+  background: #2c2c4a; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  min-width: 220px; z-index: 100; margin-top: 8px; padding: 6px 0;
+}
+.dropdown-menu a { display: block; padding: 10px 15px; color: white; text-decoration: none; font-size: 14px; }
+.dropdown-menu a:hover { background-color: #3e3e5e; }
+.siemens-menu.active .dropdown-menu { display: block; }
+
+/* ===== Page layout ===== */
+.page-wrap { width: 94%; max-width: 1280px; margin: 24px auto 60px; }
+
+.content-card {
+  background: #23233C; border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.10); padding: 16px;
+}
+.card-head {
+  display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px;
+}
+.page-title { margin: 0; font-size: 22px; font-weight: 600; }
+.head-actions { display:flex; gap:8px; }
+
+/* Back button (top right) */
+.back-button {
+  display:inline-block; padding:8px 14px; background:#00a3a3; color:#fff; text-decoration:none;
+  border-radius:4px; font-size:14px;
+}
+.back-button:hover { background:#009090; }
+
+/* ===== Table / Form (dark) ===== */
+.table-wrap { overflow-x: auto; }
 
 .form-table {
-    width: 100%; /* Changed from 50% */
-    border-collapse: collapse;
-    margin: 0 auto;
+  color:#fff; width:100%; margin:0; background:transparent; border-collapse: collapse;
 }
-
-.form-table input {
-    box-sizing: border-box;
-    width: 100%;     /* prevent overflow */
-    max-width: 100%; /* ensures it respects table cell size */
+.form-table thead th {
+  border-bottom:1px solid #8b8b8b; font-weight:500; background: transparent;
 }
+.form-table th, .form-table td { border:none; padding:10px 12px; vertical-align: top; }
+.form-table td { border-top:1px solid rgba(255,255,255,0.08); }
+.protokol-name { font-weight: 500; }
 
-.form-table td, .form-table th {
-    padding: 15px;
-    border: 1px solid #ddd;
-    vertical-align: top;
-    font-size: 18px; /* Increase font size */
-    word-break: break-word;
+/* Thumbnail cell */
+.thumb-cell img { width: 100px; height: auto; border-radius: 4px; border: 1px solid #2f2f4d; }
+
+/* Inputs dark theme */
+.form-control, .description-form input[type="text"], .description-form input[type="number"], .description-form textarea, .description-form select {
+  background-color:#00183B; color:#B3B3BE; border:1px solid #2B3C5B;
 }
-
-.form-table th {
-    background-color: #f4f4f4;
-    text-align: left;
+.form-control:focus, .description-form input:focus, .description-form textarea:focus, .description-form select:focus {
+  background-color:#00183B; color:#B3B3BE; border-color:#00a3a3;
+  box-shadow:0 0 0 0.2rem rgba(0,163,163,0.25);
 }
+.input-actual { min-width: 90px; }
 
-.form-table textarea, .form-table input {
-    font-size: 16px; /* Increase font size */
+/* Buttons (Siemens teal) */
+.btn-siemens {
+  background:#00a3a3; color:#fff; border:none; font-weight:500; padding:10px 16px; border-radius:6px; cursor:pointer;
+  transition: background .2s ease;
 }
+.btn-siemens:hover { background:#009090; }
 
-.form-table input[type="text"] {
-    height: 34px;
+.btn-siemens-strong {
+  background:#00a3a3; color:#fff; border:none; font-weight:600; padding:10px 18px; border-radius:6px; cursor:pointer;
+  transition: background .2s ease;
 }
+.btn-siemens-strong:hover { background:#009090; }
+.btn-siemens-strong[disabled], .btn-siemens[disabled] { background:#48556b; color:#c5cbd6; cursor:not-allowed; }
 
-.button-container {
-    display: flex;
-    justify-content: space-between; /* Distribute space between the buttons */
-    align-items: center; /* Align buttons vertically */
-    margin-top: 20px; /* Add margin to the top of the container */
-  }
-  
-.btn-save {
-background-color: #1869e2;
-color: white;
-border: none;
-padding: 10px 15px;
-font-size: 18px;
-border-radius: 4px;
-cursor: pointer;
-transition: background-color 0.3s;
-}
+.button-row { display:flex; gap:12px; justify-content:flex-end; margin-top: 12px; }
 
-.btn-save-export {
-background-color: #4CAF50;
-color: white;
-border: none;
-padding: 10px 15px;
-font-size: 18px;
-border-radius: 4px;
-cursor: pointer;
-transition: background-color 0.3s;
-}
-
-.btn-save-export:disabled {
-    background-color: #aaa;
-    cursor: not-allowed;
-}
-
-.btn-save:hover {
-background-color: #456ca0;
-}
-
-
-.back-button {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 16px; /* Increase font size */
-    border: none;
-    cursor: pointer;
-}
-
-.back-button:hover {
-    background-color: #0056b3;
-    text-decoration: none;
-}
-
+/* Confirmation box (dark) */
 .confirmation-box {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    border: 1px solid #ccc;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 1000;
+  display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+  background:#23233C; color:#fff; border:1px solid #2f2f4d; padding:20px; border-radius:10px;
+  box-shadow:0 0 20px rgba(0,0,0,0.35); z-index:1000; width:min(600px, 92%);
 }
-.confirmation-box button {
-    margin-top: 10px;
-}
+.file-path { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; color:#58b2ff; }
 
-.red {
-    background-color: red;
-}
+/* Status circles (if you show any here) */
+.circle { width:16px; height:16px; border-radius:50%; display:inline-block; }
+.red { background:#e24a4a; } .green { background:#23c552; } .yellow { background:#f0c419; }
+.gray { background:#6d7c99; } .blue { background:#58b2ff; } .orange { background:#f29d38; } .black { background:#1b1e2b; }
 
-.green {
-    background-color: green;
-}
+/* Modal dark styles */
+.modal-content { background:#23233C; color:#fff; border:none; border-radius:8px; }
+.modal-header { background:#1f1f39; border-bottom:1px solid #3e3e5e; }
+.modal-title { color:#fff; font-weight:600; }
+.modal-header .close { color:#fff; opacity:.8; }
+.modal-header .close:hover { opacity:1; }
+.modal-body .form-control { background:#00183B; color:#B3B3BE; border:1px solid #2B3C5B; }
+.modal-body .form-control:focus { background:#00183B; border-color:#00a3a3; box-shadow:0 0 0 .2rem rgba(0,163,163,.25); }
+.modal-footer { border-top:1px solid #3e3e5e; }
 
-.circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: inline-block;
+/* Responsive */
+@media (max-width: 900px) {
+  .page-title { font-size: 20px; }
+  .head-actions { width: 100%; justify-content: flex-start; margin-top: 8px; }
 }

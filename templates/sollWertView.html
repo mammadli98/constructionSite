@@ -2,135 +2,121 @@
 {% load static %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hubzug Protokolle</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
+
+  <!-- CSRF for JS -->
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+  <!-- Bootstrap (same line as admin) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Font Awesome (same as admin) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Page styles -->
+  <link rel="stylesheet" href="{% static 'myapp/sollWertView.css' %}">
 </head>
 <body>
-  <header>
-    <div class="welcome">
-      Welcome, <span id="username">{{ username }}</span>
+  <!-- Header (identical structure/classes as admin view) -->
+  <header class="siemens-header">
+    <div class="siemens-logo">
+      <a href="/adminView/" class="back-link" aria-label="Back to Admin View">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+    </div>
+
+    <div class="siemens-center">
+      <div class="siemens-title">Construction App</div>
+      <div class="welcome-text">Welcome, Admin</div>
+    </div>
+
+    <div class="siemens-menu">
+      <button class="menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu">☰</button>
+      <div id="mainMenu" class="dropdown-menu">
+        <a href="{% url 'soll_wert_view' %}"><i class="fas fa-sliders-h"></i> Soll Werte Bearbeiten</a>
+        <a href="/protocol_list"><i class="fas fa-database"></i> Datenbank</a>
+        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
     </div>
   </header>
 
-  <main>
-    <a href='/adminView/' class="back-button">Back</a>
-    <form action="{% url 'logout' %}" method="post" style="margin: 0;">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
+  <main class="page-wrap">
 
-    <form class="myForm" method="get" class="filter-form">
-      {{ filter_form.as_p }}
-      <button type="submit" class="btn btn-primary">Filter</button>
-      <a href="{% url 'pruefer_view' %}">Clear Filters</a>
-  </form>
+    <h2 class="section-title">Protocols</h2>
 
-  <style>
-    .accordion {
-      background-color: #eee;
-      color: #444;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      transition: 0.4s;
-    }
-    
-    .active, .accordion:hover {
-      background-color: #ccc; 
-    }
-    
-    .panel {
-      padding: 0 18px;
-      display: none;
-      background-color: white;
-      overflow: hidden;
-    }
-    </style>
-    </head>
-    <body>
-    
-    <h2>Protocols</h2>
-    
     {% for permanent in permanentProtocol %}
-      <button class="accordion">{{permanent.permanentProtocolName}}</button>
-      <div class="container" style="display: none;">
-        <table>
+      <button class="accordion">{{ permanent.permanentProtocolName }}</button>
 
-          <tr class="protokol-container">
-            <td class="protokol-name">{{ permanent.permanentProtocol1.protocolName }}</td>
-            <td>
+      <div class="protocol-box" style="display:none;">
+        <table class="table proto-table">
+          <thead>
+            <tr>
+              <th>Protokoll</th>
+              <th class="min-col">Aktion</th>
+              <th class="min-col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="protokol-container">
+              <td class="protokol-name">{{ permanent.permanentProtocol1.protocolName }}</td>
+              <td>
                 {% if permanent.permanentProtocol1.isPermanentDone %}
-                <button class="protokol-button" disabled>Bearbeiten</button>
+                  <button class="protokol-button" disabled>Bearbeiten</button>
                 {% else %}
-                <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHostSollWert" permanent.permanentProtocol1.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                  <button class="protokol-button"
+                          onclick="location.href='{% url 'protocolHubzugLiftingHostSollWert' permanent.permanentProtocol1.id %}?fahrzeugId={{ fahrzeug.id }}'">
+                    Bearbeiten
+                  </button>
                 {% endif %}
-            </td>
-            <td class="status-indicator">
-              {% if permanent.permanentProtocol1.isPermanentDone %}
-              <div class="circle green"></div>
-              {% else %}
-              <div class="circle red"></div>
-              {% endif %}
-          </td>
-          </tr> 
-
-          <tr class="protokol-container">
-            <td class="protokol-name">{{ permanent.permanentProtocol4.protocolName }}</td>
-            <td>
-                {% if permanent.permanentProtocol4.isPermanentDone %}
-                <button class="protokol-button" disabled>Bearbeiten</button>
+              </td>
+              <td class="status-indicator">
+                {% if permanent.permanentProtocol1.isPermanentDone %}
+                  <span class="circle green" title="Fertig"></span>
                 {% else %}
-                <button class="protokol-button" onclick="location.href='{% url "protocolLaufHubzugSollWert" permanent.permanentProtocol4.id %}?fahrzeugId={{ fahrzeug.id }}'">Bearbeiten</button>
+                  <span class="circle red" title="Offen"></span>
                 {% endif %}
-            </td>
-            <td class="status-indicator">
-              {% if permanent.permanentProtocol4.isPermanentDone %}
-              <div class="circle green"></div>
-              {% else %}
-              <div class="circle red"></div>
-              {% endif %}
-          </td>
-          </tr> 
+              </td>
+            </tr>
 
-        </table> 
-        <button type="button" class="btn-save-export"
-          onclick="window.location.href='{% url "protocolHubzugLiftingHostSollWertOffentlich" permanent.id %}?fahrzeugId={{ fahrzeug.id }}'"
-          {% if not permanent.permanentProtocol1.isPermanentDone or not permanent.permanentProtocol4.isPermanentDone %}disabled{% endif %}>
-          Bestätigen
-        </button>
+          </tbody>
+        </table>
 
+        <div class="button-row">
+          <button type="button" class="btn-save-export"
+                  onclick="window.location.href='{% url 'protocolHubzugLiftingHostSollWertOffentlich' permanent.id %}?fahrzeugId={{ fahrzeug.id }}'"
+                  {% if not permanent.permanentProtocol1.isPermanentDone %}disabled{% endif %}>
+            Bestätigen
+          </button>
         </div>
       </div>
-
     {% endfor %}
-
-
-
-
-    <script>
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-    
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
-    }
-    </script>
-  
   </main>
+
+  <!-- Scripts (same order/pattern as admin) -->
+  <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Header dropdown toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.querySelector('.menu-button');
+      const menuWrap = document.querySelector('.siemens-menu');
+      btn.addEventListener('click', function () {
+        const active = menuWrap.classList.toggle('active');
+        btn.setAttribute('aria-expanded', String(active));
+      });
+
+      // Accordion behavior
+      document.querySelectorAll('.accordion').forEach((acc) => {
+        acc.addEventListener('click', () => {
+          acc.classList.toggle('active');
+          const panel = acc.nextElementSibling;
+          panel.style.display = (panel.style.display === 'block') ? 'none' : 'block';
+        });
+      });
+    });
+  </script>
 </body>
 </html>

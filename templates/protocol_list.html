@@ -3,151 +3,128 @@
 {% load static %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Protocol List</title>
-    <link rel="stylesheet" href="{% static 'myapp/protocol_list.css' %}">
-    <link rel="stylesheet" href="{% static 'myapp/hubzug.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Protocol List</title>
+
+  <!-- CSRF for JS -->
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+  <!-- Bootstrap (same as admin/hubzug) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome (same as admin/hubzug) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Page styles -->
+  <link rel="stylesheet" href="{% static 'myapp/protocol_list.css' %}">
 </head>
 <body>
-    <h1>Protocol List</h1>
-    <a href='/adminView/' class="back-button">Back</a>
+  <!-- Header (same structure/classes as admin/hubzug) -->
+  <header class="siemens-header">
+    <div class="siemens-logo">
+      <a href="/adminView/" class="back-link" aria-label="Back to Admin View">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+    </div>
 
-    <!-- Filter Form -->
-    {% comment %} <form method="get">
-        {{ filter_form.as_p }}
-        <button type="submit">Filter</button>
-        <a href="{% url 'protocol_list' %}">Clear Filters</a>
-    </form> {% endcomment %}
+    <div class="siemens-center">
+      <div class="siemens-title">Construction App</div>
+      <div class="welcome-text">Welcome, Admin</div>
+    </div>
 
-    <table>
+    <div class="siemens-menu">
+      <button class="menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu">☰</button>
+      <div id="mainMenu" class="dropdown-menu">
+        <a href="{% url 'soll_wert_view' %}"><i class="fas fa-sliders-h"></i> Soll Werte Bearbeiten</a>
+        <a href="/protocol_list"><i class="fas fa-database"></i> Datenbank</a>
+        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-wrap">
+    <h1 class="section-title">Protocol List</h1>
+
+
+    <div class="table-wrap">
+      <table class="table proto-table">
         <thead>
-            <tr>
-                <th>Baustelle</th>
-                <th>Fahrzeug</th>
-                <th>Role</th>
-                <th>Protocol Type</th>
-                <th>Status</th>
-                <th>Bearbeiten</th>
-            </tr>
+          <tr>
+            <th>Baustelle</th>
+            <th>Fahrzeug</th>
+            <th>Role</th>
+            <th>Protocol Type</th>
+            <th>Status</th>
+            <th class="min-col">Bearbeiten</th>
+          </tr>
         </thead>
         <tbody>
-            {% for protocol in protocols %}
-                <tr>
-                    <td>{{ protocol.baustelle }}</td>
-                    <td>{{ protocol.fahrzeugName }}</td>
-                    <td>Hubzug</td>
-                    <td>{{ protocol.hubzug.protocol1.protocolName }}</td>
-                    <td>
-                        {% if not protocol.hubzug.protocol1.isPermanentDone %}
-                        <div class="circle black"></div>
-                        {% elif protocol.hubzug.protocol1.isExported %}
-                        <div class="circle green"></div>
-                        {% elif protocol.hubzug.protocol1.isNacharbeitNeeded %}
-                        <div class="circle orange"></div>  
-                        {% elif protocol.hubzug.protocol1.isCorrecturNeeded %}
-                        <div class="circle red"></div>
-                        {% elif protocol.hubzug.protocol1.isClosed %}
-                        <div class="circle yellow"></div>
-                        {% elif protocol.hubzug.protocol1.isSaved %}
-                        <div class="circle blue"></div>
-                        {% else %}
-                        <div class="circle gray"></div>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if not protocol.hubzug.protocol1.isExported%}
-                        <button class="protokol-button" disabled>Bearbeiten</button>
-                        {% else %}
-                        <button class="protokol-button" onclick="location.href='{% url "protocolHubzugLiftingHostAdmin" protocol.hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug_id }}'">Bearbeiten</button>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                {% comment %} <tr>
-                    <td>{{ protocol.baustelle }}</td>
-                    <td>{{ protocol.fahrzeugName }}</td>
-                    <td>Hubzug</td>
-                    <td>{{ protocol.hubzug.protocol2.protocolName }}</td>
-                    <td>
-                        {% if protocol.hubzug.protocol2.isExported %}
-                            <div class="circle green"></div>
-                        {% elif protocol.hubzug.protocol2.isClosed %}
-                            <div class="circle yellow"></div>
-                        {% elif protocol.hubzug.protocol2.isSaved %}
-                            <div class="circle blue"></div>
-                        {% else %}
-                            <div class="circle gray"></div>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>{{ protocol.baustelle }}</td>
-                    <td>{{ protocol.fahrzeugName }}</td>
-                    <td>Hubzug</td>
-                    <td>{{ protocol.hubzug.protocol3.protocolName }}</td>
-                    <td>
-                        {% if protocol.hubzug.protocol3.isExported %}
-                            <div class="circle green"></div>
-                        {% elif protocol.hubzug.protocol3.isClosed %}
-                            <div class="circle yellow"></div>
-                        {% elif protocol.hubzug.protocol3.isSaved %}
-                            <div class="circle blue"></div>
-                        {% else %}
-                            <div class="circle gray"></div>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>{{ protocol.baustelle }}</td>
-                    <td>{{ protocol.fahrzeugName }}</td>
-                    <td>Hubzug</td>
-                    <td>{{ protocol.hubzug.protocol4.protocolName }}</td>
-                    <td>
-                        {% if protocol.hubzug.protocol4.isExported %}
-                            <div class="circle green"></div>
-                        {% elif protocol.hubzug.protocol4.isClosed %}
-                            <div class="circle yellow"></div>
-                        {% elif protocol.hubzug.protocol4.isSaved %}
-                            <div class="circle blue"></div>
-                        {% else %}
-                            <div class="circle gray"></div>
-                        {% endif %}
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>{{ protocol.baustelle }}</td>
-                    <td>{{ protocol.fahrzeugName }}</td>
-                    <td>Hubzug</td>
-                    <td>{{ protocol.hubzug.protocol5.protocolName }}</td>
-                    <td>
-                        {% if protocol.hubzug.protocol5.isExported %}
-                            <div class="circle green"></div>
-                        {% elif protocol.hubzug.protocol5.isClosed %}
-                            <div class="circle yellow"></div>
-                        {% elif protocol.hubzug.protocol5.isSaved %}
-                            <div class="circle blue"></div>
-                        {% else %}
-                            <div class="circle gray"></div>
-                        {% endif %}
-                    </td>
-                </tr> {% endcomment %}
-            {% endfor %} 
+          {% for protocol in protocols %}
+          <tr>
+            <td>{{ protocol.baustelle }}</td>
+            <td>{{ protocol.fahrzeugName }}</td>
+            <td>Hubzug</td>
+            <td>{{ protocol.hubzug.protocol1.protocolName }}</td>
+            <td>
+              {% if not protocol.hubzug.protocol1.isPermanentDone %}
+                <span class="circle black" title="Nicht gestartet"></span>
+              {% elif protocol.hubzug.protocol1.isExported %}
+                <span class="circle green" title="Abgeschlossen"></span>
+              {% elif protocol.hubzug.protocol1.isNacharbeitNeeded %}
+                <span class="circle orange" title="Nacharbeit erforderlich"></span>
+              {% elif protocol.hubzug.protocol1.isCorrecturNeeded %}
+                <span class="circle red" title="Korrektur erforderlich"></span>
+              {% elif protocol.hubzug.protocol1.isClosed %}
+                <span class="circle yellow" title="Zur Überprüfung"></span>
+              {% elif protocol.hubzug.protocol1.isSaved %}
+                <span class="circle blue" title="In Bearbeitung"></span>
+              {% else %}
+                <span class="circle gray" title="Offen"></span>
+              {% endif %}
+            </td>
+            <td>
+              {% if not protocol.hubzug.protocol1.isExported %}
+                <button class="protokol-button" disabled>Bearbeiten</button>
+              {% else %}
+                <button class="protokol-button"
+                        onclick="location.href='{% url 'protocolHubzugLiftingHostAdmin' protocol.hubzug.protocol1.id %}?fahrzeugId={{ fahrzeug_id }}'">
+                  Bearbeiten
+                </button>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
         </tbody>
-    </table>
+      </table>
+    </div>
+
     <div class="color-legend">
-        <h3>Status Explanation:</h3>
-        <ul>
-            <li><div class="circle gray"></div> Offen</li>
-            <li><div class="circle blue"></div> In Bearbeitung</li>
-            <li><div class="circle yellow"></div> Zur Überprüfung</li>
-            <li><div class="circle red"></div> Korrektur erforderlich</li>
-            <li><div class="circle orange"></div> Nacharbeiter erforderlich</li>
-            <li><div class="circle green"></div> Abgeschlossen</li>
-          </ul>
-      </div>
+      <h3>Status Erklärung</h3>
+      <ul>
+        <li><span class="circle gray"></span> Offen</li>
+        <li><span class="circle blue"></span> In Bearbeitung</li>
+        <li><span class="circle yellow"></span> Zur Überprüfung</li>
+        <li><span class="circle red"></span> Korrektur erforderlich</li>
+        <li><span class="circle orange"></span> Nacharbeit erforderlich</li>
+        <li><span class="circle green"></span> Abgeschlossen</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Scripts (same pattern/order as admin/hubzug) -->
+  <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Header dropdown toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.querySelector('.menu-button');
+      const menuWrap = document.querySelector('.siemens-menu');
+      btn.addEventListener('click', function () {
+        const active = menuWrap.classList.toggle('active');
+        btn.setAttribute('aria-expanded', String(active));
+      });
+    });
+  </script>
 </body>
 </html>

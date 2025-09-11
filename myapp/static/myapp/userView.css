@@ -129,3 +129,78 @@ h2 { color: var(--text); margin: 10px 0 16px; text-align: center; font-weight: 6
 
 /* Responsive */
 @media (max-width: 768px) { .container-fluid { width: 95%; } }
+
+
+
+/* ===== Dark inputs for admin modals ===== */
+
+/* Text/number/email/password + textarea + select */
+.modal-content .form-control,
+.modal-content input[type="text"],
+.modal-content input[type="password"],
+.modal-content input[type="email"],
+.modal-content input[type="number"],
+.modal-content textarea,
+.modal-content select {
+  background-color: #00183B;
+  color: #B3B3BE;
+  border: 1px solid #2B3C5B;
+}
+
+/* Placeholder text */
+.modal-content .form-control::placeholder,
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: #8792A9;   /* softer */
+  opacity: 1;
+}
+
+/* Focus state */
+.modal-content .form-control:focus,
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+  background-color: #00183B;
+  color: #B3B3BE;
+  border-color: #00a3a3;
+  box-shadow: 0 0 0 0.2rem rgba(0,163,163,0.25);
+}
+
+/* Disabled / readonly */
+.modal-content .form-control[disabled],
+.modal-content .form-control[readonly] {
+  background-color: #0b254d;
+  color: #9aa4bc;
+  opacity: 1; /* keep readable */
+}
+
+/* Multi-selects look better with same bg */
+.modal-content select[multiple] option {
+  background-color: #00183B;
+  color: #B3B3BE;
+}
+
+/* Checkboxes (e.g., Prüfer) */
+.modal-content .form-check-input,
+.modal-content input[type="checkbox"] {
+  accent-color: #00a3a3;        /* modern browsers */
+  background-color: #00183B;
+  border: 1px solid #2B3C5B;
+}
+.modal-content .form-check-label {
+  color: #B3B3BE;
+}
+
+/* Input group addons (if you use them) */
+.modal-content .input-group-text {
+  background-color: #0b254d;
+  color: #B3B3BE;
+  border: 1px solid #2B3C5B;
+}
+
+/* Tame Chrome autofill */
+.modal-content input:-webkit-autofill {
+  -webkit-text-fill-color: #B3B3BE !important;
+  -webkit-box-shadow: 0 0 0px 1000px #00183B inset;
+  box-shadow: 0 0 0px 1000px #00183B inset;
+}
