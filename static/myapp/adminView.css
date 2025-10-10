@@ -1,118 +1,329 @@
-/* General resets and base styles */
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
 * {
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif; /* global font */
 }
-body, html {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f2f2f2;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #000028;
+  color: #fff;
+}
+
+/* Layout containers */
+.container {
+  min-height: calc(100vh - 60px); /* leave space for header */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 30px;
+  padding-top: 30px;
 }
 
 .container-fluid {
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    width: 90%;
-    max-width: 1000px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  background: #23233C;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 90%;
+  max-width: 1000px;
 }
 
+/* Header block (not the Siemens app header) */
 .header {
-    background-color: #3498db; /* Softer blue */
-    color: white;
-    padding: 20px;
-    font-size: 28px;
-    text-align: center;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: bold;
+  background-color: #3498db; /* Softer blue */
+  color: white;
+  padding: 20px;
+  font-size: 28px;
+  text-align: center;
+  font-weight: bold;
 }
 
 .row {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-/* Styling for each panel */
+/* Panels */
 .baustellen-panel, .fahrzeuge-panel {
-    flex: 1; /* each takes half of the row */
-    margin: 0 5px;
-}
-
-h2 {
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
+  flex: 1; /* each takes half of the row */
+  margin: 0 5px;
 }
 
 /* Table styling */
 .table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
+  color: #ffffff;
+  border-collapse: collapse;
+  width: 100%;
+  background: transparent;
 }
 
 .table th, .table td {
-    text-align: left;
-    padding: 8px;
-    border-bottom: 1px solid #ddd;
+  border: none;             /* ✅ Remove cell borders */
+  color: #ffffff;           /* Light text for dark theme */
+  padding: 8px 12px;
+}
+.table thead th {
+  border-bottom: 1px solid #8b8b8b;
 }
 
 /* Button styles */
 .add-btn {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  display: block;
+  margin: 10px auto;
+  text-align: center;
 }
+.add-btn:hover { background-color: #218838; }
 
-.add-btn:hover {
-    background-color: #218838;
-}
-
-.selected {
-    background-color: #d3d3d3; /* Light gray background for selected row */
-}
+.selected { background-color: #d3d3d3; }
 
 /* Responsive layout adjustments */
 @media (max-width: 768px) {
-    .row {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .baustellen-panel, .fahrzeuge-panel {
-        width: 80%;
-        margin: 10px 0;
-    }
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+  .baustellen-panel, .fahrzeuge-panel {
+    width: 80%;
+    margin: 10px 0;
+  }
 }
 
+/* Link-style button */
 .buttonDatenbank {
-    background-color: #00aeff; /* Consistent button color */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 32px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    text-decoration: none; /* Remove underline from links styled as buttons */
-    display: inline-block; /* Align properly without line breaks */
-    margin-top: 10px; /* Spacing after dropdowns */
+  background-color: #00aeff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 32px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 10px;
+}
+.buttonDatenbank:hover { background-color: #0065b3; }
+
+/* Siemens app header (shared) */
+.siemens-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1f1f39;
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+.siemens-logo { font-weight: 700; font-size: 18px; }
+.siemens-center { flex: 1; min-width: 200px; text-align: center; }
+.siemens-title { font-size: 16px; font-weight: 600; }
+.welcome-text { font-size: 14px; color: #ccc; }
+
+/* Dropdown menu */
+.siemens-menu { flex-shrink: 0; position: relative; }
+.menu-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  left: auto;
+  background: #2c2c4a;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  min-width: 200px;
+  z-index: 100;
+  margin-top: 8px;
+}
+.dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+.dropdown-menu a:hover { background-color: #3e3e5e; }
+.siemens-menu.active .dropdown-menu { display: block; }
+
+/* Flex layout for panel title + button */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.panel-header h2 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.buttonDatenbank:hover {
-    background-color: #0065b3;
+/* Stylish + Button */
+.add-icon-btn {
+  background-color: #00a3a3;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 36px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+.add-icon-btn:hover { background-color: #00a3a3; }
+
+.edit-icon-btn {
+  background-color: #00a3a3;
+  border: none;
+  border-radius: 4px;
+  padding: 3px 8px;
+  font-size: 10px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 8px;
+}
+.edit-icon-btn:hover { background-color: #0099aa; }
+.edit-icon-btn i { pointer-events: none; }
+
+/* Dark theme modal */
+.modal-content {
+  background-color: #23233C;
+  color: white;
+  border-radius: 8px;
+  border: none;
+}
+.modal-header {
+  background-color: #1f1f39;
+  border-bottom: 1px solid #3e3e5e;
+}
+.modal-title { color: #ffffff; font-weight: 600; }
+.modal-body label { color: #cccccc; }
+.modal-footer { border-top: 1px solid #3e3e5e; }
+.modal-header .close { color: white; opacity: 0.8; }
+.modal-header .close:hover { opacity: 1; }
+
+/* Siemens-style submit button */
+.btn-siemens {
+  background-color: #00a3a3;
+  color: white;
+  border: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+}
+.btn-siemens:hover { background-color: #009090; }
+
+/* Selected row highlight */
+.baustellen-panel .table tbody tr.selected {
+  background: rgba(0, 163, 163, 0.15);
+}
+
+/* Keyboard focus */
+.baustellen-panel .table tbody tr:focus {
+  outline: 2px dashed #00a3a3;
+  outline-offset: 2px;
+}
+
+
+
+/* ===== Dark inputs for admin modals ===== */
+
+/* Text/number/email/password + textarea + select */
+.modal-content .form-control,
+.modal-content input[type="text"],
+.modal-content input[type="password"],
+.modal-content input[type="email"],
+.modal-content input[type="number"],
+.modal-content textarea,
+.modal-content select {
+  background-color: #00183B;
+  color: #B3B3BE;
+  border: 1px solid #2B3C5B;
+}
+
+/* Placeholder text */
+.modal-content .form-control::placeholder,
+.modal-content input::placeholder,
+.modal-content textarea::placeholder {
+  color: #8792A9;   /* softer */
+  opacity: 1;
+}
+
+/* Focus state */
+.modal-content .form-control:focus,
+.modal-content input:focus,
+.modal-content textarea:focus,
+.modal-content select:focus {
+  background-color: #00183B;
+  color: #B3B3BE;
+  border-color: #00a3a3;
+  box-shadow: 0 0 0 0.2rem rgba(0,163,163,0.25);
+}
+
+/* Disabled / readonly */
+.modal-content .form-control[disabled],
+.modal-content .form-control[readonly] {
+  background-color: #0b254d;
+  color: #9aa4bc;
+  opacity: 1; /* keep readable */
+}
+
+/* Multi-selects look better with same bg */
+.modal-content select[multiple] option {
+  background-color: #00183B;
+  color: #B3B3BE;
+}
+
+/* Checkboxes (e.g., Prüfer) */
+.modal-content .form-check-input,
+.modal-content input[type="checkbox"] {
+  accent-color: #00a3a3;        /* modern browsers */
+  background-color: #00183B;
+  border: 1px solid #2B3C5B;
+}
+.modal-content .form-check-label {
+  color: #B3B3BE;
+}
+
+/* Input group addons (if you use them) */
+.modal-content .input-group-text {
+  background-color: #0b254d;
+  color: #B3B3BE;
+  border: 1px solid #2B3C5B;
+}
+
+/* Tame Chrome autofill */
+.modal-content input:-webkit-autofill {
+  -webkit-text-fill-color: #B3B3BE !important;
+  -webkit-box-shadow: 0 0 0px 1000px #00183B inset;
+  box-shadow: 0 0 0px 1000px #00183B inset;
 }

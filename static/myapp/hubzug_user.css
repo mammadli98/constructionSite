@@ -1,4 +1,4 @@
-/* Poppins like admin/hubzug */
+/* Poppins for consistency */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 * { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -10,7 +10,7 @@ html, body {
   color: #fff;
 }
 
-/* ===== Header (identical to admin/hubzug) ===== */
+/* ===== Siemens header (same as admin/hubzug) ===== */
 .siemens-header {
   display: flex;
   align-items: center;
@@ -41,65 +41,37 @@ html, body {
 .siemens-menu { flex-shrink: 0; position: relative; }
 .menu-button { background: transparent; border: none; color: white; font-size: 20px; cursor: pointer; }
 .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: auto;
-    background: #2c2c4a;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-    min-width: 200px;
-    z-index: 100;
-    margin-top: 8px;
-  }
-  .dropdown-menu a {
-    display: block;
-    padding: 10px 15px;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-  }
+  display: none; position: absolute; top: 100%; right: 0; left: auto;
+  background: #2c2c4a; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  min-width: 220px; z-index: 100; margin-top: 8px; padding: 6px 0;
+}
+.dropdown-menu a {
+  display: block; padding: 10px 15px; color: white; text-decoration: none; font-size: 14px;
+}
 .dropdown-menu a:hover { background-color: #3e3e5e; }
 .siemens-menu.active .dropdown-menu { display: block; }
 
 /* ===== Page layout ===== */
 .page-wrap {
   width: 92%;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 24px auto 60px;
 }
 
+.top-actions {
+  display: flex; gap: 12px; align-items: center; margin-bottom: 14px;
+}
+.logout-inline { margin: 0; }
+
 .section-title {
-  font-size: 22px;
-  font-weight: 600;
-  margin: 12px 0 8px;
+  font-size: 22px; font-weight: 600; margin: 12px 0 8px;
 }
 
-/* ===== Optional filter form (match hubzug dark form) ===== */
-.myForm {
-  display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;
-  background: #23233C; border-radius: 8px; padding: 12px; margin-bottom: 16px;
+/* ===== Table (dark, consistent) ===== */
+.table-wrap {
+  background: #23233C; border-radius: 8px; padding: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.10);
 }
-.myForm p { margin: 0; min-width: 220px; }
-.myForm .form-control, .myForm select, .myForm input[type="text"] {
-  background-color: #00183B; color: #B3B3BE; border: 1px solid #2B3C5B;
-}
-.myForm .form-control:focus, .myForm select:focus, .myForm input[type="text"]:focus {
-  background-color: #00183B; border-color: #00a3a3; box-shadow: 0 0 0 0.2rem rgba(0,163,163,0.25);
-}
-.link-clear { color: #58b2ff; text-decoration: none; }
-.link-clear:hover { text-decoration: underline; }
-
-/* Siemens button */
-.btn-siemens {
-  background-color: #00a3a3; color: white; border: none;
-  font-weight: 500; padding: 8px 16px; border-radius: 4px;
-}
-.btn-siemens:hover { background-color: #009090; }
-
-/* ===== Table (dark, consistent with hubzug/admin) ===== */
-.table-wrap { background: #23233C; border-radius: 8px; padding: 12px; box-shadow: 0 0 20px rgba(0,0,0,0.10); }
 
 .proto-table {
   color: #ffffff; width: 100%; margin: 0; background: transparent; border-collapse: collapse;
@@ -110,17 +82,19 @@ html, body {
 .proto-table th, .proto-table td {
   border: none; padding: 10px 12px;
 }
+.protokol-name { font-weight: 500; }
 .min-col { width: 150px; white-space: nowrap; }
 
-/* Action button */
+/* Action buttons */
 .protokol-button {
-  background-color: #00a3a3; color: #fff; border: none;
+  background-color: #00a3a3; color: white; border: none;
   padding: 8px 14px; border-radius: 4px; cursor: pointer; transition: background .2s ease; font-size: 14px;
 }
 .protokol-button:hover { background-color: #009090; }
 .protokol-button:disabled { background-color: #48556b; color: #c5cbd6; cursor: not-allowed; }
 
 /* Status circles */
+.status-indicator { text-align: center; }
 .circle { width: 16px; height: 16px; border-radius: 50%; display: inline-block; }
 .red { background-color: #e24a4a; }
 .yellow { background-color: #f0c419; }
@@ -132,15 +106,21 @@ html, body {
 
 /* Legend */
 .color-legend {
-  width: 100%; max-width: 600px; margin: 16px auto 0;
+  width: 100%; max-width: 700px; margin: 16px auto 0;
   padding: 12px; background-color: #23233C; border: 1px solid #2f2f4d; border-radius: 8px;
 }
 .color-legend h3 { margin: 0 0 8px; font-size: 16px; color: #ffffff; }
 .color-legend ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 6px 12px; }
 .color-legend li { display: flex; align-items: center; gap: 8px; font-size: 14px; color: #d7d9e0; }
 
+/* Back button (top-actions) */
+.back-button {
+  display: inline-block; padding: 8px 14px; background-color: #00a3a3; color: #fff;
+  text-decoration: none; border-radius: 4px; font-size: 14px;
+}
+.back-button:hover { background-color: #009090; }
+
 /* Responsive */
 @media (max-width: 768px) {
-  .myForm { flex-direction: column; }
   .min-col { width: auto; }
 }

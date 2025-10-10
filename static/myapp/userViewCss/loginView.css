@@ -1,0 +1,248 @@
+/* Google Fonts - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+.container {
+    min-height: calc(100vh - 60px); /* leave space for header */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #000028;
+    row-gap: 30px;
+    padding-top: 30px;
+  }
+.form {
+  position: absolute;
+  max-width: 430px;
+  width: 100%;
+  padding: 30px;
+  border-radius: 6px;
+  background: #23233C;
+}
+.form.signup {
+  opacity: 0;
+  pointer-events: none;
+}
+.forms.show-signup .form.signup {
+  opacity: 1;
+  pointer-events: auto;
+}
+.forms.show-signup .form.login {
+  opacity: 0;
+  pointer-events: none;
+}
+header {
+  font-size: 28px;
+  font-weight: 600;
+  color: #ffffff;
+  text-align: center;
+}
+form {
+  margin-top: 30px;
+}
+.form .field {
+  position: relative;
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 6px;
+}
+.field input,
+.field button {
+  height: 100%;
+  width: 100%;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 6px;
+}
+.field input {
+  outline: none;
+  padding: 0 15px;
+  border: 1px solid #B3B3BE;
+  background: #00183B;
+  color: #B3B3BE;
+}
+.field input:focus {
+  border-bottom-width: 2px;
+}
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #8b8b8b;
+  cursor: pointer;
+  padding: 5px;
+}
+.field button {
+    color: #000028;
+    background-color: #0CC;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-weight: 600; /* ✅ Makes text bold */
+  }
+.field button:hover {
+  background-color: #016dcb;
+}
+.form-link {
+  text-align: center;
+  margin-top: 10px;
+}
+.form-link span,
+.form-link a {
+  font-size: 14px;
+  font-weight: 400;
+  color: #232836;
+}
+.form a {
+  color: #0171d3;
+  text-decoration: none;
+}
+.form-content a:hover {
+  text-decoration: underline;
+}
+.line {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    color: #8b8b8b;
+    margin: 36px 0;
+  }
+  
+  .line::before,
+  .line::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #8b8b8b;
+    opacity: 0.6;
+  }
+  
+  .line::before {
+    margin-right: 10px;
+  }
+  
+  .line::after {
+    margin-left: 10px;
+  }
+  
+  .line-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: #8b8b8b;
+    white-space: nowrap;
+  }
+.media-options a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+a.facebook {
+  color: #0CC;
+  background-color: #4267b200;
+  border: 1px solid #0CC;
+}
+a.facebook .facebook-icon {
+  height: 28px;
+  width: 28px;
+  color: #0171d3;
+  font-size: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+.facebook-icon,
+img.google-img {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+}
+img.google-img {
+  height: 20px;
+  width: 20px;
+  object-fit: cover;
+}
+a.google {
+  border: 1px solid #CACACA;
+}
+a.google span {
+  font-weight: 500;
+  opacity: 0.6;
+  color: #232836;
+}
+@media screen and (max-width: 400px) {
+  .form {
+    padding: 20px 10px;
+  }
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Adjust if needed */
+  padding: 15px 20px;
+  background-color: #ffffff; /* or your preferred color */
+  border-bottom: 1px solid #ccc;
+}
+
+.navbar-logo img {
+  height: 40px;
+  width: auto;
+}
+
+.navbar-title {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* Optional: to hide right side (if nothing there) */
+.navbar::after {
+  content: '';
+  width: 40px;
+}
+
+/* Siemens-style Header */
+.siemens-header {
+    display: flex;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #1f1f39; /* Deep navy like in Siemens portal */
+    color: white;
+    font-weight: 500;
+    font-size: 16px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .siemens-logo {
+    font-weight: 700;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+  
+  .siemens-title {
+    font-size: 16px;
+    color: #e0e0e0;
+  }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
