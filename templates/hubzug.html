@@ -71,10 +71,10 @@
                 <span class="circle green" title="Abgeschlossen"></span>
               {% elif hubzug.protocol1.isNacharbeitNeeded %}
                 <span class="circle orange" title="Nacharbeit erforderlich"></span>
+              {% elif hubzug.protocol1.isClosed %}
+              <span class="circle yellow" title="Zur Überprüfung"></span>
               {% elif hubzug.protocol1.isCorrecturNeeded %}
                 <span class="circle red" title="Korrektur erforderlich"></span>
-              {% elif hubzug.protocol1.isClosed %}
-                <span class="circle yellow" title="Zur Überprüfung"></span>
               {% elif hubzug.protocol1.isSaved %}
                 <span class="circle blue" title="In Bearbeitung"></span>
               {% else %}

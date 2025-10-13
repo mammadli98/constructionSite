@@ -127,3 +127,13 @@ html, body { height: 100%; margin: 0; background: #000028; color: #fff; }
   .page-title { font-size: 20px; }
   .head-actions { width: 100%; justify-content: flex-start; margin-top: 8px; }
 }
+
+.status-cell { text-align: center; vertical-align: middle; }
+.status-dot {
+  display: inline-block;
+  width: 15px; height: 15px;
+  border-radius: 50%;
+}
+.status--green { background: #2e7d32; }
+.status--orange { background: #ef6c00; }
+.status--red { background: #c62828; }

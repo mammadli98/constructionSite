@@ -389,9 +389,17 @@ def protocolEndkontrolleView(request, protocol_id):
 
 @require_http_methods(["POST"])
 def protocolHubzugLiftingHostUpdate(request, protocol_id):
-    currentUser = request.user
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
+    currentUser = request.user
     fahrzeug_id = request.GET.get('fahrzeugId', '')
+
+    protokol.text_1_1 = request.POST.get('text_1_1', '')
+    protokol.text_1_1_remark = request.POST.get('text_1_1_remark', '')
+    protokol.oknok_3_6 = request.POST.get('oknok_3_6', '')
+    protokol.oknok_3_6_remark = request.POST.get('oknok_3_6_remark', '')
+    protokol.check_size_10_2 = request.POST.get('check_size_10_2', '')
+    protokol.check_size_10_2_remark = request.POST.get('check_size_10_2_remark', '')
+
     protokol.last_changer = request.user.username
     protokol.drawing = request.POST.get('drawing', '')
     protokol.rev = request.POST.get('rev', '')
@@ -402,7 +410,7 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     protokol.company = request.POST.get('company', '')
     protokol.quantity = request.POST.get('quantity', '')
     protokol.check_size_1 = request.POST.get('check_size_1', '')
-    protokol.check_size_2 = request.POST.get('check_size_2', '')
+    protokol.oknok_size_1 = request.POST.get('oknok_size_1', '')
     protokol.check_size_3 = request.POST.get('check_size_3', '')
     protokol.check_size_4 = request.POST.get('check_size_4', '')
     protokol.check_size_4a = request.POST.get('check_size_4a', '')
@@ -776,7 +784,7 @@ def exportProtokolHubzugLiftingHost(request, protocol_id):
     now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
     # Finding the absolute path of the css file
-    css_path = finders.find('pdf/pdfProtocolHubzugLiftingHost.css')
+    """ css_path = finders.find('pdf/pdfProtocolHubzugLiftingHost.css')
     css_url = request.build_absolute_uri(settings.STATIC_URL + 'pdf/pdfProtocolHubzugLiftingHost.css')
 
     html_string = render_to_string('protokol_pdf_template.html', {
@@ -796,16 +804,21 @@ def exportProtokolHubzugLiftingHost(request, protocol_id):
         protokolType=protokol.protocolName,
         path=""  # Not saving to path since we are sending directly
     )
-    protocol.save()
+    protocol.save() """
 
     protokol.isExported = True
     protokol.save()
 
+    context = {
+        'fahrzeug_id': fahrzeug_id,
+    }
+    return redirect("/prueferView/")
+
     # Return the PDF as a response
-    pdf_file.seek(0)
+    """ pdf_file.seek(0)
     response = HttpResponse(pdf_file, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
-    return response
+    return response """
 
 
     '''
@@ -937,10 +950,10 @@ def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     # Define the base names of your fields correctly according to the ones you provided
     field_bases = [
-        ('check_size_1_soll', 'check_size_1_soll_avr'),
-        ('check_size_2_soll', 'check_size_2_soll_avr'),
+        ('oknok_3_6_soll', 'check_size_1_soll_avr'),
+        ('check_size_10_2_soll', 'check_size_10_2_soll_avr'),
         ('check_size_3_soll', 'check_size_3_soll_avr'),
-        ('check_size_4_soll', 'check_size_4_soll_avr'),
+        ('oknok_size_1_soll', 'check_size_4_soll_avr'),
         ('check_size_4a_soll', 'check_size_4a_soll_avr'),
         ('check_size_5_soll', 'check_size_5_soll_avr'),
         ('check_size_6_soll', 'check_size_6_soll_avr'),
@@ -1001,9 +1014,12 @@ def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
         protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol.id)
         print(protokol.isPermanentDone)
         protokol.isPermanentDone = protokol1.isPermanentDone
-        protokol.check_size_1_soll = protokol1.check_size_1_soll
-        protokol.check_size_1_soll_avr = protokol1.check_size_1_soll_avr
-        protokol.check_size_2_soll = protokol1.check_size_2_soll
+
+        protokol.oknok_3_6_soll = protokol1.oknok_3_6_soll
+        protokol.check_size_10_2_soll = protokol1.check_size_10_2_soll
+        protokol.check_size_10_2_soll_avr = protokol1.check_size_10_2_soll_avr
+
+
         protokol.check_size_2_soll_avr = protokol1.check_size_2_soll_avr
         protokol.check_size_3_soll = protokol1.check_size_3_soll
         protokol.check_size_3_soll_avr = protokol1.check_size_3_soll_avr

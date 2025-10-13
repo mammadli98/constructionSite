@@ -71,8 +71,10 @@
               <col style="width: 6%">
               <col style="width: 10%">
               <col style="width: 10%">
+              <col style="width: 6%">   <!-- NEW: Status -->
               <col style="width: 6%">
             </colgroup>
+            
             <thead>
               <tr>
                 <th>No</th>
@@ -83,12 +85,13 @@
                 <th>CN / Leipzig</th>
                 <th>Actual</th>
                 <th>Remark</th>
+                <th>Status</th>          <!-- NEW -->
                 <th>SFAE Owner</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>1</td>
+                <td>1.1</td>
                 <td>Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
                 <td>根据图纸对焊接进行目视检查 / EXC3</td>
                 <td>Optische Kontrolle der Schweißnähte, Probenahme, Schweißbogen, Kontrolle der Schweißnahtgröße / EXC3</td>
@@ -98,24 +101,98 @@
                 <td>CN</td>
                 <td>
                   <input type="number"
-                         id="check_size_1"
-                         name="check_size_1"
+                         id="text_1_1"
+                         name="text_1_1"
                          class="form-control input-actual"
                          step="0.1"
-                         value="{{ protokol.check_size_1|default_if_none:'' }}"
+                         value="{{ protokol.text_1_1|default_if_none:'' }}"
                          data-min=""
                          data-max="">
                 </td>
                 <td>
                   <input type="text"
-                         id="drawing"
-                         name="drawing"
+                         id="text_1_1_remark"
+                         name="text_1_1_remark"
                          minlength="3"
                          maxlength="20"
                          class="form-control"
-                         value="{{ protokol.drawing|default_if_none:'' }}">
+                         value="{{ protokol.text_1_1_remark|default_if_none:'' }}">
                 </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
                 <td>QC</td>
+              </tr>
+
+
+              <tr>
+                <td>3.6</td>
+                <td>Tighten screws M12x65-8.8-A2F MA=93Nm</td>
+                <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
+                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_3_6_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_3_6" name="oknok_3_6" class="select-control">
+                      <option value="" {% if protokol.oknok_3_6 is none %}selected{% endif %}></option>
+                      <option value="OK" {% if protokol.oknok_3_6 == 'OK' %}selected{% endif %}>OK</option>
+                      <option value="NOK" {% if protokol.oknok_3_6 == 'NOK' %}selected{% endif %}>NOK</option>
+                      {% if current_user.pruefer == True %}
+                      <option value="AOK" {% if protokol.oknok_3_6 == 'AOK' %}selected{% endif %}>AOK</option>
+                      {% endif %}
+                  </select>
+              </td>
+              <td>
+                <input type="text"
+                       id="oknok_3_6_remark"
+                       name="oknok_3_6_remark"
+                       minlength="3"
+                       maxlength="20"
+                       class="form-control"
+                       value="{{ protokol.oknok_3_6_remark|default_if_none:'' }}">
+              </td>
+              <td class="status-cell" data-rule="oknok" data-target="#oknok_3_6">
+                <span class="status-dot" hidden></span>
+              </td>
+                <td>worker</td>
+              </tr>
+
+              <tr>
+                <td>10.2</td>
+                <td>
+                  wooden block height between bottom of traverse and top of upper frameand lower frame. Front and Rear.
+                  Same heigth for all carriers</td>
+                <td>横梁底部与上框架和下框架顶部之间的木块高度。前部和后部。
+                  所有发货的高度相同</td>
+                <td>Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten).
+                  Gleiche Höhe für alle Träger</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.png' %}" alt="Drawing">
+                  <p> {{ protokol.check_size_10_2_soll}} mm +/- {{ protokol.check_size_10_2_soll_avr}} mm</p>
+                </td>
+                <td>CN</td>
+                  <td>
+                    <input type="number" id="check_size_10_2" name="check_size_10_2" 
+                    data-min="{{ protokol.check_size_10_2_soll | substract:protokol.check_size_10_2_soll_avr}}" 
+                    data-max="{{ protokol.check_size_10_2_soll | adding:protokol.check_size_10_2_soll_avr}}" 
+                    class="form-control input-actual"
+                    step="0.1"
+                    value="{{ protokol.check_size_10_2|default_if_none:'' }}">
+                </td>
+                <td>
+                  <input type="text"
+                         id="check_size_10_2_remark"
+                         name="check_size_10_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.check_size_10_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="range" data-target="#check_size_10_2">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
               </tr>
 
               <tr>
@@ -128,43 +205,12 @@
                 <td>0</td>
                 <td></td>
                 <td>worker</td>
-              </tr>
+            </tr>
 
               <tr>
-                <td>1.3</td>
-                <td>Activate gear venting Pressure relief valve with safety catch…</td>
-                <td>打开每个齿轮电机的齿轮通风…</td>
-                <td>Getriebeentlüftung aktivieren…</td>
-                <td>CN</td>
-                <td>CN</td>
-                <td>0</td>
-                <td></td>
-                <td>worker/QC</td>
+                <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
               </tr>
 
-              <tr>
-                <td>1.4</td>
-                <td>Carriage: check tightening of clamping set RFN7012-55x85</td>
-                <td>将夹紧装置的行程驱动单元拧紧到驱动轮上…</td>
-                <td>Fahrwerk Anzug des Spannsatzes… RFN7012-55x85</td>
-                <td>CN</td>
-                <td>CN</td>
-                <td>0</td>
-                <td></td>
-                <td>worker</td>
-              </tr>
-
-              <tr>
-                <td>1.5</td>
-                <td>Trolley/carriage locking assembly: set two paint markings after assembly</td>
-                <td>小车锁定组件…两个油漆标记点…</td>
-                <td>Fahrwerk Spannsatzklemmverbindung…</td>
-                <td>CN</td>
-                <td>CN</td>
-                <td>0</td>
-                <td></td>
-                <td>worker</td>
-              </tr>
             </tbody>
           </table>
         </div>
@@ -178,17 +224,17 @@
                     class="btn-siemens-strong"
                     onclick="submitExportForm(this)"
                     data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}"
-                    disabled>
+                    >
               Protokoll zustimmen
             </button>
           {% else %}
-            <button type="button"
-                    class="btn-siemens-strong"
-                    onclick="submitClosedForm(this)"
-                    data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}"
-                    {% if not protokol.isSaved %}disabled{% endif %}>
-              Protokoll abschließen
-            </button>
+            <button id="close-button" type="button"
+                  class="btn-siemens-strong"
+                  onclick="submitClosedForm(this)"
+                  data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}"
+                  {% if not protokol.isSaved %}disabled{% endif %}>
+            Protokoll abschließen
+          </button>
           {% endif %}
         </div>
       </form>
@@ -242,6 +288,116 @@
   <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    function submitExportForm(button) {
+  
+      // If validation passes, proceed to submit the form
+      const url = button.getAttribute('data-url');
+      
+      // Create a form element to submit the POST request
+      const form = document.getElementById('protokol-form');
+      form.method = 'POST';
+      form.action = url;
+      
+      // Add CSRF token for Django
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      const csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = 'csrfmiddlewaretoken';
+      csrfInput.value = csrfToken;
+      form.appendChild(csrfInput);
+      
+      // Optionally, add any other hidden inputs needed
+      // const otherInput = document.createElement('input');
+      // otherInput.type = 'hidden';
+      // otherInput.name = 'some_name';
+      // otherInput.value = 'some_value';
+      // form.appendChild(otherInput);
+  
+      document.body.appendChild(form);
+      form.submit(); // Submit the form
+  }
+      // Helper: collect empties from the "Actual" column (col #7)
+  function findEmptyActualRows() {
+    const rows = Array.from(document.querySelectorAll('#protokol-form tbody tr'));
+    const empties = [];
+
+    rows.forEach(tr => {
+      const cells = tr.querySelectorAll('td');
+      if (cells.length < 7) return;
+      const noCell = cells[0];               // "No" column
+      const actualCell = cells[6];           // 0-based index → 7th column = Actual
+
+      // find the first input/select/textarea inside the Actual cell
+      const ctrl = actualCell.querySelector('input, select, textarea');
+      if (!ctrl) return; // skip rows without a control in Actual
+
+      let val = (ctrl.value ?? '').trim();
+      // For number inputs, empty string is empty; "0" is valid
+      const isEmpty = val === '';
+
+      if (isEmpty) {
+        const rowNo = (noCell?.innerText || '').trim() || '(ohne Nr.)';
+        const desc = (tr.querySelector('td:nth-child(2)')?.innerText || '').trim();
+        empties.push({ rowNo, desc });
+      }
+    });
+
+    return empties;
+  }
+
+  // Build list in modal
+  function populateEmptyList(items) {
+    const ul = document.getElementById('emptyActualList');
+    ul.innerHTML = '';
+    items.forEach(it => {
+      const li = document.createElement('li');
+      li.textContent = `${it.rowNo} — ${it.desc}`;
+      ul.appendChild(li);
+    });
+  }
+
+  // Do the actual submit (same effect as your original submitClosedForm)
+  function proceedSubmit(url) {
+    const form = document.getElementById('protokol-form');
+    form.method = 'POST';
+    form.action = url;
+
+    // ensure CSRF exists (avoid duplicates if already there)
+    const existing = form.querySelector('input[name="csrfmiddlewaretoken"]');
+    if (!existing) {
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      const csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = 'csrfmiddlewaretoken';
+      csrfInput.value = csrfToken;
+      form.appendChild(csrfInput);
+    }
+
+    form.submit();
+  }
+
+  // Intercept "Protokoll abschließen"
+  function submitClosedForm(button) {
+    const url = button.getAttribute('data-url');
+    const empties = findEmptyActualRows();
+
+    if (empties.length === 0) {
+      // no empties → proceed directly
+      proceedSubmit(url);
+      return;
+    }
+
+    // show modal with list; only proceed on confirm
+    populateEmptyList(empties);
+    $('#confirmEmptyModal').modal('show');
+
+    const confirmBtn = document.getElementById('confirmProceedBtn');
+    // Avoid stacking multiple handlers
+    confirmBtn.onclick = () => {
+      $('#confirmEmptyModal').modal('hide');
+      proceedSubmit(url);
+    };
+  }
     // Header dropdown toggle
     document.addEventListener('DOMContentLoaded', function () {
       const btn = document.querySelector('.menu-button');
@@ -253,9 +409,149 @@
         });
       }
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      function setDot(dot, color) {
+        dot.classList.remove('status--green', 'status--orange', 'status--red');
+        if (color) {
+          dot.classList.add(color);
+          dot.hidden = false;
+        } else {
+          dot.hidden = true;
+        }
+      }
+    
+      function parseNum(v) {
+        const x = parseFloat(String(v).replace(',', '.'));
+        return Number.isFinite(x) ? x : NaN;
+      }
+    
+      function updateStatus(cell) {
+        const rule = cell.dataset.rule;
+        const target = document.querySelector(cell.dataset.target);
+        const dot = cell.querySelector('.status-dot');
+        if (!target || !dot) return;
+    
+        const val = target.value?.trim();
+    
+        if (rule === 'oknok') {
+          if (val.toUpperCase() === 'OK') setDot(dot, 'status--green');
+          else if (val.toUpperCase() === 'NOK') setDot(dot, 'status--red');
+          else if (val.toUpperCase() === 'AOK') setDot(dot, 'status--orange');
+          else setDot(dot, null);
+        }
+    
+        if (rule === 'range') {
+          if (!val) { setDot(dot, null); return; }
+    
+          const num = parseNum(val);
+          const min = parseNum(target.dataset.min);
+          const max = parseNum(target.dataset.max);
+    
+          if (!Number.isFinite(num) || !Number.isFinite(min) || !Number.isFinite(max)) {
+            setDot(dot, null);
+            return;
+          }
+    
+          if (num < min || num > max) setDot(dot, 'status--red');
+          else setDot(dot, 'status--green');
+        }
+      }
+    
+      // NEW: checks if any red exists, updates hidden field
+      function updateKorrekturFlag() {
+        const hasRed = document.querySelector('.status-dot.status--red');
+        const kor = document.getElementById('korrektur');
+        if (!kor) return;
+    
+        if (hasRed) kor.value = "True";
+        else kor.value = "";
+      }
+    
+      // Initialize + bind
+      document.querySelectorAll('.status-cell').forEach(cell => {
+        const target = document.querySelector(cell.dataset.target);
+        if (target) {
+          updateStatus(cell);
+          target.addEventListener('input', () => {
+            updateStatus(cell);
+            updateKorrekturFlag();
+          });
+          target.addEventListener('change', () => {
+            updateStatus(cell);
+            updateKorrekturFlag();
+          });
+        }
+      });
+    
+      // Check once on load
+      updateKorrekturFlag();
+
+      // --- Lock "close/approve" buttons on any change ---
+      function disableCloseButtons(reason) {
+        const closeBtn =
+          document.getElementById('close-button') ||
+          document.querySelector('button[onclick^="submitClosedForm"]'); // fallback
+
+        const exportBtn = document.getElementById('export-button'); // Prüfer button (may not exist)
+
+        [closeBtn, exportBtn].forEach(btn => {
+          if (!btn) return;
+          btn.disabled = true;
+          btn.dataset.locked = "1";
+          if (reason) btn.title = reason;
+          else btn.removeAttribute('title');
+        });
+      }
+
+      (function wireDirtyGuard() {
+        const form = document.getElementById('protokol-form');
+        if (!form) return;
+
+        const lock = () => disableCloseButtons('Änderungen erkannt — bitte zuerst speichern.');
+
+        // React to any user-driven change
+        form.querySelectorAll('input, select, textarea').forEach(el => {
+          el.addEventListener('input', lock, { passive: true });
+          el.addEventListener('change', lock, { passive: true });
+        });
+
+        // If you submit the form (Speichern), the page will reload with server state,
+        // so no need to re-enable here. If you ever switch to AJAX save, call
+        // disableCloseButtons(...) only on change and re-enable on successful save.
+      })();
+    });
+
+
   </script>
 
-  <!-- Your page JS (unchanged) -->
-  <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+  <!-- Your page JS (unchanged) 
+  <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>-->
 </body>
+
+
+<!-- Confirm finish with empty Actuals -->
+<div class="modal fade" id="confirmEmptyModal" tabindex="-1" role="dialog" aria-labelledby="confirmEmptyTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmEmptyTitle">Leere Felder im „Actual“-Spalte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Diese Zeilen haben ein leeres Feld in der Spalte <b>Actual</b>:</p>
+        <ul id="emptyActualList" style="margin-left:18px;"></ul>
+        <p class="mt-2">Trotzdem abschließen?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+        <button id="confirmProceedBtn" type="button" class="btn-siemens">Trotzdem abschließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </html>

@@ -3,335 +3,512 @@
 {% load convert_tags %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ protokol.protocolName }}</title>
-    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ protokol.protocolName }}</title>
+
+  <!-- CSRF (handy if your JS posts) -->
+  <meta name="csrf-token" content="{{ csrf_token }}">
+
+  <!-- Libraries (same versions used elsewhere) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
 </head>
 <body>
-    <div class="logo-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+  <!-- Siemens header (consistent across app) -->
+  <header class="siemens-header">
+    <div class="siemens-logo">
+        <a href="/protocol_list" class="back-link" aria-label="Back to Protocol View">
+          <i class="fas fa-arrow-left"></i>
+        </a>
     </div>
-    <div class="container">
-        <a href='/protocol_list' class="back-button">Back</a>        
-        <h1>{{ protokol.protocolName }}</h1>
-        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
-            {% csrf_token %}
-            <table class="form-table">
-                <tr>
-                    <th>Beschreibung / Description</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Zeichnung-Nr / Drawing No.:</td>
-                    <td><input type="text" id="drawing" name="drawing" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.drawing|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Rev:</td>
-                    <td><input type="text" id="rev" name="rev" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.rev|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Auftragsnr. / Order No.:</td>
-                    <td><input type="text" id="order" name="order" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Auftragsnr.-SAG / Order No.-SAG:</td>
-                    <td><input type="text" id="order_sag" name="order_sag" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order_sag|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Geräte-Nr. / Device No:</td>
-                    <td><input type="text" id="device" name="device" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.device|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Hubzug-Nr. / Hoist No.:</td>
-                    <td><input type="text" id="hoist" name="hoist" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.hoist|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Firma / Company:</td>
-                    <td><input type="text" id="company" name="company" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.company|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Stückzahl / Quantity:</td>
-                    <td><input type="text" id="quantity" name="quantity" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.quantity|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Baustelle</td>
-                    <td><input type="text" id="baustelle" name="baustelle" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.baustelle|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <th>Prüfmaße / Check Sizes:</th>
-                    <th>Ist-Maß actual size
-                        [mm]</th>
-                    <th>Soll-Maß desired size
-                        [mm]</th>
-                </tr>
-                <tr>
-                    <td><b>1.</b> Horizontaler Abstand der Anschlussbohrungen* / Horizontal distance of connecting holes*</td>
-                    <td>
-                        <input type="number" id="check_size_1" name="check_size_1" 
-                        data-min="{{ protokol.check_size_1_soll | substract:protokol.check_size_1_soll_avr}}" 
-                        data-max="{{ protokol.check_size_1_soll | adding:protokol.check_size_1_soll_avr}}" 
-                        class="textarea-control" 
-                        step="0.1"
-                        value="{{ protokol.check_size_1|default_if_none:'' }}"
-                        oninput="validateInput(this, 'status_1')">
-                    </td>
-                    <td> {{ protokol.check_size_1_soll}} +/- {{ protokol.check_size_1_soll_avr}}</td>
-                    <td id="status_1"></td>
-                </tr>
-                <tr>
-                    <td><b>2.</b> Vertikaler Abstand der Anschlussbohrungen / Vertical distance of connecting holes*</td>
-                    <td>
-                        <input type="number" id="check_size_2" name="check_size_2" 
-                        data-min="{{ protokol.check_size_2_soll | substract:protokol.check_size_2_soll_avr}}" 
-                        data-max="{{ protokol.check_size_2_soll | adding:protokol.check_size_2_soll_avr}}" 
-                         class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.check_size_2|default_if_none:'' }}" oninput="validateInput(this, 'status_2')">
-                    </td>
-                    <td> {{ protokol.check_size_2_soll}} +/- {{ protokol.check_size_2_soll_avr}}</td>
-                    <td id="status_2"></td>
-                </tr>
-                <tr>
-                    <td><b>3.</b> Durchmesser 1. Anschlussbohrung / Diameter of 1st connecting hole</td>
-                    <td>
-                        <input type="number" id="check_size_3" name="check_size_3" 
-                        data-min="{{ protokol.check_size_3_soll | substract:protokol.check_size_3_soll_avr}}" 
-                        data-max="{{ protokol.check_size_3_soll | adding:protokol.check_size_3_soll_avr}}"  class="textarea-control"
-                                step="0.1" 
-                               value="{{ protokol.check_size_3|default_if_none:'' }}" oninput="validateInput(this, 'status_3')">
-                    </td>
-                    <td> D{{ protokol.check_size_3_soll}} +/- {{ protokol.check_size_3_soll_avr}}</td>
-                    <td id="status_3"></td>
-                </tr>
-                <tr>
-                    <td><b>4.</b> Durchmesser 2. Anschlussbohrung / Diameter of 2nd connecting hole</td>
-                    <td>
-                        <input type="number" id="check_size_4" name="check_size_4" 
-                        data-min="{{ protokol.check_size_4_soll | substract:protokol.check_size_4_soll_avr}}" 
-                        data-max="{{ protokol.check_size_4_soll | adding:protokol.check_size_4_soll_avr}}"  class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.check_size_4|default_if_none:'' }}" oninput="validateInput(this, 'status_4')">
-                    </td>
-                    <td> D{{ protokol.check_size_4_soll}} +/- {{ protokol.check_size_4_soll_avr}}</td>
-                    <td id="status_4"></td>
-                </tr>
-                <tr>
-                    <td><b>4a.</b> Abstand zwischen Gehäuseseiten* / Distance between the frame sides*</td>
-                    <td>
-                        <input type="number" id="check_size_4a" name="check_size_4a" 
-                        data-min="{{ protokol.check_size_4a_soll | substract:protokol.check_size_4a_soll_avr}}" 
-                        data-max="{{ protokol.check_size_4a_soll | adding:protokol.check_size_4a_soll_avr}}"  class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.check_size_4a|default_if_none:'' }}" oninput="validateInput(this, 'status_4a')">
-                    </td>
-                    <td> {{ protokol.check_size_4a_soll}} +/- {{ protokol.check_size_4a_soll_avr}}</td>
-                    <td id="status_4a"></td>
-                </tr>
-                <tr>
-                    <td><b>5.</b> Horizontaler Abstand zu Lochkreismitte für Lageranbau* / Horizontal distance to centre of drum bearing*</td>
-                    <td>
-                        <input type="number" id="check_size_5" name="check_size_5" 
-                        data-min="{{ protokol.check_size_5_soll | substract:protokol.check_size_5_soll_avr}}" 
-                        data-max="{{ protokol.check_size_5_soll | adding:protokol.check_size_5_soll_avr}}"  class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.check_size_5|default_if_none:'' }}" oninput="validateInput(this, 'status_5')">
-                    </td>
-                    <td> {{ protokol.check_size_5_soll}} +/- {{ protokol.check_size_5_soll_avr}}</td>
-                    <td id="status_5"></td>
-                </tr>
-                <tr>
-                    <td><b>6.</b> Vertikaler Abstand zu Lochkreismitte für Lageranbau* / Vertical distance to centre of drum bearing*</td>
-                    <td>
-                        <input type="number" id="check_size_6" name="check_size_6" 
-                        data-min="{{ protokol.check_size_6_soll | substract:protokol.check_size_6_soll_avr}}" 
-                        data-max="{{ protokol.check_size_6_soll | adding:protokol.check_size_6_soll_avr}}"  class="textarea-control"
-                                step="0.1" 
-                               value="{{ protokol.check_size_6|default_if_none:'' }}" oninput="validateInput(this, 'status_6')">
-                    </td>
-                    <td> {{ protokol.check_size_6_soll}} +/- {{ protokol.check_size_6_soll_avr}}</td>
-                    <td id="status_6"></td>
-                </tr>
-                <tr>
-                    <td><b>7.</b> Durchmesser der Lagerbohrung* / Diameter of the holes for the bearings*</td>
-                    <td>
-                        <input type="number" id="check_size_7" name="check_size_7" 
-                        data-min="{{ protokol.check_size_7_soll | substract:protokol.check_size_7_soll_avr}}" 
-                        data-max="{{ protokol.check_size_7_soll | adding:protokol.check_size_7_soll_avr}}"  class="textarea-control" 
-                                 step="0.1"
-                               value="{{ protokol.check_size_7|default_if_none:'' }}" oninput="validateInput(this, 'status_7')">
-                    </td>
-                    <td> {{ protokol.check_size_7_soll}} +/- {{ protokol.check_size_7_soll_avr}}</td>
-                    <td id="status_7"></td>
-                </tr>
-                <tr>
-                    <td><b>8.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
-                    <td>
-                        <input type="number" id="check_size_8" name="check_size_8" 
-                        data-min="{{ protokol.check_size_8_soll | substract:protokol.check_size_8_soll_avr}}" 
-                        data-max="{{ protokol.check_size_8_soll | adding:protokol.check_size_8_soll_avr}}" class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.check_size_8|default_if_none:'' }}" oninput="validateInput(this, 'status_8')">
-                    </td>
-                    <td> {{ protokol.check_size_8_soll}} +/- {{ protokol.check_size_8_soll_avr}}</td>
-                    <td id="status_8"></td>
-                </tr>
-                <tr>
-                    <td><b>9.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
-                    <td>
-                        <input type="number" id="check_size_9" name="check_size_9" 
-                        data-min="{{ protokol.check_size_9_soll | substract:protokol.check_size_9_soll_avr}}" 
-                        data-max="{{ protokol.check_size_9_soll | adding:protokol.check_size_9_soll_avr}}"  class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.check_size_9|default_if_none:'' }}" oninput="validateInput(this, 'status_9')">
-                    </td>
-                    <td> {{ protokol.check_size_9_soll}} +/- {{ protokol.check_size_9_soll_avr}}</td>
-                    <td id="status_9"></td>
-                </tr>
-                <tr>
-                    <td><b>10.</b> Durchmesser der beiden Aufnahmebohrungen der Klinke / Diameter of both holes for the Catch lever</td>
-                    <td>
-                        <input type="number" id="check_size_10" name="check_size_10" 
-                        data-min="{{ protokol.check_size_10_soll | substract:protokol.check_size_10_soll_avr}}" 
-                        data-max="{{ protokol.check_size_10_soll | adding:protokol.check_size_10_soll_avr}}"  class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.check_size_10|default_if_none:'' }}" oninput="validateInput(this, 'status_10')">
-                    </td>
-                    <td> {{ protokol.check_size_10_soll}} H7 +/- {{ protokol.check_size_10_soll_avr}}</td>
-                    <td id="status_10"></td>
-                </tr>
-                <tr>
-                    <th colspan="2">Lagetoleranzen / Position tolerances:</th>
-                </tr>
-                <tr>
-                    <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
-                    <td>
-                        <input type="number" id="position_tolerance_11" name="position_tolerance_11" 
-                                data-min="0.3" data-max="0.3"  class="textarea-control" 
-                                step="0.1"
-                               value="{{ protokol.position_tolerance_11|default_if_none:'' }}" oninput="validateInput(this, 'status_11')">
-                    </td>
-                    <td> {{ protokol.position_tolerance_11_soll}} mm zu B</td>
-                    <td id="status_11"></td>
-                </tr>
 
-                {% for newNumber in protokol.additional_data %}
-                    <tr>
-                        {% if protokol.additional_data|get_type:newNumber == "Toleranz" %}
-                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
-                            {% with wert=protokol.additional_data|get_wert:newNumber avr=protokol.additional_data|get_avr:newNumber %}
-                                <td>
-                                    <input type="number" id="check_size_{{ newNumber }}" name="check_size_{{ newNumber }}" 
-                                        data-min="{{ wert|substract:avr }}" 
-                                        data-max="{{ wert|adding:avr }}"  
-                                        class="textarea-control" 
-                                        step="0.1"
-                                        value="{{ protokol.additional_data|get_aktuell_wert:newNumber|default_if_none:'' }}" 
-                                        oninput="validateInput(this, 'status_{{ newNumber }}')">
-                                </td>
-                            {% endwith %}
-                            <td> {{ protokol.additional_data|get_wert:newNumber }} +/- {{protokol.additional_data|get_avr:newNumber}}</td>
-                            <td id="status_{{ newNumber }}"></td>
-                        {% else %}
-                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
-                            <td>
-                                <select id="check_size_{{newNumber}}" name="check_size_{{newNumber}}" class="select-control">
-                                    <option value="" {% if protokol.check_size_2 is none %}selected{% endif %}></option>
-                                    <option value="OK" {% if protokol.check_size_2 == 'OK' %}selected{% endif %}>OK</option>
-                                    <option value="NOK" {% if protokol.check_size_2 == 'NOK' %}selected{% endif %}>NOK</option>
-                                    <option value="NAE" {% if protokol.check_size_2 == 'NAE' %}selected{% endif %}>NAE</option>
-                                </select>
-                            </td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
+    <div class="siemens-center">
+      <div class="siemens-title">Construction App</div>
+      <div class="welcome-text">Welcome, {{ username }}</div>
+    </div>
 
-                <tr>
-                    <td><b>Neues Feld hinzufügen</b></td>
-                </tr>
-                <tr style="border-bottom: 1px solid #ddd; height: 50px;">
-                    <!-- Input field that allows any text -->
-                    <td>
-                        <input type="text" id="new_field" name="new_field"
-                            style="width: 380px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
-                    </td>
-                    
-                    <!-- Dropdown selection -->
-                    <td>
-                        <select id="new_type" name="new_type" class="select-control"
-                            style="width: 130px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; background-color: #fff;">
-                            <option value="OK/NOK/NAE">Boolean</option>
-                            <option value="Toleranz">Toleranz</option>
-                        </select>
-                    </td>
-                    
-                    <!-- Button with improved styling -->
-                    <td>
-                        <button type="button" class="btn-save-export"
-                            style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;"
-                            onclick="submitAddNewFieldForm(this)" data-url="{% url 'protocolHubzugLiftingHostAdminAddNewField' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">
-                            Hinzufügen
-                        </button>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
-                </tr>
-                
-                <tr>
-                    <td><h4>Sonstiges / Miscellaneous</h4></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td><label for="miscellaneous">Sonstiges / Miscellaneous:</label></td>
-                    <td><input type="text" id="miscellaneous" name="miscellaneous" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.miscellaneous|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Bemerkungen / Remarks:</td>
-                    <td><input type="text" id="remark" name="remark" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.remark|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Messgerät / Measure tools:</td>
-                    <td><input type="text" id="measure" name="measure" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.measure|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Datum / Date:</td>
-                    <td><input type="date" id="date" name="date" class="textarea-control" value="{{ protokol.date|default_if_none:'' }}" ></td>
-                  </tr>
-                {% if current_user.pruefer %}
-                    <tr>
-                        <td>Prüfer / Inspector:</td>
-                        <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
-                    </tr>
-                {% endif %}
-                <tr>
-                    <td>Abteilung / Department:</td>
-                    <td><input type="text" id="department" name="department" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.department|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Last modified:</td>
-                    <td>{{ protokol.last_changer|default_if_none:"" }}</td>
-                </tr>
-            </table>
-            <div class="button-container">
-                <button type="submit" class="btn-save">Speichern</button>
-                {% comment %} {% if current_user.pruefer == True %}
-                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
-                {% else %}
-                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
-                {% endif %} {% endcomment %}
-            </div>
-        </form>
-        
-        <div id="confirmation-box" class="confirmation-box" data-fahrzeug-id="{{ fahrzeug_id }}">
-            <p>Your protocol will be saved in the given path:</p>
-            <p id="file-path"></p>
-            <button onclick="hideConfirmation()">OK</button>
+    <div class="siemens-menu">
+        <button class="menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu">☰</button>
+        <div id="mainMenu" class="dropdown-menu">
+          <a href="{% url 'soll_wert_view' %}"><i class="fas fa-sliders-h"></i> Soll Werte Bearbeiten</a>
+          <a href="/protocol_list"><i class="fas fa-database"></i> Datenbank</a>
+          <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
         </div>
-    </div>
+      </div>
+  </header>
 
-    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+  <main class="page-wrap">
+    <div class="content-card">
+      <div class="card-head">
+        <h1 class="page-title">{{ protokol.protocolName }}</h1>
+      </div>
+
+      <form id="protokol-form"
+            class="description-form"
+            action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}"
+            method="post">
+        {% csrf_token %}
+
+        <div class="table-wrap">
+          <table class="table form-table">
+            <colgroup>
+              <col style="width: 5%">
+              <col style="width: 18%">
+              <col style="width: 18%">
+              <col style="width: 18%">
+              <col style="width: 9%">
+              <col style="width: 6%">
+              <col style="width: 10%">
+              <col style="width: 10%">
+              <col style="width: 6%">   <!-- NEW: Status -->
+              <col style="width: 6%">
+            </colgroup>
+            
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Review items and instructions</th>
+                <th>Chinese</th>
+                <th>German</th>
+                <th>Due situation</th>
+                <th>CN / Leipzig</th>
+                <th>Actual</th>
+                <th>Remark</th>
+                <th>Status</th>          <!-- NEW -->
+                <th>SFAE Owner</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
+                <td>根据图纸对焊接进行目视检查 / EXC3</td>
+                <td>Optische Kontrolle der Schweißnähte, Probenahme, Schweißbogen, Kontrolle der Schweißnahtgröße / EXC3</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_1"
+                         name="text_1_1"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_1|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_1_remark"
+                         name="text_1_1_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_1_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>QC</td>
+              </tr>
+
+
+              <tr>
+                <td>3.6</td>
+                <td>Tighten screws M12x65-8.8-A2F MA=93Nm</td>
+                <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
+                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_3_6_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_3_6" name="oknok_3_6" class="select-control">
+                      <option value="" {% if protokol.oknok_3_6 is none %}selected{% endif %}></option>
+                      <option value="OK" {% if protokol.oknok_3_6 == 'OK' %}selected{% endif %}>OK</option>
+                      <option value="NOK" {% if protokol.oknok_3_6 == 'NOK' %}selected{% endif %}>NOK</option>
+                  </select>
+              </td>
+              <td>
+                <input type="text"
+                       id="drawing"
+                       name="drawing"
+                       minlength="3"
+                       maxlength="20"
+                       class="form-control"
+                       value="{{ protokol.drawing|default_if_none:'' }}">
+              </td>
+              <td class="status-cell" data-rule="oknok" data-target="#oknok_3_6">
+                <span class="status-dot" hidden></span>
+              </td>
+                <td>worker</td>
+              </tr>
+
+              <tr>
+                <td>10.2</td>
+                <td>
+                  wooden block height between bottom of traverse and top of upper frameand lower frame. Front and Rear.
+                  Same heigth for all carriers</td>
+                <td>横梁底部与上框架和下框架顶部之间的木块高度。前部和后部。
+                  所有发货的高度相同</td>
+                <td>Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten).
+                  Gleiche Höhe für alle Träger</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.png' %}" alt="Drawing">
+                  <p> {{ protokol.check_size_10_2_soll}} mm +/- {{ protokol.check_size_10_2_soll_avr}} mm</p>
+                </td>
+                <td>CN</td>
+                  <td>
+                    <input type="number" id="check_size_10_2" name="check_size_10_2" 
+                    data-min="{{ protokol.check_size_10_2_soll | substract:protokol.check_size_10_2_soll_avr}}" 
+                    data-max="{{ protokol.check_size_10_2_soll | adding:protokol.check_size_10_2_soll_avr}}" 
+                    class="form-control input-actual"
+                    step="0.1"
+                    value="{{ protokol.check_size_10_2|default_if_none:'' }}">
+                </td>
+                <td>
+                  <input type="text"
+                         id="check_size_10_2_remark"
+                         name="check_size_10_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.check_size_10_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="range" data-target="#check_size_10_2">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              <tr>
+                <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <div class="button-row">
+          <button type="submit" class="btn-siemens">Speichern</button>
+        </div>
+      </form>
+
+      <!-- Confirmation sheet (styled dark) -->
+      <div id="confirmation-box" class="confirmation-box" data-fahrzeug-id="{{ fahrzeug_id }}">
+        <p>Ihr Protokoll wird hier gespeichert:</p>
+        <p id="file-path" class="file-path"></p>
+        <button class="btn-siemens" onclick="hideConfirmation()">OK</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Change Password Modal (optional, since you link to it) -->
+  <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" aria-labelledby="passwordChangeTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form method="post" action="{% url 'change_password' %}">
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="passwordChangeTitle">Passwort ändern</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <!-- Replace with your Django form if needed -->
+            <div class="form-group">
+              <label for="old_password">Aktuelles Passwort</label>
+              <input type="password" class="form-control" id="old_password" name="old_password" required>
+            </div>
+            <div class="form-group">
+              <label for="new_password1">Neues Passwort</label>
+              <input type="password" class="form-control" id="new_password1" name="new_password1" required>
+            </div>
+            <div class="form-group">
+              <label for="new_password2">Neues Passwort bestätigen</label>
+              <input type="password" class="form-control" id="new_password2" name="new_password2" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn-siemens">Speichern</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function submitExportForm(button) {
+  
+      // If validation passes, proceed to submit the form
+      const url = button.getAttribute('data-url');
+      
+      // Create a form element to submit the POST request
+      const form = document.getElementById('protokol-form');
+      form.method = 'POST';
+      form.action = url;
+      
+      // Add CSRF token for Django
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      const csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = 'csrfmiddlewaretoken';
+      csrfInput.value = csrfToken;
+      form.appendChild(csrfInput);
+      
+      // Optionally, add any other hidden inputs needed
+      // const otherInput = document.createElement('input');
+      // otherInput.type = 'hidden';
+      // otherInput.name = 'some_name';
+      // otherInput.value = 'some_value';
+      // form.appendChild(otherInput);
+  
+      document.body.appendChild(form);
+      form.submit(); // Submit the form
+  }
+      // Helper: collect empties from the "Actual" column (col #7)
+  function findEmptyActualRows() {
+    const rows = Array.from(document.querySelectorAll('#protokol-form tbody tr'));
+    const empties = [];
+
+    rows.forEach(tr => {
+      const cells = tr.querySelectorAll('td');
+      if (cells.length < 7) return;
+      const noCell = cells[0];               // "No" column
+      const actualCell = cells[6];           // 0-based index → 7th column = Actual
+
+      // find the first input/select/textarea inside the Actual cell
+      const ctrl = actualCell.querySelector('input, select, textarea');
+      if (!ctrl) return; // skip rows without a control in Actual
+
+      let val = (ctrl.value ?? '').trim();
+      // For number inputs, empty string is empty; "0" is valid
+      const isEmpty = val === '';
+
+      if (isEmpty) {
+        const rowNo = (noCell?.innerText || '').trim() || '(ohne Nr.)';
+        const desc = (tr.querySelector('td:nth-child(2)')?.innerText || '').trim();
+        empties.push({ rowNo, desc });
+      }
+    });
+
+    return empties;
+  }
+
+  // Build list in modal
+  function populateEmptyList(items) {
+    const ul = document.getElementById('emptyActualList');
+    ul.innerHTML = '';
+    items.forEach(it => {
+      const li = document.createElement('li');
+      li.textContent = `${it.rowNo} — ${it.desc}`;
+      ul.appendChild(li);
+    });
+  }
+
+  // Do the actual submit (same effect as your original submitClosedForm)
+  function proceedSubmit(url) {
+    const form = document.getElementById('protokol-form');
+    form.method = 'POST';
+    form.action = url;
+
+    // ensure CSRF exists (avoid duplicates if already there)
+    const existing = form.querySelector('input[name="csrfmiddlewaretoken"]');
+    if (!existing) {
+      const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+      const csrfInput = document.createElement('input');
+      csrfInput.type = 'hidden';
+      csrfInput.name = 'csrfmiddlewaretoken';
+      csrfInput.value = csrfToken;
+      form.appendChild(csrfInput);
+    }
+
+    form.submit();
+  }
+
+  // Intercept "Protokoll abschließen"
+  function submitClosedForm(button) {
+    const url = button.getAttribute('data-url');
+    const empties = findEmptyActualRows();
+
+    if (empties.length === 0) {
+      // no empties → proceed directly
+      proceedSubmit(url);
+      return;
+    }
+
+    // show modal with list; only proceed on confirm
+    populateEmptyList(empties);
+    $('#confirmEmptyModal').modal('show');
+
+    const confirmBtn = document.getElementById('confirmProceedBtn');
+    // Avoid stacking multiple handlers
+    confirmBtn.onclick = () => {
+      $('#confirmEmptyModal').modal('hide');
+      proceedSubmit(url);
+    };
+  }
+    // Header dropdown toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.querySelector('.menu-button');
+      const wrap = document.querySelector('.siemens-menu');
+      if (btn && wrap) {
+        btn.addEventListener('click', () => {
+          const active = wrap.classList.toggle('active');
+          btn.setAttribute('aria-expanded', String(active));
+        });
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      function setDot(dot, color) {
+        dot.classList.remove('status--green', 'status--orange', 'status--red');
+        if (color) {
+          dot.classList.add(color);
+          dot.hidden = false;
+        } else {
+          dot.hidden = true;
+        }
+      }
+    
+      function parseNum(v) {
+        const x = parseFloat(String(v).replace(',', '.'));
+        return Number.isFinite(x) ? x : NaN;
+      }
+    
+      function updateStatus(cell) {
+        const rule = cell.dataset.rule;
+        const target = document.querySelector(cell.dataset.target);
+        const dot = cell.querySelector('.status-dot');
+        if (!target || !dot) return;
+    
+        const val = target.value?.trim();
+    
+        if (rule === 'oknok') {
+          if (val.toUpperCase() === 'OK') setDot(dot, 'status--green');
+          else if (val.toUpperCase() === 'NOK') setDot(dot, 'status--red');
+          else setDot(dot, null);
+        }
+    
+        if (rule === 'range') {
+          if (!val) { setDot(dot, null); return; }
+    
+          const num = parseNum(val);
+          const min = parseNum(target.dataset.min);
+          const max = parseNum(target.dataset.max);
+    
+          if (!Number.isFinite(num) || !Number.isFinite(min) || !Number.isFinite(max)) {
+            setDot(dot, null);
+            return;
+          }
+    
+          if (num < min || num > max) setDot(dot, 'status--red');
+          else setDot(dot, 'status--green');
+        }
+      }
+    
+      // NEW: checks if any red exists, updates hidden field
+      function updateKorrekturFlag() {
+        const hasRed = document.querySelector('.status-dot.status--red');
+        const kor = document.getElementById('korrektur');
+        if (!kor) return;
+    
+        if (hasRed) kor.value = "True";
+        else kor.value = "";
+      }
+    
+      // Initialize + bind
+      document.querySelectorAll('.status-cell').forEach(cell => {
+        const target = document.querySelector(cell.dataset.target);
+        if (target) {
+          updateStatus(cell);
+          target.addEventListener('input', () => {
+            updateStatus(cell);
+            updateKorrekturFlag();
+          });
+          target.addEventListener('change', () => {
+            updateStatus(cell);
+            updateKorrekturFlag();
+          });
+        }
+      });
+    
+      // Check once on load
+      updateKorrekturFlag();
+
+      // --- Lock "close/approve" buttons on any change ---
+      function disableCloseButtons(reason) {
+        const closeBtn =
+          document.getElementById('close-button') ||
+          document.querySelector('button[onclick^="submitClosedForm"]'); // fallback
+
+        const exportBtn = document.getElementById('export-button'); // Prüfer button (may not exist)
+
+        [closeBtn, exportBtn].forEach(btn => {
+          if (!btn) return;
+          btn.disabled = true;
+          btn.dataset.locked = "1";
+          if (reason) btn.title = reason;
+          else btn.removeAttribute('title');
+        });
+      }
+
+      (function wireDirtyGuard() {
+        const form = document.getElementById('protokol-form');
+        if (!form) return;
+
+        const lock = () => disableCloseButtons('Änderungen erkannt — bitte zuerst speichern.');
+
+        // React to any user-driven change
+        form.querySelectorAll('input, select, textarea').forEach(el => {
+          el.addEventListener('input', lock, { passive: true });
+          el.addEventListener('change', lock, { passive: true });
+        });
+
+        // If you submit the form (Speichern), the page will reload with server state,
+        // so no need to re-enable here. If you ever switch to AJAX save, call
+        // disableCloseButtons(...) only on change and re-enable on successful save.
+      })();
+    });
+
+
+  </script>
+
+  <!-- Your page JS (unchanged) 
+  <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>-->
 </body>
+
+
+<!-- Confirm finish with empty Actuals -->
+<div class="modal fade" id="confirmEmptyModal" tabindex="-1" role="dialog" aria-labelledby="confirmEmptyTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmEmptyTitle">Leere Felder im „Actual“-Spalte</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Diese Zeilen haben ein leeres Feld in der Spalte <b>Actual</b>:</p>
+        <ul id="emptyActualList" style="margin-left:18px;"></ul>
+        <p class="mt-2">Trotzdem abschließen?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+        <button id="confirmProceedBtn" type="button" class="btn-siemens">Trotzdem abschließen</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 </html>

@@ -13,11 +13,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
     </div>
     <div class="container">
-        {% if current_user.pruefer == True %}
-        <a href='/prueferView/' class="back-button">Back</a>    
-        {% else %}
-        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
-        {% endif %}
+        <a href='/protocol_list' class="back-button">Back</a>        
         <h1>{{ protokol.protocolName }}</h1>
         <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
             {% csrf_token %}
@@ -81,12 +77,6 @@
                         value="{{ protokol.check_size_1|default_if_none:'' }}"
                         oninput="validateInput(this, 'status_1')">
                     </td>
-                            <input type="number" id="check_size_1" name="check_size_1" 
-                            data-min="{{ protokol.check_size_1_soll | substract:protokol.check_size_1_soll_avr}}" 
-                            data-max="{{ protokol.check_size_1_soll | adding:protokol.check_size_1_soll_avr}}" 
-                            class="textarea-control" 
-                            step="0.1"
-                            value="{{ protokol.check_size_1|default_if_none:'' }}">
                     <td> {{ protokol.check_size_1_soll}} +/- {{ protokol.check_size_1_soll_avr}}</td>
                     <td id="status_1"></td>
                 </tr>
@@ -214,7 +204,7 @@
                 <tr>
                     <th colspan="2">Lagetoleranzen / Position tolerances:</th>
                 </tr>
-{% comment %}                 <tr>
+                <tr>
                     <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
                     <td>
                         <input type="number" id="position_tolerance_11" name="position_tolerance_11" 
@@ -224,7 +214,7 @@
                     </td>
                     <td> {{ protokol.position_tolerance_11_soll}} mm zu B</td>
                     <td id="status_11"></td>
-                </tr> {% endcomment %}
+                </tr>
 
                 {% for newNumber in protokol.additional_data %}
                     <tr>
@@ -256,6 +246,35 @@
                         {% endif %}
                     </tr>
                 {% endfor %}
+
+                <tr>
+                    <td><b>Neues Feld hinzufügen</b></td>
+                </tr>
+                <tr style="border-bottom: 1px solid #ddd; height: 50px;">
+                    <!-- Input field that allows any text -->
+                    <td>
+                        <input type="text" id="new_field" name="new_field"
+                            style="width: 380px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                    </td>
+                    
+                    <!-- Dropdown selection -->
+                    <td>
+                        <select id="new_type" name="new_type" class="select-control"
+                            style="width: 130px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; background-color: #fff;">
+                            <option value="OK/NOK/NAE">Boolean</option>
+                            <option value="Toleranz">Toleranz</option>
+                        </select>
+                    </td>
+                    
+                    <!-- Button with improved styling -->
+                    <td>
+                        <button type="button" class="btn-save-export"
+                            style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;"
+                            onclick="submitAddNewFieldForm(this)" data-url="{% url 'protocolHubzugLiftingHostAdminAddNewField' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">
+                            Hinzufügen
+                        </button>
+                    </td>
+                </tr>
 
                 <tr>
                     <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
@@ -298,15 +317,11 @@
             </table>
             <div class="button-container">
                 <button type="submit" class="btn-save">Speichern</button>
-                {% if current_user.pruefer == True %}
-                <button id="export-button" type="button" class="btn-save-export" 
-                    onclick="submitExportForm(this)" 
-                    data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}"
-                    disabled>
-                    Protokol zustimmen
-                </button>           {% else %}
+                {% comment %} {% if current_user.pruefer == True %}
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLiftingHost' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
+                {% else %}
                 <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
-                {% endif %}
+                {% endif %} {% endcomment %}
             </div>
         </form>
         

@@ -10,6 +10,21 @@ class ProtocolHubzugLiftingHost(models.Model):
     isPermanentDone = models.BooleanField(default=False)
     isNacharbeitNeeded = models.BooleanField(default=False)
 
+    text_1_1 = models.TextField(null=True, blank=True)
+    text_1_1_remark = models.TextField(null=True, blank=True)
+
+    oknok_3_6 = models.TextField(null=True, blank=True)
+    oknok_3_6_soll = models.TextField(default = "93", null=True, blank=True)
+    oknok_3_6_remark = models.TextField(null=True, blank=True)
+
+    check_size_10_2 = models.TextField(null=True, blank=True)
+    check_size_10_2_soll = models.TextField(default = "245", null=True, blank=True)
+    check_size_10_2_soll_avr = models.TextField(default = "3", null=True, blank=True)
+    check_size_10_2_remark = models.TextField(null=True, blank=True)
+
+    
+    
+    oknok_3_6 = models.TextField(verbose_name="1.1", null=True, blank=True)
     protocolName = models.CharField(max_length=255, default="Maßkontrolle Rahmen")
     drawing = models.TextField(verbose_name="Zeichnung-Nr / Drawing No.", null=True, blank=True)
     rev = models.TextField(verbose_name="Rev", null=True, blank=True)
@@ -19,9 +34,9 @@ class ProtocolHubzugLiftingHost(models.Model):
     hoist = models.TextField(verbose_name="Hubzug-Nr. / Hoist No.", null=True, blank=True)
     company = models.TextField(verbose_name="Firma / Company", null=True, blank=True)
     quantity = models.TextField(verbose_name="Stückzahl / Quantity", null=True, blank=True)
-    check_size_1 = models.TextField(verbose_name="1. Horizontaler Abstand der Anschlussbohrungen* / Horizontal distance of connecting holes*", null=True, blank=True)
-    check_size_2 = models.TextField(verbose_name="2. Vertikaler Abstand der Anschlussbohrungen / Vertical distance of connecting holes*", null=True, blank=True)
-    check_size_3 = models.TextField(verbose_name="3. Durchmesser 1.Anschlussbohrung / Diameter of 1st connecting hole", null=True, blank=True)
+    check_size_1 = models.TextField(verbose_name="Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3", null=True, blank=True)
+    oknok_size_1 = models.TextField(verbose_name="Tighten screws M12x65-8.8-A2F MA=93Nm", null=True, blank=True)
+    check_size_3 = models.TextField(verbose_name="wooden block height between bottom of traverse and top of upper frameand lower frame. Front and Rear. Same heigth for all carriers", null=True, blank=True)
     check_size_4 = models.TextField(verbose_name="4. Durchmesser 2. Anschlussbohrung / Diameter of 2nd connecting hole", null=True, blank=True)
     check_size_4a = models.TextField(verbose_name="4a. Abstand zwischen Gehäuseseiten* / Distance between the frame sides *", null=True, blank=True)
     check_size_5 = models.TextField(verbose_name="5. Horizontaler Abstand zu Lochkreismitte für Lageranbau* / Horizontal distance to centre of drum bearing*", null=True, blank=True)
@@ -33,7 +48,7 @@ class ProtocolHubzugLiftingHost(models.Model):
     position_tolerance_11 = models.TextField(verbose_name="11. Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2", null=True, blank=True)
     check_size_1_soll =  models.TextField(default = "1230", null=True, blank=True)
     check_size_1_soll_avr =  models.TextField(default = "1.2", null=True, blank=True)
-    check_size_2_soll =  models.TextField(default = "245", null=True, blank=True)
+    oknok_size_1_soll =  models.TextField(default = "245", null=True, blank=True)
     check_size_2_soll_avr =  models.TextField(default = "0.5", null=True, blank=True)
     check_size_3_soll =  models.TextField(default = "23", null=True, blank=True)
     check_size_3_soll_avr =  models.TextField(default = "0.2", null=True, blank=True)

@@ -3,219 +3,261 @@
 {% load convert_tags %}
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ protokol.protocolName }}</title>
-    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ protokol.protocolName }}</title>
+
+  <!-- Same libs & CSS as the main page -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
 </head>
 <body>
-    <div class="logo-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+  <!-- Siemens header: same markup/classes -->
+  <header class="siemens-header">
+    <div class="siemens-logo">
+      <a href="/sollWertView/" class="back-link" aria-label="Back">
+        <i class="fas fa-arrow-left"></i>
+      </a>
     </div>
-    <div class="container">
-        <a href='/sollWertView/' class="back-button">Back</a>
-        <h1>{{ protokol.protocolName }}</h1>
-        <form id="protokol-form" action="{% url 'protocolHubzugLiftingHostSollWertUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
-            {% csrf_token %}
-            <table class="form-table">
-                <tr>
-                    <th>Prüfmaße / Check Sizes:</th>
-                    <th>Soll-Maß Wert</th>
-                    <th>Soll-Maß Avarage</th>
-                    <th>Soll-Maß desired size
-                        [mm]</th>
-                </tr>
-                <tr>
-                    <td><b>1.</b> Horizontaler Abstand der Anschlussbohrungen* / Horizontal distance of connecting holes*</td>
-                    <td>
-                        <input type="number" id="check_size_1_soll" name="check_size_1_soll" style="width: 100px;" step="0.1">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_1_soll_avr" name="check_size_1_soll_avr" style="width: 100px;" step="0.1">
-                    </td>
-                    <td> {{ protokol.check_size_1_soll}} +/- {{ protokol.check_size_1_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>2.</b> Vertikaler Abstand der Anschlussbohrungen / Vertical distance of connecting holes*</td>
-                    <td>
-                        <input type="number" id="check_size_2_soll" name="check_size_2_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_2_soll_avr" name="check_size_2_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_2_soll}} +/- {{ protokol.check_size_2_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>3.</b> Durchmesser 1. Anschlussbohrung / Diameter of 1st connecting hole</td>
-                    <td>
-                        <input type="number" id="check_size_3_soll" name="check_size_3_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_3_soll_avr" name="check_size_3_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_3_soll}} +/- {{ protokol.check_size_3_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>4.</b> Durchmesser 2. Anschlussbohrung / Diameter of 2nd connecting hole</td>
-                    <td>
-                        <input type="number" id="check_size_4_soll" name="check_size_4_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_4_soll_avr" name="check_size_4_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_4_soll}} +/- {{ protokol.check_size_4_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>4a.</b> Abstand zwischen Gehäuseseiten* / Distance between the frame sides*</td>
-                    <td>
-                        <input type="number" id="check_size_4a_soll" name="check_size_4a_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_4a_soll_avr" name="check_size_4a_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_4a_soll}} +/- {{ protokol.check_size_4a_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>5.</b> Horizontaler Abstand zu Lochkreismitte für Lageranbau* / Horizontal distance to centre of drum bearing*</td>
-                    <td>
-                        <input type="number" id="check_size_5_soll" name="check_size_5_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_5_soll_avr" name="check_size_5_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_5_soll}} +/- {{ protokol.check_size_5_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>6.</b> Vertikaler Abstand zu Lochkreismitte für Lageranbau* / Vertical distance to centre of drum bearing*</td>
-                    <td>
-                        <input type="number" id="check_size_6_soll" name="check_size_6_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_6_soll_avr" name="check_size_6_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_6_soll}} +/- {{ protokol.check_size_6_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>7.</b> Durchmesser der Lagerbohrung* / Diameter of the holes for the bearings*</td>
-                    <td>
-                        <input type="number" id="check_size_7_soll" name="check_size_7_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_7_soll_avr" name="check_size_7_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_7_soll}} +/- {{ protokol.check_size_7_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>8.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
-                    <td>
-                        <input type="number" id="check_size_8_soll" name="check_size_8_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_8_soll_avr" name="check_size_8_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_8_soll}} +/- {{ protokol.check_size_8_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>9.</b> Abstand zwischen Trommelachse und Bohrung für Klinke / Distance between centre of drum shaft and hole for catch lever</td>
-                    <td>
-                        <input type="number" id="check_size_9_soll" name="check_size_9_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_9_soll_avr" name="check_size_9_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_9_soll}} +/- {{ protokol.check_size_9_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <td><b>10.</b> Durchmesser der beiden Aufnahmebohrungen der Klinke / Diameter of both holes for the Catch lever</td>
-                    <td>
-                        <input type="number" id="check_size_10_soll" name="check_size_10_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="check_size_10_soll_avr" name="check_size_10_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.check_size_10_soll}} +/- {{ protokol.check_size_10_soll_avr}}</td>
-                </tr>
-                <tr>
-                    <th colspan="2">Lagetoleranzen / Position tolerances:</th>
-                </tr>
-                <tr>
-                    <td><b>11.</b> Rechtwinkligkeit Trommellagerachse zu beiden Flächen der Seitenscheiben Pos. 1+2 / Right angle drum axle to both sides of the hoist frame Pos. 1 and Pos. 2</td>
-                    <td>
-                        <input type="number" id="position_tolerance_11_soll" name="position_tolerance_11_soll", style="width: 100px;">
-                    </td>
-                    <td>
-                        <input type="number" id="position_tolerance_11_soll_avr" name="position_tolerance_11_soll_avr", style="width: 100px;">
-                    </td>
-                    <td> {{ protokol.position_tolerance_11_soll}} +/- {{ protokol.position_tolerance_11_soll_avr}}</td>
-                </tr>
 
-                {% for newNumber in protokol.additional_data %}
-                    <tr>
-                        {% if protokol.additional_data|get_type:newNumber == "Toleranz" %}
-                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
-                            <td>
-                                <input type="number" id="check_size_{{newNumber}}_soll" name="check_size_{{newNumber}}_soll", style="width: 100px;">
-                            </td>
-                            <td>
-                                <input type="number" id="check_size_{{newNumber}}_soll_avr" name="check_size_{{newNumber}}_soll_avr", style="width: 100px;">
-                            </td>
-                            <td> {{ protokol.additional_data|get_wert:newNumber }} +/- {{protokol.additional_data|get_avr:newNumber}}</td>
-                        {% else %}
-                            <td> <b>{{newNumber}}.</b> {{ protokol.additional_data|get_name:newNumber }}</td>
-                            <td>
-                                <select id="check_size_{{newNumber}}" name="check_size_{{newNumber}}" class="select-control">
-                                    <option value="" {% if protokol.check_size_2 is none %}selected{% endif %}></option>
-                                    <option value="OK" {% if protokol.check_size_2 == 'OK' %}selected{% endif %}>OK</option>
-                                    <option value="NOK" {% if protokol.check_size_2 == 'NOK' %}selected{% endif %}>NOK</option>
-                                    <option value="NAE" {% if protokol.check_size_2 == 'NAE' %}selected{% endif %}>NAE</option>
-                                </select>
-                            </td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
+    <div class="siemens-center">
+      <div class="siemens-title">Construction App</div>
+      <div class="welcome-text">Welcome, {{ username }}</div>
+    </div>
 
-                <tr>
-                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
-                </tr>
+    <div class="siemens-menu">
+        <button class="menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu">☰</button>
+        <div id="mainMenu" class="dropdown-menu">
+          <a href="{% url 'soll_wert_view' %}"><i class="fas fa-sliders-h"></i> Soll Werte Bearbeiten</a>
+          <a href="/protocol_list"><i class="fas fa-database"></i> Datenbank</a>
+          <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
+  </header>
 
-                <tr>
-                    <td><b>Neues Feld hinzufügen</b></td>
-                </tr>
+  <main class="page-wrap">
+    <div class="content-card">
+      <div class="card-head">
+        <h1 class="page-title">{{ protokol.protocolName }}</h1>
+      </div>
 
-                <tr style="border-bottom: 1px solid #ddd; height: 50px;">
-                    <!-- Input field that allows any text -->
+      <form id="protokol-form"
+            class="description-form"
+            action="{% url 'protocolHubzugLiftingHostSollWertUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}"
+            method="post">
+        {% csrf_token %}
+
+        <div class="table-wrap">
+          <table class="table form-table">
+            <!-- Widths aligned with your main page look -->
+            <colgroup>
+              <col style="width: 5%">
+              <col style="width: 18%">
+              <col style="width: 18%">
+              <col style="width: 18%">
+              <col style="width: 9%">
+              <col style="width: 6%">
+              <col style="width: 13%">
+              <col style="width: 13%">
+            </colgroup>
+
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Review items and instructions</th>
+                <th>Chinese</th>
+                <th>German</th>
+                <th>Due situation</th>
+                <th>CN / Leipzig</th>
+                <th>Soll-Maß Wert</th>
+                <th>Soll-Maß Average</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <!-- 10.2 row -->
+              <tr>
+                <td>10.2</td>
+                <td>
+                  wooden block height between bottom of traverse and top of upper frame and lower frame. Front and Rear.
+                  Same height for all carriers
+                </td>
+                <td>横梁底部与上框架和下框架顶部之间的木块高度。前部和后部。所有发货的高度相同</td>
+                <td>Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten). Gleiche Höhe für alle Träger</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.png' %}" alt="Drawing">
+                  <p>{{ protokol.check_size_10_2_soll }} mm +/- {{ protokol.check_size_10_2_soll_avr }} mm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number" id="check_size_10_2_soll" name="check_size_10_2_soll"
+                         class="form-control" step="0.1">
+                </td>
+                <td>
+                  <input type="number" id="check_size_10_2_soll_avr" name="check_size_10_2_soll_avr"
+                         class="form-control" step="0.1">
+                </td>
+              </tr>
+
+              <!-- 3.6 row -->
+              <tr>
+                <td>3.6</td>
+                <td>Tighten screws M12x65-8.8-A2F MA=93Nm</td>
+                <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
+                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.png' %}" alt="Drawing">
+                  <p>{{ protokol.oknok_3_6_soll }}</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number" id="oknok_3_6_soll" name="oknok_3_6_soll"
+                         class="form-control">
+                </td>
+                <td></td>
+              </tr>
+
+              <!-- Dynamic additional fields -->
+              {% for newNumber in protokol.additional_data %}
+                {% if protokol.additional_data|get_type:newNumber == "Toleranz" %}
+                  <tr>
+                    <td><b>{{ newNumber }}.</b></td>
+                    <td>{{ protokol.additional_data|get_name:newNumber }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>CN</td>
                     <td>
-                        <input type="text" id="new_field" name="new_field"
-                            style="width: 380px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px;">
+                      <input type="number" id="check_size_{{newNumber}}_soll"
+                             name="check_size_{{newNumber}}_soll"
+                             class="form-control">
                     </td>
-                    
-                    <!-- Dropdown selection -->
                     <td>
-                        <select id="new_type" name="new_type" class="select-control"
-                            style="width: 130px; padding: 5px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; background-color: #fff;">
-                            <option value="OK/NOK/NAE">Boolean</option>
-                            <option value="Toleranz">Toleranz</option>
-                        </select>
+                      <input type="number" id="check_size_{{newNumber}}_soll_avr"
+                             name="check_size_{{newNumber}}_soll_avr"
+                             class="form-control">
                     </td>
-                    
-                    <!-- Button with improved styling -->
+                  </tr>
+                {% else %}
+                  <tr>
+                    <td><b>{{ newNumber }}.</b></td>
+                    <td>{{ protokol.additional_data|get_name:newNumber }}</td>
+                    <td></td><td></td><td></td>
+                    <td>CN</td>
                     <td>
-                        <button type="button" class="btn-save-export"
-                            style="padding: 8px 12px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px;"
-                            onclick="submitAddNewFieldForm(this)" data-url="{% url 'protocolHubzugLiftingHostAddNewField' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">
-                            Hinzufügen
-                        </button>
+                      <select id="check_size_{{newNumber}}" name="check_size_{{newNumber}}" class="form-control select-control">
+                        <option value="" {% if protokol.check_size_2 is none %}selected{% endif %}></option>
+                        <option value="OK"  {% if protokol.check_size_2 == 'OK'  %}selected{% endif %}>OK</option>
+                        <option value="NOK" {% if protokol.check_size_2 == 'NOK' %}selected{% endif %}>NOK</option>
+                        <option value="NAE" {% if protokol.check_size_2 == 'NAE' %}selected{% endif %}>NAE</option>
+                      </select>
                     </td>
-                </tr>
-                
-            </table>
-            <div class="button-container">
-                <button type="submit" class="btn-save">Speichern</button>
-                <button type="button" class="btn-save-export" onclick="submitPermanentClosedForm(this)" data-url="{% url 'protocolHubzugLiftingHostSollWertClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">Bestätigen</button>
+                    <td></td>
+                  </tr>
+                {% endif %}
+              {% endfor %}
+
+              <!-- Hidden korr field (kept for parity) -->
+              <tr>
+                <td colspan="8">
+                  <input type="text" id="korrektur" name="korrektur" style="display:none;" value="">
+                </td>
+              </tr>
+
+              <!-- Add new field (kept, styled by same CSS) -->
+              <tr>
+                <td colspan="8"><b>Neues Feld hinzufügen</b></td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="text" id="new_field" name="new_field"
+                         class="form-control" placeholder="Feldname…">
+                </td>
+                <td style="max-width:160px;">
+                  <select id="new_type" name="new_type" class="form-control select-control">
+                    <option value="OK/NOK/NAE">Boolean</option>
+                    <option value="Toleranz">Toleranz</option>
+                  </select>
+                </td>
+                <td>
+                  <button type="button" class="btn-siemens"
+                          onclick="submitAddNewFieldForm(this)"
+                          data-url="{% url 'protocolHubzugLiftingHostAddNewField' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">
+                    Hinzufügen
+                  </button>
+                </td>
+                <td colspan="4"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="button-row">
+          <button type="submit" class="btn-siemens">Speichern</button>
+          <button type="button"
+                  class="btn-siemens-strong"
+                  onclick="submitPermanentClosedForm(this)"
+                  data-url="{% url 'protocolHubzugLiftingHostSollWertClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}">
+            Bestätigen
+          </button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <!-- Password Modal (same look as main page if you use it here too) -->
+  <div class="modal fade" id="passwordChangeModal" tabindex="-1" role="dialog" aria-labelledby="passwordChangeTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <form method="post" action="{% url 'change_password' %}">
+        {% csrf_token %}
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="passwordChangeTitle">Passwort ändern</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Schließen">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="old_password">Aktuelles Passwort</label>
+              <input type="password" class="form-control" id="old_password" name="old_password" required>
             </div>
-        </form>
+            <div class="form-group">
+              <label for="new_password1">Neues Passwort</label>
+              <input type="password" class="form-control" id="new_password1" name="new_password1" required>
+            </div>
+            <div class="form-group">
+              <label for="new_password2">Neues Passwort bestätigen</label>
+              <input type="password" class="form-control" id="new_password2" name="new_password2" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn-siemens">Speichern</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Schließen</button>
+          </div>
+        </div>
+      </form>
     </div>
+  </div>
 
-    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+  <!-- Same scripts as main page (menu toggle, Bootstrap) -->
+  <script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const btn = document.querySelector('.menu-button');
+      const wrap = document.querySelector('.siemens-menu');
+      if (btn && wrap) {
+        btn.addEventListener('click', () => {
+          const active = wrap.classList.toggle('active');
+          btn.setAttribute('aria-expanded', String(active));
+        });
+      }
+    });
+  </script>
+
+  <!-- Hook up your existing JS if needed -->
+  <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
 </body>
 </html>
