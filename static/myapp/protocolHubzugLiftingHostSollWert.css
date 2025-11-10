@@ -1,0 +1,110 @@
+/* ===== Base / Font ===== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+html, body { height: 100%; margin: 0; background: #000028; color: #fff; }
+
+/* ===== Header Logo ===== */
+.logo-container {
+  display: flex; align-items: center; justify-content: center;
+  padding: 12px 0; background: #1f1f39; border-bottom: 1px solid #3e3e5e;
+}
+.logo-container img { height: 28px; filter: brightness(1.1) contrast(1.05); }
+
+/* ===== Page Layout Card ===== */
+.container {
+  width: 94%; max-width: 1280px; margin: 24px auto 60px;
+  background: #23233C; border-radius: 10px; padding: 16px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.10);
+}
+
+/* Title + Back */
+.container h1 { margin: 12px 0 16px; font-size: 22px; font-weight: 600; }
+.back-button {
+  display:inline-block; margin: 4px 0 10px; padding:8px 14px;
+  background:#00a3a3; color:#fff; text-decoration:none; border-radius:6px; font-size:14px;
+  transition: background .2s ease;
+}
+.back-button:hover { background:#009090; }
+
+/* ===== Table (dark) ===== */
+.form-table {
+  width: 100%; border-collapse: collapse; color: #fff; background: transparent;
+}
+.form-table th, .form-table td { padding: 10px 12px; vertical-align: top; border: none; }
+.form-table thead th {
+  font-weight: 500; background: transparent; border-bottom: 1px solid #8b8b8b;
+}
+.form-table tbody td { border-top: 1px solid rgba(255,255,255,0.08); }
+
+/* Thumbnail cell (images in "Due situation") */
+.thumb-cell img {
+  width: 100px; height: auto; border-radius: 4px; border: 1px solid #2f2f4d;
+}
+.thumb-cell p { margin: 6px 0 0; color: #B3B3BE; }
+
+/* ===== Inputs / Selects ===== */
+.description-form input[type="text"],
+.description-form input[type="number"],
+.description-form textarea,
+.description-form select {
+  background-color:#00183B; color:#B3B3BE; border:1px solid #2B3C5B;
+  border-radius: 6px; padding: 8px 10px; font-size: 14px;
+  min-height: 36px;
+}
+.description-form input[type="text"]::placeholder,
+.description-form input[type="number"]::placeholder,
+.description-form textarea::placeholder { color:#7f8aa8; }
+
+.description-form input:focus,
+.description-form textarea:focus,
+.description-form select:focus {
+  outline: none; background-color:#00183B; color:#E5E7F2; border-color:#00a3a3;
+  box-shadow:0 0 0 0.2rem rgba(0,163,163,0.25);
+}
+
+/* Width helper for numeric cells (if needed) */
+.description-form input[type="number"] { width: 100px; }
+
+/* The “Boolean” selects in dynamic rows share this class */
+.select-control {
+  background-color:#00183B; color:#B3B3BE; border:1px solid #2B3C5B; border-radius: 6px; padding: 8px 10px;
+}
+
+/* ===== Buttons ===== */
+.btn-save, .btn-save-export {
+  background:#00a3a3; color:#fff; border:none; font-weight:600; padding:10px 18px;
+  border-radius:6px; cursor:pointer; transition: background .2s ease;
+}
+.btn-save:hover, .btn-save-export:hover { background:#009090; }
+.btn-save[disabled], .btn-save-export[disabled] { background:#48556b; color:#c5cbd6; cursor:not-allowed; }
+
+/* Container holding page action buttons */
+.button-container { display:flex; gap:12px; justify-content:flex-end; margin-top: 16px; }
+
+/* “Add new field” button (already has inline styles; this just harmonizes hover/disabled) */
+.btn-save-export:disabled { background:#48556b !important; color:#c5cbd6 !important; cursor:not-allowed; }
+
+/* ===== Status dots (kept for consistency/reuse) ===== */
+.status-cell { text-align: center; vertical-align: middle; }
+.status-dot { display: inline-block; width: 15px; height: 15px; border-radius: 50%; }
+.status--green { background: #2e7d32; }
+.status--orange { background: #ef6c00; }
+.status--red { background: #c62828; }
+
+/* ===== Modal (if you reuse confirmation modals here later) ===== */
+.modal-content { background:#23233C; color:#fff; border:none; border-radius:8px; }
+.modal-header { background:#1f1f39; border-bottom:1px solid #3e3e5e; }
+.modal-title { color:#fff; font-weight:600; }
+.modal-header .close { color:#fff; opacity:.8; }
+.modal-header .close:hover { opacity:1; }
+.modal-body .form-control { background:#00183B; color:#B3B3BE; border:1px solid #2B3C5B; }
+.modal-body .form-control:focus { background:#00183B; border-color:#00a3a3; box-shadow:0 0 0 .2rem rgba(0,163,163,.25); }
+.modal-footer { border-top:1px solid #3e3e5e; }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .container { width: 96%; padding: 14px; }
+  .container h1 { font-size: 20px; }
+  .form-table th, .form-table td { padding: 8px 10px; }
+}
