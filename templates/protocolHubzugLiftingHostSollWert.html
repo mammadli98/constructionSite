@@ -118,6 +118,24 @@
                 <td></td>
               </tr>
 
+              <tr>
+                <td>1.7</td>
+                <td>Guide rollers D=80 of trolleys installed, Loctite 243 on left hand thread and right hand thread Bolts sealing pait in Green
+                </td>
+                <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
+                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.png' %}" alt="Drawing">
+                  <p>{{ protokol.oknok_1_7_soll }}</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number" id="oknok_1_7_soll" name="oknok_1_7_soll"
+                         class="form-control">
+                </td>
+                <td></td>
+              </tr>
+
               <!-- Dynamic additional fields -->
               {% for newNumber in protokol.additional_data %}
                 {% if protokol.additional_data|get_type:newNumber == "Toleranz" %}

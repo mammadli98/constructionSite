@@ -90,6 +90,7 @@
               </tr>
             </thead>
             <tbody>
+
               <tr>
                 <td>1.1</td>
                 <td>Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
@@ -197,15 +198,73 @@
 
               <tr>
                 <td>1.2</td>
-                <td>Disassemble Operating Instructions Traction Motor and fix with 1 cable tie in 1 box</td>
-                <td>电机说明书和1个扎带统一放在一个纸箱里</td>
-                <td>Betriebsanleitung Fahrantriebe demontieren 1 Kabelbinder mit 1 Karton befestigen</td>
+                <td>Disassemble Operating Instructions Traction Motors 1 x bag with cable tie fastener and collect in box seperatley (keep in CN)
+                  </td>
+                <td>根据图纸对焊接进行目视检查 / EXC3</td>
+                <td>Optische Kontrolle der Schweißnähte, Probenahme, Schweißbogen, Kontrolle der Schweißnahtgröße / EXC3</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/4.png' %}" alt="Drawing">
+                </td>
                 <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_2"
+                         name="text_1_2"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_2|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_2_remark"
+                         name="text_1_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>QC</td>
+              </tr>
+
+              <tr>
+                <td>1.7</td>
+                <td>Guide rollers D=80 of trolleys installed, Loctite 243 on left hand thread and right hand thread Bolts sealing pait in Green
+                  </td>
+                <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
+                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_7_soll }}Nm</p>
+                </td>
                 <td>CN</td>
-                <td>0</td>
-                <td></td>
+                <td>
+                  <select id="oknok_1_7" name="oknok_1_7" class="select-control">
+                      <option value="" {% if protokol.oknok_1_7 is none %}selected{% endif %}></option>
+                      <option value="OK" {% if protokol.oknok_1_7 == 'OK' %}selected{% endif %}>OK</option>
+                      <option value="NOK" {% if protokol.oknok_1_7 == 'NOK' %}selected{% endif %}>NOK</option>
+                      {% if current_user.pruefer == True %}
+                      <option value="AOK" {% if protokol.oknok_1_7 == 'AOK' %}selected{% endif %}>AOK</option>
+                      {% endif %}
+                  </select>
+              </td>
+              <td>
+                <input type="text"
+                       id="oknok_1_7_remark"
+                       name="oknok_1_7_remark"
+                       minlength="3"
+                       maxlength="20"
+                       class="form-control"
+                       value="{{ protokol.oknok_1_7_remark|default_if_none:'' }}">
+              </td>
+              <td class="status-cell" data-rule="oknok" data-target="#oknok_1_7">
+                <span class="status-dot" hidden></span>
+              </td>
                 <td>worker</td>
-            </tr>
+              </tr>
+
 
               <tr>
                 <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>

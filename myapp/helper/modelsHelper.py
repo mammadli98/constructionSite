@@ -12,10 +12,15 @@ class ProtocolHubzugLiftingHost(models.Model):
 
     text_1_1 = models.TextField(null=True, blank=True)
     text_1_1_remark = models.TextField(null=True, blank=True)
+    text_1_2 = models.TextField(null=True, blank=True)
+    text_1_2_remark = models.TextField(null=True, blank=True)
 
     oknok_3_6 = models.TextField(null=True, blank=True)
     oknok_3_6_soll = models.TextField(default = "93", null=True, blank=True)
     oknok_3_6_remark = models.TextField(null=True, blank=True)
+    oknok_1_7 = models.TextField(null=True, blank=True)
+    oknok_1_7_soll = models.TextField(default = "55", null=True, blank=True)
+    oknok_1_7_remark = models.TextField(null=True, blank=True)
 
     check_size_10_2 = models.TextField(null=True, blank=True)
     check_size_10_2_soll = models.TextField(default = "245", null=True, blank=True)

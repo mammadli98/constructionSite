@@ -395,8 +395,12 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
 
     protokol.text_1_1 = request.POST.get('text_1_1', '')
     protokol.text_1_1_remark = request.POST.get('text_1_1_remark', '')
+    protokol.text_1_2 = request.POST.get('text_1_2', '')
+    protokol.text_1_2_remark = request.POST.get('text_1_2_remark', '')
     protokol.oknok_3_6 = request.POST.get('oknok_3_6', '')
     protokol.oknok_3_6_remark = request.POST.get('oknok_3_6_remark', '')
+    protokol.oknok_1_7 = request.POST.get('oknok_1_7', '')
+    protokol.oknok_1_7_remark = request.POST.get('oknok_1_7_remark', '')
     protokol.check_size_10_2 = request.POST.get('check_size_10_2', '')
     protokol.check_size_10_2_remark = request.POST.get('check_size_10_2_remark', '')
 
@@ -950,8 +954,10 @@ def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
     fahrzeug_id = request.GET.get('fahrzeugId', '')
     # Define the base names of your fields correctly according to the ones you provided
     field_bases = [
-        ('oknok_3_6_soll', 'check_size_1_soll_avr'),
+        ('oknok_1_7_soll','oknok_1_7_soll'),
         ('check_size_10_2_soll', 'check_size_10_2_soll_avr'),
+
+        ('oknok_3_6_soll', 'check_size_1_soll_avr'),
         ('check_size_3_soll', 'check_size_3_soll_avr'),
         ('oknok_size_1_soll', 'check_size_4_soll_avr'),
         ('check_size_4a_soll', 'check_size_4a_soll_avr'),
