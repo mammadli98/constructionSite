@@ -137,3 +137,7 @@ html, body { height: 100%; margin: 0; background: #000028; color: #fff; }
 .status--green { background: #2e7d32; }
 .status--orange { background: #ef6c00; }
 .status--red { background: #c62828; }
+
+.page-wrap { width: 100vw; max-width: none; margin: 0 auto 60px; }
+.content-card { border-radius: 0; padding: 12px 16px; }  /* optional: full-bleed look */
+.table-wrap { overflow-x: auto; }  /* keep for small screens */

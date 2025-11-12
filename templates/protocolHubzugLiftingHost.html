@@ -63,16 +63,16 @@
         <div class="table-wrap">
           <table class="table form-table">
             <colgroup>
-              <col style="width: 5%">
-              <col style="width: 18%">
-              <col style="width: 18%">
-              <col style="width: 18%">
-              <col style="width: 9%">
-              <col style="width: 6%">
-              <col style="width: 10%">
-              <col style="width: 10%">
-              <col style="width: 6%">   <!-- NEW: Status -->
-              <col style="width: 6%">
+              <col style="width:5%">
+              <col style="width:16%">
+              <col style="width:16%">
+              <col style="width:16%">
+              <col style="width:9%">
+              <col style="width:6%">
+              <col style="width:10%">
+              <col style="width:10%">
+              <col style="width:6%">
+              <col style="width:6%">
             </colgroup>
             
             <thead>
@@ -97,7 +97,7 @@
                 <td>根据图纸对焊接进行目视检查 / EXC3</td>
                 <td>Optische Kontrolle der Schweißnähte, Probenahme, Schweißbogen, Kontrolle der Schweißnahtgröße / EXC3</td>
                 <td class="thumb-cell">
-                  <img src="{% static 'images/1.png' %}" alt="Drawing">
+                  <img src="{% static 'images/1.1.png' %}" alt="Drawing">
                 </td>
                 <td>CN</td>
                 <td>
@@ -122,80 +122,42 @@
                 <td class="status-cell"><span class="status-dot" hidden></span></td>
                 <td>QC</td>
               </tr>
-
-
+              
               <tr>
-                <td>3.6</td>
-                <td>Tighten screws M12x65-8.8-A2F MA=93Nm</td>
-                <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
-                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td>1.1</td>
+                <td>Front and rear buffer installed, Screws 12x30, </td>
+                <td>前后缓冲垫已安装，螺丝规格为12x30</td>
+                <td>Pufferanbauten vorne und hinten montiert, Schrauben 12x30</td>
                 <td class="thumb-cell">
-                  <img src="{% static 'images/2.png' %}" alt="Drawing">
-                  <p>MA={{ protokol.oknok_3_6_soll }}Nm</p>
+                  <img src="{% static 'images/1.1.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_1_soll }}Nm</p>
                 </td>
                 <td>CN</td>
                 <td>
-                  <select id="oknok_3_6" name="oknok_3_6" class="select-control">
-                      <option value="" {% if protokol.oknok_3_6 is none %}selected{% endif %}></option>
-                      <option value="OK" {% if protokol.oknok_3_6 == 'OK' %}selected{% endif %}>OK</option>
-                      <option value="NOK" {% if protokol.oknok_3_6 == 'NOK' %}selected{% endif %}>NOK</option>
-                      {% if current_user.pruefer == True %}
-                      <option value="AOK" {% if protokol.oknok_3_6 == 'AOK' %}selected{% endif %}>AOK</option>
-                      {% endif %}
+                  <select id="oknok_1_1" name="oknok_1_1" class="select-control">
+                    <option value="" {% if protokol.oknok_1_1 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_1 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
                   </select>
-              </td>
-              <td>
-                <input type="text"
-                       id="oknok_3_6_remark"
-                       name="oknok_3_6_remark"
-                       minlength="3"
-                       maxlength="20"
-                       class="form-control"
-                       value="{{ protokol.oknok_3_6_remark|default_if_none:'' }}">
-              </td>
-              <td class="status-cell" data-rule="oknok" data-target="#oknok_3_6">
-                <span class="status-dot" hidden></span>
-              </td>
-                <td>worker</td>
-              </tr>
-
-              <tr>
-                <td>10.2</td>
-                <td>
-                  wooden block height between bottom of traverse and top of upper frameand lower frame. Front and Rear.
-                  Same heigth for all carriers</td>
-                <td>横梁底部与上框架和下框架顶部之间的木块高度。前部和后部。
-                  所有发货的高度相同</td>
-                <td>Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten).
-                  Gleiche Höhe für alle Träger</td>
-                <td class="thumb-cell">
-                  <img src="{% static 'images/3.png' %}" alt="Drawing">
-                  <p> {{ protokol.check_size_10_2_soll}} mm +/- {{ protokol.check_size_10_2_soll_avr}} mm</p>
-                </td>
-                <td>CN</td>
-                  <td>
-                    <input type="number" id="check_size_10_2" name="check_size_10_2" 
-                    data-min="{{ protokol.check_size_10_2_soll | substract:protokol.check_size_10_2_soll_avr}}" 
-                    data-max="{{ protokol.check_size_10_2_soll | adding:protokol.check_size_10_2_soll_avr}}" 
-                    class="form-control input-actual"
-                    step="0.1"
-                    value="{{ protokol.check_size_10_2|default_if_none:'' }}">
                 </td>
                 <td>
                   <input type="text"
-                         id="check_size_10_2_remark"
-                         name="check_size_10_2_remark"
+                         id="oknok_1_1_remark"
+                         name="oknok_1_1_remark"
                          minlength="3"
                          maxlength="20"
                          class="form-control"
-                         value="{{ protokol.check_size_10_2_remark|default_if_none:'' }}">
+                         value="{{ protokol.oknok_1_1_remark|default_if_none:'' }}">
                 </td>
-                <td class="status-cell" data-rule="range" data-target="#check_size_10_2">
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_1">
                   <span class="status-dot" hidden></span>
                 </td>
                 <td>worker</td>
               </tr>
-
+              
               <tr>
                 <td>1.2</td>
                 <td>Disassemble Operating Instructions Traction Motors 1 x bag with cable tie fastener and collect in box seperatley (keep in CN)
@@ -203,7 +165,7 @@
                 <td>根据图纸对焊接进行目视检查 / EXC3</td>
                 <td>Optische Kontrolle der Schweißnähte, Probenahme, Schweißbogen, Kontrolle der Schweißnahtgröße / EXC3</td>
                 <td class="thumb-cell">
-                  <img src="{% static 'images/4.png' %}" alt="Drawing">
+                  <img src="{% static 'images/1.2.png' %}" alt="Drawing">
                 </td>
                 <td>CN</td>
                 <td>
@@ -228,7 +190,138 @@
                 <td class="status-cell"><span class="status-dot" hidden></span></td>
                 <td>QC</td>
               </tr>
-
+              
+              <tr>
+                <td>1.2</td>
+                <td>Tighten Screws M10x50 /lubricated,after adjusting upper frame. </td>
+                <td>调整上框架后，拧紧M10x50螺钉</td>
+                <td>Schrauben M10x50 anziehen / geschmiert,nach Justierung des oberen Rahmens</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.2.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_2_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_2" name="oknok_1_2" class="select-control">
+                    <option value="" {% if protokol.oknok_1_2 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_2 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_2 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_2 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_2_remark"
+                         name="oknok_1_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_2">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.3</td>
+                <td>Activate gear ventingPressure relief valve with safety strap.Remove the transport safety device by pulling the safety tab 1 in the direction of the arrow.</td>
+                <td>打开每个齿轮电机的齿轮通风带安全带的泄压阀。沿箭头方向拉动安全片1，拆下运输安全装置</td>
+                <td>Getriebeentlüftung aktivierenDruckentlastungsventil mit Sicherheitsgurt.Transportsicherung entfernen, indem Lasche 1 in Pfeilrichtung gezogen wird.</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.3.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_3"
+                         name="text_1_3"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_3|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_3_remark"
+                         name="text_1_3_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_3_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>1.5</td>
+                <td>Trolley / carriage locking assemblyTwo paint marking points need to be placed after installation1x mark clamping set to shaft1x mark clamping set to hub</td>
+                <td>小车锁定组件安装后需要设置两个油漆标记点1套轴用标记夹紧装置1套轮毂标记夹紧装置</td>
+                <td>Fahrwerk SpannsatzklemmverbindungZwei Farbpunkte nach Montage anbringen:1x Markierung Spannsatz zur Welle1x Markierung Spannsatz zur Nabe</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.5.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_5"
+                         name="text_1_5"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_5|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_5_remark"
+                         name="text_1_5_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_5_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.6</td>
+                <td>Running GearRetaining ring DIN 471-40x1,75 and shim ring DIN 988-40x50x0,5 are mountedmake sure that the retaining ring is not overstreched after mounting!</td>
+                <td>传动装置已安装符合DIN 471-40x1,75标准的扣环和符合DIN 988-40x50x0,5标准的垫片环确保安装后扣环不会过度拉伸！</td>
+                <td>FahrwerkSicherungsring DIN 471-40x1,75 und Passscheibe DIN 988-40x50x0,5 montiertDarauf achten, dass der Sicherungsring nach der Montage nicht überdehnt ist!</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.6.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_6"
+                         name="text_1_6"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_6|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_6_remark"
+                         name="text_1_6_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_6_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
               <tr>
                 <td>1.7</td>
                 <td>Guide rollers D=80 of trolleys installed, Loctite 243 on left hand thread and right hand thread Bolts sealing pait in Green
@@ -236,7 +329,7 @@
                 <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
                 <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
                 <td class="thumb-cell">
-                  <img src="{% static 'images/2.png' %}" alt="Drawing">
+                  <img src="{% static 'images/1.7.png' %}" alt="Drawing">
                   <p>MA={{ protokol.oknok_1_7_soll }}Nm</p>
                 </td>
                 <td>CN</td>
@@ -264,7 +357,2346 @@
               </td>
                 <td>worker</td>
               </tr>
-
+              
+              <tr>
+                <td>1.8</td>
+                <td>Check all protection plates at guiderollers if - installed- bended or damagedDamaged protection plates must be changed</td>
+                <td>检查导向轮上的所有防护板是否-已安装- 弯曲或损坏损坏的保护板必须更换</td>
+                <td>Alle Rollensicherungen an den Führungsrollen prüfen, ob- montiert- verbogen oder beschädigtBeschädigte Rollensicherungen müssen ersetzt werden</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.8.png' %}" alt="Drawing">
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_1_8"
+                         name="text_1_8"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_8|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_8_remark"
+                         name="text_1_8_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_8_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>1.9</td>
+                <td>Bumper area front and rear: remove red sheet metal.</td>
+                <td>前后保险杠区域：移除红色金属板</td>
+                <td>Pufferrbereich vorne und hinten: Rotes Blech entfernen.</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.9.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_9"
+                         name="text_1_9"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_9|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_9_remark"
+                         name="text_1_9_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_9_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.11</td>
+                <td>Wheel covers on the drive wheels and idle trolleys installed</td>
+                <td>驱动轮和空转小车上安装了轮罩</td>
+                <td>Radabdeckungen an Antriebsrädern und Lasufrädern montiert</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.11.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_11"
+                         name="text_1_11"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_11|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_11_remark"
+                         name="text_1_11_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_11_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.12</td>
+                <td>Install 4x Safty plate completeScrew DIN 7984-M6x16-8.8-A2F</td>
+                <td>安装4个安全板，确保完整无缺螺钉 DIN 7984-M6x16-8.8-A2F</td>
+                <td>4x Radbandagensicherung komplett montierenSchraube DIN 7984-M6x16-8.8-A2F</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.12.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_12_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_12" name="oknok_1_12" class="select-control">
+                    <option value="" {% if protokol.oknok_1_12 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_12 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_12 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_12 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_12_remark"
+                         name="oknok_1_12_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_12_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_12">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.13</td>
+                <td> blocking flat iron at the first (and last) trolley installed. Sloted holes move to the out side.  M12x30: secure with Loctite 243, MA=54 Nm2 piece /hangerLoctite colour Green</td>
+                <td>在安装的第一个（也是最后一个）小车上安装阻挡扁铁。开槽孔移至外侧。M12x30：用乐泰243胶水固定，扭矩=54牛米2件/一套 乐泰胶水（绿色）</td>
+                <td>Flacheisen am ersten (und letzten) Trolley montiert.Langlöcher nach außen versetzt.M12x30: mit Loctite 243 sichern, MA=54 Nm2 Stück / HalterungLoctite Farbe: Grün</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.13.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_13_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_13" name="oknok_1_13" class="select-control">
+                    <option value="" {% if protokol.oknok_1_13 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_13 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_13 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_13 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_13_remark"
+                         name="oknok_1_13_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_13_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_13">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.15</td>
+                <td>Install the anti drop protecting bolt (2 pcs.),  Tighten the M20x150-10.9-HV </td>
+                <td>安装防脱落保护螺栓（2个）拧紧M20x150-10.9-HV</td>
+                <td>Fallschutzbolzen (2 Stück) montierenM20x150-10.9-HV festziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.15.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_15_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_15" name="oknok_1_15" class="select-control">
+                    <option value="" {% if protokol.oknok_1_15 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_15 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_15 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_15 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_15_remark"
+                         name="oknok_1_15_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_15_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_15">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.16</td>
+                <td>Axle screw on the trolley thighten with 23Nm Loctite 243Loctite colour Green</td>
+                <td>小车上的轴螺钉需要用乐泰243胶水拧紧 乐泰胶水：绿色</td>
+                <td>Achsschraube am Trolley mit 23 Nm anziehenLoctite 243Loctite Farbe: Grün</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.16.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_16_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_16" name="oknok_1_16" class="select-control">
+                    <option value="" {% if protokol.oknok_1_16 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_16 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_16 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_16 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_16_remark"
+                         name="oknok_1_16_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_16_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_16">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.18</td>
+                <td>Mount SH systemholder racket for the cable protection conduit  on the front traverse of trolley systemScrew M6x20-8.8-A2F, MA=11Nm</td>
+                <td>在小车前横梁上安装用于电缆保护套管的SH系统支架螺钉 M6x20-8.8-A2F，扭矩=11牛米</td>
+                <td>SH-Systemhalter für Kabelschutzrohr an der vorderen Traverse des Trolley-Systems montierenSchraube M6x20-8.8-A2F, MA=11Nm</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.18.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_18_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_18" name="oknok_1_18" class="select-control">
+                    <option value="" {% if protokol.oknok_1_18 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_18 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_18 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_18 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_18_remark"
+                         name="oknok_1_18_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_18_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_18">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.19</td>
+                <td>Tighten Screws 2 x M10x50-8.8 / lubricated </td>
+                <td>拧紧螺钉 2 x M10x50-8.8</td>
+                <td>Schrauben 2 x M10x50-8.8 anziehen / geschmiert</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.19.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_19_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_19" name="oknok_1_19" class="select-control">
+                    <option value="" {% if protokol.oknok_1_19 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_19 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_19 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_19 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_19_remark"
+                         name="oknok_1_19_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_19_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_19">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.21</td>
+                <td>FRONT trolley system: vertical distance load bar to bottom of upper frame profile</td>
+                <td>小车前端部分：负载杆到上框架型材底部的垂直距离</td>
+                <td>Vorderes Trolley-System:Vertikaler Abstand Lastträger bis Unterkante oberes Rahmenprofil</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.21.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_21_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_21" name="oknok_1_21" class="select-control">
+                    <option value="" {% if protokol.oknok_1_21 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_21 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_21 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_21 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_21_remark"
+                         name="oknok_1_21_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_21_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_21">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>QC</td>
+              </tr>
+              
+              <tr>
+                <td>1.22</td>
+                <td>REAR  trolley system: vertical distance load bar to bottom of upper frame profile</td>
+                <td>小车后端部分：负载杆到上框架型材底部的垂直距离</td>
+                <td>Hinteres Trolley-System:Vertikaler Abstand Lastträger bis Unterkante oberes Rahmenprofil</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.22.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_22_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_22" name="oknok_1_22" class="select-control">
+                    <option value="" {% if protokol.oknok_1_22 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_22 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_22 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_22 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_22_remark"
+                         name="oknok_1_22_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_22_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_22">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>QC</td>
+              </tr>
+              
+              <tr>
+                <td>1.23</td>
+                <td>after adjusting upper frame- mounting space plate and tighten - Nut KMT 8- set srew - MA=18Nm (Allen key WS4)- and mounting spring pin at king pins </td>
+                <td>调整上框后- 安装空间板并拧紧- 螺母 KMT 8- 安装螺钉 - 扭矩=18牛米（内六角扳手WS4）- 以及安装弹簧销在主销处</td>
+                <td>Nach Justierung des oberen Rahmens:- Montageplatte anbringenund anziehen- Mutter KMT 8- Stellschraube - MA=18Nm (Innensechskant SW4)- und Federstift an den Königszapfen montieren</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.23.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_23_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_23" name="oknok_1_23" class="select-control">
+                    <option value="" {% if protokol.oknok_1_23 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_23 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_23 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_23 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_23_remark"
+                         name="oknok_1_23_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_23_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_23">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.24</td>
+                <td>Check cleaning brush installed on first trolleyTighten screws1 x dwg A5E51112257A M12x20 LH MA=55 Nm1 x M8 x 20  8.8    MA=27 Nmlocked by wedge disk</td>
+                <td>第一辆小车上安装了清洁刷拧紧螺钉1个图纸编号A5E51112257A，M12x20，左旋，扭矩=55牛米1个M8 x 20的螺钉，扭矩为8.8牛米，最大扭矩为27牛米被楔形盘锁定</td>
+                <td>Reinigungsbürste am ersten Trolley prüfenSchrauben anziehen1 x Zeichnung A5E51112257A M12x20 LH MA=55 Nm1 x M8 x 20 8.8 MA=27 Nmmit Keilscheibe gesichert</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.24.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_24"
+                         name="text_1_24"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_24|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_24_remark"
+                         name="text_1_24_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_24_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.25</td>
+                <td>Cleaning brushsecure the brush by gently pressing the brush guide together at the ends with pliers</td>
+                <td>清洁刷用钳子轻轻按压刷子导轨的两端，将其固定</td>
+                <td>ReinigungsbürsteBürste sichern, indem die Führungen an den Enden vorsichtig mit einer Zange zusammengedrückt werden</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.25.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_25"
+                         name="text_1_25"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_25|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_25_remark"
+                         name="text_1_25_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_25_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.26</td>
+                <td>Install collector box on trolley axis 1Tighten screw 2x M8x16-8.8-MA=27Nmdismateling for transportationCollector Assembly see drawing A5E54056831A</td>
+                <td>在小车轴1上安装集电盒拧紧2颗M8x16-8.8-MA规格的螺钉，扭矩为27牛米为运输而拆卸见图纸A5E43564492A</td>
+                <td>Stromabnehmerbox auf Trolley-Achse 1 montierenSchraube 2x M8x16-8.8-MA=27Nm anziehenDemontage für TransportMontagezeichnung A5E54056831A beachten</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.26.png' %}" alt="Drawing">
+                </td>
+                <td>Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_1_26"
+                         name="text_1_26"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_26|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_26_remark"
+                         name="text_1_26_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_26_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>1.27</td>
+                <td>Adjusting collectorbox adjust (59mm)</td>
+                <td>调整收集器箱</td>
+                <td>Stromabnehmer einstellen.(59 mm justieren)</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.27.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_27_soll }}Nm</p>
+                </td>
+                <td>Leipzig</td>
+                <td>
+                  <select id="oknok_1_27" name="oknok_1_27" class="select-control">
+                    <option value="" {% if protokol.oknok_1_27 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_27 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_27 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_27 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_27_remark"
+                         name="oknok_1_27_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_27_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_27">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>1.28</td>
+                <td>Mount the locking bolt on the locking piece with distance minimum 9mm. Check functionality, that locking bolt locks properly. Adjusting nut (white) andcounter nut (red) tightenedSecure both with Loctite 243Loctite colour Green</td>
+                <td>将锁定螺栓安装在锁定件上，且距离至少为9毫米检查锁定螺栓是否能够正常锁定调整螺母（白色）和锁紧螺母（红色）已拧紧用乐泰243胶水将其固定乐泰胶水，绿色</td>
+                <td>Verriegelungsbolzen am Verriegelungselement mit mindestens 9 mm Abstand montieren. Funktion prüfen, ob Bolzen korrekt verriegelt.Justiermutter (weiß) und Kontermutter (rot) festgezogenBeide mit Loctite 243 sichernLoctite Farbe: Grün</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.28.png' %}" alt="Drawing">
+                </td>
+                <td>Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_1_28"
+                         name="text_1_28"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_28|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_28_remark"
+                         name="text_1_28_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_28_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>1.29</td>
+                <td>Fixing the data matrix reader  Adjust the QRcode reader for all hangers in the same distanceZ- distance top of rail to top of reader 22,6 mmX- distance  bracket in the middle of slotholesMount and adjust QR code reader on 2nd axis screws M8x25, M8x16 MA=27Nmscrews M6 for QR code MA=10Nm</td>
+                <td>固定数据阅读器将二维码阅读器调整至与所有衣架保持相同距离轨道顶部到阅读器顶部的Z向距离 22.6毫米X距离支架位于吊孔的中间在第二轴上安装并调整二维码阅读器螺钉 M8x25、M8x16，扭矩=27牛米用于二维码的M6螺钉，扭矩为10牛米</td>
+                <td>Datenmatrix-Lesegerät befestigenQR-Code-Leser für alle Halter auf gleichen Abstand einstellenZ-Abstand: Schienenoberkante bis Leseroberkante 22,6 mmX-Abstand: Halter mittig in LanglochQR-Code-Leser an 2. Achse montieren und einstellenSchrauben M8x25, M8x16 MA=27NmSchrauben M6 für QR-Code MA=10Nm</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.29.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_29_soll }}Nm</p>
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <select id="oknok_1_29" name="oknok_1_29" class="select-control">
+                    <option value="" {% if protokol.oknok_1_29 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_29 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_29 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_29 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_29_remark"
+                         name="oknok_1_29_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_29_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_29">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>1.31</td>
+                <td>Ground collector (PE) installed on the 3rd trolleyTighten screw 2x M8x16-8.8-MA=27NmPE-Collector Assembly  see drawing A5E54058304A</td>
+                <td>安装在第三辆小车上的接地收集器（PE）拧紧螺钉 2颗 M8x16-8.8-MA=27牛米</td>
+                <td>PE-Nachläufer am 3. Trolley montiertSchrauben 2x M8x16-8.8-MA=27Nm anziehenPE-Nachläufer-Montage siehe Zeichnung A5E54058304A</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.31.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_31_soll }}Nm</p>
+                </td>
+                <td>Leipzig</td>
+                <td>
+                  <select id="oknok_1_31" name="oknok_1_31" class="select-control">
+                    <option value="" {% if protokol.oknok_1_31 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_31 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_31 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_31 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_31_remark"
+                         name="oknok_1_31_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_31_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_31">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.32</td>
+                <td>mounting of drip tray A5E54443423AM12x30-8.8-A2F, MA=93Nmsecure with loctite 243</td>
+                <td>滴水盘A5E54443423A的安装M12x30-8.8-A2F，MA=93Nm用乐泰243固定</td>
+                <td>Auffangwanne A5E54443423A montierenM12x30-8.8-A2F, MA=93Nmmit Loctite 243 sichernLoctite Farbe:Grün</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.32.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_1_32_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_1_32" name="oknok_1_32" class="select-control">
+                    <option value="" {% if protokol.oknok_1_32 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_32 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_32 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_32 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_1_32_remark"
+                         name="oknok_1_32_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_1_32_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_1_32">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>1.33</td>
+                <td>grounding on transmission device and all movable parts</td>
+                <td>将传输设备和所有可移动部件接地</td>
+                <td>Erdung an Getriebe und allen beweglichen Teilen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.33.png' %}" alt="Drawing">
+                </td>
+                <td>Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_1_33"
+                         name="text_1_33"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_33|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_33_remark"
+                         name="text_1_33_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_33_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>1.34</td>
+                <td>protective wax transparent spray on the blanked parts to protect against rust during transportation(e.g. Würth-Art. Nr. 0893082400)</td>
+                <td>在加工面上喷涂一层透明的防护蜡，以防止运输过程中生锈（例如，Würth产品编号0893082400）</td>
+                <td>Transparenter Korrosionsschutzwachs auf blanke Teile zum Schutz vor Rost beim Transport auftragen(z. B. Würth-Art.-Nr. 0893082400)</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.34.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_1_34"
+                         name="text_1_34"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_34|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_34_remark"
+                         name="text_1_34_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_34_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>1.35</td>
+                <td>Screws are marked after thightening with torque marque, sealing paint. Red</td>
+                <td>螺丝拧紧后用扭矩标记、密封漆进行标记：红色</td>
+                <td>Schrauben nach Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.35.png' %}" alt="Drawing">
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_1_35"
+                         name="text_1_35"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_35|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_35_remark"
+                         name="text_1_35_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_35_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>1.36</td>
+                <td>Screws fixed with Loctite glue have to be marked  with paint in Green colour. No change in colour permitted.Special advice see file&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
+                <td>用乐泰胶水固定的螺钉必须用绿色油漆标记。不允许改变颜色。特别建议见文件</td>
+                <td>Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.Sonderhinweis siehe Datei&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/1.36.png' %}" alt="Drawing">
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_1_36"
+                         name="text_1_36"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_1_36|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_1_36_remark"
+                         name="text_1_36_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_1_36_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>2.1</td>
+                <td>Visual inspection of weldings,sampling, welding bend, check size of welding seams according drawing / EXC3</td>
+                <td>根据图纸/EXC3，目视检查焊接件、取样、焊接弯管、检查焊缝尺寸</td>
+                <td>Visuelle Prüfung der Schweißnähte, Probenahme, Schweißbogen, Überprüfung der Schweißnahtgröße gemäß Zeichnung / EXC3</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.1.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_1"
+                         name="text_2_1"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_1|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_1_remark"
+                         name="text_2_1_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_1_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>QC</td>
+              </tr>
+              
+              <tr>
+                <td>2.1</td>
+                <td>check encoder typeCMV 582 M(magnetic)</td>
+                <td>检查编码器类型CMV 582 M（磁性）</td>
+                <td>Encodertyp prüfenCMV 582 M(magnetisch)</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.1.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_1"
+                         name="text_2_1"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_1|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_1_remark"
+                         name="text_2_1_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_1_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.2</td>
+                <td>Disassemble Operating Instructions Traction Motors2 x bag with fastenerand collect in box seperatley (keep in CN)</td>
+                <td>电机说明书和2个扎带统一放在一个纸箱里</td>
+                <td>Betriebsanleitung Hubmotorenmotoren demontieren2 x Beutel mit Befestigerund separat in Kiste sammeln (in CN aufbewahren)</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.2.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_2"
+                         name="text_2_2"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_2|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_2_remark"
+                         name="text_2_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.3</td>
+                <td>Installing the brake release lever an protect with Safety Cain1 x lifting motor left1 x lifting motor right</td>
+                <td>安装刹车释放杆用安全带保护左侧1个升降电机1个右升降电机</td>
+                <td>Bremse-Entriegelungshebel montierenund mit Sicherheitskette sichern1 x Hubmotor links1 x Hubmotor rechts</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.3.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_3"
+                         name="text_2_3"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_3|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_3_remark"
+                         name="text_2_3_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_3_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.4</td>
+                <td>Check installation of safety chain for brake release lever1 x lifting motor left1 x lifting motor right</td>
+                <td>刹车释放杆的安全链左侧1个升降电机1个右升降电机</td>
+                <td>Sicherheitskette für Bremse-Entriegelungshebel prüfen1 x Hubmotor links1 x Hubmotor rechts</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.4.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_4"
+                         name="text_2_4"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_4|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_4_remark"
+                         name="text_2_4_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_4_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.5</td>
+                <td>Activate gear venting for each gearmotorPressure relief valve with safety strap.Remove the transport safety device by pulling the safety tab 1 in the direction of the arrow.</td>
+                <td>打开每个齿轮电机的齿轮通风带安全带的泄压阀。沿箭头方向拉动安全片1，拆下运输安全装置</td>
+                <td>Getriebeentlüftung für jeden Getriebemotor aktivierenDruckentlastungsventil mit Sicherheitsgurt.Transportsicherung durch Ziehen der Lasche 1 in Pfeilrichtung entfernen.</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.5.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_5"
+                         name="text_2_5"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_5|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_5_remark"
+                         name="text_2_5_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_5_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>2.6</td>
+                <td>Mount lifting ropes laid out correctly, in an orderly and free-running manner according drawing lifting unit Pay attention: leftthread or rightthread</td>
+                <td>钢丝绳按照图纸以有序且自由运行的方式正确铺设注意：左螺纹或右螺纹</td>
+                <td>Hubseile ordnungsgemäß und frei beweglich gemäß Zeichnung der Hebeeinheit verlegenAchtung: Links- oder Rechtsschlag beachten</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.6.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_6"
+                         name="text_2_6"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_6|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_6_remark"
+                         name="text_2_6_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_6_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.7</td>
+                <td>M20x60 8.8Tighten bolts on hoist device, Pos 71, 83 with 4 pieces M20*60 8.8</td>
+                <td>使用4颗M20*60 8.8规格的螺栓，将位置71、83处的起重装置上的螺栓拧紧</td>
+                <td>M20x60 8.8Schrauben an Hubvorrichtung anziehen, Pos 71, 83 mit 4 Stück M20*60 8.8</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.7.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_7"
+                         name="text_2_7"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_7|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_7_remark"
+                         name="text_2_7_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_7_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.8</td>
+                <td>Check grease nipples of the flange bearings on the hoist pointing to the rear</td>
+                <td>卷扬机上法兰轴承的润滑油嘴指向后方</td>
+                <td>Schmiernippel der Flanschlager an der Rückseite der Hebevorrichtung prüfen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.8.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_8"
+                         name="text_2_8"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_8|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_8_remark"
+                         name="text_2_8_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_8_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.9</td>
+                <td>tighten screws at paguflex coupling2 x  M4     MA = 2 Nm</td>
+                <td>拧紧Paguflex联轴器上的螺丝2个M4螺钉，扭矩=2牛米</td>
+                <td>Schrauben an der Paguflex-Kupplung anziehen2 x M4 MA = 2 Nm</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.9.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_2_9_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_2_9" name="oknok_2_9" class="select-control">
+                    <option value="" {% if protokol.oknok_2_9 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_2_9 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_2_9 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_2_9 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_2_9_remark"
+                         name="oknok_2_9_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_2_9_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_2_9">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.11</td>
+                <td>At each lift drive Gearmotor shrink diskMark all bolts after tensioning according Siemens specificationTwo paint marking points need to be placed after installation1x mark clamping set to shaft1x mark clamping set to hub</td>
+                <td>每次升降驱动时，齿轮电机收缩盘按照西门子规范，在涨紧后标记所有螺栓安装后需要设置两个油漆标记点1套轴用标记夹紧装置1套轮毂标记夹紧装置</td>
+                <td>An jeder Hebeantriebseinheit Schrumpfscheibe am GetriebemotorAlle Schrauben nach Vorspannung gemäß Siemens-Spezifikation markierenZwei Farbmarkierungen nach der Montage anbringen:1x Markierung Klemmsatz zur Welle1x Markierung Klemmsatz zur Nabe</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.11.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_2_11"
+                         name="text_2_11"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_11|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_11_remark"
+                         name="text_2_11_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_11_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>2.12</td>
+                <td>Mounting of drip tray right A5E54080598Aand left A5E51110929A on rear motorMA=180Nm</td>
+                <td>A5E54080598A型号跳闸托盘的安装并将A5E51110929A留在后置电机上MA=180Nm</td>
+                <td>Auffangwanne rechts A5E54080598A und links A5E51110929A am hinteren Motor montierenMA=180Nm</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.12.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_2_12_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_2_12" name="oknok_2_12" class="select-control">
+                    <option value="" {% if protokol.oknok_2_12 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_2_12 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_2_12 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_2_12 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_2_12_remark"
+                         name="oknok_2_12_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_2_12_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_2_12">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>2.13</td>
+                <td>Screws are marked after thightening with torque marque, sealing paint. Red</td>
+                <td>螺丝拧紧后用扭矩标记、密封漆进行标记：红色</td>
+                <td>Schrauben nach dem Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.13.png' %}" alt="Drawing">
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_2_13"
+                         name="text_2_13"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_13|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_13_remark"
+                         name="text_2_13_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_13_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>2.14</td>
+                <td>Screws fixed with Loctite glue have to be marked  with paint in Green colour. No change in colour permitted.Special advice see file&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
+                <td>用乐泰胶固定的螺丝必须用绿色油漆进行标记。不得更改颜色。</td>
+                <td>Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.Sonderhinweis siehe Datei&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/2.14.png' %}" alt="Drawing">
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_2_14"
+                         name="text_2_14"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_2_14|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_2_14_remark"
+                         name="text_2_14_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_2_14_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.1</td>
+                <td>Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
+                <td>焊接、目视检查、取样、焊接弯曲、检查焊缝尺寸</td>
+                <td>Visuelle Prüfung der Schweißnähte, Probenahme, Schweißbogen, Überprüfung der Schweißnahtgröße / EXC3</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.1.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_1"
+                         name="text_3_1"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_1|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_1_remark"
+                         name="text_3_1_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_1_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.1</td>
+                <td>Remain length from both side of the clamp ramp: first clamp ~100 mm, second clamp 40~50mm from first clampLifting rope stop at rope rocker:Free rope length after rope bag min.450 mmrope clamp mounted 2x per dead rope endFix with cable tiesLoop and rope bag to the outsidesee A5E51581844A</td>
+                <td>钢丝绳锁紧装置斜面两侧的剩余长度：第一个约100毫米，第二个距离第一个40~50毫米钢丝绳在锁紧摇杆处停止：每端安装2个绳夹用扎带固定将环和绳袋套到外面见A5E51581844A</td>
+                <td>Restlänge beidseitig an der Klemprampe: erste Klemme ~100 mm,zweite Klemme 40~50 mm von der ersten KlemmeHubseil endet an der Seilwippe:Freie Seillänge nach Seiltasche mindestens 450 mmSeilklemme 2x je Seilende montiertMit Kabelbindern sichernSchlinge und Seilsack nach außensiehe A5E51581844A</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.1.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_1"
+                         name="text_3_1"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_1|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_1_remark"
+                         name="text_3_1_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_1_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.2</td>
+                <td>Check that one (1) steel rope is guided over  steel rope pulleys (front right side) Other three (3) steel ropes over (PA) polyamid pulleys.</td>
+                <td>检查一（1）根钢丝绳是否绕过钢丝绳滑轮（右前侧），其他三（3）根钢丝绳是否绕过尼龙滑轮</td>
+                <td>Prüfen, dass ein (1) Stahlseil über Stahlseilrollen (Vorderseite rechts) geführt istDie anderen drei (3) Seile über (PA) Polyamidrollen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.2.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_2"
+                         name="text_3_2"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_2|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_2_remark"
+                         name="text_3_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.3</td>
+                <td>Adjust screws of horizontal alignment:M12 x 80 adjusted for horizontal alignment.Top of all four screws should be adjusted at the same height level referenced to a virtual level by laser.After adjustment tighten counter nut and mark with sealing paint.Important for readjustment on site !Basic: The carrier and  and stroke is adjusted.See 7.5 and 7.6</td>
+                <td>调整水平对齐螺钉：M12 x 80已调整为水平对齐。所有四个螺钉的顶部应通过激光调整到与虚拟水平相同的高度。调整后，拧紧防松螺母并用密封漆标记。现场重新调整很重要！基础：调整载体和行程。见7.5和7.6</td>
+                <td>Schrauben für Horizontalverstellung einstellen:M12x80 zur Horizontalverstellung angepasst.Oberkante aller vier Schrauben auf gleiche Höhe einstellen, bezogen auf virtuelles Niveau mit Laser.Nach Einstellung Kontermutter festziehen und mit Sicherungslack markieren.Wichtig für Nachjustierung vor Ort!Grundlage: Träger und Hub sind eingestellt.Siehe 7.5 und 7.6</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.3.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_3"
+                         name="text_3_3"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_3|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_3_remark"
+                         name="text_3_3_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_3_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.4</td>
+                <td>Bracket for the cable conduit and all MURRPLASTIC components are mounted in the front of hanger, on the upper frame and trolley system</td>
+                <td>电缆导管及其所有配件的支架MURRPLASTIC部件安装在吊架前部、上框架和手推车系统上</td>
+                <td>Halterung für Kabelschutzrohr und alle MURRPLASTIK-Komponenten vorne am Aufhänger, am oberen Rahmen und Trolley-System montiert</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.4.png' %}" alt="Drawing">
+                </td>
+                <td>Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_3_4"
+                         name="text_3_4"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_4|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_4_remark"
+                         name="text_3_4_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_4_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>3.5</td>
+                <td>Check that there is no collision between the cable channel and the cable pulley. the space between should be 8mmuse a cable channel with a width of 300mm for checking</td>
+                <td>检查钢丝绳线槽支架和钢丝绳轮之间是否有干涉。两者之间的间距应为8毫米使用宽度为300毫米的线槽支架进行检查</td>
+                <td>Prüfen, dass kein Kontakt zwischen Kabelkanal und Umlenkrolle besteht. Abstand muss 8mm betragenZur Prüfung Kabelkanal mit 300mm Breite verwenden</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.5.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_5"
+                         name="text_3_5"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_5|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_5_remark"
+                         name="text_3_5_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_5_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.6</td>
+                <td>Tighten screws M12x65-8.8-A2F MA=93Nm</td>
+                <td>拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
+                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.6.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_3_6_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_3_6" name="oknok_3_6" class="select-control">
+                      <option value="" {% if protokol.oknok_3_6 is none %}selected{% endif %}></option>
+                      <option value="OK" {% if protokol.oknok_3_6 == 'OK' %}selected{% endif %}>OK</option>
+                      <option value="NOK" {% if protokol.oknok_3_6 == 'NOK' %}selected{% endif %}>NOK</option>
+                      {% if current_user.pruefer == True %}
+                      <option value="AOK" {% if protokol.oknok_3_6 == 'AOK' %}selected{% endif %}>AOK</option>
+                      {% endif %}
+                  </select>
+              </td>
+              <td>
+                <input type="text"
+                       id="oknok_3_6_remark"
+                       name="oknok_3_6_remark"
+                       minlength="3"
+                       maxlength="20"
+                       class="form-control"
+                       value="{{ protokol.oknok_3_6_remark|default_if_none:'' }}">
+              </td>
+              <td class="status-cell" data-rule="oknok" data-target="#oknok_3_6">
+                <span class="status-dot" hidden></span>
+              </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.6</td>
+                <td>Tighten screws M12x65-8.8-A2F MA=93Nm</td>
+                <td>拧紧螺钉M12x65-8.8-A2F，扭矩=93牛米</td>
+                <td>Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.6.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_3_6_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_3_6" name="oknok_3_6" class="select-control">
+                    <option value="" {% if protokol.oknok_3_6 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_3_6 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_3_6 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_3_6 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_3_6_remark"
+                         name="oknok_3_6_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_3_6_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_3_6">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.8</td>
+                <td>Rope break switch centered adjusted according to drawing</td>
+                <td>断绳开关居中根据图纸进行调整</td>
+                <td>Seilbruchschalter zentriertgemäß Zeichnung eingestellt</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.8.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_8"
+                         name="text_3_8"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_8|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_8_remark"
+                         name="text_3_8_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_8_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.9</td>
+                <td>prepress of the spring on Pos.10</td>
+                <td>位置10的弹簧预压</td>
+                <td>Vorspannung der Feder auf Pos.10</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.9.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_3_9_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_3_9" name="oknok_3_9" class="select-control">
+                    <option value="" {% if protokol.oknok_3_9 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_3_9 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_3_9 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_3_9 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_3_9_remark"
+                         name="oknok_3_9_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_3_9_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_3_9">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.11</td>
+                <td>Mount bolt head above,Split pins bent around the bolt below</td>
+                <td>将螺栓头安装在上方，开口销在螺栓下方弯曲</td>
+                <td>Bolzenkopf oben montieren,Splinte unterhalb der Schraube umbiegen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.11.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_11"
+                         name="text_3_11"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_11|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_11_remark"
+                         name="text_3_11_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_11_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.12</td>
+                <td>Mount M12x36 long nut must be in contact with bolt and lock M12 nut with long nut</td>
+                <td>M12x36长螺母必须与螺栓接触，并用长螺母锁紧M12螺母</td>
+                <td>M12x36-Langmutter muss Kontakt mit Schraube haben und M12-Mutter mit Langmutter sichern</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.12.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_12"
+                         name="text_3_12"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_12|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_12_remark"
+                         name="text_3_12_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_12_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.13</td>
+                <td>Mount ISO 8746 4x16 dowel pin</td>
+                <td>安装ISO 8746 4x16定位销</td>
+                <td>ISO 8746 4x16 Spannstift montieren</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.13.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_13"
+                         name="text_3_13"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_13|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_13_remark"
+                         name="text_3_13_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_13_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.14</td>
+                <td>Position of rope connection under load horizontal position</td>
+                <td>负载水平位置下绳索连接的位置</td>
+                <td>Position der Seilverbindung in belasteter, horizontaler Lage</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.14.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_14"
+                         name="text_3_14"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_14|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_14_remark"
+                         name="text_3_14_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_14_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.15</td>
+                <td>Mount Lock long nut with bolt head to prevent rotation</td>
+                <td>安装带螺栓头的锁紧长螺母，以防止旋转</td>
+                <td>Langmutter mit Schraubenkopf sichern, um Rotation zu verhindern</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.15.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_15"
+                         name="text_3_15"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_15|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_15_remark"
+                         name="text_3_15_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_15_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.16</td>
+                <td>Rope connection Spline spread angle 45 ° Tolerance +0/-15 °</td>
+                <td>钢丝绳连接展开角度45°，公差+0/-15°</td>
+                <td>SeilverbindungSplinte  Öffnungswinkel 45°, Toleranz +0/-15°</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.16.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_16"
+                         name="text_3_16"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_16|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_16_remark"
+                         name="text_3_16_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_16_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.18</td>
+                <td>All rope belay pins, which avoid that steel ropes can move out of pulleys are mounted</td>
+                <td>所有防止钢丝绳从滑轮中脱出的绳索固定销均已安装</td>
+                <td>Alle Seilsicherungsstifte, die das Herausspringen der Stahlseile aus den Rollen verhindern, sind montiert</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.18.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_18"
+                         name="text_3_18"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_18|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_18_remark"
+                         name="text_3_18_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_18_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.19</td>
+                <td>frequency converters  and SD card installedseparate packing when shipped</td>
+                <td>变频器和SD卡已安装装运时单独包装</td>
+                <td>Frequenzumrichter und SD-Karte montiertSeparat verpackt bei Lieferung</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.19.png' %}" alt="Drawing">
+                </td>
+                <td>Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_3_19"
+                         name="text_3_19"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_19|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_19_remark"
+                         name="text_3_19_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_19_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td></td>
+              </tr>
+              
+              <tr>
+                <td>3.21</td>
+                <td>Adjustment of the guide rollers 4x screws M10   M=50 Nm  M=50NmDistance 180mm +0,5  Adjust the leveling of upperframe</td>
+                <td>扶正轮的调整4个M10螺钉，扭矩M=50 Nm，扭矩M=50 Nm距离 180毫米 +0.5调整上框架的水平度</td>
+                <td>Einstellung der Führungsrollen4x Schrauben M10 M=50 NmAbstand 180 mm +0,5Nivellierung des oberen Rahmens einstellen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.21.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_3_21_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_3_21" name="oknok_3_21" class="select-control">
+                    <option value="" {% if protokol.oknok_3_21 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_3_21 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_3_21 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_3_21 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_3_21_remark"
+                         name="oknok_3_21_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_3_21_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_3_21">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.22</td>
+                <td>Front roller up       - touching guide rail 0 mmFront roller down - gap 1,0 mm between guide railRear roller up     - gap 1,0 mm between guide railRear roller down - touching guide rail 0 mmAttention: Keep always the same procedure for front and back.</td>
+                <td>前上升 - 与导轨接触 0 毫米前向下 - 导轨之间间隙为1.0毫米后上升 - 导轨之间间隙为1.0毫米后下降 - 接触导轨 0 毫米注意：前后两面始终保持相同的操作程序。</td>
+                <td>Vordere Rolle oben - 0 mm Kontakt zur SchieneVordere Rolle unten - 1,0 mm Abstand zur SchieneHintere Rolle oben - 1,0 mm Abstand zur SchieneHintere Rolle unten - 0 mm Kontakt zur SchieneAchtung: Immer gleiche Prozedur vorne und hinten</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.22.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_22"
+                         name="text_3_22"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_22|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_22_remark"
+                         name="text_3_22_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_22_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.23</td>
+                <td>TR Rope encoder mounted and adjusted.perpendicular movement of the encoder ropein x and y direction</td>
+                <td>TR 拉绳编码器已安装并调整。编码器绳索的垂直运动在x和y方向上</td>
+                <td>TR-Seil-Encoder montiert und justiert.Senkrechte Bewegung des Encoder-Seils in x- und y-Richtung</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.23.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_23"
+                         name="text_3_23"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_23|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_23_remark"
+                         name="text_3_23_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_23_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.24</td>
+                <td>Check colour Reference flag-A5E54330572ARAL 3000/red</td>
+                <td>参考标志-A5E54330572A颜色：RAL 3000/红色</td>
+                <td>Farbe des Referenzfahne prüfen - A5E54330572ARAL 3000/rot</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.24.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_24"
+                         name="text_3_24"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_24|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_24_remark"
+                         name="text_3_24_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_24_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.25</td>
+                <td>Set retaining plates for proximity switch.Lower frame must be in necessary upper position14 mm  +/- 1 mm top of bumper to bottom of upper frame tube </td>
+                <td>为接近开关设置固定板下框架必须处于必要的上部位置保险杠顶部至上框架管底部的距离为14毫米+/-1毫米</td>
+                <td>Anschlagplatten für Näherungsschalter montieren.Unterrahmen muss in oberer Position sein14 mm +/- 1 mm von Oberkante Puffer bis Unterkante Rohr des oberen Rahmens</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.25.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_25"
+                         name="text_3_25"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_25|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_25_remark"
+                         name="text_3_25_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_25_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.26</td>
+                <td>For adjustment the plate for proximity switch use A5E54377383A-Setting aid reference initiator</td>
+                <td>用于调整接近开关的板A5E54377383A-设置辅助参考启动器</td>
+                <td>Zur Justierung der Einschraubhülese für den  NäherungsschalterA5E54377383A-Einstellhilfe verwenden</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.26.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_26"
+                         name="text_3_26"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_26|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_26_remark"
+                         name="text_3_26_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_26_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.27</td>
+                <td>Synchroneous ropes:All rope belay Pins, which avoid that steel ropes can move out of pulleys are mounted</td>
+                <td>同步钢丝绳：所有防止钢丝绳从滑轮中脱出的绳索固定销均已安装</td>
+                <td>Synchronseile:Alle Seilsicherungsstifte, die das Herausspringen der Stahlseile aus den Rollen verhindern, sind montiert</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.27.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_3_27_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_3_27" name="oknok_3_27" class="select-control">
+                    <option value="" {% if protokol.oknok_3_27 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_3_27 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_3_27 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_3_27 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_3_27_remark"
+                         name="oknok_3_27_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_3_27_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_3_27">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.28</td>
+                <td>Synchroneous ropes:Bearing inside the pulleys: Synchronous pulleys Check bearing seat for noticeable clearance.  (tilting).</td>
+                <td>同步钢丝绳：滑轮内部的轴承：同步滑轮 检查轴承座是否有明显间隙（倾斜）。</td>
+                <td>Synchronseile:Lager innerhalb der Rollen: SynchronrollenLagersitz auf spürbares Spiel prüfen (Schwenken).</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.28.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_28"
+                         name="text_3_28"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_28|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_28_remark"
+                         name="text_3_28_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_28_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>3.29</td>
+                <td>Check screws of horizontal alignment at counterweight side:They must be able to be turned and not stopped by the counter weigth inside the tube.Hint: Counterweight position must be according drawing !!</td>
+                <td>检查配重侧水平对齐的螺丝：它们必须能够转动，且不会被管内的配重阻止。提示：配重位置必须符合图纸要求！！</td>
+                <td>Schrauben der Horizontalverstellung auf Gegengewichtsseite prüfen:Sie müssen drehbar sein und dürfen nicht durch das Gegengewicht im Rohr blockiert werden.Hinweis: Position des Gegengewichts muss laut Zeichnung sein!</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.29.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_3_29"
+                         name="text_3_29"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_29|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_29_remark"
+                         name="text_3_29_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_29_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.31</td>
+                <td>Screws are marked after thightening with torque marque, sealing paint. Red</td>
+                <td>螺丝拧紧后用扭矩标记、密封漆进行标记。红色</td>
+                <td>Schrauben nach dem Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.31.png' %}" alt="Drawing">
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_3_31"
+                         name="text_3_31"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_31|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_31_remark"
+                         name="text_3_31_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_31_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>3.32</td>
+                <td>Screws fixed with Loctite glue have to be marked  with paint in Green colour. No change in colour permitted. Special advice see file&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
+                <td>用乐泰胶水固定的螺钉必须用绿色油漆标记。不允许改变颜色。特别建议见文件&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
+                <td>Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.Sonderhinweis siehe Datei&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/3.32.png' %}" alt="Drawing">
+                </td>
+                <td>CN / Leipzig</td>
+                <td>
+                  <input type="number"
+                         id="text_3_32"
+                         name="text_3_32"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_3_32|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_3_32_remark"
+                         name="text_3_32_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_3_32_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker/QC</td>
+              </tr>
+              
+              <tr>
+                <td>4.1</td>
+                <td>Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
+                <td>目视检查焊接件、取样、焊接弯管、检查焊缝尺寸/EXC3</td>
+                <td>Visuelle Prüfung der Schweißnähte, Probenahme, Schweißbogen, Überprüfung der Schweißnahtgröße / EXC3</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/4.1.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_4_1"
+                         name="text_4_1"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_4_1|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_4_1_remark"
+                         name="text_4_1_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_4_1_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>QC</td>
+              </tr>
+              
+              <tr>
+                <td>4.2</td>
+                <td>Telescope outer tube and telescope assembly Install 12 Sliding blocks (pos 100 + pos 102). Adjust sliding block with shim plates to eleminate the gap. Vertical sliding blocks 0,5mm gaphorizontal slidings block touching screws, M6x20-8.8-A2F MA=4Nm</td>
+                <td>剪刀叉外管和组件安装12个滑块（位置100和位置102）。使用垫片调整滑块以消除间隙。垂直滑块，间隙0.5毫米水平滑块接触螺钉，M6x20-8.8-A2F，扭矩=4牛米</td>
+                <td>Teleskopaußenrohr und Teleskopbaugruppe12 Gleitstücke montieren (Pos. 100 + Pos. 102). Gleitstück mit Futterblechen einstellen, um den Spalt auszugleichen.Vertikale Gleitstück: 0,5 mm SpaltHorizontale Gleitstücke: KontaktSchrauben M6x20-8.8-A2F, MA=4Nm</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/4.2.png' %}" alt="Drawing">
+                  <p>MA={{ protokol.oknok_4_2_soll }}Nm</p>
+                </td>
+                <td>CN</td>
+                <td>
+                  <select id="oknok_4_2" name="oknok_4_2" class="select-control">
+                    <option value="" {% if protokol.oknok_4_2 is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_4_2 == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_4_2 == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_4_2 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                </td>
+                <td>
+                  <input type="text"
+                         id="oknok_4_2_remark"
+                         name="oknok_4_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.oknok_4_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="oknok" data-target="#oknok_4_2">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>4.3</td>
+                <td>Check mounting of twist protection on the synchronous rope terminal</td>
+                <td>检查同步钢丝绳端上的扭转保护装置的安装情况</td>
+                <td>Montage des Verdrehschutzes an der Synchronseil-Endklemme prüfen</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/4.3.png' %}" alt="Drawing">
+                </td>
+                <td>CN</td>
+                <td>
+                  <input type="number"
+                         id="text_4_3"
+                         name="text_4_3"
+                         class="form-control input-actual"
+                         step="0.1"
+                         value="{{ protokol.text_4_3|default_if_none:'' }}"
+                         data-min=""
+                         data-max="">
+                </td>
+                <td>
+                  <input type="text"
+                         id="text_4_3_remark"
+                         name="text_4_3_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.text_4_3_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell"><span class="status-dot" hidden></span></td>
+                <td>worker</td>
+              </tr>
+              
+              <tr>
+                <td>10.2</td>
+                <td>
+                  wooden block height between bottom of traverse and top of upper frameand lower frame. Front and Rear.
+                  Same heigth for all carriers</td>
+                <td>横梁底部与上框架和下框架顶部之间的木块高度。前部和后部。
+                  所有发货的高度相同</td>
+                <td>Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten).
+                  Gleiche Höhe für alle Träger</td>
+                <td class="thumb-cell">
+                  <img src="{% static 'images/10.2.png' %}" alt="Drawing">
+                  <p> {{ protokol.check_size_10_2_soll}} mm +/- {{ protokol.check_size_10_2_soll_avr}} mm</p>
+                </td>
+                <td>CN</td>
+                  <td>
+                    <input type="number" id="check_size_10_2" name="check_size_10_2" 
+                    data-min="{{ protokol.check_size_10_2_soll | substract:protokol.check_size_10_2_soll_avr}}" 
+                    data-max="{{ protokol.check_size_10_2_soll | adding:protokol.check_size_10_2_soll_avr}}" 
+                    class="form-control input-actual"
+                    step="0.1"
+                    value="{{ protokol.check_size_10_2|default_if_none:'' }}">
+                </td>
+                <td>
+                  <input type="text"
+                         id="check_size_10_2_remark"
+                         name="check_size_10_2_remark"
+                         minlength="3"
+                         maxlength="20"
+                         class="form-control"
+                         value="{{ protokol.check_size_10_2_remark|default_if_none:'' }}">
+                </td>
+                <td class="status-cell" data-rule="range" data-target="#check_size_10_2">
+                  <span class="status-dot" hidden></span>
+                </td>
+                <td>worker</td>
+              </tr>
 
               <tr>
                 <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>

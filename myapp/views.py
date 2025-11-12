@@ -397,8 +397,180 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     protokol.text_1_1_remark = request.POST.get('text_1_1_remark', '')
     protokol.text_1_2 = request.POST.get('text_1_2', '')
     protokol.text_1_2_remark = request.POST.get('text_1_2_remark', '')
+
+    protokol.text_1_3 = request.POST.get('text_1_3', '')
+    protokol.text_1_3_remark = request.POST.get('text_1_3_remark', '')
+    protokol.text_1_5 = request.POST.get('text_1_5', '')
+    protokol.text_1_5_remark = request.POST.get('text_1_5_remark', '')
+    protokol.text_1_6 = request.POST.get('text_1_6', '')
+    protokol.text_1_6_remark = request.POST.get('text_1_6_remark', '')
+    protokol.text_1_8 = request.POST.get('text_1_8', '')
+    protokol.text_1_8_remark = request.POST.get('text_1_8_remark', '')
+    protokol.text_1_9 = request.POST.get('text_1_9', '')
+    protokol.text_1_9_remark = request.POST.get('text_1_9_remark', '')
+    protokol.text_1_11 = request.POST.get('text_1_11', '')
+    protokol.text_1_11_remark = request.POST.get('text_1_11_remark', '')
+    protokol.text_1_24 = request.POST.get('text_1_24', '')
+    protokol.text_1_24_remark = request.POST.get('text_1_24_remark', '')
+    protokol.text_1_25 = request.POST.get('text_1_25', '')
+    protokol.text_1_25_remark = request.POST.get('text_1_25_remark', '')
+    protokol.text_1_26 = request.POST.get('text_1_26', '')
+    protokol.text_1_26_remark = request.POST.get('text_1_26_remark', '')
+    protokol.text_1_28 = request.POST.get('text_1_28', '')
+    protokol.text_1_28_remark = request.POST.get('text_1_28_remark', '')
+    protokol.text_1_33 = request.POST.get('text_1_33', '')
+    protokol.text_1_33_remark = request.POST.get('text_1_33_remark', '')
+    protokol.text_1_34 = request.POST.get('text_1_34', '')
+    protokol.text_1_34_remark = request.POST.get('text_1_34_remark', '')
+    protokol.text_1_35 = request.POST.get('text_1_35', '')
+    protokol.text_1_35_remark = request.POST.get('text_1_35_remark', '')
+    protokol.text_1_36 = request.POST.get('text_1_36', '')
+    protokol.text_1_36_remark = request.POST.get('text_1_36_remark', '')
+    protokol.text_2_1 = request.POST.get('text_2_1', '')
+    protokol.text_2_1_remark = request.POST.get('text_2_1_remark', '')
+    protokol.text_2_2 = request.POST.get('text_2_2', '')
+    protokol.text_2_2_remark = request.POST.get('text_2_2_remark', '')
+    protokol.text_2_3 = request.POST.get('text_2_3', '')
+    protokol.text_2_3_remark = request.POST.get('text_2_3_remark', '')
+    protokol.text_2_4 = request.POST.get('text_2_4', '')
+    protokol.text_2_4_remark = request.POST.get('text_2_4_remark', '')
+    protokol.text_2_5 = request.POST.get('text_2_5', '')
+    protokol.text_2_5_remark = request.POST.get('text_2_5_remark', '')
+    protokol.text_2_6 = request.POST.get('text_2_6', '')
+    protokol.text_2_6_remark = request.POST.get('text_2_6_remark', '')
+    protokol.text_2_7 = request.POST.get('text_2_7', '')
+    protokol.text_2_7_remark = request.POST.get('text_2_7_remark', '')
+    protokol.text_2_8 = request.POST.get('text_2_8', '')
+    protokol.text_2_8_remark = request.POST.get('text_2_8_remark', '')
+    protokol.text_2_1 = request.POST.get('text_2_1', '')
+    protokol.text_2_1_remark = request.POST.get('text_2_1_remark', '')
+    protokol.text_2_11 = request.POST.get('text_2_11', '')
+    protokol.text_2_11_remark = request.POST.get('text_2_11_remark', '')
+    protokol.text_2_13 = request.POST.get('text_2_13', '')
+    protokol.text_2_13_remark = request.POST.get('text_2_13_remark', '')
+    protokol.text_2_14 = request.POST.get('text_2_14', '')
+    protokol.text_2_14_remark = request.POST.get('text_2_14_remark', '')
+    protokol.text_3_1 = request.POST.get('text_3_1', '')
+    protokol.text_3_1_remark = request.POST.get('text_3_1_remark', '')
+    protokol.text_3_4 = request.POST.get('text_3_4', '')
+    protokol.text_3_4_remark = request.POST.get('text_3_4_remark', '')
+    protokol.text_3_5 = request.POST.get('text_3_5', '')
+    protokol.text_3_5_remark = request.POST.get('text_3_5_remark', '')
+    protokol.text_3_8 = request.POST.get('text_3_8', '')
+    protokol.text_3_8_remark = request.POST.get('text_3_8_remark', '')
+    protokol.text_3_1 = request.POST.get('text_3_1', '')
+    protokol.text_3_1_remark = request.POST.get('text_3_1_remark', '')
+    protokol.text_3_11 = request.POST.get('text_3_11', '')
+    protokol.text_3_11_remark = request.POST.get('text_3_11_remark', '')
+    protokol.text_3_12 = request.POST.get('text_3_12', '')
+    protokol.text_3_12_remark = request.POST.get('text_3_12_remark', '')
+    protokol.text_3_13 = request.POST.get('text_3_13', '')
+    protokol.text_3_13_remark = request.POST.get('text_3_13_remark', '')
+    protokol.text_3_14 = request.POST.get('text_3_14', '')
+    protokol.text_3_14_remark = request.POST.get('text_3_14_remark', '')
+    protokol.text_3_15 = request.POST.get('text_3_15', '')
+    protokol.text_3_15_remark = request.POST.get('text_3_15_remark', '')
+    protokol.text_3_16 = request.POST.get('text_3_16', '')
+    protokol.text_3_16_remark = request.POST.get('text_3_16_remark', '')
+    protokol.text_3_18 = request.POST.get('text_3_18', '')
+    protokol.text_3_18_remark = request.POST.get('text_3_18_remark', '')
+    protokol.text_3_19 = request.POST.get('text_3_19', '')
+    protokol.text_3_19_remark = request.POST.get('text_3_19_remark', '')
+    protokol.text_3_2 = request.POST.get('text_3_2', '')
+    protokol.text_3_2_remark = request.POST.get('text_3_2_remark', '')
+    protokol.text_3_22 = request.POST.get('text_3_22', '')
+    protokol.text_3_22_remark = request.POST.get('text_3_22_remark', '')
+    protokol.text_3_23 = request.POST.get('text_3_23', '')
+    protokol.text_3_23_remark = request.POST.get('text_3_23_remark', '')
+    protokol.text_3_24 = request.POST.get('text_3_24', '')
+    protokol.text_3_24_remark = request.POST.get('text_3_24_remark', '')
+    protokol.text_3_25 = request.POST.get('text_3_25', '')
+    protokol.text_3_25_remark = request.POST.get('text_3_25_remark', '')
+    protokol.text_3_26 = request.POST.get('text_3_26', '')
+    protokol.text_3_26_remark = request.POST.get('text_3_26_remark', '')
+    protokol.text_3_28 = request.POST.get('text_3_28', '')
+    protokol.text_3_28_remark = request.POST.get('text_3_28_remark', '')
+    protokol.text_3_29 = request.POST.get('text_3_29', '')
+    protokol.text_3_29_remark = request.POST.get('text_3_29_remark', '')
+    protokol.text_3_3 = request.POST.get('text_3_3', '')
+    protokol.text_3_3_remark = request.POST.get('text_3_3_remark', '')
+    protokol.text_3_31 = request.POST.get('text_3_31', '')
+    protokol.text_3_31_remark = request.POST.get('text_3_31_remark', '')
+    protokol.text_3_32 = request.POST.get('text_3_32', '')
+    protokol.text_3_32_remark = request.POST.get('text_3_32_remark', '')
+    protokol.text_4_1 = request.POST.get('text_4_1', '')
+    protokol.text_4_1_remark = request.POST.get('text_4_1_remark', '')
+    protokol.text_4_3 = request.POST.get('text_4_3', '')
+    protokol.text_4_3_remark = request.POST.get('text_4_3_remark', '')
+
     protokol.oknok_3_6 = request.POST.get('oknok_3_6', '')
     protokol.oknok_3_6_remark = request.POST.get('oknok_3_6_remark', '')
+    protokol.oknok_1_1 = request.POST.get('oknok_1_1', '')
+    protokol.oknok_1_1_remark = request.POST.get('oknok_1_1_remark', '')
+
+    protokol.oknok_1_12 = request.POST.get('oknok_1_12', '')
+    protokol.oknok_1_12_remark = request.POST.get('oknok_1_12_remark', '')
+
+    protokol.oknok_1_13 = request.POST.get('oknok_1_13', '')
+    protokol.oknok_1_13_remark = request.POST.get('oknok_1_13_remark', '')
+
+    protokol.oknok_1_15 = request.POST.get('oknok_1_15', '')
+    protokol.oknok_1_15_remark = request.POST.get('oknok_1_15_remark', '')
+
+    protokol.oknok_1_16 = request.POST.get('oknok_1_16', '')
+    protokol.oknok_1_16_remark = request.POST.get('oknok_1_16_remark', '')
+
+    protokol.oknok_1_18 = request.POST.get('oknok_1_18', '')
+    protokol.oknok_1_18_remark = request.POST.get('oknok_1_18_remark', '')
+
+    protokol.oknok_1_19 = request.POST.get('oknok_1_19', '')
+    protokol.oknok_1_19_remark = request.POST.get('oknok_1_19_remark', '')
+
+    protokol.oknok_1_2 = request.POST.get('oknok_1_2', '')
+    protokol.oknok_1_2_remark = request.POST.get('oknok_1_2_remark', '')
+
+    protokol.oknok_1_21 = request.POST.get('oknok_1_21', '')
+    protokol.oknok_1_21_remark = request.POST.get('oknok_1_21_remark', '')
+
+    protokol.oknok_1_22 = request.POST.get('oknok_1_22', '')
+    protokol.oknok_1_22_remark = request.POST.get('oknok_1_22_remark', '')
+
+    protokol.oknok_1_23 = request.POST.get('oknok_1_23', '')
+    protokol.oknok_1_23_remark = request.POST.get('oknok_1_23_remark', '')
+
+    protokol.oknok_1_27 = request.POST.get('oknok_1_27', '')
+    protokol.oknok_1_27_remark = request.POST.get('oknok_1_27_remark', '')
+
+    protokol.oknok_1_29 = request.POST.get('oknok_1_29', '')
+    protokol.oknok_1_29_remark = request.POST.get('oknok_1_29_remark', '')
+
+    protokol.oknok_1_31 = request.POST.get('oknok_1_31', '')
+    protokol.oknok_1_31_remark = request.POST.get('oknok_1_31_remark', '')
+
+    protokol.oknok_1_32 = request.POST.get('oknok_1_32', '')
+    protokol.oknok_1_32_remark = request.POST.get('oknok_1_32_remark', '')
+
+    protokol.oknok_2_9 = request.POST.get('oknok_2_9', '')
+    protokol.oknok_2_9_remark = request.POST.get('oknok_2_9_remark', '')
+
+    protokol.oknok_2_12 = request.POST.get('oknok_2_12', '')
+    protokol.oknok_2_12_remark = request.POST.get('oknok_2_12_remark', '')
+
+    protokol.oknok_3_6 = request.POST.get('oknok_3_6', '')
+    protokol.oknok_3_6_remark = request.POST.get('oknok_3_6_remark', '')
+
+    protokol.oknok_3_9 = request.POST.get('oknok_3_9', '')
+    protokol.oknok_3_9_remark = request.POST.get('oknok_3_9_remark', '')
+
+    protokol.oknok_3_21 = request.POST.get('oknok_3_21', '')
+    protokol.oknok_3_21_remark = request.POST.get('oknok_3_21_remark', '')
+
+    protokol.oknok_3_27 = request.POST.get('oknok_3_27', '')
+    protokol.oknok_3_27_remark = request.POST.get('oknok_3_27_remark', '')
+
+    protokol.oknok_4_2 = request.POST.get('oknok_4_2', '')
+    protokol.oknok_4_2_remark = request.POST.get('oknok_4_2_remark', '')
+
     protokol.oknok_1_7 = request.POST.get('oknok_1_7', '')
     protokol.oknok_1_7_remark = request.POST.get('oknok_1_7_remark', '')
     protokol.check_size_10_2 = request.POST.get('check_size_10_2', '')
@@ -955,6 +1127,29 @@ def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
     # Define the base names of your fields correctly according to the ones you provided
     field_bases = [
         ('oknok_1_7_soll','oknok_1_7_soll'),
+        ('oknok_1_1_soll','oknok_1_1_soll'),
+        ('oknok_1_12_soll','oknok_1_12_soll'),
+        ('oknok_1_13_soll','oknok_1_13_soll'),
+        ('oknok_1_15_soll','oknok_1_15_soll'),
+        ('oknok_1_16_soll','oknok_1_16_soll'),
+        ('oknok_1_18_soll','oknok_1_18_soll'),
+        ('oknok_1_19_soll','oknok_1_19_soll'),
+        ('oknok_1_2_soll','oknok_1_2_soll'),
+        ('oknok_1_21_soll','oknok_1_21_soll'),
+        ('oknok_1_22_soll','oknok_1_22_soll'),
+        ('oknok_1_23_soll','oknok_1_23_soll'),
+        ('oknok_1_27_soll','oknok_1_27_soll'),
+        ('oknok_1_29_soll','oknok_1_29_soll'),
+        ('oknok_1_31_soll','oknok_1_31_soll'),
+        ('oknok_1_32_soll','oknok_1_32_soll'),
+        ('oknok_2_9_soll','oknok_2_9_soll'),
+        ('oknok_2_12_soll','oknok_2_12_soll'),
+        ('oknok_3_6_soll','oknok_3_6_soll'),
+        ('oknok_3_9_soll','oknok_3_9_soll'),
+        ('oknok_3_21_soll','oknok_3_21_soll'),
+        ('oknok_3_27_soll','oknok_3_27_soll'),
+        ('oknok_4_2_soll','oknok_4_2_soll'),
+        
         ('check_size_10_2_soll', 'check_size_10_2_soll_avr'),
 
         ('oknok_3_6_soll', 'check_size_1_soll_avr'),
