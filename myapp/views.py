@@ -393,188 +393,397 @@ def protocolHubzugLiftingHostUpdate(request, protocol_id):
     currentUser = request.user
     fahrzeug_id = request.GET.get('fahrzeugId', '')
 
-    protokol.text_1_1 = request.POST.get('text_1_1', '')
-    protokol.text_1_1_remark = request.POST.get('text_1_1_remark', '')
-    protokol.text_1_2 = request.POST.get('text_1_2', '')
-    protokol.text_1_2_remark = request.POST.get('text_1_2_remark', '')
 
-    protokol.text_1_3 = request.POST.get('text_1_3', '')
-    protokol.text_1_3_remark = request.POST.get('text_1_3_remark', '')
-    protokol.text_1_5 = request.POST.get('text_1_5', '')
-    protokol.text_1_5_remark = request.POST.get('text_1_5_remark', '')
-    protokol.text_1_6 = request.POST.get('text_1_6', '')
-    protokol.text_1_6_remark = request.POST.get('text_1_6_remark', '')
-    protokol.text_1_8 = request.POST.get('text_1_8', '')
-    protokol.text_1_8_remark = request.POST.get('text_1_8_remark', '')
-    protokol.text_1_9 = request.POST.get('text_1_9', '')
-    protokol.text_1_9_remark = request.POST.get('text_1_9_remark', '')
-    protokol.text_1_11 = request.POST.get('text_1_11', '')
-    protokol.text_1_11_remark = request.POST.get('text_1_11_remark', '')
-    protokol.text_1_24 = request.POST.get('text_1_24', '')
-    protokol.text_1_24_remark = request.POST.get('text_1_24_remark', '')
-    protokol.text_1_25 = request.POST.get('text_1_25', '')
-    protokol.text_1_25_remark = request.POST.get('text_1_25_remark', '')
-    protokol.text_1_26 = request.POST.get('text_1_26', '')
-    protokol.text_1_26_remark = request.POST.get('text_1_26_remark', '')
-    protokol.text_1_28 = request.POST.get('text_1_28', '')
-    protokol.text_1_28_remark = request.POST.get('text_1_28_remark', '')
-    protokol.text_1_33 = request.POST.get('text_1_33', '')
-    protokol.text_1_33_remark = request.POST.get('text_1_33_remark', '')
-    protokol.text_1_34 = request.POST.get('text_1_34', '')
-    protokol.text_1_34_remark = request.POST.get('text_1_34_remark', '')
-    protokol.text_1_35 = request.POST.get('text_1_35', '')
-    protokol.text_1_35_remark = request.POST.get('text_1_35_remark', '')
-    protokol.text_1_36 = request.POST.get('text_1_36', '')
-    protokol.text_1_36_remark = request.POST.get('text_1_36_remark', '')
-    protokol.text_2_1 = request.POST.get('text_2_1', '')
-    protokol.text_2_1_remark = request.POST.get('text_2_1_remark', '')
-    protokol.text_2_2 = request.POST.get('text_2_2', '')
-    protokol.text_2_2_remark = request.POST.get('text_2_2_remark', '')
-    protokol.text_2_3 = request.POST.get('text_2_3', '')
-    protokol.text_2_3_remark = request.POST.get('text_2_3_remark', '')
-    protokol.text_2_4 = request.POST.get('text_2_4', '')
-    protokol.text_2_4_remark = request.POST.get('text_2_4_remark', '')
-    protokol.text_2_5 = request.POST.get('text_2_5', '')
-    protokol.text_2_5_remark = request.POST.get('text_2_5_remark', '')
-    protokol.text_2_6 = request.POST.get('text_2_6', '')
-    protokol.text_2_6_remark = request.POST.get('text_2_6_remark', '')
-    protokol.text_2_7 = request.POST.get('text_2_7', '')
-    protokol.text_2_7_remark = request.POST.get('text_2_7_remark', '')
-    protokol.text_2_8 = request.POST.get('text_2_8', '')
-    protokol.text_2_8_remark = request.POST.get('text_2_8_remark', '')
-    protokol.text_2_1 = request.POST.get('text_2_1', '')
-    protokol.text_2_1_remark = request.POST.get('text_2_1_remark', '')
-    protokol.text_2_11 = request.POST.get('text_2_11', '')
-    protokol.text_2_11_remark = request.POST.get('text_2_11_remark', '')
-    protokol.text_2_13 = request.POST.get('text_2_13', '')
-    protokol.text_2_13_remark = request.POST.get('text_2_13_remark', '')
-    protokol.text_2_14 = request.POST.get('text_2_14', '')
-    protokol.text_2_14_remark = request.POST.get('text_2_14_remark', '')
-    protokol.text_3_1 = request.POST.get('text_3_1', '')
-    protokol.text_3_1_remark = request.POST.get('text_3_1_remark', '')
-    protokol.text_3_4 = request.POST.get('text_3_4', '')
-    protokol.text_3_4_remark = request.POST.get('text_3_4_remark', '')
-    protokol.text_3_5 = request.POST.get('text_3_5', '')
-    protokol.text_3_5_remark = request.POST.get('text_3_5_remark', '')
-    protokol.text_3_8 = request.POST.get('text_3_8', '')
-    protokol.text_3_8_remark = request.POST.get('text_3_8_remark', '')
-    protokol.text_3_1 = request.POST.get('text_3_1', '')
-    protokol.text_3_1_remark = request.POST.get('text_3_1_remark', '')
-    protokol.text_3_11 = request.POST.get('text_3_11', '')
-    protokol.text_3_11_remark = request.POST.get('text_3_11_remark', '')
-    protokol.text_3_12 = request.POST.get('text_3_12', '')
-    protokol.text_3_12_remark = request.POST.get('text_3_12_remark', '')
-    protokol.text_3_13 = request.POST.get('text_3_13', '')
-    protokol.text_3_13_remark = request.POST.get('text_3_13_remark', '')
-    protokol.text_3_14 = request.POST.get('text_3_14', '')
-    protokol.text_3_14_remark = request.POST.get('text_3_14_remark', '')
-    protokol.text_3_15 = request.POST.get('text_3_15', '')
-    protokol.text_3_15_remark = request.POST.get('text_3_15_remark', '')
-    protokol.text_3_16 = request.POST.get('text_3_16', '')
-    protokol.text_3_16_remark = request.POST.get('text_3_16_remark', '')
-    protokol.text_3_18 = request.POST.get('text_3_18', '')
-    protokol.text_3_18_remark = request.POST.get('text_3_18_remark', '')
-    protokol.text_3_19 = request.POST.get('text_3_19', '')
-    protokol.text_3_19_remark = request.POST.get('text_3_19_remark', '')
-    protokol.text_3_2 = request.POST.get('text_3_2', '')
-    protokol.text_3_2_remark = request.POST.get('text_3_2_remark', '')
-    protokol.text_3_22 = request.POST.get('text_3_22', '')
-    protokol.text_3_22_remark = request.POST.get('text_3_22_remark', '')
-    protokol.text_3_23 = request.POST.get('text_3_23', '')
-    protokol.text_3_23_remark = request.POST.get('text_3_23_remark', '')
-    protokol.text_3_24 = request.POST.get('text_3_24', '')
-    protokol.text_3_24_remark = request.POST.get('text_3_24_remark', '')
-    protokol.text_3_25 = request.POST.get('text_3_25', '')
-    protokol.text_3_25_remark = request.POST.get('text_3_25_remark', '')
-    protokol.text_3_26 = request.POST.get('text_3_26', '')
-    protokol.text_3_26_remark = request.POST.get('text_3_26_remark', '')
-    protokol.text_3_28 = request.POST.get('text_3_28', '')
-    protokol.text_3_28_remark = request.POST.get('text_3_28_remark', '')
-    protokol.text_3_29 = request.POST.get('text_3_29', '')
-    protokol.text_3_29_remark = request.POST.get('text_3_29_remark', '')
-    protokol.text_3_3 = request.POST.get('text_3_3', '')
-    protokol.text_3_3_remark = request.POST.get('text_3_3_remark', '')
-    protokol.text_3_31 = request.POST.get('text_3_31', '')
-    protokol.text_3_31_remark = request.POST.get('text_3_31_remark', '')
-    protokol.text_3_32 = request.POST.get('text_3_32', '')
-    protokol.text_3_32_remark = request.POST.get('text_3_32_remark', '')
-    protokol.text_4_1 = request.POST.get('text_4_1', '')
-    protokol.text_4_1_remark = request.POST.get('text_4_1_remark', '')
-    protokol.text_4_3 = request.POST.get('text_4_3', '')
-    protokol.text_4_3_remark = request.POST.get('text_4_3_remark', '')
-
-    protokol.oknok_3_6 = request.POST.get('oknok_3_6', '')
-    protokol.oknok_3_6_remark = request.POST.get('oknok_3_6_remark', '')
     protokol.oknok_1_1 = request.POST.get('oknok_1_1', '')
     protokol.oknok_1_1_remark = request.POST.get('oknok_1_1_remark', '')
-
-    protokol.oknok_1_12 = request.POST.get('oknok_1_12', '')
-    protokol.oknok_1_12_remark = request.POST.get('oknok_1_12_remark', '')
-
-    protokol.oknok_1_13 = request.POST.get('oknok_1_13', '')
-    protokol.oknok_1_13_remark = request.POST.get('oknok_1_13_remark', '')
-
-    protokol.oknok_1_15 = request.POST.get('oknok_1_15', '')
-    protokol.oknok_1_15_remark = request.POST.get('oknok_1_15_remark', '')
-
-    protokol.oknok_1_16 = request.POST.get('oknok_1_16', '')
-    protokol.oknok_1_16_remark = request.POST.get('oknok_1_16_remark', '')
-
-    protokol.oknok_1_18 = request.POST.get('oknok_1_18', '')
-    protokol.oknok_1_18_remark = request.POST.get('oknok_1_18_remark', '')
-
-    protokol.oknok_1_19 = request.POST.get('oknok_1_19', '')
-    protokol.oknok_1_19_remark = request.POST.get('oknok_1_19_remark', '')
-
     protokol.oknok_1_2 = request.POST.get('oknok_1_2', '')
     protokol.oknok_1_2_remark = request.POST.get('oknok_1_2_remark', '')
-
-    protokol.oknok_1_21 = request.POST.get('oknok_1_21', '')
-    protokol.oknok_1_21_remark = request.POST.get('oknok_1_21_remark', '')
-
-    protokol.oknok_1_22 = request.POST.get('oknok_1_22', '')
-    protokol.oknok_1_22_remark = request.POST.get('oknok_1_22_remark', '')
-
-    protokol.oknok_1_23 = request.POST.get('oknok_1_23', '')
-    protokol.oknok_1_23_remark = request.POST.get('oknok_1_23_remark', '')
-
-    protokol.oknok_1_27 = request.POST.get('oknok_1_27', '')
-    protokol.oknok_1_27_remark = request.POST.get('oknok_1_27_remark', '')
-
-    protokol.oknok_1_29 = request.POST.get('oknok_1_29', '')
-    protokol.oknok_1_29_remark = request.POST.get('oknok_1_29_remark', '')
-
-    protokol.oknok_1_31 = request.POST.get('oknok_1_31', '')
-    protokol.oknok_1_31_remark = request.POST.get('oknok_1_31_remark', '')
-
-    protokol.oknok_1_32 = request.POST.get('oknok_1_32', '')
-    protokol.oknok_1_32_remark = request.POST.get('oknok_1_32_remark', '')
-
-    protokol.oknok_2_9 = request.POST.get('oknok_2_9', '')
-    protokol.oknok_2_9_remark = request.POST.get('oknok_2_9_remark', '')
-
-    protokol.oknok_2_12 = request.POST.get('oknok_2_12', '')
-    protokol.oknok_2_12_remark = request.POST.get('oknok_2_12_remark', '')
-
-    protokol.oknok_3_6 = request.POST.get('oknok_3_6', '')
-    protokol.oknok_3_6_remark = request.POST.get('oknok_3_6_remark', '')
-
-    protokol.oknok_3_9 = request.POST.get('oknok_3_9', '')
-    protokol.oknok_3_9_remark = request.POST.get('oknok_3_9_remark', '')
-
-    protokol.oknok_3_21 = request.POST.get('oknok_3_21', '')
-    protokol.oknok_3_21_remark = request.POST.get('oknok_3_21_remark', '')
-
-    protokol.oknok_3_27 = request.POST.get('oknok_3_27', '')
-    protokol.oknok_3_27_remark = request.POST.get('oknok_3_27_remark', '')
-
-    protokol.oknok_4_2 = request.POST.get('oknok_4_2', '')
-    protokol.oknok_4_2_remark = request.POST.get('oknok_4_2_remark', '')
-
+    protokol.oknok_1_3 = request.POST.get('oknok_1_3', '')
+    protokol.oknok_1_3_remark = request.POST.get('oknok_1_3_remark', '')
+    protokol.oknok_1_4 = request.POST.get('oknok_1_4', '')
+    protokol.oknok_1_4_remark = request.POST.get('oknok_1_4_remark', '')
+    protokol.oknok_1_5 = request.POST.get('oknok_1_5', '')
+    protokol.oknok_1_5_remark = request.POST.get('oknok_1_5_remark', '')
+    protokol.oknok_1_6 = request.POST.get('oknok_1_6', '')
+    protokol.oknok_1_6_remark = request.POST.get('oknok_1_6_remark', '')
     protokol.oknok_1_7 = request.POST.get('oknok_1_7', '')
     protokol.oknok_1_7_remark = request.POST.get('oknok_1_7_remark', '')
-    protokol.check_size_10_2 = request.POST.get('check_size_10_2', '')
-    protokol.check_size_10_2_remark = request.POST.get('check_size_10_2_remark', '')
+    protokol.oknok_1_8 = request.POST.get('oknok_1_8', '')
+    protokol.oknok_1_8_remark = request.POST.get('oknok_1_8_remark', '')
+    protokol.oknok_1_9 = request.POST.get('oknok_1_9', '')
+    protokol.oknok_1_9_remark = request.POST.get('oknok_1_9_remark', '')
+    protokol.oknok_1_10 = request.POST.get('oknok_1_10', '')
+    protokol.oknok_1_10_remark = request.POST.get('oknok_1_10_remark', '')
+    protokol.oknok_1_11 = request.POST.get('oknok_1_11', '')
+    protokol.oknok_1_11_remark = request.POST.get('oknok_1_11_remark', '')
+    protokol.oknok_1_12 = request.POST.get('oknok_1_12', '')
+    protokol.oknok_1_12_remark = request.POST.get('oknok_1_12_remark', '')
+    protokol.oknok_1_13 = request.POST.get('oknok_1_13', '')
+    protokol.oknok_1_13_remark = request.POST.get('oknok_1_13_remark', '')
+    protokol.oknok_1_14 = request.POST.get('oknok_1_14', '')
+    protokol.oknok_1_14_remark = request.POST.get('oknok_1_14_remark', '')
+    protokol.oknok_1_15 = request.POST.get('oknok_1_15', '')
+    protokol.oknok_1_15_remark = request.POST.get('oknok_1_15_remark', '')
+    protokol.oknok_1_16 = request.POST.get('oknok_1_16', '')
+    protokol.oknok_1_16_remark = request.POST.get('oknok_1_16_remark', '')
+    protokol.oknok_1_17 = request.POST.get('oknok_1_17', '')
+    protokol.oknok_1_17_remark = request.POST.get('oknok_1_17_remark', '')
+    protokol.oknok_1_18 = request.POST.get('oknok_1_18', '')
+    protokol.oknok_1_18_remark = request.POST.get('oknok_1_18_remark', '')
+    protokol.oknok_1_19 = request.POST.get('oknok_1_19', '')
+    protokol.oknok_1_19_remark = request.POST.get('oknok_1_19_remark', '')
+    protokol.oknok_1_20 = request.POST.get('oknok_1_20', '')
+    protokol.oknok_1_20_remark = request.POST.get('oknok_1_20_remark', '')
+    protokol.oknok_1_23 = request.POST.get('oknok_1_23', '')
+    protokol.oknok_1_23_remark = request.POST.get('oknok_1_23_remark', '')
+    protokol.oknok_1_24 = request.POST.get('oknok_1_24', '')
+    protokol.oknok_1_24_remark = request.POST.get('oknok_1_24_remark', '')
+    protokol.oknok_1_25 = request.POST.get('oknok_1_25', '')
+    protokol.oknok_1_25_remark = request.POST.get('oknok_1_25_remark', '')
+    protokol.oknok_1_26 = request.POST.get('oknok_1_26', '')
+    protokol.oknok_1_26_remark = request.POST.get('oknok_1_26_remark', '')
+    protokol.oknok_1_27 = request.POST.get('oknok_1_27', '')
+    protokol.oknok_1_27_remark = request.POST.get('oknok_1_27_remark', '')
+    protokol.oknok_1_28 = request.POST.get('oknok_1_28', '')
+    protokol.oknok_1_28_remark = request.POST.get('oknok_1_28_remark', '')
+    protokol.oknok_1_29 = request.POST.get('oknok_1_29', '')
+    protokol.oknok_1_29_remark = request.POST.get('oknok_1_29_remark', '')
+    protokol.oknok_1_30 = request.POST.get('oknok_1_30', '')
+    protokol.oknok_1_30_remark = request.POST.get('oknok_1_30_remark', '')
+    protokol.oknok_1_31 = request.POST.get('oknok_1_31', '')
+    protokol.oknok_1_31_remark = request.POST.get('oknok_1_31_remark', '')
+    protokol.oknok_1_32 = request.POST.get('oknok_1_32', '')
+    protokol.oknok_1_32_remark = request.POST.get('oknok_1_32_remark', '')
+    protokol.oknok_1_33 = request.POST.get('oknok_1_33', '')
+    protokol.oknok_1_33_remark = request.POST.get('oknok_1_33_remark', '')
+    protokol.oknok_1_34 = request.POST.get('oknok_1_34', '')
+    protokol.oknok_1_34_remark = request.POST.get('oknok_1_34_remark', '')
+    protokol.oknok_1_35 = request.POST.get('oknok_1_35', '')
+    protokol.oknok_1_35_remark = request.POST.get('oknok_1_35_remark', '')
+    protokol.oknok_1_36 = request.POST.get('oknok_1_36', '')
+    protokol.oknok_1_36_remark = request.POST.get('oknok_1_36_remark', '')
+    protokol.oknok_2_1 = request.POST.get('oknok_2_1', '')
+    protokol.oknok_2_1_remark = request.POST.get('oknok_2_1_remark', '')
+    protokol.oknok_2_2 = request.POST.get('oknok_2_2', '')
+    protokol.oknok_2_2_remark = request.POST.get('oknok_2_2_remark', '')
+    protokol.oknok_2_3 = request.POST.get('oknok_2_3', '')
+    protokol.oknok_2_3_remark = request.POST.get('oknok_2_3_remark', '')
+    protokol.oknok_2_4 = request.POST.get('oknok_2_4', '')
+    protokol.oknok_2_4_remark = request.POST.get('oknok_2_4_remark', '')
+    protokol.oknok_2_5 = request.POST.get('oknok_2_5', '')
+    protokol.oknok_2_5_remark = request.POST.get('oknok_2_5_remark', '')
+    protokol.oknok_2_6 = request.POST.get('oknok_2_6', '')
+    protokol.oknok_2_6_remark = request.POST.get('oknok_2_6_remark', '')
+    protokol.oknok_2_7 = request.POST.get('oknok_2_7', '')
+    protokol.oknok_2_7_remark = request.POST.get('oknok_2_7_remark', '')
+    protokol.oknok_2_8 = request.POST.get('oknok_2_8', '')
+    protokol.oknok_2_8_remark = request.POST.get('oknok_2_8_remark', '')
+    protokol.oknok_2_9 = request.POST.get('oknok_2_9', '')
+    protokol.oknok_2_9_remark = request.POST.get('oknok_2_9_remark', '')
+    protokol.oknok_2_10 = request.POST.get('oknok_2_10', '')
+    protokol.oknok_2_10_remark = request.POST.get('oknok_2_10_remark', '')
+    protokol.oknok_2_11 = request.POST.get('oknok_2_11', '')
+    protokol.oknok_2_11_remark = request.POST.get('oknok_2_11_remark', '')
+    protokol.oknok_2_12 = request.POST.get('oknok_2_12', '')
+    protokol.oknok_2_12_remark = request.POST.get('oknok_2_12_remark', '')
+    protokol.oknok_2_13 = request.POST.get('oknok_2_13', '')
+    protokol.oknok_2_13_remark = request.POST.get('oknok_2_13_remark', '')
+    protokol.oknok_2_14 = request.POST.get('oknok_2_14', '')
+    protokol.oknok_2_14_remark = request.POST.get('oknok_2_14_remark', '')
+    protokol.oknok_3_1 = request.POST.get('oknok_3_1', '')
+    protokol.oknok_3_1_remark = request.POST.get('oknok_3_1_remark', '')
+    protokol.oknok_3_2 = request.POST.get('oknok_3_2', '')
+    protokol.oknok_3_2_remark = request.POST.get('oknok_3_2_remark', '')
+    protokol.oknok_3_3 = request.POST.get('oknok_3_3', '')
+    protokol.oknok_3_3_remark = request.POST.get('oknok_3_3_remark', '')
+    protokol.oknok_3_4 = request.POST.get('oknok_3_4', '')
+    protokol.oknok_3_4_remark = request.POST.get('oknok_3_4_remark', '')
+    protokol.oknok_3_5 = request.POST.get('oknok_3_5', '')
+    protokol.oknok_3_5_remark = request.POST.get('oknok_3_5_remark', '')
+    protokol.oknok_3_6 = request.POST.get('oknok_3_6', '')
+    protokol.oknok_3_6_remark = request.POST.get('oknok_3_6_remark', '')
+    protokol.oknok_3_8 = request.POST.get('oknok_3_8', '')
+    protokol.oknok_3_8_remark = request.POST.get('oknok_3_8_remark', '')
+    protokol.oknok_3_10 = request.POST.get('oknok_3_10', '')
+    protokol.oknok_3_10_remark = request.POST.get('oknok_3_10_remark', '')
+    protokol.oknok_3_11 = request.POST.get('oknok_3_11', '')
+    protokol.oknok_3_11_remark = request.POST.get('oknok_3_11_remark', '')
+    protokol.oknok_3_12 = request.POST.get('oknok_3_12', '')
+    protokol.oknok_3_12_remark = request.POST.get('oknok_3_12_remark', '')
+    protokol.oknok_3_13 = request.POST.get('oknok_3_13', '')
+    protokol.oknok_3_13_remark = request.POST.get('oknok_3_13_remark', '')
+    protokol.oknok_3_14 = request.POST.get('oknok_3_14', '')
+    protokol.oknok_3_14_remark = request.POST.get('oknok_3_14_remark', '')
+    protokol.oknok_3_15 = request.POST.get('oknok_3_15', '')
+    protokol.oknok_3_15_remark = request.POST.get('oknok_3_15_remark', '')
+    protokol.oknok_3_16 = request.POST.get('oknok_3_16', '')
+    protokol.oknok_3_16_remark = request.POST.get('oknok_3_16_remark', '')
+    protokol.oknok_3_17 = request.POST.get('oknok_3_17', '')
+    protokol.oknok_3_17_remark = request.POST.get('oknok_3_17_remark', '')
+    protokol.oknok_3_18 = request.POST.get('oknok_3_18', '')
+    protokol.oknok_3_18_remark = request.POST.get('oknok_3_18_remark', '')
+    protokol.oknok_3_19 = request.POST.get('oknok_3_19', '')
+    protokol.oknok_3_19_remark = request.POST.get('oknok_3_19_remark', '')
+    protokol.oknok_3_20 = request.POST.get('oknok_3_20', '')
+    protokol.oknok_3_20_remark = request.POST.get('oknok_3_20_remark', '')
+    protokol.oknok_3_21 = request.POST.get('oknok_3_21', '')
+    protokol.oknok_3_21_remark = request.POST.get('oknok_3_21_remark', '')
+    protokol.oknok_3_22 = request.POST.get('oknok_3_22', '')
+    protokol.oknok_3_22_remark = request.POST.get('oknok_3_22_remark', '')
+    protokol.oknok_3_23 = request.POST.get('oknok_3_23', '')
+    protokol.oknok_3_23_remark = request.POST.get('oknok_3_23_remark', '')
+    protokol.oknok_3_24 = request.POST.get('oknok_3_24', '')
+    protokol.oknok_3_24_remark = request.POST.get('oknok_3_24_remark', '')
+    protokol.oknok_3_25 = request.POST.get('oknok_3_25', '')
+    protokol.oknok_3_25_remark = request.POST.get('oknok_3_25_remark', '')
+    protokol.oknok_3_26 = request.POST.get('oknok_3_26', '')
+    protokol.oknok_3_26_remark = request.POST.get('oknok_3_26_remark', '')
+    protokol.oknok_3_27 = request.POST.get('oknok_3_27', '')
+    protokol.oknok_3_27_remark = request.POST.get('oknok_3_27_remark', '')
+    protokol.oknok_3_28 = request.POST.get('oknok_3_28', '')
+    protokol.oknok_3_28_remark = request.POST.get('oknok_3_28_remark', '')
+    protokol.oknok_3_29 = request.POST.get('oknok_3_29', '')
+    protokol.oknok_3_29_remark = request.POST.get('oknok_3_29_remark', '')
+    protokol.oknok_3_30 = request.POST.get('oknok_3_30', '')
+    protokol.oknok_3_30_remark = request.POST.get('oknok_3_30_remark', '')
+    protokol.oknok_3_31 = request.POST.get('oknok_3_31', '')
+    protokol.oknok_3_31_remark = request.POST.get('oknok_3_31_remark', '')
+    protokol.oknok_3_32 = request.POST.get('oknok_3_32', '')
+    protokol.oknok_3_32_remark = request.POST.get('oknok_3_32_remark', '')
+    protokol.oknok_4_1 = request.POST.get('oknok_4_1', '')
+    protokol.oknok_4_1_remark = request.POST.get('oknok_4_1_remark', '')
+    protokol.oknok_4_2 = request.POST.get('oknok_4_2', '')
+    protokol.oknok_4_2_remark = request.POST.get('oknok_4_2_remark', '')
+    protokol.oknok_4_3 = request.POST.get('oknok_4_3', '')
+    protokol.oknok_4_3_remark = request.POST.get('oknok_4_3_remark', '')
+    protokol.oknok_4_4 = request.POST.get('oknok_4_4', '')
+    protokol.oknok_4_4_remark = request.POST.get('oknok_4_4_remark', '')
+
+    protokol.text_4_5 = request.POST.get('text_4_5', '')
+    protokol.text_4_5_remark = request.POST.get('text_4_5_remark', '')
+    protokol.text_7_5 = request.POST.get('text_7_5', '')
+    protokol.text_7_5_remark = request.POST.get('text_7_5_remark', '')
+    protokol.text_7_6 = request.POST.get('text_7_6', '')
+    protokol.text_7_6_remark = request.POST.get('text_7_6_remark', '')
+    protokol.text_9_1=request.POST.get('text_9_1','')
+    protokol.text_9_1_remark=request.POST.get('text_9_1_remark','')
+    protokol.text_9_2=request.POST.get('text_9_2','')
+    protokol.text_9_2_remark=request.POST.get('text_9_2_remark','')
+    protokol.text_9_3=request.POST.get('text_9_3','')
+    protokol.text_9_3_remark=request.POST.get('text_9_3_remark','')
+    protokol.text_9_4=request.POST.get('text_9_4','')
+    protokol.text_9_4_remark=request.POST.get('text_9_4_remark','')
+    protokol.text_9_5=request.POST.get('text_9_5','')
+    protokol.text_9_5_remark=request.POST.get('text_9_5_remark','')
+    protokol.text_9_6=request.POST.get('text_9_6','')
+    protokol.text_9_6_remark=request.POST.get('text_9_6_remark','')
+    protokol.text_9_7=request.POST.get('text_9_7','')
+    protokol.text_9_7_remark=request.POST.get('text_9_7_remark','')
+    protokol.text_9_7_1=request.POST.get('text_9_7_1','')
+    protokol.text_9_7_1_remark=request.POST.get('text_9_7_1_remark','')
+    protokol.text_9_7_2=request.POST.get('text_9_7_2','')
+    protokol.text_9_7_2_remark=request.POST.get('text_9_7_2_remark','')
+    protokol.text_9_7_3=request.POST.get('text_9_7_3','')
+    protokol.text_9_7_3_remark=request.POST.get('text_9_7_3_remark','')
+    protokol.text_9_7_4=request.POST.get('text_9_7_4','')
+    protokol.text_9_7_4_remark=request.POST.get('text_9_7_4_remark','')
+    protokol.text_9_7_5=request.POST.get('text_9_7_5','')
+    protokol.text_9_7_5_remark=request.POST.get('text_9_7_5_remark','')
+    protokol.text_9_7_6=request.POST.get('text_9_7_6','')
+    protokol.text_9_7_6_remark=request.POST.get('text_9_7_6_remark','')
+    protokol.text_9_7_7=request.POST.get('text_9_7_7','')
+    protokol.text_9_7_7_remark=request.POST.get('text_9_7_7_remark','')
+    protokol.text_9_7_8=request.POST.get('text_9_7_8','')
+    protokol.text_9_7_8_remark=request.POST.get('text_9_7_8_remark','')
+
+    protokol.oknok_4_6 = request.POST.get('oknok_4_6', '')
+    protokol.oknok_4_6_remark = request.POST.get('oknok_4_6_remark', '')
+    protokol.oknok_4_7 = request.POST.get('oknok_4_7', '')
+    protokol.oknok_4_7_remark = request.POST.get('oknok_4_7_remark', '')
+    protokol.oknok_4_8 = request.POST.get('oknok_4_8', '')
+    protokol.oknok_4_8_remark = request.POST.get('oknok_4_8_remark', '')
+    protokol.oknok_4_9 = request.POST.get('oknok_4_9', '')
+    protokol.oknok_4_9_remark = request.POST.get('oknok_4_9_remark', '')
+    protokol.oknok_4_10 = request.POST.get('oknok_4_10', '')
+    protokol.oknok_4_10_remark = request.POST.get('oknok_4_10_remark', '')
+    protokol.oknok_4_11 = request.POST.get('oknok_4_11', '')
+    protokol.oknok_4_11_remark = request.POST.get('oknok_4_11_remark', '')
+    protokol.oknok_4_12 = request.POST.get('oknok_4_12', '')
+    protokol.oknok_4_12_remark = request.POST.get('oknok_4_12_remark', '')
+    protokol.oknok_4_13 = request.POST.get('oknok_4_13', '')
+    protokol.oknok_4_13_remark = request.POST.get('oknok_4_13_remark', '')
+    protokol.oknok_4_14 = request.POST.get('oknok_4_14', '')
+    protokol.oknok_4_14_remark = request.POST.get('oknok_4_14_remark', '')
+    protokol.oknok_5_1 = request.POST.get('oknok_5_1', '')
+    protokol.oknok_5_1_remark = request.POST.get('oknok_5_1_remark', '')
+    protokol.oknok_5_2 = request.POST.get('oknok_5_2', '')
+    protokol.oknok_5_2_remark = request.POST.get('oknok_5_2_remark', '')
+    protokol.oknok_5_3 = request.POST.get('oknok_5_3', '')
+    protokol.oknok_5_3_remark = request.POST.get('oknok_5_3_remark', '')
+    protokol.oknok_5_4 = request.POST.get('oknok_5_4', '')
+    protokol.oknok_5_4_remark = request.POST.get('oknok_5_4_remark', '')
+    protokol.oknok_5_5 = request.POST.get('oknok_5_5', '')
+    protokol.oknok_5_5_remark = request.POST.get('oknok_5_5_remark', '')
+    protokol.oknok_5_6 = request.POST.get('oknok_5_6', '')
+    protokol.oknok_5_6_remark = request.POST.get('oknok_5_6_remark', '')
+    protokol.oknok_5_7 = request.POST.get('oknok_5_7', '')
+    protokol.oknok_5_7_remark = request.POST.get('oknok_5_7_remark', '')
+    protokol.oknok_5_8 = request.POST.get('oknok_5_8', '')
+    protokol.oknok_5_8_remark = request.POST.get('oknok_5_8_remark', '')
+    protokol.oknok_5_9 = request.POST.get('oknok_5_9', '')
+    protokol.oknok_5_9_remark = request.POST.get('oknok_5_9_remark', '')
+    protokol.oknok_5_10 = request.POST.get('oknok_5_10', '')
+    protokol.oknok_5_10_remark = request.POST.get('oknok_5_10_remark', '')
+    protokol.oknok_5_11 = request.POST.get('oknok_5_11', '')
+    protokol.oknok_5_11_remark = request.POST.get('oknok_5_11_remark', '')
+    protokol.oknok_5_12 = request.POST.get('oknok_5_12', '')
+    protokol.oknok_5_12_remark = request.POST.get('oknok_5_12_remark', '')
+    protokol.oknok_5_13 = request.POST.get('oknok_5_13', '')
+    protokol.oknok_5_13_remark = request.POST.get('oknok_5_13_remark', '')
+    protokol.oknok_5_14 = request.POST.get('oknok_5_14', '')
+    protokol.oknok_5_14_remark = request.POST.get('oknok_5_14_remark', '')
+    protokol.oknok_5_15 = request.POST.get('oknok_5_15', '')
+    protokol.oknok_5_15_remark = request.POST.get('oknok_5_15_remark', '')
+    protokol.oknok_5_16 = request.POST.get('oknok_5_16', '')
+    protokol.oknok_5_16_remark = request.POST.get('oknok_5_16_remark', '')
+    protokol.oknok_5_17 = request.POST.get('oknok_5_17', '')
+    protokol.oknok_5_17_remark = request.POST.get('oknok_5_17_remark', '')
+    protokol.oknok_5_18 = request.POST.get('oknok_5_18', '')
+    protokol.oknok_5_18_remark = request.POST.get('oknok_5_18_remark', '')
+    protokol.oknok_5_19 = request.POST.get('oknok_5_19', '')
+    protokol.oknok_5_19_remark = request.POST.get('oknok_5_19_remark', '')
+    protokol.oknok_5_20 = request.POST.get('oknok_5_20', '')
+    protokol.oknok_5_20_remark = request.POST.get('oknok_5_20_remark', '')
+    protokol.oknok_5_21 = request.POST.get('oknok_5_21', '')
+    protokol.oknok_5_21_remark = request.POST.get('oknok_5_21_remark', '')
+    protokol.oknok_5_22 = request.POST.get('oknok_5_22', '')
+    protokol.oknok_5_22_remark = request.POST.get('oknok_5_22_remark', '')
+    protokol.oknok_5_23 = request.POST.get('oknok_5_23', '')
+    protokol.oknok_5_23_remark = request.POST.get('oknok_5_23_remark', '')
+    protokol.oknok_5_24 = request.POST.get('oknok_5_24', '')
+    protokol.oknok_5_24_remark = request.POST.get('oknok_5_24_remark', '')
+    protokol.oknok_5_25 = request.POST.get('oknok_5_25', '')
+    protokol.oknok_5_25_remark = request.POST.get('oknok_5_25_remark', '')
+    protokol.oknok_5_26 = request.POST.get('oknok_5_26', '')
+    protokol.oknok_5_26_remark = request.POST.get('oknok_5_26_remark', '')
+    protokol.oknok_5_27 = request.POST.get('oknok_5_27', '')
+    protokol.oknok_5_27_remark = request.POST.get('oknok_5_27_remark', '')
+    protokol.oknok_5_28 = request.POST.get('oknok_5_28', '')
+    protokol.oknok_5_28_remark = request.POST.get('oknok_5_28_remark', '')
+    protokol.oknok_5_29 = request.POST.get('oknok_5_29', '')
+    protokol.oknok_5_29_remark = request.POST.get('oknok_5_29_remark', '')
+    protokol.oknok_5_30 = request.POST.get('oknok_5_30', '')
+    protokol.oknok_5_30_remark = request.POST.get('oknok_5_30_remark', '')
+    protokol.oknok_5_31 = request.POST.get('oknok_5_31', '')
+    protokol.oknok_5_31_remark = request.POST.get('oknok_5_31_remark', '')
+    protokol.oknok_5_32 = request.POST.get('oknok_5_32', '')
+    protokol.oknok_5_32_remark = request.POST.get('oknok_5_32_remark', '')
+    protokol.oknok_5_33 = request.POST.get('oknok_5_33', '')
+    protokol.oknok_5_33_remark = request.POST.get('oknok_5_33_remark', '')
+    protokol.oknok_5_34 = request.POST.get('oknok_5_34', '')
+    protokol.oknok_5_34_remark = request.POST.get('oknok_5_34_remark', '')
+    protokol.oknok_5_35 = request.POST.get('oknok_5_35', '')
+    protokol.oknok_5_35_remark = request.POST.get('oknok_5_35_remark', '')
+    protokol.oknok_5_36 = request.POST.get('oknok_5_36', '')
+    protokol.oknok_5_36_remark = request.POST.get('oknok_5_36_remark', '')
+    protokol.oknok_5_37 = request.POST.get('oknok_5_37', '')
+    protokol.oknok_5_37_remark = request.POST.get('oknok_5_37_remark', '')
+    protokol.oknok_5_38 = request.POST.get('oknok_5_38', '')
+    protokol.oknok_5_38_remark = request.POST.get('oknok_5_38_remark', '')
+    protokol.oknok_5_39 = request.POST.get('oknok_5_39', '')
+    protokol.oknok_5_39_remark = request.POST.get('oknok_5_39_remark', '')
+    protokol.oknok_5_40 = request.POST.get('oknok_5_40', '')
+    protokol.oknok_5_40_remark = request.POST.get('oknok_5_40_remark', '')
+    protokol.oknok_5_41 = request.POST.get('oknok_5_41', '')
+    protokol.oknok_5_41_remark = request.POST.get('oknok_5_41_remark', '')
+    protokol.oknok_5_42 = request.POST.get('oknok_5_42', '')
+    protokol.oknok_5_42_remark = request.POST.get('oknok_5_42_remark', '')
+    protokol.oknok_5_43 = request.POST.get('oknok_5_43', '')
+    protokol.oknok_5_43_remark = request.POST.get('oknok_5_43_remark', '')
+    protokol.oknok_5_44 = request.POST.get('oknok_5_44', '')
+    protokol.oknok_5_44_remark = request.POST.get('oknok_5_44_remark', '')
+    protokol.oknok_5_45 = request.POST.get('oknok_5_45', '')
+    protokol.oknok_5_45_remark = request.POST.get('oknok_5_45_remark', '')
+    protokol.oknok_5_46 = request.POST.get('oknok_5_46', '')
+    protokol.oknok_5_46_remark = request.POST.get('oknok_5_46_remark', '')
+    protokol.oknok_5_47 = request.POST.get('oknok_5_47', '')
+    protokol.oknok_5_47_remark = request.POST.get('oknok_5_47_remark', '')
+    protokol.oknok_5_48 = request.POST.get('oknok_5_48', '')
+    protokol.oknok_5_48_remark = request.POST.get('oknok_5_48_remark', '')
+    protokol.oknok_5_49 = request.POST.get('oknok_5_49', '')
+    protokol.oknok_5_49_remark = request.POST.get('oknok_5_49_remark', '')
+    protokol.oknok_5_50 = request.POST.get('oknok_5_50', '')
+    protokol.oknok_5_50_remark = request.POST.get('oknok_5_50_remark', '')
+    protokol.oknok_5_51 = request.POST.get('oknok_5_51', '')
+    protokol.oknok_5_51_remark = request.POST.get('oknok_5_51_remark', '')
+    protokol.oknok_6_1 = request.POST.get('oknok_6_1', '')
+    protokol.oknok_6_1_remark = request.POST.get('oknok_6_1_remark', '')
+    protokol.oknok_6_2 = request.POST.get('oknok_6_2', '')
+    protokol.oknok_6_2_remark = request.POST.get('oknok_6_2_remark', '')
+    protokol.oknok_6_3 = request.POST.get('oknok_6_3', '')
+    protokol.oknok_6_3_remark = request.POST.get('oknok_6_3_remark', '')
+    protokol.oknok_6_4 = request.POST.get('oknok_6_4', '')
+    protokol.oknok_6_4_remark = request.POST.get('oknok_6_4_remark', '')
+    protokol.oknok_6_5 = request.POST.get('oknok_6_5', '')
+    protokol.oknok_6_5_remark = request.POST.get('oknok_6_5_remark', '')
+    protokol.oknok_6_6 = request.POST.get('oknok_6_6', '')
+    protokol.oknok_6_6_remark = request.POST.get('oknok_6_6_remark', '')
+    protokol.oknok_6_7 = request.POST.get('oknok_6_7', '')
+    protokol.oknok_6_7_remark = request.POST.get('oknok_6_7_remark', '')
+    protokol.oknok_6_8 = request.POST.get('oknok_6_8', '')
+    protokol.oknok_6_8_remark = request.POST.get('oknok_6_8_remark', '')
+    protokol.oknok_6_9 = request.POST.get('oknok_6_9', '')
+    protokol.oknok_6_9_remark = request.POST.get('oknok_6_9_remark', '')
+    protokol.oknok_6_10 = request.POST.get('oknok_6_10', '')
+    protokol.oknok_6_10_remark = request.POST.get('oknok_6_10_remark', '')
+    protokol.oknok_6_11 = request.POST.get('oknok_6_11', '')
+    protokol.oknok_6_11_remark = request.POST.get('oknok_6_11_remark', '')
+    protokol.oknok_6_12 = request.POST.get('oknok_6_12', '')
+    protokol.oknok_6_12_remark = request.POST.get('oknok_6_12_remark', '')
+    protokol.oknok_6_13 = request.POST.get('oknok_6_13', '')
+    protokol.oknok_6_13_remark = request.POST.get('oknok_6_13_remark', '')
+    protokol.oknok_7_1 = request.POST.get('oknok_7_1', '')
+    protokol.oknok_7_1_remark = request.POST.get('oknok_7_1_remark', '')
+    protokol.oknok_7_2 = request.POST.get('oknok_7_2', '')
+    protokol.oknok_7_2_remark = request.POST.get('oknok_7_2_remark', '')
+    protokol.oknok_7_3 = request.POST.get('oknok_7_3', '')
+    protokol.oknok_7_3_remark = request.POST.get('oknok_7_3_remark', '')
+    protokol.oknok_7_4 = request.POST.get('oknok_7_4', '')
+    protokol.oknok_7_4_remark = request.POST.get('oknok_7_4_remark', '')
+    protokol.oknok_8_1 = request.POST.get('oknok_8_1', '')
+    protokol.oknok_8_1_remark = request.POST.get('oknok_8_1_remark', '')
+    protokol.oknok_8_2 = request.POST.get('oknok_8_2', '')
+    protokol.oknok_8_2_remark = request.POST.get('oknok_8_2_remark', '')
+    protokol.oknok_8_3 = request.POST.get('oknok_8_3', '')
+    protokol.oknok_8_3_remark = request.POST.get('oknok_8_3_remark', '')
+    protokol.oknok_8_4 = request.POST.get('oknok_8_4', '')
+    protokol.oknok_8_4_remark = request.POST.get('oknok_8_4_remark', '')
+    protokol.oknok_8_5 = request.POST.get('oknok_8_5', '')
+    protokol.oknok_8_5_remark = request.POST.get('oknok_8_5_remark', '')
+    protokol.oknok_10_1 = request.POST.get('oknok_10_1', '')
+    protokol.oknok_10_1_remark = request.POST.get('oknok_10_1_remark', '')
+    protokol.oknok_10_2 = request.POST.get('oknok_10_2', '')
+    protokol.oknok_10_2_remark = request.POST.get('oknok_10_2_remark', '')
+    protokol.oknok_10_3 = request.POST.get('oknok_10_3', '')
+    protokol.oknok_10_3_remark = request.POST.get('oknok_10_3_remark', '')
+    protokol.oknok_10_4 = request.POST.get('oknok_10_4', '')
+    protokol.oknok_10_4_remark = request.POST.get('oknok_10_4_remark', '')
+    protokol.oknok_10_5 = request.POST.get('oknok_10_5', '')
+    protokol.oknok_10_5_remark = request.POST.get('oknok_10_5_remark', '')
+
+
+
+
+
+
+    protokol.check_size_1_21 = request.POST.get('check_size_1_21', '')
+    protokol.check_size_1_21_remark = request.POST.get('check_size_1_21_remark', '')
+    protokol.check_size_1_22 = request.POST.get('check_size_1_22', '')
+    protokol.check_size_1_22_remark = request.POST.get('check_size_1_22_remark', '')
+    protokol.check_size_3_7 = request.POST.get('check_size_3_7', '')
+    protokol.check_size_3_7_remark = request.POST.get('check_size_3_7_remark', '')
+    protokol.check_size_3_9 = request.POST.get('check_size_3_9', '')
+    protokol.check_size_3_9_remark = request.POST.get('check_size_3_9_remark', '')
 
     protokol.last_changer = request.user.username
     protokol.drawing = request.POST.get('drawing', '')
@@ -1128,31 +1337,183 @@ def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
     field_bases = [
         ('oknok_1_7_soll','oknok_1_7_soll'),
         ('oknok_1_1_soll','oknok_1_1_soll'),
+        ('oknok_1_2_soll','oknok_1_2_soll'),
+        ('oknok_1_3_soll','oknok_1_3_soll'),
+        ('oknok_1_4_soll','oknok_1_4_soll'),
+        ('oknok_1_5_soll','oknok_1_5_soll'),
+        ('oknok_1_6_soll','oknok_1_6_soll'),
+        ('oknok_1_7_soll','oknok_1_7_soll'),
+        ('oknok_1_8_soll','oknok_1_8_soll'),
+        ('oknok_1_9_soll','oknok_1_9_soll'),
+        ('oknok_1_10_soll','oknok_1_10_soll'),
+        ('oknok_1_11_soll','oknok_1_11_soll'),
         ('oknok_1_12_soll','oknok_1_12_soll'),
         ('oknok_1_13_soll','oknok_1_13_soll'),
+        ('oknok_1_14_soll','oknok_1_14_soll'),
         ('oknok_1_15_soll','oknok_1_15_soll'),
         ('oknok_1_16_soll','oknok_1_16_soll'),
+        ('oknok_1_17_soll','oknok_1_17_soll'),
         ('oknok_1_18_soll','oknok_1_18_soll'),
         ('oknok_1_19_soll','oknok_1_19_soll'),
-        ('oknok_1_2_soll','oknok_1_2_soll'),
-        ('oknok_1_21_soll','oknok_1_21_soll'),
-        ('oknok_1_22_soll','oknok_1_22_soll'),
+        ('oknok_1_20_soll','oknok_1_20_soll'),
         ('oknok_1_23_soll','oknok_1_23_soll'),
+        ('oknok_1_24_soll','oknok_1_24_soll'),
+        ('oknok_1_25_soll','oknok_1_25_soll'),
+        ('oknok_1_26_soll','oknok_1_26_soll'),
         ('oknok_1_27_soll','oknok_1_27_soll'),
+        ('oknok_1_28_soll','oknok_1_28_soll'),
         ('oknok_1_29_soll','oknok_1_29_soll'),
+        ('oknok_1_30_soll','oknok_1_30_soll'),
         ('oknok_1_31_soll','oknok_1_31_soll'),
         ('oknok_1_32_soll','oknok_1_32_soll'),
+        ('oknok_1_33_soll','oknok_1_33_soll'),
+        ('oknok_1_34_soll','oknok_1_34_soll'),
+        ('oknok_1_35_soll','oknok_1_35_soll'),
+        ('oknok_1_36_soll','oknok_1_36_soll'),
+        ('oknok_2_1_soll','oknok_2_1_soll'),
+        ('oknok_2_2_soll','oknok_2_2_soll'),
+        ('oknok_2_3_soll','oknok_2_3_soll'),
+        ('oknok_2_4_soll','oknok_2_4_soll'),
+        ('oknok_2_5_soll','oknok_2_5_soll'),
+        ('oknok_2_6_soll','oknok_2_6_soll'),
+        ('oknok_2_7_soll','oknok_2_7_soll'),
+        ('oknok_2_8_soll','oknok_2_8_soll'),
         ('oknok_2_9_soll','oknok_2_9_soll'),
+        ('oknok_2_10_soll','oknok_2_10_soll'),
+        ('oknok_2_11_soll','oknok_2_11_soll'),
         ('oknok_2_12_soll','oknok_2_12_soll'),
+        ('oknok_2_13_soll','oknok_2_13_soll'),
+        ('oknok_2_14_soll','oknok_2_14_soll'),
+        ('oknok_3_1_soll','oknok_3_1_soll'),
+        ('oknok_3_2_soll','oknok_3_2_soll'),
+        ('oknok_3_3_soll','oknok_3_3_soll'),
+        ('oknok_3_4_soll','oknok_3_4_soll'),
+        ('oknok_3_5_soll','oknok_3_5_soll'),
         ('oknok_3_6_soll','oknok_3_6_soll'),
-        ('oknok_3_9_soll','oknok_3_9_soll'),
+        ('oknok_3_8_soll','oknok_3_8_soll'),
+        ('oknok_3_10_soll','oknok_3_10_soll'),
+        ('oknok_3_11_soll','oknok_3_11_soll'),
+        ('oknok_3_12_soll','oknok_3_12_soll'),
+        ('oknok_3_13_soll','oknok_3_13_soll'),
+        ('oknok_3_14_soll','oknok_3_14_soll'),
+        ('oknok_3_15_soll','oknok_3_15_soll'),
+        ('oknok_3_16_soll','oknok_3_16_soll'),
+        ('oknok_3_17_soll','oknok_3_17_soll'),
+        ('oknok_3_18_soll','oknok_3_18_soll'),
+        ('oknok_3_19_soll','oknok_3_19_soll'),
+        ('oknok_3_20_soll','oknok_3_20_soll'),
         ('oknok_3_21_soll','oknok_3_21_soll'),
+        ('oknok_3_22_soll','oknok_3_22_soll'),
+        ('oknok_3_23_soll','oknok_3_23_soll'),
+        ('oknok_3_24_soll','oknok_3_24_soll'),
+        ('oknok_3_25_soll','oknok_3_25_soll'),
+        ('oknok_3_26_soll','oknok_3_26_soll'),
         ('oknok_3_27_soll','oknok_3_27_soll'),
+        ('oknok_3_28_soll','oknok_3_28_soll'),
+        ('oknok_3_29_soll','oknok_3_29_soll'),
+        ('oknok_3_30_soll','oknok_3_30_soll'),
+        ('oknok_3_31_soll','oknok_3_31_soll'),
+        ('oknok_3_32_soll','oknok_3_32_soll'),
+        ('oknok_4_1_soll','oknok_4_1_soll'),
         ('oknok_4_2_soll','oknok_4_2_soll'),
+        ('oknok_4_3_soll','oknok_4_3_soll'),
+        ('oknok_4_4_soll','oknok_4_4_soll'),
+        ('oknok_4_6_soll','oknok_4_6_soll'),
+        ('oknok_4_7_soll','oknok_4_7_soll'),
+        ('oknok_4_8_soll','oknok_4_8_soll'),
+        ('oknok_4_9_soll','oknok_4_9_soll'),
+        ('oknok_4_10_soll','oknok_4_10_soll'),
+        ('oknok_4_11_soll','oknok_4_11_soll'),
+        ('oknok_4_12_soll','oknok_4_12_soll'),
+        ('oknok_4_13_soll','oknok_4_13_soll'),
+        ('oknok_4_14_soll','oknok_4_14_soll'),
+        ('oknok_5_1_soll','oknok_5_1_soll'),
+        ('oknok_5_2_soll','oknok_5_2_soll'),
+        ('oknok_5_3_soll','oknok_5_3_soll'),
+        ('oknok_5_4_soll','oknok_5_4_soll'),
+        ('oknok_5_5_soll','oknok_5_5_soll'),
+        ('oknok_5_6_soll','oknok_5_6_soll'),
+        ('oknok_5_7_soll','oknok_5_7_soll'),
+        ('oknok_5_8_soll','oknok_5_8_soll'),
+        ('oknok_5_9_soll','oknok_5_9_soll'),
+        ('oknok_5_10_soll','oknok_5_10_soll'),
+        ('oknok_5_11_soll','oknok_5_11_soll'),
+        ('oknok_5_12_soll','oknok_5_12_soll'),
+        ('oknok_5_13_soll','oknok_5_13_soll'),
+        ('oknok_5_14_soll','oknok_5_14_soll'),
+        ('oknok_5_15_soll','oknok_5_15_soll'),
+        ('oknok_5_16_soll','oknok_5_16_soll'),
+        ('oknok_5_17_soll','oknok_5_17_soll'),
+        ('oknok_5_18_soll','oknok_5_18_soll'),
+        ('oknok_5_19_soll','oknok_5_19_soll'),
+        ('oknok_5_20_soll','oknok_5_20_soll'),
+        ('oknok_5_21_soll','oknok_5_21_soll'),
+        ('oknok_5_22_soll','oknok_5_22_soll'),
+        ('oknok_5_23_soll','oknok_5_23_soll'),
+        ('oknok_5_24_soll','oknok_5_24_soll'),
+        ('oknok_5_25_soll','oknok_5_25_soll'),
+        ('oknok_5_26_soll','oknok_5_26_soll'),
+        ('oknok_5_27_soll','oknok_5_27_soll'),
+        ('oknok_5_28_soll','oknok_5_28_soll'),
+        ('oknok_5_29_soll','oknok_5_29_soll'),
+        ('oknok_5_30_soll','oknok_5_30_soll'),
+        ('oknok_5_31_soll','oknok_5_31_soll'),
+        ('oknok_5_32_soll','oknok_5_32_soll'),
+        ('oknok_5_33_soll','oknok_5_33_soll'),
+        ('oknok_5_34_soll','oknok_5_34_soll'),
+        ('oknok_5_35_soll','oknok_5_35_soll'),
+        ('oknok_5_36_soll','oknok_5_36_soll'),
+        ('oknok_5_37_soll','oknok_5_37_soll'),
+        ('oknok_5_38_soll','oknok_5_38_soll'),
+        ('oknok_5_39_soll','oknok_5_39_soll'),
+        ('oknok_5_40_soll','oknok_5_40_soll'),
+        ('oknok_5_41_soll','oknok_5_41_soll'),
+        ('oknok_5_42_soll','oknok_5_42_soll'),
+        ('oknok_5_43_soll','oknok_5_43_soll'),
+        ('oknok_5_44_soll','oknok_5_44_soll'),
+        ('oknok_5_45_soll','oknok_5_45_soll'),
+        ('oknok_5_46_soll','oknok_5_46_soll'),
+        ('oknok_5_47_soll','oknok_5_47_soll'),
+        ('oknok_5_48_soll','oknok_5_48_soll'),
+        ('oknok_5_49_soll','oknok_5_49_soll'),
+        ('oknok_5_50_soll','oknok_5_50_soll'),
+        ('oknok_5_51_soll','oknok_5_51_soll'),
+        ('oknok_6_1_soll','oknok_6_1_soll'),
+        ('oknok_6_2_soll','oknok_6_2_soll'),
+        ('oknok_6_3_soll','oknok_6_3_soll'),
+        ('oknok_6_4_soll','oknok_6_4_soll'),
+        ('oknok_6_5_soll','oknok_6_5_soll'),
+        ('oknok_6_6_soll','oknok_6_6_soll'),
+        ('oknok_6_7_soll','oknok_6_7_soll'),
+        ('oknok_6_8_soll','oknok_6_8_soll'),
+        ('oknok_6_9_soll','oknok_6_9_soll'),
+        ('oknok_6_10_soll','oknok_6_10_soll'),
+        ('oknok_6_11_soll','oknok_6_11_soll'),
+        ('oknok_6_12_soll','oknok_6_12_soll'),
+        ('oknok_6_13_soll','oknok_6_13_soll'),
+        ('oknok_7_1_soll','oknok_7_1_soll'),
+        ('oknok_7_2_soll','oknok_7_2_soll'),
+        ('oknok_7_3_soll','oknok_7_3_soll'),
+        ('oknok_7_4_soll','oknok_7_4_soll'),
+        ('oknok_8_1_soll','oknok_8_1_soll'),
+        ('oknok_8_2_soll','oknok_8_2_soll'),
+        ('oknok_8_3_soll','oknok_8_3_soll'),
+        ('oknok_8_4_soll','oknok_8_4_soll'),
+        ('oknok_8_5_soll','oknok_8_5_soll'),
+        ('oknok_10_1_soll','oknok_10_1_soll'),
+        ('oknok_10_2_soll','oknok_10_2_soll'),
+        ('oknok_10_3_soll','oknok_10_3_soll'),
+        ('oknok_10_4_soll','oknok_10_4_soll'),
+        ('oknok_10_5_soll','oknok_10_5_soll'),
+
+
+
+
+
+
         
         ('check_size_10_2_soll', 'check_size_10_2_soll_avr'),
 
-        ('oknok_3_6_soll', 'check_size_1_soll_avr'),
         ('check_size_3_soll', 'check_size_3_soll_avr'),
         ('oknok_size_1_soll', 'check_size_4_soll_avr'),
         ('check_size_4a_soll', 'check_size_4a_soll_avr'),
@@ -1217,8 +1578,7 @@ def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
         protokol.isPermanentDone = protokol1.isPermanentDone
 
         protokol.oknok_3_6_soll = protokol1.oknok_3_6_soll
-        protokol.check_size_10_2_soll = protokol1.check_size_10_2_soll
-        protokol.check_size_10_2_soll_avr = protokol1.check_size_10_2_soll_avr
+        protokol.oknok_1_10_soll = protokol1.oknok_1_10_soll
 
 
         protokol.check_size_2_soll_avr = protokol1.check_size_2_soll_avr

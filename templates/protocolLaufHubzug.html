@@ -1,381 +1,556 @@
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+{% load convert_tags %}
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ protokol.protocolName }}</title>
-    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+  <meta charset="UTF-8" />
+  <title>{{ protokol.protocolName }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Libraries (same versions used elsewhere) -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- Page CSS -->
+  <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+  <style>
+  
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+* { box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+html, body { height: 100%; margin: 0; background: #000028; color: #fff; }
+.siemens-header { display:flex; align-items:center; justify-content:space-between; background:#1f1f39; color:#fff; padding:10px 20px; width:100%; box-shadow:0 2px 4px rgba(0,0,0,0.3); }
+.siemens-logo { font-weight:700; font-size:18px; }
+.siemens-center { flex:1; min-width:200px; text-align:center; }
+.siemens-title { font-size:16px; font-weight:600; }
+.welcome-text { font-size:14px; color:#ccc; }
+.page-wrap { width: 94%; max-width: 1280px; margin: 24px auto 60px; }
+.content-card { background:#23233C; border-radius:10px; box-shadow:0 0 20px rgba(0,0,0,0.10); padding:16px; }
+.form-control { background:#00183B; color:#B3B3BE; border:1px solid #2B3C5B; padding:6px 8px; border-radius:4px; }
+.form-control:focus { background:#00183B; color:#B3B3BE; border-color:#00a3a3; outline:none; box-shadow:0 0 0 0.2rem rgba(0,163,163,0.25); }
+
+  
+.checksheet { --line: rgba(255,255,255,0.35); --head-bg:#2c2c4a; --head-text:#e8f6ff; --left-bg:#1f2642; }
+.checksheet .section { width:100%; border-collapse:collapse; table-layout:fixed; margin-bottom:12px; }
+.checksheet th, .checksheet td { border:1px solid var(--line); padding:6px 6px; text-align:center; vertical-align:middle; color:#fff; }
+.checksheet th.group { background: var(--head-bg); color: var(--head-text); font-weight:600; }
+.checksheet th.no, .checksheet td.no { width:34px; font-weight:700; background:#202a4f; }
+.checksheet th.left, .checksheet td.left { background: var(--left-bg); width:260px; font-weight:600; line-height:1.15; }
+.checksheet .tight { padding:2px; }
+.checksheet .torque { min-width:64px; font-weight:600; color:#9fe3e3; }
+.checksheet .seal input { text-transform: none; }
+.checksheet input[type="text"] { width:100%; border:0; padding:6px 6px; text-align:center; font:inherit; background:#00183B; color:#B3B3BE; border:1px solid #2B3C5B; border-radius:4px; }
+.checksheet input[type="text"]:focus { border-color:#00a3a3; box-shadow:0 0 0 0.2rem rgba(0,163,163,0.25); outline:none; }
+@media (max-width: 900px) {
+  .checksheet th.left, .checksheet td.left { width:200px; }
+}
+
+  </style>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+<header class="siemens-header">
+    <div class="siemens-logo">
+      {% if current_user.pruefer == True %}
+        <a href="/prueferView/" class="back-link" aria-label="Back to Prüfer View">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      {% else %}
+        <a href="/hubzug/?fahrzeugId={{ fahrzeug_id }}" class="back-link" aria-label="Back to Hubzug">
+          <i class="fas fa-arrow-left"></i>
+        </a>
+      {% endif %}
     </div>
-    <div class="container">
-        {% if current_user.pruefer == True %}
-        <a href='/prueferView/' class="back-button">Back</a>    
-        {% else %}
-        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
-        {% endif %}
-        <h1>{{protokol.protocolName}}</h1>
-        <form id="protokol-form" action="{% url 'protocolLaufHubzugUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
-            {% csrf_token %}
-            <table class="form-table">
-                <tr>
-                    <th>Beschreibung / Description</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>Zeichnung-Nr / Drawing No.:</td>
-                    <td><input type="text" id="drawing" name="drawing" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.drawing|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Rev:</td>
-                    <td><input type="text" id="rev" name="rev" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.rev|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Auftragsnr. / Order No.:</td>
-                    <td><input type="text" id="order" name="order" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Auftragsnr.-SAG / Order No.-SAG:</td>
-                    <td><input type="text" id="order_sag" name="order_sag" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order_sag|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Hubzug-Nr. / Hoist No.:</td>
-                    <td><input type="text" id="hoist" name="hoist" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.hoist|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Hublast / Load Type:</td>
-                    <td><input type="text" id="loadTp" name="loadTp" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.loadTp|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Firma / Company:</td>
-                    <td><input type="text" id="company" name="company" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.company|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Stückzahl / Quantity:</td>
-                    <td><input type="text" id="quantity" name="quantity" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.quantity|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Baustelle:</td>
-                    <td><input type="text" id="baustelle" name="baustelle" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.baustelle|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <th>Beschreibung / Description</th>
-                    <th> O.K / N.O.K</th>
-                </tr>
-                <tr>
-                    <td><b>1.</b> Seilzeugnisse aller Hubseile vorhanden? / All Rope certificates available?</td>
-                    <td>
-                        <select id="check_size_1" name="check_size_1" class="select-control">
-                            <option value="" {% if protokol.check_size_1 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_1 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_1 == 'NOK' %}selected{% endif %}>NOK</option>
-                            {% if current_user.pruefer == True %}
-                                <option value="NAE" {% if protokol.check_size_1 == 'NAE' %}selected{% endif %}>NAE</option>
-                            {% endif %}
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>2.</b> Laufschein Seiltrommel ausgefüllt und unterschrieben? / Route card for rope drum filled-in and signed?</td>
-                    <td>
-                        <select id="check_size_2" name="check_size_2" class="select-control">
-                            <option value="" {% if protokol.check_size_2 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_2 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_2 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_2 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
 
-                </tr>
-                <tr>
-                    <td><b>3.</b> Name des Schweißers des Hubzugsrahmen / Name of approved welder (Qualifikation Klasse E, DIN EN 1090 (T1-3))</td>
-                    <td>
-                        <input type="text" id="check_size_3" name="check_size_3" class="textarea-control" 
-                               value="{{ protokol.check_size_3|default_if_none:'' }}">
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>4.</b> Schweißnähte des Hubzugsrahmen geprüft? / Visual Check of the welding seams of the lifting frame</td>
-                    <td>
-                        <select id="check_size_4" name="check_size_4" class="select-control">
-                            <option value="" {% if protokol.check_size_4 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_4 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_4 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_4 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr></tr>
-                    <td><b>4a.</b> Schweißnähte Rissprüfung durchgeführt? Geräte-Nr? Mindestens 1 Stück je Auftrag und jeder 20. Hubzugrahmen. / Crack test of the weldings of the frame done? Hoist No.? At least once for each order and every 20th frame.</td>
-                    <td>
-                        <select id="check_size_4a" name="check_size_4a" class="select-control">
-                            <option value="" {% if protokol.check_size_4a is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_4a == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_4a == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_4a == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>5.</b> Dokumentation zu 4 und 4a vorhanden? / Documentation for 4 and 4a available?</td>
-                    <td>
-                        <select id="check_size_5" name="check_size_5" class="select-control">
-                            <option value="" {% if protokol.check_size_5 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_5 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_5 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_5 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>6.</b> Wurde die Checkliste "Maßkontrolle Hubzugsrahmen" ausgefüllt? / Checklist "Measure Check Hoist Frame" filled in?</td>
-                    <td>
-                        <select id="check_size_6" name="check_size_6" class="select-control">
-                            <option value="" {% if protokol.check_size_6 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_6 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_6 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_6 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                
-                <tr>
-                    <td><b>7.</b> Wurde die Checkliste "Zwischenkontrolle Hubzug" ausgefüllt? / Checklist "Intermediate Check Hoist" filled in?</td>
-                    <td>
-                        <select id="check_size_7" name="check_size_7" class="select-control">
-                            <option value="" {% if protokol.check_size_7 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_7 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_7 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_7 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>8.</b> Hubzugsrahmen dauerhaft mit Gerätenummer gekennzeichnet (Schlagzahl am Rahmen)? / Number of lifting hoist</td>
-                    <td>
-                        <select id="check_size_8" name="check_size_8" class="select-control">
-                            <option value="" {% if protokol.check_size_8 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_8 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_8 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_8 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>9.</b> Wurde die Checkliste "Laufschein Klinkeneinheit" ausgefüllt? / Checklist "Route card Catch detent unit" filled in?</td>
-                    <td>
-                        <select id="check_size_9" name="check_size_9" class="select-control">
-                            <option value="" {% if protokol.check_size_9 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_9 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_9 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_9 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>10.</b> Lackierung in Ordnung? Sichtprüfung / Painting okay? Visual check</td>
-                    <td>
-                        <select id="check_size_10" name="check_size_10" class="select-control">
-                            <option value="" {% if protokol.check_size_10 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_10 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_10 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_10 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>11.</b> Konservierung der blanken Teile erfolgt? / Conservation of all blank parts done?</td>
-                    <td>
-                        <select id="check_size_11" name="check_size_11" class="select-control">
-                            <option value="" {% if protokol.check_size_11 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_11 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_11 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_11 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>12.</b> Seile aufgelegt? Auf Länge und Schlagrichtung achten. / Steel ropes mounted? Take care of Length and lay direction.</td>
-                    <td>
-                        <select id="check_size_12" name="check_size_12" class="select-control">
-                            <option value="" {% if protokol.check_size_12 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_12 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_12 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_12 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>13.</b> Schlagrichtung der Seile nach Zeichnung? Seilrille Links und Rechts beachten (Linkssteigung für Seil mit Rechtsschlag.) / Lay direction of the ropes according to drawing? Take care of left and right thread of rope groove (Left thread groove for right lay direction)</td>
-                    <td>
-                        <select id="check_size_13" name="check_size_13" class="select-control">
-                            <option value="" {% if protokol.check_size_13 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_13 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_13 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_13 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>14.</b> NUR BEI 2 ANTRIEBEN. Abschaltsignalprüfung Rechter Antrieb. Prüfgewicht siehe Parameterliste. 3x wiederholen. Prüfung Endschalterabstand nach Zeichnung / ONLY IN CASE OF2 MOTORS! Power off signal check only right drive unit. Testing weight see Parameter list. Repeating three times</td>
-                    <td>
-                        <select id="check_size_14" name="check_size_14" class="select-control">
-                            <option value="" {% if protokol.check_size_14 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_14 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_14 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_14 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>15.</b> NUR BEI 2 ANTRIEBEN. Abschaltsignalprüfung Linker Antrieb. Prüfgewicht siehe Parameterliste. 3x wiederholen. Prüfung Endschalterabstand nach Zeichnung / ONLY IN CASE OF2 MOTORS! Power off signal check only left drive unit. Testing weight see Parameter list. Repeating three times</td>
-                    <td>
-                        <select id="check_size_15" name="check_size_15" class="select-control">
-                            <option value="" {% if protokol.check_size_15 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_15 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_15 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_15 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>16.</b> Heben und Senken mit 1,25-facher Nennlast, keine ungewöhnliche Laufgeräusche vorhanden? / Lifting and Lowering with 1.25 times of nominal load. No running noises should be existend</td>
-                    <td>
-                        <select id="check_size_16" name="check_size_16" class="select-control">
-                            <option value="" {% if protokol.check_size_16 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_16 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_16 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_16 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>17.</b> Prüfbuch Hubzug vorhanden mit allen für den Hubzug erforderlichen Eintragungen und Unterschriften? / Is test book for hoist available including all necessary data and signatures?</td>
-                        <td>
-                        <select id="check_size_17" name="check_size_17" class="select-control">
-                            <option value="" {% if protokol.check_size_17 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_17 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_17 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_17 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>18.</b> Hubantrieb rechts: Bezeichnung: / Lift motor right: Identification:</td>
-                    <td>
-                        <select id="check_size_18" name="check_size_18" class="select-control">
-                            <option value="" {% if protokol.check_size_18 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_18 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_18 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_18 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>19.</b> Hubantrieb links: Bezeichnung: / Lift motor left: Identification:</td>
-                    <td>
-                        <select id="check_size_19" name="check_size_19" class="select-control">
-                            <option value="" {% if protokol.check_size_19 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_19 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_19 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_19 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>20.</b> Gerätenummer Seiltrommel (stirnseitig) eintragen: / Fill in device number of rope drum (on the face side):</td>
-                    <td>
-                        <input type="text" id="check_size_20" name="check_size_20" class="textarea-control" 
-                               value="{{ protokol.check_size_20|default_if_none:'' }}">
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>21.</b> Gerätenummer der Fangklinkeneinheit eintragen: / Fill in device number of catch detent unit:</td>
-                    <td>
-                        <input type="text" id="check_size_21" name="check_size_21" class="textarea-control" 
-                               value="{{ protokol.check_size_21|default_if_none:'' }}">
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>22.</b> Typenschild komplett ausgefüllt und gut lesbar angebracht. / Type plate filled in complete and fixed on hoist</td>
-                    <td>
-                        <select id="check_size_22" name="check_size_22" class="select-control">
-                            <option value="" {% if protokol.check_size_22 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_22 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_22 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_22 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr>
-                    <td><b>23.</b> Wurde die Checkliste Endkontrolle Hubzug ausgefüllt? / Was the check list "Lifting hoist Final Check" filled in?</td>
-                    <td>
-                        <select id="check_size_23" name="check_size_23" class="select-control">
-                            <option value="" {% if protokol.check_size_23 is none %}selected{% endif %}></option>
-                            <option value="OK" {% if protokol.check_size_23 == 'OK' %}selected{% endif %}>OK</option>
-                            <option value="NOK" {% if protokol.check_size_23 == 'NOK' %}selected{% endif %}>NOK</option>
-                            <option value="NAE" {% if protokol.check_size_23 == 'NAE' %}selected{% endif %}>NAE</option>
-                        </select>
-                    </td>
-                </tr>
+    <div class="siemens-center">
+      <div class="siemens-title">Construction App</div>
+      <div class="welcome-text">Welcome, {{ username }}</div>
+    </div>
+
+    <div class="siemens-menu">
+      <button class="menu-button" aria-haspopup="true" aria-expanded="false" aria-controls="mainMenu">☰</button>
+      <div id="mainMenu" class="dropdown-menu">
+        <a href="#" data-toggle="modal" data-target="#passwordChangeModal">
+          <i class="fas fa-key"></i> Change Password
+        </a>
+        <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+      </div>
+    </div>
+  </header>
+
+<main class="page-wrap">
+  <section class="content-card">
+    <h1 class="page-title">{{ protokol.protocolName }}</h1>
+
+    <div class="checksheet">
+
+      <!-- ==================== SECTION 1 ==================== -->
+      <table class="section" aria-label="Section 1">
+        <tr>
+          <th rowspan="4" class="no">1.</th>
+          <th rowspan="4" class="left">
+            GELENKBOLZEN<br>MAẞE<br><br>
+            PIVOT PIN<br>DIMENSIONS
+          </th>
+          <th colspan="4" class="group">FERTIGER / MANUFACTURER</th>
+          <th colspan="8" class="group">BAUSTELLE / BUILDING SITE</th>
+        </tr>
+        <tr>
+          <!-- Manufacturer -->
+          <th rowspan="2">VORNE / FRONT</th>
+          <th colspan="2">MITTE / MIDDLE</th>
+          <th rowspan="2">HINTEN / BACK</th>
+          <!-- Building site -->
+          <th rowspan="2">VORNE / FRONT</th>
+          <th colspan="2">MITTE / MIDDLE</th>
+          <th rowspan="2">HINTEN / BACK</th>
+          <th colspan="3">DREHMOMENT LEGESCHLÜSSEL / TORQUE SET WRENCH / Nm</th>
+          <th rowspan="2">SIEGEL LACK</th>
+        </tr>
+        <tr>
+          <!-- Mitte splits -->
+          <th>VORNE / FRONT</th>
+          <th>HINTEN / BACK</th>
+          <th>VORNE / FRONT</th>
+          <th>HINTEN / BACK</th>
+          <!-- torque values -->
+          <th class="torque">137</th>
+          <th class="torque">46</th>
+          <th class="torque">18</th>
+        </tr>
+        <tr>
+          <!-- inputs -->
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          
+          <td class="seal"><input type="text" class="form-control" placeholder="Siegel / Lack" /></td>
+        </tr>
+      </table>
+
+      <!-- ==================== SECTION 2 ==================== -->
+      <table class="section" aria-label="Section 2">
+        <tr>
+          <th rowspan="4" class="no">2.</th>
+          <th rowspan="4" class="left">
+            Z - RICHTUNG<br>OBERRAHMEN SCHRAUBEN 4×<br><br>
+            Z - DIRECTION UPPER FRAME ( SCREWS 4× )
+          </th>
+          <th colspan="4" class="group">FERTIGER / MANUFACTURER</th>
+          <th colspan="4" class="group">BAUSTELLE / BUILDING SITE</th>
+        </tr>
+        <tr>
+          <th colspan="2">VORNE / FRONT</th>
+          <th colspan="2">HINTEN / BACK</th>
+          <th colspan="2">VORNE / FRONT</th>
+          <th colspan="2">HINTEN / BACK</th>
+        </tr>
+        <tr>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+        </tr>
+        <tr>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+        </tr>
+      </table>
+
+      <!-- ==================== SECTION 3 ==================== -->
+      <table class="section" aria-label="Section 3">
+        <tr>
+          <th rowspan="4" class="no">3.</th>
+          <th rowspan="4" class="left">
+            Z - RICHTUNG UNTERRAHMEN ( LAM ANSCHLAGS-PUNKTE )<br><br>
+            Z - DIRECTION LOWER FRAME ( LAM STOP POINTS )
+          </th>
+          <th colspan="4" class="group">FERTIGER / MANUFACTURER</th>
+          <th colspan="4" class="group">BAUSTELLE / BUILDING SITE</th>
+        </tr>
+        <tr>
+          <th colspan="2">VORNE / FRONT</th>
+          <th colspan="2">HINTEN / BACK</th>
+          <th colspan="2">VORNE / FRONT</th>
+          <th colspan="2">HINTEN / BACK</th>
+        </tr>
+        <tr>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+        </tr>
+        <tr>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+        </tr>
+      </table>
+
+      <!-- ==================== SECTION 4 ==================== -->
+      <table class="section" aria-label="Section 4">
+        <tr>
+          <th rowspan="4" class="no">4.</th>
+          <th rowspan="4" class="left">
+            ABSTAND OBER - ZU UNTERRAHMEN IN REFERENZPOSITION (OBEN) Z - WERT :<br><br>
+            DISTANCE UPPER - TO LOWER FRAME IN REFERENCE POSITION (TOP) Z - VALUE :
+          </th>
+          <th colspan="4" class="group">FERTIGER / MANUFACTURER</th>
+          <th colspan="4" class="group">BAUSTELLE / BUILDING SITE</th>
+        </tr>
+        <tr>
+          <th colspan="2">VORNE / FRONT</th>
+          <th colspan="2">HINTEN / BACK</th>
+          <th colspan="2">VORNE / FRONT</th>
+          <th colspan="2">HINTEN / BACK</th>
+        </tr>
+        <tr>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+          <th>LINKS / LEFT</th>
+          <th>RECHTS / RIGHT</th>
+        </tr>
+        <tr>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+        </tr>
+      </table>
+
+      <!-- ==================== SECTION 5 ==================== -->
+      <table class="section" aria-label="Section 5">
+        <tr>
+          <th rowspan="4" class="no">5.</th>
+          <th rowspan="4" class="left">
+            HUBBEWEGUNG IN X - RICHTUNG<br><br>
+            Z-WERT OBEN : ____<br>
+            Z-WERT UNTEN : ____<br>
+            TOLERANZ : ± 2mm<br><br>
+            LIFTING MOVEMENT IN X - DIRECTION<br><br>
+            Z-VALUE TOP : ____<br>
+            Z-VALUE BOTTOM : ____<br>
+            TOLERANCE : ± 2mm
+          </th>
+          <th colspan="2" class="group">FERTIGER / MANUFACTURER</th>
+          <th colspan="9" class="group">BAUSTELLE / BUILDING SITE</th>
+        </tr>
+        <tr>
+          <th colspan="2">LETZTE MESSUNG / LAST MEASUREMENT</th>
+          <th colspan="3">1. MESSUNG / MEASUREMENT</th>
+          <th colspan="3">2. MESSUNG / MEASUREMENT</th>
+          <th colspan="3">3. MESSUNG / MEASUREMENT</th>
+        </tr>
+        <tr>
+          <th>OBEN / TOP</th>
+          <th>UNTEN / DOWN</th>
+          <th>OBEN / TOP</th>
+          <th>UNTEN / DOWN</th>
+          <th class="tight">X</th>
+          <th>OBEN / TOP</th>
+          <th>UNTEN / DOWN</th>
+          <th class="tight">X</th>
+          <th>OBEN / TOP</th>
+          <th>UNTEN / DOWN</th>
+          <th class="tight">X</th>
+        </tr>
+        <tr>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" placeholder="X" /></td>
+
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" placeholder="X" /></td>
+
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" /></td>
+          <td><input type="text" class="form-control" placeholder="X" /></td>
+        </tr>
+      </table>
+
+    </div>
+  </section>
+</main>
+
+<!-- Scripts -->
+<script defer src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  function submitExportForm(button) {
+
+    // If validation passes, proceed to submit the form
+    const url = button.getAttribute('data-url');
+    
+    // Create a form element to submit the POST request
+    const form = document.getElementById('protokol-form');
+    form.method = 'POST';
+    form.action = url;
+    
+    // Add CSRF token for Django
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = 'csrfmiddlewaretoken';
+    csrfInput.value = csrfToken;
+    form.appendChild(csrfInput);
+    
+    // Optionally, add any other hidden inputs needed
+    // const otherInput = document.createElement('input');
+    // otherInput.type = 'hidden';
+    // otherInput.name = 'some_name';
+    // otherInput.value = 'some_value';
+    // form.appendChild(otherInput);
+
+    document.body.appendChild(form);
+    form.submit(); // Submit the form
+}
+    // Helper: collect empties from the "Actual" column (col #7)
+function findEmptyActualRows() {
+  const rows = Array.from(document.querySelectorAll('#protokol-form tbody tr'));
+  const empties = [];
+
+  rows.forEach(tr => {
+    const cells = tr.querySelectorAll('td');
+    if (cells.length < 7) return;
+    const noCell = cells[0];               // "No" column
+    const actualCell = cells[6];           // 0-based index → 7th column = Actual
+
+    // find the first input/select/textarea inside the Actual cell
+    const ctrl = actualCell.querySelector('input, select, textarea');
+    if (!ctrl) return; // skip rows without a control in Actual
+
+    let val = (ctrl.value ?? '').trim();
+    // For number inputs, empty string is empty; "0" is valid
+    const isEmpty = val === '';
+
+    if (isEmpty) {
+      const rowNo = (noCell?.innerText || '').trim() || '(ohne Nr.)';
+      const desc = (tr.querySelector('td:nth-child(2)')?.innerText || '').trim();
+      empties.push({ rowNo, desc });
+    }
+  });
+
+  return empties;
+}
+
+// Build list in modal
+function populateEmptyList(items) {
+  const ul = document.getElementById('emptyActualList');
+  ul.innerHTML = '';
+  items.forEach(it => {
+    const li = document.createElement('li');
+    li.textContent = `${it.rowNo} — ${it.desc}`;
+    ul.appendChild(li);
+  });
+}
+
+// Do the actual submit (same effect as your original submitClosedForm)
+function proceedSubmit(url) {
+  const form = document.getElementById('protokol-form');
+  form.method = 'POST';
+  form.action = url;
+
+  // ensure CSRF exists (avoid duplicates if already there)
+  const existing = form.querySelector('input[name="csrfmiddlewaretoken"]');
+  if (!existing) {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = 'csrfmiddlewaretoken';
+    csrfInput.value = csrfToken;
+    form.appendChild(csrfInput);
+  }
+
+  form.submit();
+}
+
+// Intercept "Protokoll abschließen"
+function submitClosedForm(button) {
+  const url = button.getAttribute('data-url');
+  const empties = findEmptyActualRows();
+
+  if (empties.length === 0) {
+    // no empties → proceed directly
+    proceedSubmit(url);
+    return;
+  }
+
+  // show modal with list; only proceed on confirm
+  populateEmptyList(empties);
+  $('#confirmEmptyModal').modal('show');
+
+  const confirmBtn = document.getElementById('confirmProceedBtn');
+  // Avoid stacking multiple handlers
+  confirmBtn.onclick = () => {
+    $('#confirmEmptyModal').modal('hide');
+    proceedSubmit(url);
+  };
+}
+  // Header dropdown toggle
+  document.addEventListener('DOMContentLoaded', function () {
+    const btn = document.querySelector('.menu-button');
+    const wrap = document.querySelector('.siemens-menu');
+    if (btn && wrap) {
+      btn.addEventListener('click', () => {
+        const active = wrap.classList.toggle('active');
+        btn.setAttribute('aria-expanded', String(active));
+      });
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+    function setDot(dot, color) {
+      dot.classList.remove('status--green', 'status--orange', 'status--red');
+      if (color) {
+        dot.classList.add(color);
+        dot.hidden = false;
+      } else {
+        dot.hidden = true;
+      }
+    }
   
-                <tr>
-                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
-                </tr>
+    function parseNum(v) {
+      const x = parseFloat(String(v).replace(',', '.'));
+      return Number.isFinite(x) ? x : NaN;
+    }
+  
+    function updateStatus(cell) {
+      const rule = cell.dataset.rule;
+      const target = document.querySelector(cell.dataset.target);
+      const dot = cell.querySelector('.status-dot');
+      if (!target || !dot) return;
+  
+      const val = target.value?.trim();
+  
+      if (rule === 'oknok') {
+        if (val.toUpperCase() === 'OK') setDot(dot, 'status--green');
+        else if (val.toUpperCase() === 'NOK') setDot(dot, 'status--red');
+        else if (val.toUpperCase() === 'AOK') setDot(dot, 'status--orange');
+        else setDot(dot, null);
+      }
+  
+      if (rule === 'range') {
+        if (!val) { setDot(dot, null); return; }
+  
+        const num = parseNum(val);
+        const min = parseNum(target.dataset.min);
+        const max = parseNum(target.dataset.max);
+  
+        if (!Number.isFinite(num) || !Number.isFinite(min) || !Number.isFinite(max)) {
+          setDot(dot, null);
+          return;
+        }
+  
+        if (num < min || num > max) setDot(dot, 'status--red');
+        else setDot(dot, 'status--green');
+      }
+    }
+  
+    // NEW: checks if any red exists, updates hidden field
+    function updateKorrekturFlag() {
+      const hasRed = document.querySelector('.status-dot.status--red');
+      const kor = document.getElementById('korrektur');
+      if (!kor) return;
+  
+      if (hasRed) kor.value = "True";
+      else kor.value = "";
+    }
+  
+    // Initialize + bind
+    document.querySelectorAll('.status-cell').forEach(cell => {
+      const target = document.querySelector(cell.dataset.target);
+      if (target) {
+        updateStatus(cell);
+        target.addEventListener('input', () => {
+          updateStatus(cell);
+          updateKorrekturFlag();
+        });
+        target.addEventListener('change', () => {
+          updateStatus(cell);
+          updateKorrekturFlag();
+        });
+      }
+    });
+  
+    // Check once on load
+    updateKorrekturFlag();
 
-                <tr>
-                    <td><input type="text" id="nacharbeit" name="nacharbeit" style="display:none;" value=""></td>
-                </tr>
-                
-                <tr>
-                    <td><h4>Sonstiges / Miscellaneous</h4></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Bemerkungen / Remarks:</td>
-                    <td><input type="text" id="remark" name="remark" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.remark|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Datum / Date:</td>
-                    <td><input type="date" id="date" name="date" class="textarea-control" value="{{ protokol.date|default_if_none:'' }}" ></td>
-                  </tr>
-                {% if current_user.pruefer %}
-                    <tr>
-                        <td>Prüfer / Inspector:</td>
-                        <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
-                    </tr>
-                {% endif %}
-                <tr>
-                    <td>Abteilung / Department:</td>
-                    <td><input type="text" id="department" name="department" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.department|default_if_none:'' }}"></td>
-                </tr>
-                <tr>
-                    <td>Last modified:</td>
-                    <td>{{ protokol.last_changer|default_if_none:"" }}</td>
-                </tr>
-            </table>
-            <div class="button-container">
-                <button type="submit" class="btn-save">Speichern</button>
-                {% if current_user.pruefer == True %}
-                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLaufSeiltrommel' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
-                {% else %}
-                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolLaufHubzugClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
-                {% endif %}
-            </div>
-        </form>
-        
-        <div id="confirmation-box" class="confirmation-box" data-fahrzeug-id="{{ fahrzeug_id }}">
-            <p>Your protocol will be saved in the given path:</p>
-            <p id="file-path"></p>
-            <button onclick="hideConfirmation()">OK</button>
-        </div>
-    </div>
+    // --- Lock "close/approve" buttons on any change ---
+    function disableCloseButtons(reason) {
+      const closeBtn =
+        document.getElementById('close-button') ||
+        document.querySelector('button[onclick^="submitClosedForm"]'); // fallback
 
-    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
-    <script src="{% static 'myapp/protocolLaufHubzug.js' %}"></script>
+      const exportBtn = document.getElementById('export-button'); // Prüfer button (may not exist)
+
+      [closeBtn, exportBtn].forEach(btn => {
+        if (!btn) return;
+        btn.disabled = true;
+        btn.dataset.locked = "1";
+        if (reason) btn.title = reason;
+        else btn.removeAttribute('title');
+      });
+    }
+
+    (function wireDirtyGuard() {
+      const form = document.getElementById('protokol-form');
+      if (!form) return;
+
+      const lock = () => disableCloseButtons('Änderungen erkannt — bitte zuerst speichern.');
+
+      // React to any user-driven change
+      form.querySelectorAll('input, select, textarea').forEach(el => {
+        el.addEventListener('input', lock, { passive: true });
+        el.addEventListener('change', lock, { passive: true });
+      });
+
+      // If you submit the form (Speichern), the page will reload with server state,
+      // so no need to re-enable here. If you ever switch to AJAX save, call
+      // disableCloseButtons(...) only on change and re-enable on successful save.
+    })();
+  });
+
+
+</script>
+
 </body>
 </html>

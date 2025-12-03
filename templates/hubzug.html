@@ -83,6 +83,38 @@
             </td>
           </tr>
 
+          <!-- Protocol 2 -->
+          <tr class="protokol-container">
+            <td class="protokol-name">{{ hubzug.protocol4.protocolName }}</td>
+            <td>
+              {% if hubzug.protocol4.isClosed or not hubzug.protocol4.isPermanentDone %}
+                <button class="protokol-button" disabled>Bearbeiten</button>
+              {% else %}
+                <button class="protokol-button"
+                        onclick="location.href='{% url 'protocolLaufHubzug' hubzug.protocol4.id %}?fahrzeugId={{ fahrzeug_id }}'">
+                  Bearbeiten
+                </button>
+              {% endif %}
+            </td>
+            <td class="status-indicator">
+              {% if not hubzug.protocol4.isPermanentDone %}
+                <span class="circle black" title="Wartet auf Admin-Bestätigung"></span>
+              {% elif hubzug.protocol4.isExported %}
+                <span class="circle green" title="Abgeschlossen"></span>
+              {% elif hubzug.protocol4.isNacharbeitNeeded %}
+                <span class="circle orange" title="Nacharbeit erforderlich"></span>
+              {% elif hubzug.protocol4.isClosed %}
+              <span class="circle yellow" title="Zur Überprüfung"></span>
+              {% elif hubzug.protocol4.isCorrecturNeeded %}
+                <span class="circle red" title="Korrektur erforderlich"></span>
+              {% elif hubzug.protocol4.isSaved %}
+                <span class="circle blue" title="In Bearbeitung"></span>
+              {% else %}
+                <span class="circle gray" title="Offen"></span>
+              {% endif %}
+            </td>
+          </tr>
+
         </tbody>
       </table>
     </div>

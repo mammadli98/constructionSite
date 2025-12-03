@@ -2617,42 +2617,6 @@
                 <td>worker</td>
               </tr>
               
-              <tr>
-                <td>10.2</td>
-                <td>
-                  wooden block height between bottom of traverse and top of upper frameand lower frame. Front and Rear.
-                  Same heigth for all carriers</td>
-                <td>横梁底部与上框架和下框架顶部之间的木块高度。前部和后部。
-                  所有发货的高度相同</td>
-                <td>Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten).
-                  Gleiche Höhe für alle Träger</td>
-                <td class="thumb-cell">
-                  <img src="{% static 'images/10.2.png' %}" alt="Drawing">
-                  <p> {{ protokol.check_size_10_2_soll}} mm +/- {{ protokol.check_size_10_2_soll_avr}} mm</p>
-                </td>
-                <td>CN</td>
-                  <td>
-                    <input type="number" id="check_size_10_2" name="check_size_10_2" 
-                    data-min="{{ protokol.check_size_10_2_soll | substract:protokol.check_size_10_2_soll_avr}}" 
-                    data-max="{{ protokol.check_size_10_2_soll | adding:protokol.check_size_10_2_soll_avr}}" 
-                    class="form-control input-actual"
-                    step="0.1"
-                    value="{{ protokol.check_size_10_2|default_if_none:'' }}">
-                </td>
-                <td>
-                  <input type="text"
-                         id="check_size_10_2_remark"
-                         name="check_size_10_2_remark"
-                         minlength="3"
-                         maxlength="20"
-                         class="form-control"
-                         value="{{ protokol.check_size_10_2_remark|default_if_none:'' }}">
-                </td>
-                <td class="status-cell" data-rule="range" data-target="#check_size_10_2">
-                  <span class="status-dot" hidden></span>
-                </td>
-                <td>worker</td>
-              </tr>
               
               <tr>
                 <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>

@@ -80,6 +80,27 @@
               </td>
             </tr>
 
+            <tr class="protokol-container">
+              <td class="protokol-name">{{ permanent.permanentProtocol4.protocolName }}</td>
+              <td>
+                {% if permanent.permanentProtocol4.isPermanentDone %}
+                  <button class="protokol-button" disabled>Bearbeiten</button>
+                {% else %}
+                  <button class="protokol-button"
+                          onclick="location.href='{% url 'protocolLaufHubzugSollWert' permanent.permanentProtocol4.id %}?fahrzeugId={{ fahrzeug.id }}'">
+                    Bearbeiten
+                  </button>
+                {% endif %}
+              </td>
+              <td class="status-indicator">
+                {% if permanent.permanentProtocol4.isPermanentDone %}
+                  <span class="circle green" title="Fertig"></span>
+                {% else %}
+                  <span class="circle red" title="Offen"></span>
+                {% endif %}
+              </td>
+            </tr>
+
           </tbody>
         </table>
 

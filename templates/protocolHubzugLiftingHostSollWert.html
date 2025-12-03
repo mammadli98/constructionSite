@@ -486,28 +486,7 @@
                 <td></td>
               </tr>
               
-              <tr>
-                <td>10.2</td>
-                <td>
-                  wooden block height between bottom of traverse and top of upper frame and lower frame. Front and Rear.
-                  Same height for all carriers
-                </td>
-                <td>横梁底部与上框架和下框架顶部之间的木块高度。前部和后部。所有发货的高度相同</td>
-                <td>Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten). Gleiche Höhe für alle Träger</td>
-                <td class="thumb-cell">
-                  <img src="{% static 'images/10.2.png' %}" alt="Drawing">
-                  <p>{{ protokol.check_size_10_2_soll }} mm +/- {{ protokol.check_size_10_2_soll_avr }} mm</p>
-                </td>
-                <td>CN</td>
-                <td>
-                  <input type="number" id="check_size_10_2_soll" name="check_size_10_2_soll"
-                         class="form-control" step="0.1">
-                </td>
-                <td>
-                  <input type="number" id="check_size_10_2_soll_avr" name="check_size_10_2_soll_avr"
-                         class="form-control" step="0.1">
-                </td>
-              </tr>
+            
 
               <!-- Dynamic additional fields -->
               {% for newNumber in protokol.additional_data %}

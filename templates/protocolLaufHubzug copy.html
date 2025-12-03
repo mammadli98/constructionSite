@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ protokol.protocolName }}</title>
+    <link rel="stylesheet" href="{% static 'myapp/protocolHubzugLiftingHost.css' %}">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
+    </div>
+    <div class="container">
+        {% if current_user.pruefer == True %}
+        <a href='/prueferView/' class="back-button">Back</a>    
+        {% else %}
+        <a href='/hubzug/?fahrzeugId={{ fahrzeug_id }}' class="back-button">Back</a>        
+        {% endif %}
+        <h1>{{protokol.protocolName}}</h1>
+        <form id="protokol-form" action="{% url 'protocolLaufHubzugUpdate' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" method="post" class="description-form" >
+            {% csrf_token %}
+            <table class="form-table">
+                <tr>
+                    <th>Beschreibung / Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Zeichnung-Nr / Drawing No.:</td>
+                    <td><input type="text" id="drawing" name="drawing" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.drawing|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Rev:</td>
+                    <td><input type="text" id="rev" name="rev" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.rev|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr. / Order No.:</td>
+                    <td><input type="text" id="order" name="order" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Auftragsnr.-SAG / Order No.-SAG:</td>
+                    <td><input type="text" id="order_sag" name="order_sag" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.order_sag|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Hubzug-Nr. / Hoist No.:</td>
+                    <td><input type="text" id="hoist" name="hoist" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.hoist|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Hublast / Load Type:</td>
+                    <td><input type="text" id="loadTp" name="loadTp" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.loadTp|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Firma / Company:</td>
+                    <td><input type="text" id="company" name="company" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.company|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Stückzahl / Quantity:</td>
+                    <td><input type="text" id="quantity" name="quantity" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.quantity|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Baustelle:</td>
+                    <td><input type="text" id="baustelle" name="baustelle" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.baustelle|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <th>Beschreibung / Description</th>
+                    <th> O.K / N.O.K</th>
+                </tr>
+                <tr>
+                    <td><b>1.</b> Seilzeugnisse aller Hubseile vorhanden? / All Rope certificates available?</td>
+                    <td>
+                        <select id="check_size_1" name="check_size_1" class="select-control">
+                            <option value="" {% if protokol.check_size_1 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_1 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                            {% if current_user.pruefer == True %}
+                                <option value="NAE" {% if protokol.check_size_1 == 'NAE' %}selected{% endif %}>NAE</option>
+                            {% endif %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>2.</b> Laufschein Seiltrommel ausgefüllt und unterschrieben? / Route card for rope drum filled-in and signed?</td>
+                    <td>
+                        <select id="check_size_2" name="check_size_2" class="select-control">
+                            <option value="" {% if protokol.check_size_2 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_2 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_2 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_2 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>3.</b> Name des Schweißers des Hubzugsrahmen / Name of approved welder (Qualifikation Klasse E, DIN EN 1090 (T1-3))</td>
+                    <td>
+                        <input type="text" id="check_size_3" name="check_size_3" class="textarea-control" 
+                               value="{{ protokol.check_size_3|default_if_none:'' }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>4.</b> Schweißnähte des Hubzugsrahmen geprüft? / Visual Check of the welding seams of the lifting frame</td>
+                    <td>
+                        <select id="check_size_4" name="check_size_4" class="select-control">
+                            <option value="" {% if protokol.check_size_4 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_4 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_4 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_4 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr></tr>
+                    <td><b>4a.</b> Schweißnähte Rissprüfung durchgeführt? Geräte-Nr? Mindestens 1 Stück je Auftrag und jeder 20. Hubzugrahmen. / Crack test of the weldings of the frame done? Hoist No.? At least once for each order and every 20th frame.</td>
+                    <td>
+                        <select id="check_size_4a" name="check_size_4a" class="select-control">
+                            <option value="" {% if protokol.check_size_4a is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_4a == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_4a == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_4a == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>5.</b> Dokumentation zu 4 und 4a vorhanden? / Documentation for 4 and 4a available?</td>
+                    <td>
+                        <select id="check_size_5" name="check_size_5" class="select-control">
+                            <option value="" {% if protokol.check_size_5 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_5 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_5 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_5 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>6.</b> Wurde die Checkliste "Maßkontrolle Hubzugsrahmen" ausgefüllt? / Checklist "Measure Check Hoist Frame" filled in?</td>
+                    <td>
+                        <select id="check_size_6" name="check_size_6" class="select-control">
+                            <option value="" {% if protokol.check_size_6 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_6 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_6 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_6 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><b>7.</b> Wurde die Checkliste "Zwischenkontrolle Hubzug" ausgefüllt? / Checklist "Intermediate Check Hoist" filled in?</td>
+                    <td>
+                        <select id="check_size_7" name="check_size_7" class="select-control">
+                            <option value="" {% if protokol.check_size_7 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_7 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_7 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_7 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>8.</b> Hubzugsrahmen dauerhaft mit Gerätenummer gekennzeichnet (Schlagzahl am Rahmen)? / Number of lifting hoist</td>
+                    <td>
+                        <select id="check_size_8" name="check_size_8" class="select-control">
+                            <option value="" {% if protokol.check_size_8 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_8 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_8 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_8 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>9.</b> Wurde die Checkliste "Laufschein Klinkeneinheit" ausgefüllt? / Checklist "Route card Catch detent unit" filled in?</td>
+                    <td>
+                        <select id="check_size_9" name="check_size_9" class="select-control">
+                            <option value="" {% if protokol.check_size_9 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_9 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_9 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_9 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>10.</b> Lackierung in Ordnung? Sichtprüfung / Painting okay? Visual check</td>
+                    <td>
+                        <select id="check_size_10" name="check_size_10" class="select-control">
+                            <option value="" {% if protokol.check_size_10 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_10 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_10 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_10 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>11.</b> Konservierung der blanken Teile erfolgt? / Conservation of all blank parts done?</td>
+                    <td>
+                        <select id="check_size_11" name="check_size_11" class="select-control">
+                            <option value="" {% if protokol.check_size_11 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_11 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_11 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_11 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>12.</b> Seile aufgelegt? Auf Länge und Schlagrichtung achten. / Steel ropes mounted? Take care of Length and lay direction.</td>
+                    <td>
+                        <select id="check_size_12" name="check_size_12" class="select-control">
+                            <option value="" {% if protokol.check_size_12 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_12 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_12 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_12 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>13.</b> Schlagrichtung der Seile nach Zeichnung? Seilrille Links und Rechts beachten (Linkssteigung für Seil mit Rechtsschlag.) / Lay direction of the ropes according to drawing? Take care of left and right thread of rope groove (Left thread groove for right lay direction)</td>
+                    <td>
+                        <select id="check_size_13" name="check_size_13" class="select-control">
+                            <option value="" {% if protokol.check_size_13 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_13 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_13 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_13 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>14.</b> NUR BEI 2 ANTRIEBEN. Abschaltsignalprüfung Rechter Antrieb. Prüfgewicht siehe Parameterliste. 3x wiederholen. Prüfung Endschalterabstand nach Zeichnung / ONLY IN CASE OF2 MOTORS! Power off signal check only right drive unit. Testing weight see Parameter list. Repeating three times</td>
+                    <td>
+                        <select id="check_size_14" name="check_size_14" class="select-control">
+                            <option value="" {% if protokol.check_size_14 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_14 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_14 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_14 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>15.</b> NUR BEI 2 ANTRIEBEN. Abschaltsignalprüfung Linker Antrieb. Prüfgewicht siehe Parameterliste. 3x wiederholen. Prüfung Endschalterabstand nach Zeichnung / ONLY IN CASE OF2 MOTORS! Power off signal check only left drive unit. Testing weight see Parameter list. Repeating three times</td>
+                    <td>
+                        <select id="check_size_15" name="check_size_15" class="select-control">
+                            <option value="" {% if protokol.check_size_15 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_15 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_15 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_15 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>16.</b> Heben und Senken mit 1,25-facher Nennlast, keine ungewöhnliche Laufgeräusche vorhanden? / Lifting and Lowering with 1.25 times of nominal load. No running noises should be existend</td>
+                    <td>
+                        <select id="check_size_16" name="check_size_16" class="select-control">
+                            <option value="" {% if protokol.check_size_16 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_16 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_16 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_16 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>17.</b> Prüfbuch Hubzug vorhanden mit allen für den Hubzug erforderlichen Eintragungen und Unterschriften? / Is test book for hoist available including all necessary data and signatures?</td>
+                        <td>
+                        <select id="check_size_17" name="check_size_17" class="select-control">
+                            <option value="" {% if protokol.check_size_17 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_17 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_17 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_17 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>18.</b> Hubantrieb rechts: Bezeichnung: / Lift motor right: Identification:</td>
+                    <td>
+                        <select id="check_size_18" name="check_size_18" class="select-control">
+                            <option value="" {% if protokol.check_size_18 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_18 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_18 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_18 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>19.</b> Hubantrieb links: Bezeichnung: / Lift motor left: Identification:</td>
+                    <td>
+                        <select id="check_size_19" name="check_size_19" class="select-control">
+                            <option value="" {% if protokol.check_size_19 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_19 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_19 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_19 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>20.</b> Gerätenummer Seiltrommel (stirnseitig) eintragen: / Fill in device number of rope drum (on the face side):</td>
+                    <td>
+                        <input type="text" id="check_size_20" name="check_size_20" class="textarea-control" 
+                               value="{{ protokol.check_size_20|default_if_none:'' }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>21.</b> Gerätenummer der Fangklinkeneinheit eintragen: / Fill in device number of catch detent unit:</td>
+                    <td>
+                        <input type="text" id="check_size_21" name="check_size_21" class="textarea-control" 
+                               value="{{ protokol.check_size_21|default_if_none:'' }}">
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>22.</b> Typenschild komplett ausgefüllt und gut lesbar angebracht. / Type plate filled in complete and fixed on hoist</td>
+                    <td>
+                        <select id="check_size_22" name="check_size_22" class="select-control">
+                            <option value="" {% if protokol.check_size_22 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_22 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_22 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_22 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>23.</b> Wurde die Checkliste Endkontrolle Hubzug ausgefüllt? / Was the check list "Lifting hoist Final Check" filled in?</td>
+                    <td>
+                        <select id="check_size_23" name="check_size_23" class="select-control">
+                            <option value="" {% if protokol.check_size_23 is none %}selected{% endif %}></option>
+                            <option value="OK" {% if protokol.check_size_23 == 'OK' %}selected{% endif %}>OK</option>
+                            <option value="NOK" {% if protokol.check_size_23 == 'NOK' %}selected{% endif %}>NOK</option>
+                            <option value="NAE" {% if protokol.check_size_23 == 'NAE' %}selected{% endif %}>NAE</option>
+                        </select>
+                    </td>
+                </tr>
+  
+                <tr>
+                    <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" id="nacharbeit" name="nacharbeit" style="display:none;" value=""></td>
+                </tr>
+                
+                <tr>
+                    <td><h4>Sonstiges / Miscellaneous</h4></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Bemerkungen / Remarks:</td>
+                    <td><input type="text" id="remark" name="remark" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.remark|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Datum / Date:</td>
+                    <td><input type="date" id="date" name="date" class="textarea-control" value="{{ protokol.date|default_if_none:'' }}" ></td>
+                  </tr>
+                {% if current_user.pruefer %}
+                    <tr>
+                        <td>Prüfer / Inspector:</td>
+                        <td><input type="text" id="inspector" name="inspector" minlength="3" maxlength="20" class="textarea-control" pattern="[a-zA-Z1-9,]{2,20}$" title="Please write max of 20 characters" value="{{ protokol.inspector|default_if_none:'' }}"></td>
+                    </tr>
+                {% endif %}
+                <tr>
+                    <td>Abteilung / Department:</td>
+                    <td><input type="text" id="department" name="department" minlength="3" maxlength="20" class="textarea-control" value="{{ protokol.department|default_if_none:'' }}"></td>
+                </tr>
+                <tr>
+                    <td>Last modified:</td>
+                    <td>{{ protokol.last_changer|default_if_none:"" }}</td>
+                </tr>
+            </table>
+            <div class="button-container">
+                <button type="submit" class="btn-save">Speichern</button>
+                {% if current_user.pruefer == True %}
+                <button type="button" class="btn-save-export" onclick="submitExportForm(this)" data-url="{% url 'exportProtokolHubzugLaufSeiltrommel' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol zustimmen</button>
+                {% else %}
+                <button type="button" class="btn-save-export" onclick="submitClosedForm(this)" data-url="{% url 'protocolLaufHubzugClose' protokol.id %}?fahrzeugId={{ fahrzeug_id }}" {% if not protokol.isSaved %}disabled{% endif %}>Protokol abscließen</button>
+                {% endif %}
+            </div>
+        </form>
+        
+        <div id="confirmation-box" class="confirmation-box" data-fahrzeug-id="{{ fahrzeug_id }}">
+            <p>Your protocol will be saved in the given path:</p>
+            <p id="file-path"></p>
+            <button onclick="hideConfirmation()">OK</button>
+        </div>
+    </div>
+
+    <script src="{% static 'myapp/protocolHubzugLiftingHost.js' %}"></script>
+    <script src="{% static 'myapp/protocolLaufHubzug.js' %}"></script>
+</body>
+</html>
