@@ -11,7 +11,7 @@
         font-family: 'Arial', sans-serif;
         margin: 0;
         padding: 20px;
-        font-size: 12px;
+        font-size: 10px;
     }
     table {
         width: 100%;
@@ -53,24 +53,38 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg" alt="Siemens AG Logo">
     </div>
 
-    <table>
+    <table class="measurement-section">
         <tr>
-            <th colspan="4">{{ protokol.protocolName }}</th>
+            <th colspan="1">{{ protokol.protocolName }}</th>
+            <th colspan="7">Tilt EMS A5E53621916A</th>
+        </tr>
+
+
+        <tr>
+            <th colspan="1">No</th>
+            <th colspan="1">Review items and instructions</th>
+            <th colspan="1">Chinese</th>
+            <th colspan="1">German</th>
+            <th colspan="1">Due situation</th>
+            <th colspan="1">CN/Leipzig</th>
+            <th colspan="1">Actual</th>
+            <th colspan="1">Remark</th>
         </tr>
         <tr>
-            <td>Zeichnung-Nr. <br>
-                Drawing No.:</td>
-            <td>{{ protokol.drawing }}</td>
-            <td>Auftragsnr.: <br>
-                Order No.:</td>
-            <td>{{ protokol.order }}</td>
+            <td>1.1</td>
+            <td>Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
+            <td>根据图纸对焊接进行目视检查 / EXC3</td>
+            <td>Optische Kontrolle der Schweißnähte, Probenahme, Schweißbogen, Kontrolle der Schweißnahtgröße / EXC3</td>
+            <td>Revision</td>
+            <td>CN</td>
+            <td>{{ protokol.oknok_1_1 }}</td>
+            <td>{{ protokol.remark }}</td>
         </tr>
         <tr>
             <td>Revision</td>
-            <td>{{ protokol.rev }}</td>
-            <td>Geräte-Nr.: <br>
-                Device No.</td>
-            <td>{{ protokol.device }}</td>
+            <td>CN</td>
+            <td>{{ protokol.oknok_1_1 }}</td>
+            <td>{{ protokol.remark }}</td>
         </tr>
         <tr>
             <td>Auftragsnr.-SAG: <br>

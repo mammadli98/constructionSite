@@ -1164,40 +1164,29 @@ def protocolEndkontrolleClose(request, protocol_id):
 @require_http_methods(["POST"])
 def exportProtokolHubzugLiftingHost(request, protocol_id):
     protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol_id)
-    fahrzeug_id = request.GET.get('fahrzeugId', None)
-    fahrzeug = newFahrzeug.objects.get(id=fahrzeug_id)
+    fahrzeug_id = request.GET.get('fahrzeugId')
+    fahrzeug = get_object_or_404(newFahrzeug, id=fahrzeug_id)
     now = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-    # Finding the absolute path of the css file
-    """ css_path = finders.find('pdf/pdfProtocolHubzugLiftingHost.css')
     css_url = request.build_absolute_uri(settings.STATIC_URL + 'pdf/pdfProtocolHubzugLiftingHost.css')
 
     html_string = render_to_string('protokol_pdf_template.html', {
         'protokol': protokol,
-        'css_url': css_url  # Pass the CSS URL to the template
+        'css_url': css_url
     })
 
     html = HTML(string=html_string, base_url=request.build_absolute_uri())
     pdf_file = io.BytesIO()
     html.write_pdf(target=pdf_file)
-    
-    # Update the database entries
-    protocol = AllProtocols(
-        baustelle=fahrzeug.baustelle.baustelleName,
-        fahrzeug=fahrzeug.fahrzeugName,
-        teil="Hubzug",
-        protokolType=protokol.protocolName,
-        path=""  # Not saving to path since we are sending directly
-    )
-    protocol.save() """
 
     protokol.isExported = True
     protokol.save()
 
-    context = {
-        'fahrzeug_id': fahrzeug_id,
-    }
-    return redirect("/prueferView/")
+    pdf_file.seek(0)
+    response = HttpResponse(pdf_file.read(), content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
+    print("I am working")
+    return response
 
     # Return the PDF as a response
     """ pdf_file.seek(0)
