@@ -351,6 +351,14 @@
                     <option value="AOK" {% if protokol.oknok_1_8 == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
+                  <select id="oknok_1_8_lp" name="oknok_1_8_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_1_8_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_8_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_8_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_8_lp == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
                 </td>
                 <td>
                   <input type="text"
@@ -1074,6 +1082,14 @@
                     <option value="AOK" {% if protokol.oknok_1_29 == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
+                  <select id="oknok_1_29_lp" name="oknok_1_29_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_1_29_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_29_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_29_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_29_lp == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
                 </td>
                 <td>
                   <input type="text"
@@ -1278,6 +1294,14 @@
                     <option value="AOK" {% if protokol.oknok_1_35 == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
+                  <select id="oknok_1_35_lp" name="oknok_1_35_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_1_35_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_35_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_35_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_35_lp == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
                 </td>
                 <td>
                   <input type="text"
@@ -1309,6 +1333,14 @@
                     <option value="NOK" {% if protokol.oknok_1_36 == 'NOK' %}selected{% endif %}>NOK</option>
                     {% if current_user.pruefer == True %}
                     <option value="AOK" {% if protokol.oknok_1_36 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                  <select id="oknok_1_36_lp" name="oknok_1_36_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_1_36_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_1_36_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_1_36_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_1_36_lp == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
                 </td>
@@ -1754,6 +1786,14 @@
                     <option value="AOK" {% if protokol.oknok_2_13 == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
+                  <select id="oknok_2_13_lp" name="oknok_2_13_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_2_13_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_2_13_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_2_13_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_2_13_lp == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
                 </td>
                 <td>
                   <input type="text"
@@ -1787,6 +1827,14 @@
                     <option value="AOK" {% if protokol.oknok_2_14 == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
+                  <select id="oknok_2_14_lp" name="oknok_2_14_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_2_14_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_2_14_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_2_14_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_2_14_lp == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
                 </td>
                 <td>
                   <input type="text"
@@ -1818,6 +1866,14 @@
                     <option value="NOK" {% if protokol.oknok_3_1 == 'NOK' %}selected{% endif %}>NOK</option>
                     {% if current_user.pruefer == True %}
                     <option value="AOK" {% if protokol.oknok_3_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                  <select id="oknok_3_1_lp" name="oknok_3_1_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_3_1_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_3_1_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_3_1_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_3_1_lp == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
                 </td>
@@ -2848,6 +2904,14 @@
                     <option value="AOK" {% if protokol.oknok_3_31 == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
+                  <select id="oknok_3_31_lp" name="oknok_3_31_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_3_31_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_3_31_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_3_31_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_3_31_lp == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
                 </td>
                 <td>
                   <input type="text"
@@ -2879,6 +2943,14 @@
                     <option value="NOK" {% if protokol.oknok_3_32 == 'NOK' %}selected{% endif %}>NOK</option>
                     {% if current_user.pruefer == True %}
                     <option value="AOK" {% if protokol.oknok_3_32 == 'AOK' %}selected{% endif %}>AOK</option>
+                    {% endif %}
+                  </select>
+                  <select id="oknok_3_32_lp" name="oknok_3_32_lp" class="select-control">
+                    <option value="" {% if protokol.oknok_3_32_lp is none %}selected{% endif %}></option>
+                    <option value="OK" {% if protokol.oknok_3_32_lp == 'OK' %}selected{% endif %}>OK</option>
+                    <option value="NOK" {% if protokol.oknok_3_32_lp == 'NOK' %}selected{% endif %}>NOK</option>
+                    {% if current_user.pruefer == True %}
+                    <option value="AOK" {% if protokol.oknok_3_32_lp == 'AOK' %}selected{% endif %}>AOK</option>
                     {% endif %}
                   </select>
                 </td>
@@ -3356,6 +3428,14 @@ unter dem Teleskoplager montieren.</td>
       <option value="AOK" {% if protokol.oknok_4_13 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_4_13_lp" name="oknok_4_13_lp" class="select-control">
+      <option value="" {% if protokol.oknok_4_13_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_4_13_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_4_13_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_4_13_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -3392,6 +3472,14 @@ Sonderhinweis siehe Datei <<250508_Loctite_TEMS_LPZ.xlsx>></td>
       <option value="NOK" {% if protokol.oknok_4_14 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_4_14 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_4_14_lp" name="oknok_4_14_lp" class="select-control">
+      <option value="" {% if protokol.oknok_4_14_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_4_14_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_4_14_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_4_14_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
@@ -4429,6 +4517,14 @@ Farbe RAL 3000 / ROT prüfen</td>
       <option value="AOK" {% if protokol.oknok_5_26 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_5_26_lp" name="oknok_5_26_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_26_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_26_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_26_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_26_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -4549,6 +4645,14 @@ Justierung in Werk und vor Ort</td>
       <option value="AOK" {% if protokol.oknok_5_29 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_5_29_lp" name="oknok_5_29_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_29_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_29_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_29_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_29_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -4588,6 +4692,14 @@ PE-Kabel vorne am Schwenkrahmen anschließen
       <option value="NOK" {% if protokol.oknok_5_30 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_5_30 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_5_30_lp" name="oknok_5_30_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_30_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_30_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_30_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_30_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
@@ -4808,6 +4920,14 @@ Möglichkeiten zu richtigen oder falschen Einstellung.
       <option value="AOK" {% if protokol.oknok_5_35 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_5_35_lp" name="oknok_5_35_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_35_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_35_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_35_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_35_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -4944,6 +5064,14 @@ Dehnung nach dem Spannen 2 mm / +1 mm</td>
       <option value="NOK" {% if protokol.oknok_5_38 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_5_38 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_5_38_lp" name="oknok_5_38_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_38_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_38_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_38_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_38_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
@@ -5290,6 +5418,14 @@ Halterung muss sauber in 4 Schrauben passen</td>
       <option value="AOK" {% if protokol.oknok_5_46 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_5_46_lp" name="oknok_5_46_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_46_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_46_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_46_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_46_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -5334,6 +5470,14 @@ Abstand zwischen Klemmenplatten und 90° prüfen</td>
       <option value="NOK" {% if protokol.oknok_5_47 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_5_47 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_5_47_lp" name="oknok_5_47_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_47_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_47_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_47_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_47_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
@@ -5453,6 +5597,14 @@ Schraube M8, MA=27Nm</td>
       <option value="AOK" {% if protokol.oknok_5_50 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_5_50_lp" name="oknok_5_50_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_50_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_50_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_50_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_50_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -5492,6 +5644,14 @@ Sonderhinweis siehe Datei
       <option value="NOK" {% if protokol.oknok_5_51 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_5_51 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_5_51_lp" name="oknok_5_51_lp" class="select-control">
+      <option value="" {% if protokol.oknok_5_51_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_5_51_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_5_51_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_5_51_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
@@ -5967,6 +6127,14 @@ Positionen siehe A5E53621916A Seite 4/4</td>
       <option value="AOK" {% if protokol.oknok_6_12 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_6_12_lp" name="oknok_6_12_lp" class="select-control">
+      <option value="" {% if protokol.oknok_6_12_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_6_12_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_6_12_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_6_12_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -6004,6 +6172,14 @@ Sonderhinweis siehe Datei
       <option value="NOK" {% if protokol.oknok_6_13 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_6_13 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_6_13_lp" name="oknok_6_13_lp" class="select-control">
+      <option value="" {% if protokol.oknok_6_13_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_6_13_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_6_13_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_6_13_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
@@ -6262,6 +6438,14 @@ Maximaler Hub: 4.600 mm</td>
       <option value="AOK" {% if protokol.oknok_8_1 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_8_1_lp" name="oknok_8_1_lp" class="select-control">
+      <option value="" {% if protokol.oknok_8_1_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_8_1_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_8_1_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_8_1_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -6295,6 +6479,14 @@ Maximaler Hub: 4.600 mm</td>
       <option value="NOK" {% if protokol.oknok_8_2 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_8_2 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_8_2_lp" name="oknok_8_2_lp" class="select-control">
+      <option value="" {% if protokol.oknok_8_2_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_8_2_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_8_2_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_8_2_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
@@ -6338,6 +6530,14 @@ Rechts gedreht: 30°, 60°, 90°, 110°</td>
       <option value="AOK" {% if protokol.oknok_8_3 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_8_3_lp" name="oknok_8_3_lp" class="select-control">
+      <option value="" {% if protokol.oknok_8_3_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_8_3_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_8_3_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_8_3_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -6373,6 +6573,14 @@ Rechts gedreht: 30°, 60°, 90°, 110°</td>
       <option value="AOK" {% if protokol.oknok_8_4 == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
+    <select id="oknok_8_4_lp" name="oknok_8_4_lp" class="select-control">
+      <option value="" {% if protokol.oknok_8_4_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_8_4_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_8_4_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_8_4_lp == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
   </td>
   <td>
     <input type="text"
@@ -6404,6 +6612,14 @@ Rechts gedreht: 30°, 60°, 90°, 110°</td>
       <option value="NOK" {% if protokol.oknok_8_5 == 'NOK' %}selected{% endif %}>NOK</option>
       {% if current_user.pruefer == True %}
       <option value="AOK" {% if protokol.oknok_8_5 == 'AOK' %}selected{% endif %}>AOK</option>
+      {% endif %}
+    </select>
+    <select id="oknok_8_5_lp" name="oknok_8_5_lp" class="select-control">
+      <option value="" {% if protokol.oknok_8_5_lp is none %}selected{% endif %}></option>
+      <option value="OK" {% if protokol.oknok_8_5_lp == 'OK' %}selected{% endif %}>OK</option>
+      <option value="NOK" {% if protokol.oknok_8_5_lp == 'NOK' %}selected{% endif %}>NOK</option>
+      {% if current_user.pruefer == True %}
+      <option value="AOK" {% if protokol.oknok_8_5_lp == 'AOK' %}selected{% endif %}>AOK</option>
       {% endif %}
     </select>
   </td>
