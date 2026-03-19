@@ -1212,7 +1212,6 @@ def exportProtokolHubzugLiftingHost(request, protocol_id):
     pdf_file.seek(0)
     response = HttpResponse(pdf_file.read(), content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{protokol.protocolName}_{now}.pdf"'
-    print("I am working")
     return response
 
     # Return the PDF as a response
