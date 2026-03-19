@@ -119,7 +119,7 @@
 <body>
     <div class="page">
     <div class="header-logo">
-        <img src="{% static 'images/siemens_logo.png' %}" onerror="this.onerror=null;this.src='https://upload.wikimedia.org/wikipedia/commons/3/3c/Siemens_AG_logo.svg';" alt="Siemens AG Logo">
+        <img src="{% static 'myapp/logo.png' %}" alt="Siemens AG Logo">
     </div>
 
     <table class="measurement-section">
@@ -160,7 +160,7 @@
 <td class="text-left">Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
 <td class="text-left">根据图纸对焊接进行目视检查 / EXC3</td>
 <td class="text-left">Optische Kontrolle der Schweißnähte, Probenahme, Schweißbogen, Kontrolle der Schweißnahtgröße / EXC3</td>
-  <td class="drawing-cell"><img src="../static/images/1.1.png" class="drawing-img" alt="Drawing"></td>
+  <td class="drawing-cell"><img src="{% static 'images/1.1.png' %}" class="drawing-img" alt="Drawing"></td>
   <td>CN</td>
   <td colspan="2">{{ protokol.oknok_1_1 }}</td>
   <td class="text-left">{{ protokol.oknok_1_1_remark }}</td>
@@ -171,7 +171,7 @@
 <td class="text-left">Disassemble Operating Instructions Traction Motors 1 x bag with cable tie fastener and collect in box seperatley (keep in CN)</td>
 <td class="text-left">电机说明书和1个扎带统一放在一个纸箱里</td>
 <td class="text-left">Betriebsanleitung Fahrantriebe demontieren 1 x Beutel mit Kabelbinder und separat in Kiste sammeln (in CN aufbewahren)</td>
-  <td class="drawing-cell"><img src="../static/images/1.2.png" class="drawing-img" alt="Drawing"></td>
+  <td class="drawing-cell"><img src="{% static 'images/1.2.png' %}" class="drawing-img" alt="Drawing"></td>
   <td>CN</td>
   <td colspan="2">{{ protokol.oknok_1_2 }}</td>
   <td class="text-left">{{ protokol.oknok_1_2_remark }}</td>
@@ -182,7 +182,7 @@
 <td class="text-left">Activate gear venting Pressure relief valve with safety strap. Remove the transport safety device by pulling the safety tab 1 in the direction of the arrow.</td>
 <td class="text-left">打开每个齿轮电机的齿轮通风 带安全带的泄压阀。沿箭头方向拉动安全片1，拆下运输安全装置</td>
 <td class="text-left">Getriebeentlüftung aktivieren Druckentlastungsventil mit Sicherheitsgurt. Transportsicherung entfernen, indem Lasche 1 in Pfeilrichtung gezogen wird.</td>
-<td class="drawing-cell"><img src="../static/images/1.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_3 }}</td>
 <td class="text-left">{{ protokol.oknok_1_3_remark }}</td>
@@ -193,7 +193,7 @@
 <td class="text-left">Carriage Check thightening of the clamping set travel drive unit to the drive wheel. Ringfeder RFN7012-55x85, MA=41Nm follow the assembly instructions RfN 7012. All screws at locking assembly are marked after thightening with torque marque, sealing paint</td>
 <td class="text-left">将夹紧装置的行程驱动单元拧紧到驱动轮上。环形齿轮 RFN7012-55x85，扭矩=41牛米 遵循装配说明RfN 7012 锁紧组件上的所有螺钉在拧紧后都会用扭矩标记和密封漆进行标记</td>
 <td class="text-left">Fahrwerk Anzug des Spannsatzes des Fahrantriebs an das Antriebsrad prüfen. Ringfeder RFN7012-55x85, MA=41Nm Montageanleitung RFN 7012 befolgen. Alle Schrauben des Spannsatzes nach dem Anziehen mit Drehmomentmarkierung und Sicherungslack kennzeichnen</td>
-<td class="drawing-cell"><img src="../static/images/1.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_4 }}</td>
 <td class="text-left">{{ protokol.oknok_1_4_remark }}</td>
@@ -204,7 +204,7 @@
 <td class="text-left">Disassemble Operating Instructions Traction Motors 1 x bag with cable tie fastener and collect in box seperatley (keep in CN)</td>
 <td class="text-left">电机说明书和1个扎带统一放在一个纸箱里</td>
 <td class="text-left">Betriebsanleitung Fahrantriebe demontieren 1 x Beutel mit Kabelbinder und separat in Kiste sammeln (in CN aufbewahren)</td>
-<td class="drawing-cell"><img src="../static/images/1.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_5 }}</td>
 <td class="text-left">{{ protokol.oknok_1_5_remark }}</td>
@@ -215,7 +215,7 @@
 <td class="text-left">Running Gear Retaining ring DIN 471-40x1,75 and shim ring DIN 988-40x50x0,5 are mounted make sure that the retaining ring is not overstreched after mounting!</td>
 <td class="text-left">传动装置 已安装符合DIN 471-40x1,75标准的扣环和符合DIN 988-40x50x0,5标准的垫片环 确保安装后扣环不会过度拉伸</td>
 <td class="text-left">Fahrwerk Sicherungsring DIN 471-40x1,75 und Passscheibe DIN 988-40x50x0,5 montiert Darauf achten, dass der Sicherungsring nach der Montage nicht überdehnt ist!</td>
-<td class="drawing-cell"><img src="../static/images/1.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_6 }}</td>
 <td class="text-left">{{ protokol.oknok_1_6_remark }}</td>
@@ -226,7 +226,7 @@
 <td class="text-left">Guide rollers D=80 of trolleys installed, Loctite 243 on left hand thread and right hand thread Bolts sealing pait in Green</td>
 <td class="text-left">已安装小车导向轮D=80，左手螺纹和右手螺纹均涂有乐泰243胶水 绿色螺栓密封漆</td>
 <td class="text-left">Führungsrollen D=80 der Trolleys montiert, Loctite 243 auf Links- und Rechtsgewinde Schrauben mit grünem Sicherungslack</td>
-<td class="drawing-cell"><img src="../static/images/1.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_7 }}</td>
 <td class="text-left">{{ protokol.oknok_1_7_remark }}</td>
@@ -237,7 +237,7 @@
 <td class="text-left">Check all protection plates at guiderollers if -installed, -bended or damaged Damaged protection plates must be changed</td>
 <td class="text-left">检查导向轮上的所有防护板是否 -已安装, -弯曲或损坏 损坏的保护板必须更换</td>
 <td class="text-left">Alle Rollensicherungen an den Führungsrollen prüfen, ob -montiert, -verbogen oder beschädigt Beschädigte Rollensicherungen müssen ersetzt werden</td>
-<td class="drawing-cell"><img src="../static/images/1.8.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.8.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_1_8 }}</td>
 <td>{{ protokol.oknok_1_8_lp }}</td>
@@ -249,7 +249,7 @@
 <td class="text-left">Bumper area front and rear: remove red sheet metal.</td>
 <td class="text-left">前后保险杠区域：移除红色金属板</td>
 <td class="text-left">Pufferrbereich vorne und hinten: Rotes Blech entfernen.</td>
-<td class="drawing-cell"><img src="../static/images/1.9.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.9.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_9 }}</td>
 <td class="text-left">{{ protokol.oknok_1_9_remark }}</td>
@@ -260,7 +260,7 @@
 <td class="text-left">Front and rear buffer installed, Screws 12x30</td>
 <td class="text-left">前后缓冲垫已安装，螺丝规格为12x30</td>
 <td class="text-left">Pufferanbauten vorne und hinten montiert, Schrauben 12x30</td>
-<td class="drawing-cell"><img src="../static/images/1.10.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.10.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_10 }}</td>
 <td class="text-left">{{ protokol.oknok_1_10_remark }}</td>
@@ -271,7 +271,7 @@
 <td class="text-left">Wheel covers on the drive wheels and idle trolleys installed</td>
 <td class="text-left">驱动轮和空转小车上安装了轮罩</td>
 <td class="text-left">Radabdeckungen an Antriebsrädern und Lasufrädern montiert</td>
-<td class="drawing-cell"><img src="../static/images/1.11.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.11.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_11 }}</td>
 <td class="text-left">{{ protokol.oknok_1_11_remark }}</td>
@@ -282,7 +282,7 @@
 <td class="text-left">Install 4x Safty plate complete Screw DIN 7984-M6x16-8.8-A2F</td>
 <td class="text-left">安装4个安全板，确保完整无缺 螺钉 DIN 7984-M6x16-8.8-A2F</td>
 <td class="text-left">4x Radbandagensicherung komplett montieren Schraube DIN 7984-M6x16-8.8-A2F</td>
-<td class="drawing-cell"><img src="../static/images/1.12.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.12.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_12 }}</td>
 <td class="text-left">{{ protokol.oknok_1_12_remark }}</td>
@@ -293,7 +293,7 @@
 <td class="text-left">Blocking flat iron at the first (and last) trolley installed. Sloted holes move to the out side.  M12x30: secure with Loctite 243, MA=54 Nm 2 piece /hanger Loctite colour Green</td>
 <td class="text-left">在安装的第一个（也是最后一个）小车上安装阻挡扁铁。开槽孔移至外侧。M12x30：用乐泰243胶水固定，扭矩=54牛米 2件/一套 乐泰胶水（绿色</td>
 <td class="text-left">Flacheisen am ersten (und letzten) Trolley montiert. Langlöcher nach außen versetzt. M12x30: mit Loctite 243 sichern, MA=54 Nm. 2 Stück / Halterung. Loctite Farbe: Grün</td>
-<td class="drawing-cell"><img src="../static/images/1.13.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.13.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_13 }}</td>
 <td class="text-left">{{ protokol.oknok_1_13_remark }}</td>
@@ -304,7 +304,7 @@
 <td class="text-left">Installation of 2 bearing houses and grease nipple on position 101 (swivelbearing Deinhammer), bearing should be lubricated during installation. Grease all contact surfaces and  fill grooves complete with grease ( Basic lubrication) LEPG 2 - SKF</td>
 <td class="text-left">在101号位置安装2个轴承座和油嘴（旋转轴承Deinhammer）安装时应对轴承进行润滑。润滑所有接触面，并用油脂填满凹槽（基本润滑）</td>
 <td class="text-left">Montage von 2 Gelenklagern und Schmiernippel an Position 101 (Drehgelenklager Deinhammer), Lager sollen während der Montage geschmiert werden. Alle Kontaktflächen fetten und Nuten vollständig mit Schmierfett füllen (Grundschmierung). LEPG 2 - SKF</td>
-<td class="drawing-cell"><img src="../static/images/1.14.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.14.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_14 }}</td>
 <td class="text-left">{{ protokol.oknok_1_14_remark }}</td>
@@ -315,7 +315,7 @@
 <td class="text-left">Install the anti drop protecting bolt (2 pcs.), Tighten the M20x150-10.9-HV</td>
 <td class="text-left">安装防脱落保护螺栓（2个）. 拧紧M20x150-10.9-HV</td>
 <td class="text-left">Fallschutzbolzen (2 Stück) montieren M20x150-10.9-HV festziehen</td>
-<td class="drawing-cell"><img src="../static/images/1.15.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.15.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_15 }}</td>
 <td class="text-left">{{ protokol.oknok_1_15_remark }}</td>
@@ -326,7 +326,7 @@
 <td class="text-left">Axle screw on the trolley thighten with 23Nm Loctite 243. Loctite colour Green</td>
 <td class="text-left">小车上的轴螺钉需要用乐泰243胶水拧紧. 乐泰胶水：绿色</td>
 <td class="text-left">Achsschraube am Trolley mit 23 Nm anziehen. Loctite 243. Loctite Farbe: Grün</td>
-<td class="drawing-cell"><img src="../static/images/1.16.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.16.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_16 }}</td>
 <td class="text-left">{{ protokol.oknok_1_16_remark }}</td>
@@ -337,7 +337,7 @@
 <td class="text-left">Check for installation at all 4 trolleys. Spacer between lower bearing and cross beam</td>
 <td class="text-left">检查所有4个小车是否已安装 下轴承与横梁之间的隔片</td>
 <td class="text-left">Prüfen, ob an allen 4 Fahr und Laufwerken die Unterlagsscheibe zwischen unterem Lager und Quertraversenauflage montiert ist.</td>
-<td class="drawing-cell"><img src="../static/images/1.17.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.17.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_17 }}</td>
 <td class="text-left">{{ protokol.oknok_1_17_remark }}</td>
@@ -348,7 +348,7 @@
 <td class="text-left">Mount SH systemholder racket for the cable protection conduit  on the front traverse of trolley system. Screw M6x20-8.8-A2F, MA=11Nm</td>
 <td class="text-left">在小车前横梁上安装用于电缆保护套管的SH系统支架. 螺钉 M6x20-8.8-A2F，扭矩=11牛米</td>
 <td class="text-left">SH-Systemhalter für Kabelschutzrohr an der vorderen Traverse des Trolley-Systems montieren. Schraube M6x20-8.8-A2F, MA=11Nm</td>
-<td class="drawing-cell"><img src="../static/images/1.18.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.18.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_18 }}</td>
 <td class="text-left">{{ protokol.oknok_1_18_remark }}</td>
@@ -359,7 +359,7 @@
 <td class="text-left">Tighten Screws 2 x M10x50-8.8/lubricated</td>
 <td class="text-left">拧紧螺钉 2 x M10x50-8.8</td>
 <td class="text-left">Schrauben 2 x M10x50-8.8 anziehen/geschmiert</td>
-<td class="drawing-cell"><img src="../static/images/1.19.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.19.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_19 }}</td>
 <td class="text-left">{{ protokol.oknok_1_19_remark }}</td>
@@ -370,7 +370,7 @@
 <td class="text-left">Tighten Screws M10x50 /lubricated, after adjusting upper frame.</td>
 <td class="text-left">调整上框架后，拧紧M10x50螺钉</td>
 <td class="text-left">Schrauben M10x50 anziehen/geschmiert, nach Justierung des oberen Rahmens</td>
-<td class="drawing-cell"><img src="../static/images/1.20.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.20.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_20 }}</td>
 <td class="text-left">{{ protokol.oknok_1_20_remark }}</td>
@@ -381,7 +381,7 @@
 <td class="text-left">FRONT trolley system: vertical distance load bar to bottom of upper frame profile</td>
 <td class="text-left">小车前端部分：负载杆到上框架型材底部的垂直距离</td>
 <td class="text-left">Vorderes Trolley-System:Vertikaler Abstand Lastträger bis Unterkante oberes Rahmenprofil</td>
-<td class="drawing-cell"><img src="../static/images/1.21.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.21.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_21 }}</td>
 <td class="text-left">{{ protokol.oknok_1_21_remark }}</td>
@@ -392,7 +392,7 @@
 <td class="text-left">REAR  trolley system: vertical distance load bar to bottom of upper frame profile</td>
 <td class="text-left">小车后端部分：负载杆到上框架型材底部的垂直距离</td>
 <td class="text-left">Hinteres Trolley-System:Vertikaler Abstand Lastträger bis Unterkante oberes Rahmenprofil</td>
-<td class="drawing-cell"><img src="../static/images/1.22.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.22.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_22 }}</td>
 <td class="text-left">{{ protokol.oknok_1_22_remark }}</td>
@@ -403,7 +403,7 @@
 <td class="text-left">after adjusting upper frame- mounting space plate and tighten - Nut KMT 8- set srew - MA=18Nm (Allen key WS4)- and mounting spring pin at king pins</td>
 <td class="text-left">调整上框后- 安装空间板并拧紧- 螺母 KMT 8- 安装螺钉 - 扭矩=18牛米（内六角扳手WS4）- 以及安装弹簧销在主销处</td>
 <td class="text-left">Nach Justierung des oberen Rahmens:- Montageplatte anbringenund anziehen- Mutter KMT 8- Stellschraube - MA=18Nm (Innensechskant SW4)- und Federstift an den Königszapfen montieren</td>
-<td class="drawing-cell"><img src="../static/images/1.23.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.23.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_23 }}</td>
 <td class="text-left">{{ protokol.oknok_1_23_remark }}</td>
@@ -414,7 +414,7 @@
 <td class="text-left">Check cleaning brush installed on first trolleyTighten screws1 x dwg A5E51112257A M12x20 LH MA=55 Nm1 x M8 x 20  8.8    MA=27 Nmlocked by wedge disk</td>
 <td class="text-left">第一辆小车上安装了清洁刷拧紧螺钉1个图纸编号A5E51112257A，M12x20，左旋，扭矩=55牛米1个M8 x 20的螺钉，扭矩为8.8牛米，最大扭矩为27牛米被楔形盘锁定</td>
 <td class="text-left">Reinigungsbürste am ersten Trolley prüfenSchrauben anziehen1 x Zeichnung A5E51112257A M12x20 LH MA=55 Nm1 x M8 x 20 8.8 MA=27 Nmmit Keilscheibe gesichert</td>
-<td class="drawing-cell"><img src="../static/images/1.24.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.24.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_24 }}</td>
 <td class="text-left">{{ protokol.oknok_1_24_remark }}</td>
@@ -425,7 +425,7 @@
 <td class="text-left">Cleaning brushsecure the brush by gently pressing the brush guide together at the ends with pliers</td>
 <td class="text-left">清洁刷用钳子轻轻按压刷子导轨的两端，将其固定</td>
 <td class="text-left">ReinigungsbürsteBürste sichern, indem die Führungen an den Enden vorsichtig mit einer Zange zusammengedrückt werden</td>
-<td class="drawing-cell"><img src="../static/images/1.25.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.25.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_25 }}</td>
 <td class="text-left">{{ protokol.oknok_1_25_remark }}</td>
@@ -436,7 +436,7 @@
 <td class="text-left">Install collector box on trolley axis 1Tighten screw 2x M8x16-8.8-MA=27Nm. Dismateling for transportation. Collector Assembly see drawing A5E54056831A</td>
 <td class="text-left">在小车轴1上安装集电盒拧紧2颗M8x16-8.8-MA规格的螺钉，扭矩为27牛米为运输而拆卸见图纸A5E43564492A</td>
 <td class="text-left">Stromabnehmerbox auf Trolley-Achse 1 montieren. Schraube 2x M8x16-8.8-MA=27Nm anziehen. Demontage für TransportMontagezeichnung A5E54056831A beachten</td>
-<td class="drawing-cell"><img src="../static/images/1.26.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.26.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_1_26 }}</td>
 <td class="text-left">{{ protokol.oknok_1_26_remark }}</td>
@@ -447,7 +447,7 @@
 <td class="text-left">Adjusting collectorbox adjust (59mm)</td>
 <td class="text-left">调整收集器箱</td>
 <td class="text-left">Stromabnehmer einstellen.(59 mm justieren)</td>
-<td class="drawing-cell"><img src="../static/images/1.27.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.27.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_1_27 }}</td>
 <td class="text-left">{{ protokol.oknok_1_27_remark }}</td>
@@ -458,7 +458,7 @@
 <td class="text-left">Mount the locking bolt on the locking piece with distance minimum 9mm. Check functionality, that locking bolt locks properly. Adjusting nut (white) andcounter nut (red) tightenedSecure both with Loctite 243Loctite colour Green</td>
 <td class="text-left">将锁定螺栓安装在锁定件上，且距离至少为9毫米检查锁定螺栓是否能够正常锁定调整螺母（白色）和锁紧螺母（红色）已拧紧用乐泰243胶水将其固定乐泰胶水，绿色</td>
 <td class="text-left">Verriegelungsbolzen am Verriegelungselement mit mindestens 9 mm Abstand montieren. Funktion prüfen, ob Bolzen korrekt verriegelt.Justiermutter (weiß) und Kontermutter (rot) festgezogenBeide mit Loctite 243 sichernLoctite Farbe: Grün</td>
-<td class="drawing-cell"><img src="../static/images/1.28.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.28.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_1_28 }}</td>
 <td class="text-left">{{ protokol.oknok_1_28_remark }}</td>
@@ -469,7 +469,7 @@
 <td class="text-left">Fixing the data matrix reader. Adjust the QRcode reader for all hangers in the same distance. Z- distance top of rail to top of reader 22,6 mm. X- distance  bracket in the middle of slotholes. Mount and adjust QR code reader on 2nd axis screws M8x25, M8x16 MA=27Nmscrews M6 for QR code MA=10Nm</td>
 <td class="text-left">固定数据阅读器将二维码阅读器调整至与所有衣架保持相同距离轨道顶部到阅读器顶部的Z向距离 22.6毫米X距离支架位于吊孔的中间在第二轴上安装并调整二维码阅读器螺钉 M8x25、M8x16，扭矩=27牛米用于二维码的M6螺钉，扭矩为10牛米</td>
 <td class="text-left">Datenmatrix-Lesegerät befestigen. QR-Code-Leser für alle Halter auf gleichen Abstand einstellen. Z-Abstand: Schienenoberkante bis Leseroberkante 22,6 mm. X-Abstand: Halter mittig in Langloch. QR-Code-Leser an 2. Achse montieren und einstellen. Schrauben M8x25, M8x16 MA=27Nm. Schrauben M6 für QR-Code MA=10Nm</td>
-<td class="drawing-cell"><img src="../static/images/1.29.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.29.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_1_29 }}</td>
 <td>{{ protokol.oknok_1_29_lp }}</td>
@@ -481,7 +481,7 @@
 <td class="text-left">Fixing the data matrix reader. Adjust the QRcode reader for all hangers in the same distance 1189mm ±1 to the rear mounting pin left. Distance will be fixed with the first hanger. Mount and adjust QR code reader on 2nd axis. Screws M8x25, M8x16 MA=27Nm. Screws M6 for QR code MA=10Nm</td>
 <td class="text-left">固定数据阅读器. 将所有吊架上的二维码阅读器调整至距离左侧后安装销1189毫米±1毫米的位置。. 与第一个吊架的距离将是固定的. 在第二轴上安装并调整二维码阅读器. 螺钉M8x25，M8x16，扭矩=27牛米. 用于二维码的M6螺钉，扭矩MA=10牛米</td>
 <td class="text-left">Datenmatrix-Lesegerät befestigen. QR-Code-Leser auf 1189 mm ±1 zur hinteren Befestigungsachse links einstellen. Abstand wird mit erstem Halter fixiert. QR-Code-Leser an 2. Achse montieren und einstellen. Schrauben M8x25, M8x16 MA=27Nm. Schrauben M6 für QR-Code Leser MA=10Nm</td>
-<td class="drawing-cell"><img src="../static/images/1.30.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.30.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_1_30 }}</td>
 <td class="text-left">{{ protokol.oknok_1_30_remark }}</td>
@@ -492,7 +492,7 @@
 <td class="text-left">Ground collector (PE) installed on the 3rd trolleyTighten screw 2x M8x16-8.8-MA=27NmPE-Collector Assembly see drawing A5E54058304A</td>
 <td class="text-left">安装在第三辆小车上的接地收集器（PE）拧紧螺钉 2颗 M8x16-8.8-MA=27牛米</td>
 <td class="text-left">PE-Nachläufer am 3. Trolley montiertSchrauben 2x M8x16-8.8-MA=27Nm anziehenPE-Nachläufer-Montage siehe Zeichnung A5E54058304A</td>
-<td class="drawing-cell"><img src="../static/images/1.31.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.31.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_1_31 }}</td>
 <td class="text-left">{{ protokol.oknok_1_31_remark }}</td>
@@ -503,7 +503,7 @@
 <td class="text-left">mounting of drip tray A5E54443423AM12x30-8.8-A2F, MA=93Nmsecure with loctite 243</td>
 <td class="text-left">滴水盘A5E54443423A的安装M12x30-8.8-A2F，MA=93Nm用乐泰243固定</td>
 <td class="text-left">Auffangwanne A5E54443423A montierenM12x30-8.8-A2F, MA=93Nmmit Loctite 243 sichernLoctite Farbe:Grün</td>
-<td class="drawing-cell"><img src="../static/images/1.32.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.32.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_32 }}</td>
 <td class="text-left">{{ protokol.oknok_1_32_remark }}</td>
@@ -514,7 +514,7 @@
 <td class="text-left">grounding on transmission device and all movable parts</td>
 <td class="text-left">将传输设备和所有可移动部件接地</td>
 <td class="text-left">Erdung an Getriebe und allen beweglichen Teilen</td>
-<td class="drawing-cell"><img src="../static/images/1.33.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.33.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_1_33 }}</td>
 <td class="text-left">{{ protokol.oknok_1_33_remark }}</td>
@@ -525,7 +525,7 @@
 <td class="text-left">protective wax transparent spray on the blanked parts to protect against rust during transportation(e.g. Würth-Art. Nr. 0893082400)</td>
 <td class="text-left">在加工面上喷涂一层透明的防护蜡，以防止运输过程中生锈（例如，Würth产品编号0893082400）</td>
 <td class="text-left">Transparenter Korrosionsschutzwachs auf blanke Teile zum Schutz vor Rost beim Transport auftragen(z. B. Würth-Art.-Nr. 0893082400)</td>
-<td class="drawing-cell"><img src="../static/images/1.34.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.34.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_1_34 }}</td>
 <td class="text-left">{{ protokol.oknok_1_34_remark }}</td>
@@ -536,7 +536,7 @@
 <td class="text-left">Screws are marked after thightening with torque marque, sealing paint. Red</td>
 <td class="text-left">螺丝拧紧后用扭矩标记、密封漆进行标记：红色</td>
 <td class="text-left">Schrauben nach Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
-<td class="drawing-cell"><img src="../static/images/1.35.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.35.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_1_35 }}</td>
 <td>{{ protokol.oknok_1_35_lp }}</td>
@@ -548,7 +548,7 @@
 <td class="text-left">Screws fixed with Loctite glue have to be marked  with paint in Green colour. No change in colour permitted.Special advice see file&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
 <td class="text-left">用乐泰胶水固定的螺钉必须用绿色油漆标记。不允许改变颜色。特别建议见文件</td>
 <td class="text-left">Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.Sonderhinweis siehe Datei&lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
-<td class="drawing-cell"><img src="../static/images/1.36.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/1.36.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_1_36 }}</td>
 <td>{{ protokol.oknok_1_36_lp }}</td>
@@ -564,7 +564,7 @@
 <td class="text-left">Visual inspection of weldings,sampling, welding bend, check size of welding seams according drawing/EXC3</td>
 <td class="text-left">根据图纸/EXC3，目视检查焊接件、取样、焊接弯管、检查焊缝尺寸</td>
 <td class="text-left">Visuelle Prüfung der Schweißnähte, Probenahme, Schweißbogen, Überprüfung der Schweißnahtgröße gemäß Zeichnung / EXC3</td>
-<td class="drawing-cell"><img src="../static/images/2.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_1 }}</td>
 <td class="text-left">{{ protokol.oknok_2_1_remark }}</td>
@@ -575,7 +575,7 @@
 <td class="text-left">Disassemble Operating Instructions Traction Motors. 2 x bag with fastenerand collect in box seperatley (keep in CN)</td>
 <td class="text-left">电机说明书和2个扎带统一放在一个纸箱里</td>
 <td class="text-left">Betriebsanleitung Hubmotorenmotoren demontieren. 2 x Beutel mit Befestigerund separat in Kiste sammeln (in CN aufbewahren)</td>
-<td class="drawing-cell"><img src="../static/images/2.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_2 }}</td>
 <td class="text-left">{{ protokol.oknok_2_2_remark }}</td>
@@ -586,7 +586,7 @@
 <td class="text-left">Installing the brake release lever an protect with Safety Cain. 1 x lifting motor left. 1 x lifting motor right</td>
 <td class="text-left">安装刹车释放杆用安全带保护左侧. 1个升降电机. 1个右升降电机</td>
 <td class="text-left">Bremse-Entriegelungshebe. l montierenund mit Sicherheitskette sichern. 1 x Hubmotor links1 x Hubmotor rechts</td>
-<td class="drawing-cell"><img src="../static/images/2.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_3 }}</td>
 <td class="text-left">{{ protokol.oknok_2_3_remark }}</td>
@@ -597,7 +597,7 @@
 <td class="text-left">Check installation of safety chain for brake release lever. 1 x lifting motor left. 1 x lifting motor right</td>
 <td class="text-left">刹车释放杆的安全链左侧. 1个升降电机. 1个右升降电机</td>
 <td class="text-left">Sicherheitskette für Bremse-Entriegelungshebe. l prüfen1 x Hubmotor links. 1 x Hubmotor rechts</td>
-<td class="drawing-cell"><img src="../static/images/2.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_4 }}</td>
 <td class="text-left">{{ protokol.oknok_2_4_remark }}</td>
@@ -608,7 +608,7 @@
 <td class="text-left">Activate gear venting for each gearmotorPressure relief valve with safety strap. Remove the transport safety device by pulling the safety tab 1 in the direction of the arrow.</td>
 <td class="text-left">打开每个齿轮电机的齿轮通风带安全带的泄压阀。沿箭头方向拉动安全片1，拆下运输安全装置</td>
 <td class="text-left">Getriebeentlüftung für jeden Getriebemotor aktivierenDruckentlastungsventil mit Sicherheitsgurt. Transportsicherung durch Ziehen der Lasche 1 in Pfeilrichtung entfernen.</td>
-<td class="drawing-cell"><img src="../static/images/2.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_5 }}</td>
 <td class="text-left">{{ protokol.oknok_2_5_remark }}</td>
@@ -619,7 +619,7 @@
 <td class="text-left">Mount lifting ropes laid out correctly, in an orderly and free-running manner according drawing lifting unit. Pay attention: leftthread or rightthread</td>
 <td class="text-left">钢丝绳按照图纸以有序且自由运行的方式正确铺设注意：左螺纹或右螺纹</td>
 <td class="text-left">Hubseile ordnungsgemäß und frei beweglich gemäß Zeichnung der Hebeeinheit verlegen. Achtung: Links- oder Rechtsschlag beachten</td>
-<td class="drawing-cell"><img src="../static/images/2.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_6 }}</td>
 <td class="text-left">{{ protokol.oknok_2_6_remark }}</td>
@@ -630,7 +630,7 @@
 <td class="text-left">M20x60 8.8. Tighten bolts on hoist device, Pos 71, 83 with 4 pieces M20*60 8.8</td>
 <td class="text-left">使用4颗M20*60 8.8. 规格的螺栓，将位置71、83处的起重装置上的螺栓拧紧</td>
 <td class="text-left">M20x60 8.8. Schrauben an Hubvorrichtung anziehen, Pos 71, 83 mit 4 Stück M20*60 8.8</td>
-<td class="drawing-cell"><img src="../static/images/2.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_7 }}</td>
 <td class="text-left">{{ protokol.oknok_2_7_remark }}</td>
@@ -641,7 +641,7 @@
 <td class="text-left">Check grease nipples of the flange bearings on the hoist pointing to the rear</td>
 <td class="text-left">卷扬机上法兰轴承的润滑油嘴指向后方</td>
 <td class="text-left">Schmiernippel der Flanschlager an der Rückseite der Hebevorrichtung prüfen</td>
-<td class="drawing-cell"><img src="../static/images/2.8.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.8.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_8 }}</td>
 <td class="text-left">{{ protokol.oknok_2_8_remark }}</td>
@@ -652,7 +652,7 @@
 <td class="text-left">Tighten screws at paguflex coupling. 2 x  M4     MA = 2 Nm</td>
 <td class="text-left">拧紧Paguflex联轴器上的螺丝2个M4螺钉，扭矩=2牛米</td>
 <td class="text-left">Schrauben an der Paguflex-Kupplung anziehen. 2 x M4 MA = 2 Nm</td>
-<td class="drawing-cell"><img src="../static/images/2.9.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.9.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_9 }}</td>
 <td class="text-left">{{ protokol.oknok_2_9_remark }}</td>
@@ -663,7 +663,7 @@
 <td class="text-left">Check encoder type. CMV 582 M (magnetic)</td>
 <td class="text-left">检查编码器类型. CMV 582 M（磁性）</td>
 <td class="text-left">Encodertyp prüfen. CMV 582 M (magnetisch)</td>
-<td class="drawing-cell"><img src="../static/images/2.10.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.10.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_10 }}</td>
 <td class="text-left">{{ protokol.oknok_2_10_remark }}</td>
@@ -674,7 +674,7 @@
 <td class="text-left">At each lift drive Gearmotor shrink diskMark all bolts after tensioning according Siemens specification. Two paint marking points need to be placed after installation. 1x mark clamping set to shaft. 1x mark clamping set to hub</td>
 <td class="text-left">每次升降驱动时，齿轮电机收缩盘按照西门子规范，在涨紧后标记所有螺栓安装后需要设置两个油漆标记点1套轴用标记夹紧装置1套轮毂标记夹紧装置</td>
 <td class="text-left">An jeder Hebeantriebseinheit Schrumpfscheibe am Getriebemotor. Alle Schrauben nach Vorspannung gemäß Siemens-Spezifikation markieren. Zwei Farbmarkierungen nach der Montage anbringen: 1x Markierung Klemmsatz zur Welle. 1x Markierung Klemmsatz zur Nabe</td>
-<td class="drawing-cell"><img src="../static/images/2.11.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.11.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_11 }}</td>
 <td class="text-left">{{ protokol.oknok_2_11_remark }}</td>
@@ -685,7 +685,7 @@
 <td class="text-left">Mounting of drip tray right A5E54080598Aand left A5E51110929A on rear motor MA=180Nm</td>
 <td class="text-left">A5E54080598A型号跳闸托盘的安装并将A5E51110929A留在后置电机上MA=180Nm</td>
 <td class="text-left">Auffangwanne rechts A5E54080598A und links A5E51110929A am hinteren Motor montieren MA=180Nm</td>
-<td class="drawing-cell"><img src="../static/images/2.12.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.12.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_2_12 }}</td>
 <td class="text-left">{{ protokol.oknok_2_12_remark }}</td>
@@ -696,7 +696,7 @@
 <td class="text-left">Screws are marked after thightening with torque marque, sealing paint. Red</td>
 <td class="text-left">螺丝拧紧后用扭矩标记、密封漆进行标记：红色</td>
 <td class="text-left">Schrauben nach dem Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
-<td class="drawing-cell"><img src="../static/images/2.13.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.13.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_2_13 }}</td>
 <td>{{ protokol.oknok_2_13_lp }}</td>
@@ -708,7 +708,7 @@
 <td class="text-left">Screws fixed with Loctite glue have to be marked  with paint in Green colour. No change in colour permitted.Special advice see file &lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
 <td class="text-left">用乐泰胶固定的螺丝必须用绿色油漆进行标记。不得更改颜色。</td>
 <td class="text-left">Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.Sonderhinweis siehe Datei &lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
-<td class="drawing-cell"><img src="../static/images/2.14.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/2.14.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_2_14 }}</td>
 <td>{{ protokol.oknok_2_14_lp }}</td>
@@ -724,7 +724,7 @@
 <td class="text-left">Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
 <td class="text-left">焊接、目视检查、取样、焊接弯曲、检查焊缝尺寸</td>
 <td class="text-left">Visuelle Prüfung der Schweißnähte, Probenahme, Schweißbogen, Überprüfung der Schweißnahtgröße / EXC3</td>
-<td class="drawing-cell"><img src="../static/images/3.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td>{{ protokol.oknok_3_1 }}</td>
 <td>{{ protokol.oknok_3_1_lp }}</td>
@@ -736,7 +736,7 @@
 <td class="text-left">Pre-Assemble brackets. 1) Bracket for Control Box A5E54397236A 2) Bracket 2 Frequency Inverter A5E53860824A 3) Bracket 3-Frequency Inverter A5E53860814A 4) Bracket 2 Frequency Inverter A5E53860824A 5) Bracket 1 Frequency Inverter A5E46801453A 6) Bracket for SMGM  - W7  A5E54495606A 7) Bracket for IR-Box A5E54019957A 8) Bracket for brake relay A5E54356739A 9) Mounting plate for relay A5E54275447A. inclusive handlebar,  bolts and washers for the units.</td>
 <td class="text-left">安装从后部EMS开始 (1) 控制箱 (2) FU G120D 3,0kW + 控制单元 (3) FU G120D 7,5千瓦 + 控制单元 (4) FU G120D 7,5千瓦 + 控制单元 (5)FU G120D 4,0千瓦 + 控制单元 (6) SMGM (7)红外显示 (8) 继电器盒1 (9) 继电器盒2</td>
 <td class="text-left">Halterungen vormontieren (1) Steuerbox (2) FU G120D 4,0kW + Steuereinheit (3) FU G120D 7,5kW + Steuereinheit (4) FU G120D 7,5kW + Steuereinheit (5) FU G120D 3,0kW + Steuereinheit (6) SMGM (7) Infrarot-Anzeige (8) Relaisbox 1 (9) Relaisbox 2. inklusive Lenker, Schrauben und Unterlegscheiben für die Einheiten.</td>
-<td class="drawing-cell"><img src="../static/images/3.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_2 }}</td>
 <td class="text-left">{{ protokol.oknok_3_2_remark }}</td>
@@ -756,7 +756,7 @@
 (7) Infrarot-Anzeige
 (8) Relaisbox 1
 (9) Relaisbox 2</td>
-<td class="drawing-cell"><img src="../static/images/3.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_3_3 }}</td>
 <td class="text-left">{{ protokol.oknok_3_3_remark }}</td>
@@ -767,7 +767,7 @@
 <td class="text-left">Bracket for the cable conduit and all MURRPLASTIC components are mounted in the front of hanger, on the upper frame and trolley system</td>
 <td class="text-left">电缆导管及其所有配件的支架MURRPLASTIC部件安装在吊架前部、上框架和手推车系统上</td>
 <td class="text-left">Halterung für Kabelschutzrohr und alle MURRPLASTIK-Komponenten vorne am Aufhänger, am oberen Rahmen und Trolley-System montiert</td>
-<td class="drawing-cell"><img src="../static/images/3.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_3_4 }}</td>
 <td class="text-left">{{ protokol.oknok_3_4_remark }}</td>
@@ -778,7 +778,7 @@
 <td class="text-left">Check that there is no collision between the cable channel and the cable pulley. the space between should be 8mm use a cable channel with a width of 300mm for checking</td>
 <td class="text-left">检查钢丝绳线槽支架和钢丝绳轮之间是否有干涉。两者之间的间距应为8毫米使用宽度为300毫米的线槽支架进行检查</td>
 <td class="text-left">Prüfen, dass kein Kontakt zwischen Kabelkanal und Umlenkrolle besteht. Abstand muss 8mm betragen. Zur Prüfung Kabelkanal mit 300mm Breite verwenden</td>
-<td class="drawing-cell"><img src="../static/images/3.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_5 }}</td>
 <td class="text-left">{{ protokol.oknok_3_5_remark }}</td>
@@ -789,7 +789,7 @@
 <td class="text-left">Tighten screws M12x65-8.8-A2F MA=93Nm</td>
 <td class="text-left">拧紧螺钉M12x65-8.8-A2F,扭矩=93牛米</td>
 <td class="text-left">Schrauben M12x65-8.8-A2F MA=93Nm anziehen</td>
-<td class="drawing-cell"><img src="../static/images/3.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_6 }}</td>
 <td class="text-left">{{ protokol.oknok_3_6_remark }}</td>
@@ -800,7 +800,7 @@
 <td class="text-left">Rope rocker centered,  distance between buffer and rocker on each side approx. 10mm tolerance  ±3mm. Attention: Correction only according to the adjustment instructions in the operating instructions</td>
 <td class="text-left">钢丝绳摇杆居中， 每侧缓冲器和摇杆之间的距离约为10mm. 公差±3mm. 注意：仅根据操作说明中的调整说明进行校正</td>
 <td class="text-left">Seilwippe zentriert, Abstand zwischen Puffer und Wippe auf beiden Seiten ca. 10mm. Toleranz ±3mm. Achtung: Korrektur nur gemäß Einstellanweisung in der Betriebsanleitung</td>
-<td class="drawing-cell"><img src="../static/images/3.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_7 }}</td>
 <td class="text-left">{{ protokol.oknok_3_7_remark }}</td>
@@ -811,7 +811,7 @@
 <td class="text-left">Rope break switch centered adjusted according to drawing</td>
 <td class="text-left">断绳开关居中根据图纸进行调整</td>
 <td class="text-left">Seilbruchschalter zentriertgemäß Zeichnung eingestellt</td>
-<td class="drawing-cell"><img src="../static/images/3.8.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.8.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_8 }}</td>
 <td class="text-left">{{ protokol.oknok_3_8_remark }}</td>
@@ -822,7 +822,7 @@
 <td class="text-left">prepress of the spring on Pos.10</td>
 <td class="text-left">位置10的弹簧预压</td>
 <td class="text-left">Vorspannung der Feder auf Pos.10</td>
-<td class="drawing-cell"><img src="../static/images/3.9.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.9.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_9 }}</td>
 <td class="text-left">{{ protokol.oknok_3_9_remark }}</td>
@@ -833,7 +833,7 @@
 <td class="text-left">Remain length from both side of the clamp ramp: first clamp ~100 mm, second clamp 40~50mm from first clamp. Lifting rope stop at rope rocker: Free rope length after rope bag min.450 mm rope clamp mounted 2x per dead rope end Fix with cable ties. Loop and rope bag to the outside. see A5E51581844A</td>
 <td class="text-left">钢丝绳锁紧装置斜面两侧的剩余长度：第一个约100毫米，第二个距离第一个40~50毫米 钢丝绳在锁紧摇杆处停止：每端安装2个绳夹 用扎带固定. 将环和绳袋套到外面. 见A5E51581844A</td>
 <td class="text-left">Restlänge beidseitig an der Klemprampe: erste Klemme ~100 mm, zweite Klemme 40~50 mm von der ersten Klemme. Hubseil endet an der Seilwippe: Freie Seillänge nach Seiltasche mindestens 450 mm. Seilklemme 2x je Seilende montiert. Mit Kabelbindern sichern. Schlinge und Seilsack nach außen. Siehe A5E51581844A</td>
-<td class="drawing-cell"><img src="../static/images/3.10.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.10.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_10 }}</td>
 <td class="text-left">{{ protokol.oknok_3_10_remark }}</td>
@@ -844,7 +844,7 @@
 <td class="text-left">Mount bolt head above,Split pins bent around the bolt below</td>
 <td class="text-left">将螺栓头安装在上方，开口销在螺栓下方弯曲</td>
 <td class="text-left">Bolzenkopf oben montieren,Splinte unterhalb der Schraube umbiegen</td>
-<td class="drawing-cell"><img src="../static/images/3.11.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.11.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_11 }}</td>
 <td class="text-left">{{ protokol.oknok_3_11_remark }}</td>
@@ -855,7 +855,7 @@
 <td class="text-left">Mount M12x36 long nut must be in contact with bolt and lock M12 nut with long nut</td>
 <td class="text-left">M12x36长螺母必须与螺栓接触，并用长螺母锁紧M12螺母</td>
 <td class="text-left">M12x36-Langmutter muss Kontakt mit Schraube haben und M12-Mutter mit Langmutter sichern</td>
-<td class="drawing-cell"><img src="../static/images/3.12.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.12.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_12 }}</td>
 <td class="text-left">{{ protokol.oknok_3_12_remark }}</td>
@@ -866,7 +866,7 @@
 <td class="text-left">Mount ISO 8746 4x16 dowel pin</td>
 <td class="text-left">安装ISO 8746 4x16定位销</td>
 <td class="text-left">ISO 8746 4x16 Spannstift montieren</td>
-<td class="drawing-cell"><img src="../static/images/3.13.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.13.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_13 }}</td>
 <td class="text-left">{{ protokol.oknok_3_13_remark }}</td>
@@ -877,7 +877,7 @@
 <td class="text-left">Position of rope connection under load horizontal position</td>
 <td class="text-left">负载水平位置下绳索连接的位置</td>
 <td class="text-left">Position der Seilverbindung in belasteter, horizontaler Lage</td>
-<td class="drawing-cell"><img src="../static/images/3.14.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.14.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_14 }}</td>
 <td class="text-left">{{ protokol.oknok_3_14_remark }}</td>
@@ -888,7 +888,7 @@
 <td class="text-left">Mount Lock long nut with bolt head to prevent rotation</td>
 <td class="text-left">安装带螺栓头的锁紧长螺母，以防止旋转</td>
 <td class="text-left">Langmutter mit Schraubenkopf sichern, um Rotation zu verhindern</td>
-<td class="drawing-cell"><img src="../static/images/3.15.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.15.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_15 }}</td>
 <td class="text-left">{{ protokol.oknok_3_15_remark }}</td>
@@ -899,7 +899,7 @@
 <td class="text-left">Rope connection Spline spread angle 45° Tolerance +0/-15 °</td>
 <td class="text-left">钢丝绳连接展开角度45°，公差+0/-15°</td>
 <td class="text-left">SeilverbindungSplinte  Öffnungswinkel 45°, Toleranz +0/-15°</td>
-<td class="drawing-cell"><img src="../static/images/3.16.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.16.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_16 }}</td>
 <td class="text-left">{{ protokol.oknok_3_16_remark }}</td>
@@ -910,7 +910,7 @@
 <td class="text-left">Cable connection  A5E51581844A. Bolt distance pre adjusted at 120,4 +/-1 when ropes are tensioned. Note: Not forseen to adjust lower frame in workshop.</td>
 <td class="text-left">钢丝绳连接 A5E51581844A. 螺栓间距预调为120.4±1 当钢丝绳被拉紧时。注意：车间内不提供调整下框架的服务</td>
 <td class="text-left">Kabelverbindung A5E51581844A. Schraubenabstand voreingestellt auf 120,4 +/-1 bei gespannten Seilen. Hinweis: Für die Einstellungen im Werk  zur Nachjustierung nicht vorgesehen.</td>
-<td class="drawing-cell"><img src="../static/images/3.17.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.17.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_17 }}</td>
 <td class="text-left">{{ protokol.oknok_3_17_remark }}</td>
@@ -921,7 +921,7 @@
 <td class="text-left">All rope belay pins, which avoid that steel ropes can move out of pulleys are mounted</td>
 <td class="text-left">所有防止钢丝绳从滑轮中脱出的绳索固定销均已安装</td>
 <td class="text-left">Alle Seilsicherungsstifte, die das Herausspringen der Stahlseile aus den Rollen verhindern, sind montiert</td>
-<td class="drawing-cell"><img src="../static/images/3.18.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.18.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_18 }}</td>
 <td class="text-left">{{ protokol.oknok_3_18_remark }}</td>
@@ -932,7 +932,7 @@
 <td class="text-left">frequency converters and SD card installed. Separate packing when shipped</td>
 <td class="text-left">变频器和SD卡已安装装运时单独包装</td>
 <td class="text-left">Frequenzumrichter und SD-Karte montiert. Separat verpackt bei Lieferung</td>
-<td class="drawing-cell"><img src="../static/images/3.19.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.19.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_3_19 }}</td>
 <td class="text-left">{{ protokol.oknok_3_19_remark }}</td>
@@ -943,7 +943,7 @@
 <td class="text-left">Check that one (1) steel rope is guided over  steel rope pulleys (front right side). Other three (3) steel ropes over (PA) polyamid pulleys.</td>
 <td class="text-left">检查一（1）根钢丝绳是否绕过钢丝绳滑轮（右前侧），其他三（3）根钢丝绳是否绕过尼龙滑轮</td>
 <td class="text-left">Prüfen, dass ein (1) Stahlseil über Stahlseilrollen (Vorderseite rechts) geführt ist. Die anderen drei (3) Seile über (PA) Polyamidrollen</td>
-<td class="drawing-cell"><img src="../static/images/3.20.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.20.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_20 }}</td>
 <td class="text-left">{{ protokol.oknok_3_20_remark }}</td>
@@ -954,7 +954,7 @@
 <td class="text-left">Adjustment of the guide rollers 4x screws M10 M=50 Nm  M=50Nm. Distance 180mm +0,5  Adjust the leveling of upperframe</td>
 <td class="text-left">扶正轮的调整4个M10螺钉，扭矩M=50 Nm，扭矩M=50 Nm距离 180毫米 +0.5调整上框架的水平度</td>
 <td class="text-left">Einstellung der Führungsrollen4x Schrauben M10 M=50 Nm. Abstand 180 mm +0,5Nivellierung des oberen Rahmens einstellen</td>
-<td class="drawing-cell"><img src="../static/images/3.21.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.21.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_21 }}</td>
 <td class="text-left">{{ protokol.oknok_3_21_remark }}</td>
@@ -965,7 +965,7 @@
 <td class="text-left">Front roller up - touching guide rail 0 mm. Front roller down - gap 1,0 mm between guide rail. Rear roller up - gap 1,0 mm between guide rail. Rear roller down - touching guide rail 0 mm. Attention: Keep always the same procedure for front and back.</td>
 <td class="text-left">前上升 - 与导轨接触 0 毫米前向下 - 导轨之间间隙为1.0毫米后上升 - 导轨之间间隙为1.0毫米后下降 - 接触导轨 0 毫米注意：前后两面始终保持相同的操作程序。</td>
 <td class="text-left">Vordere Rolle oben - 0 mm Kontakt zur SchieneVordere Rolle unten - 1,0 mm Abstand zur Schiene. Hintere Rolle oben - 1,0 mm Abstand zur Schiene. Hintere Rolle unten - 0 mm Kontakt zur Schiene. Achtung: Immer gleiche Prozedur vorne und hinten</td>
-<td class="drawing-cell"><img src="../static/images/3.22.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.22.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_22 }}</td>
 <td class="text-left">{{ protokol.oknok_3_22_remark }}</td>
@@ -976,7 +976,7 @@
 <td class="text-left">TR Rope encoder mounted and adjusted.perpendicular movement of the encoder ropein x and y direction</td>
 <td class="text-left">TR 拉绳编码器已安装并调整。编码器绳索的垂直运动在x和y方向上</td>
 <td class="text-left">TR-Seil-Encoder montiert und justiert.Senkrechte Bewegung des Encoder-Seils in x- und y-Richtung</td>
-<td class="drawing-cell"><img src="../static/images/3.23.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.23.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_23 }}</td>
 <td class="text-left">{{ protokol.oknok_3_23_remark }}</td>
@@ -987,7 +987,7 @@
 <td class="text-left">Check colour Reference flag-A5E54330572A. RAL 3000/red</td>
 <td class="text-left">参考标志-A5E54330572A颜色：RAL 3000/红色</td>
 <td class="text-left">Farbe des Referenzfahne prüfen - A5E54330572A. RAL 3000/rot</td>
-<td class="drawing-cell"><img src="../static/images/3.24.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.24.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_24 }}</td>
 <td class="text-left">{{ protokol.oknok_3_24_remark }}</td>
@@ -998,7 +998,7 @@
 <td class="text-left">Set retaining plates for proximity switch.Lower frame must be in necessary upper position14 mm  +/- 1 mm top of bumper to bottom of upper frame tube</td>
 <td class="text-left">为接近开关设置固定板下框架必须处于必要的上部位置保险杠顶部至上框架管底部的距离为14毫米+/-1毫米</td>
 <td class="text-left">Anschlagplatten für Näherungsschalter montieren.Unterrahmen muss in oberer Position sein14 mm +/- 1 mm von Oberkante Puffer bis Unterkante Rohr des oberen Rahmens</td>
-<td class="drawing-cell"><img src="../static/images/3.25.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.25.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_25 }}</td>
 <td class="text-left">{{ protokol.oknok_3_25_remark }}</td>
@@ -1009,7 +1009,7 @@
 <td class="text-left">For adjustment the plate for proximity switch use A5E54377383A-Setting aid reference initiator</td>
 <td class="text-left">用于调整接近开关的板A5E54377383A-设置辅助参考启动器</td>
 <td class="text-left">Zur Justierung der Einschraubhülese für den  Näherungsschalter. A5E54377383A-Einstellhilfe verwenden</td>
-<td class="drawing-cell"><img src="../static/images/3.26.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.26.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_26 }}</td>
 <td class="text-left">{{ protokol.oknok_3_26_remark }}</td>
@@ -1020,7 +1020,7 @@
 <td class="text-left">Synchroneous ropes:All rope belay Pins, which avoid that steel ropes can move out of pulleys are mounted</td>
 <td class="text-left">同步钢丝绳：所有防止钢丝绳从滑轮中脱出的绳索固定销均已安装</td>
 <td class="text-left">Synchronseile:Alle Seilsicherungsstifte, die das Herausspringen der Stahlseile aus den Rollen verhindern, sind montiert</td>
-<td class="drawing-cell"><img src="../static/images/3.27.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.27.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_27 }}</td>
 <td class="text-left">{{ protokol.oknok_3_27_remark }}</td>
@@ -1031,7 +1031,7 @@
 <td class="text-left">Synchroneous ropes:Bearing inside the pulleys: Synchronous pulleys Check bearing seat for noticeable clearance.  (tilting).</td>
 <td class="text-left">同步钢丝绳：滑轮内部的轴承：同步滑轮 检查轴承座是否有明显间隙（倾斜）。</td>
 <td class="text-left">Synchronseile:Lager innerhalb der Rollen: SynchronrollenLagersitz auf spürbares Spiel prüfen (Schwenken).</td>
-<td class="drawing-cell"><img src="../static/images/3.28.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.28.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_28 }}</td>
 <td class="text-left">{{ protokol.oknok_3_28_remark }}</td>
@@ -1042,7 +1042,7 @@
 <td class="text-left">Check screws of horizontal alignment at counterweight side:They must be able to be turned and not stopped by the counter weigth inside the tube. Hint: Counterweight position must be according drawing !!</td>
 <td class="text-left">检查配重侧水平对齐的螺丝：它们必须能够转动，且不会被管内的配重阻止。提示：配重位置必须符合图纸要求！！</td>
 <td class="text-left">Schrauben der Horizontalverstellung auf Gegengewichtsseite prüfen:Sie müssen drehbar sein und dürfen nicht durch das Gegengewicht im Rohr blockiert werden. Hinweis: Position des Gegengewichts muss laut Zeichnung sein!</td>
-<td class="drawing-cell"><img src="../static/images/3.29.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.29.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_29 }}</td>
 <td class="text-left">{{ protokol.oknok_3_29_remark }}</td>
@@ -1053,7 +1053,7 @@
 <td class="text-left">Adjust screws of horizontal alignment: M12 x 80 adjusted for horizontal alignment. Top of all four screws should be adjusted at the same height level referenced to a virtual level by laser. After adjustment tighten counter nut and mark with sealing paint. Important for readjustment on site! Basic: The carrier and  and stroke is adjusted. See 7.5 and 7.6</td>
 <td class="text-left">调整水平对齐螺钉：M12 x 80已调整为水平对齐。所有四个螺钉的顶部应通过激光调整到与虚拟水平相同的高度。调整后，拧紧防松螺母并用密封漆标记。现场重新调整很重要！基础：调整载体和行程。见7.5和7.6</td>
 <td class="text-left">Schrauben für Horizontalverstellung einstellen: M12x80 zur Horizontalverstellung angepasst. Oberkante aller vier Schrauben auf gleiche Höhe einstellen, bezogen auf virtuelles Niveau mit Laser. Nach Einstellung Kontermutter festziehen und mit Sicherungslack markieren. Wichtig für Nachjustierung vor Ort! Grundlage: Träger und Hub sind eingestellt. Siehe 7.5 und 7.6</td>
-<td class="drawing-cell"><img src="../static/images/3.30.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.30.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_3_30 }}</td>
 <td class="text-left">{{ protokol.oknok_3_30_remark }}</td>
@@ -1064,7 +1064,7 @@
 <td class="text-left">Screws are marked after thightening with torque marque, sealing paint. Red</td>
 <td class="text-left">螺丝拧紧后用扭矩标记、密封漆进行标记。红色</td>
 <td class="text-left">Schrauben nach dem Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
-<td class="drawing-cell"><img src="../static/images/3.31.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.31.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_3_31 }}</td>
 <td>{{ protokol.oknok_3_31_lp }}</td>
@@ -1076,7 +1076,7 @@
 <td class="text-left">Screws fixed with Loctite glue have to be marked  with paint in Green colour. No change in colour permitted. Special advice see file &lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
 <td class="text-left">用乐泰胶水固定的螺钉必须用绿色油漆标记。不允许改变颜色。特别建议见文件 &lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
 <td class="text-left">Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.Sonderhinweis siehe Datei &lt;&lt;250508_Loctite_TEMS_LPZ.xlsx&gt;&gt;</td>
-<td class="drawing-cell"><img src="../static/images/3.32.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/3.32.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_3_32 }}</td>
 <td>{{ protokol.oknok_3_32_lp }}</td>
@@ -1092,7 +1092,7 @@
 <td class="text-left">Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
 <td class="text-left">目视检查焊接件、取样、焊接弯管、检查焊缝尺寸/EXC3</td>
 <td class="text-left">Visuelle Prüfung der Schweißnähte, Probenahme, Schweißbogen, Überprüfung der Schweißnahtgröße / EXC3</td>
-<td class="drawing-cell"><img src="../static/images/4.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_1 }}</td>
 <td class="text-left">{{ protokol.oknok_4_1_remark }}</td>
@@ -1103,7 +1103,7 @@
 <td class="text-left">Telescope outer tube and telescope assembly. Install 12 Sliding blocks (pos 100 + pos 102). Adjust sliding block with shim plates to eleminate the gap. Vertical sliding blocks 0,5mm gaphorizontal slidings block touching screws, M6x20-8.8-A2F MA=4Nm</td>
 <td class="text-left">剪刀叉外管和组件安装12个滑块（位置100和位置102）。使用垫片调整滑块以消除间隙。垂直滑块，间隙0.5毫米水平滑块接触螺钉，M6x20-8.8-A2F，扭矩=4牛米</td>
 <td class="text-left">Teleskopaußenrohr und Teleskopbaugruppe12 Gleitstücke montieren (Pos. 100 + Pos. 102). Gleitstück mit Futterblechen einstellen, um den Spalt auszugleichen.Vertikale Gleitstück: 0,5 mm SpaltHorizontale Gleitstücke: KontaktSchrauben M6x20-8.8-A2F, MA=4Nm</td>
-<td class="drawing-cell"><img src="../static/images/4.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_2 }}</td>
 <td class="text-left">{{ protokol.oknok_4_2_remark }}</td>
@@ -1114,7 +1114,7 @@
 <td class="text-left">Check mounting of twist protection on the synchronous rope terminal</td>
 <td class="text-left">检查同步钢丝绳端上的扭转保护装置的安装情况</td>
 <td class="text-left">Montage des Verdrehschutzes an der Synchronseil-Endklemme prüfen</td>
-<td class="drawing-cell"><img src="../static/images/4.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_3 }}</td>
 <td class="text-left">{{ protokol.oknok_4_3_remark }}</td>
@@ -1125,7 +1125,7 @@
 <td class="text-left">Mount rope belay pins</td>
 <td class="text-left">安装钢丝绳保护杆</td>
 <td class="text-left">Seilsicherungsstifte montieren</td>
-<td class="drawing-cell"><img src="../static/images/4.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_4 }}</td>
 <td class="text-left">{{ protokol.oknok_4_4_remark }}</td>
@@ -1157,7 +1157,7 @@ For weight test and record the distance
 Zum Testen des Gewichts und zur Aufzeichnung:
 33 mm + 3 - 9 mm
 Die Abweichung jedes Seils beträgt 33 mm + 3 mm - 9 mm</td>
-<td class="drawing-cell"><img src="../static/images/4.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_5 }}</td>
 <td class="text-left">{{ protokol.oknok_4_5_remark }}</td>
@@ -1170,7 +1170,7 @@ Die Abweichung jedes Seils beträgt 33 mm + 3 mm - 9 mm</td>
 <td class="text-left">The rope should not touch the inside of the bearing hole from telescope.</td>
 <td class="text-left">钢丝绳不能从剪刀叉接触轴承孔的内侧走</td>
 <td class="text-left">Das Seil darf die Innenseite der Lagerbohrung vom Teleskop nicht berühren.</td>
-<td class="drawing-cell"><img src="../static/images/4.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_6 }}</td>
 <td class="text-left">{{ protokol.oknok_4_6_remark }}</td>
@@ -1181,7 +1181,7 @@ Die Abweichung jedes Seils beträgt 33 mm + 3 mm - 9 mm</td>
 <td class="text-left">Adjust the rope from encoder perpendicular in x and y direction</td>
 <td class="text-left">将钢丝绳调整至与编码器垂直 在x和y方向上</td>
 <td class="text-left">Seil vom Encoder senkrecht in x- und y-Richtung ausrichten</td>
-<td class="drawing-cell"><img src="../static/images/4.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_7 }}</td>
 <td class="text-left">{{ protokol.oknok_4_7_remark }}</td>
@@ -1192,7 +1192,7 @@ Die Abweichung jedes Seils beträgt 33 mm + 3 mm - 9 mm</td>
 <td class="text-left">Fixation of bearing at the upper and lower frame. Check tightening torque. Shim plates are mounted, Shimplates and contact surfaces must be free of oil and grease and paint.</td>
 <td class="text-left">上下机架轴承的固定。检查拧紧扭矩。 安装垫片， 垫片和接触面必须无油、油脂和油漆。</td>
 <td class="text-left">Lagerbefestigung am oberen und unteren Rahmen prüfen. Anzugsmoment kontrollieren. Ausgleichsbleche montiert, Kontaktflächen müssen frei von Öl, Fett und Farbe sein.</td>
-<td class="drawing-cell"><img src="../static/images/4.8.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.8.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_8 }}</td>
 <td class="text-left">{{ protokol.oknok_4_8_remark }}</td>
@@ -1203,7 +1203,7 @@ Die Abweichung jedes Seils beträgt 33 mm + 3 mm - 9 mm</td>
 <td class="text-left">Fixation of axle at upper frame with lock nut. Check if locknut is fixed and secured with locking plate. 1 piece of locking plate must be bended into 1 goove of lock nut.</td>
 <td class="text-left">用花键螺母将轴固定在上部车架上。 检查螺母是否已固定，并用锁板将其紧固。必须将1块锁紧板弯入锁紧螺母的1个凹槽中。</td>
 <td class="text-left">Achsbefestigung am oberen Rahmen mit Sicherungsmutter prüfen. Sicherstellen, dass Mutter fixiert ist und mit Sicherungsblech gesichert. 1 Sicherungsblech muss in eine Nut der Mutter gebogen sein.</td>
-<td class="drawing-cell"><img src="../static/images/4.9.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.9.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_9 }}</td>
 <td class="text-left">{{ protokol.oknok_4_9_remark }}</td>
@@ -1214,7 +1214,7 @@ Die Abweichung jedes Seils beträgt 33 mm + 3 mm - 9 mm</td>
 <td class="text-left">Grease nipple: Check position to the outside.</td>
 <td class="text-left">油嘴安装在外侧</td>
 <td class="text-left">Schmiernippel: Position nach außen prüfen.</td>
-<td class="drawing-cell"><img src="../static/images/4.10.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.10.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_10 }}</td>
 <td class="text-left">{{ protokol.oknok_4_10_remark }}</td>
@@ -1225,7 +1225,7 @@ Die Abweichung jedes Seils beträgt 33 mm + 3 mm - 9 mm</td>
 <td class="text-left">Fixation of bearing at the lower frame. Check if bearing and cone are fixed. 1 piece of locking plate must be bended into 1 groove of lock nut. MA = 90 Nm (different from manufacturer default)</td>
 <td class="text-left">下框架处轴承的固定。检查轴承和内圈是否固定。必须将1块锁定板弯入锁紧螺母的1个凹槽中。MA = 90牛米（与制造商默认值不同）</td>
 <td class="text-left">Lagerbefestigung am unteren Rahmen prüfen. Lager und Konus müssen fixiert sein. 1 Sicherungsblech muss in eine Nut der Mutter gebogen sein. MA = 90 Nm (abweichend vom Herstellerwert)</td>
-<td class="drawing-cell"><img src="../static/images/4.11.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.11.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_11 }}</td>
 <td class="text-left">{{ protokol.oknok_4_11_remark }}</td>
@@ -1239,7 +1239,7 @@ below teleskop bearing.</td>
 在剪刀叉轴承下方</td>
 <td class="text-left">Auffangwanne A5E53891798A
 unter dem Teleskoplager montieren.</td>
-<td class="drawing-cell"><img src="../static/images/4.12.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.12.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_4_12 }}</td>
 <td class="text-left">{{ protokol.oknok_4_12_remark }}</td>
@@ -1250,7 +1250,7 @@ unter dem Teleskoplager montieren.</td>
 <td class="text-left">Screws are marked after thightening with torque marque, sealing paint. Red</td>
 <td class="text-left">螺丝拧紧后用扭矩标记、密封漆进行标记。红色</td>
 <td class="text-left">Schrauben nach dem Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
-<td class="drawing-cell"><img src="../static/images/4.13.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.13.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_4_13 }}</td>
 <td>{{ protokol.oknok_4_13_lp }}</td>
@@ -1265,7 +1265,7 @@ Special advice see file <<250508_Loctite_TEMS_LPZ.xlsx>></td>
 特别建议见文件 <<250508_Loctite_TEMS_LPZ.xlsx>></td>
 <td class="text-left">Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.
 Sonderhinweis siehe Datei <<250508_Loctite_TEMS_LPZ.xlsx>></td>
-<td class="drawing-cell"><img src="../static/images/4.14.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/4.14.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_4_14 }}</td>
 <td>{{ protokol.oknok_4_14_lp }}</td>
@@ -1281,7 +1281,7 @@ Sonderhinweis siehe Datei <<250508_Loctite_TEMS_LPZ.xlsx>></td>
 <td class="text-left">Visual inspection of weldings, sampling, welding bend, check size of welding seams / EXC3</td>
 <td class="text-left">目视检查焊接件、取样、焊接弯管、检查焊缝尺寸/EXC3</td>
 <td class="text-left">Visuelle Prüfung der Schweißnähte, Probenahme, Schweißbogen, Überprüfung der Schweißnahtgröße / EXC3</td>
-<td class="drawing-cell"><img src="../static/images/5.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_1 }}</td>
 <td class="text-left">{{ protokol.oknok_5_1_remark }}</td>
@@ -1292,7 +1292,7 @@ Sonderhinweis siehe Datei <<250508_Loctite_TEMS_LPZ.xlsx>></td>
 <td class="text-left">Check hoist rope is mounted properly on the pulleys?</td>
 <td class="text-left">检查钢丝绳是否正确安装在滑轮上？</td>
 <td class="text-left">Prüfen, ob das Hubseil korrekt über die Rollen geführt ist</td>
-<td class="drawing-cell"><img src="../static/images/5.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_2 }}</td>
 <td class="text-left">{{ protokol.oknok_5_2_remark }}</td>
@@ -1303,7 +1303,7 @@ Sonderhinweis siehe Datei <<250508_Loctite_TEMS_LPZ.xlsx>></td>
 <td class="text-left">Assemble Support Frame assembly according drawing A5E53767972A</td>
 <td class="text-left">根据图纸A5E53767972A组装支撑架</td>
 <td class="text-left">Tragrahmen gemäß Zeichnung A5E53767972A montieren</td>
-<td class="drawing-cell"><img src="../static/images/5.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_3 }}</td>
 <td class="text-left">{{ protokol.oknok_5_3_remark }}</td>
@@ -1317,7 +1317,7 @@ Hint: Keep dimension distance in x direction according drawing. Important for la
 提示：根据图纸保持x方向的尺寸距离。这对后续的齿形带安装很重要</td>
 <td class="text-left">Kompletten Drehrahmen gemäß Zeichnung A5E53754235A montieren
 Hinweis: Maß in X-Richtung laut Zeichnung einhalten. Wichtig für spätere Zahnriemenmontage</td>
-<td class="drawing-cell"><img src="../static/images/5.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_4 }}</td>
 <td class="text-left">{{ protokol.oknok_5_4_remark }}</td>
@@ -1328,7 +1328,7 @@ Hinweis: Maß in X-Richtung laut Zeichnung einhalten. Wichtig für spätere Zahn
 <td class="text-left">Assemble Support roller assembly according drawing A5E54327093A</td>
 <td class="text-left">根据图纸A5E54327093A组装弯梁组件</td>
 <td class="text-left">Stützrollenbaugruppe gemäß Zeichnung A5E54327093A montieren</td>
-<td class="drawing-cell"><img src="../static/images/5.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_5 }}</td>
 <td class="text-left">{{ protokol.oknok_5_5_remark }}</td>
@@ -1351,7 +1351,7 @@ Vorne links: A5E50206207A
 Vorne rechts: A5E50033920A
 Hinten links: A5E50213833A
 Hinten rechts: A5E49854984A</td>
-<td class="drawing-cell"><img src="../static/images/5.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_6 }}</td>
 <td class="text-left">{{ protokol.oknok_5_6_remark }}</td>
@@ -1365,7 +1365,7 @@ Screw ISO 4762-M12x35-10.9-dacromet</td>
 螺钉 ISO 4762-M12x35-10.9-达克罗处理</td>
 <td class="text-left">Schrauben zur Befestigung aller 4 Lacktraversenaufnahmen prüfen
 Schraube ISO 4762-M12x35-10.9-dacromet</td>
-<td class="drawing-cell"><img src="../static/images/5.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_7 }}</td>
 <td class="text-left">{{ protokol.oknok_5_7_remark }}</td>
@@ -1385,7 +1385,7 @@ Schraube ISO 4762-M12x35-10.9-dacromet</td>
 - Kein Fett
 - Kein Öl
 - Keine Farbe</td>
-<td class="drawing-cell"><img src="../static/images/5.8.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.8.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_8 }}</td>
 <td class="text-left">{{ protokol.oknok_5_8_remark }}</td>
@@ -1412,7 +1412,7 @@ Funktion des Verriegelungsmechanismus prüfen:
 2. Grünen Riegel drehen
 3. Roten Hebel schließen und grünen Riegel fixieren
 Nach Prüfung Hebel in Ausgangsposition zurückstellen</td>
-<td class="drawing-cell"><img src="../static/images/5.9.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.9.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_9 }}</td>
 <td class="text-left">{{ protokol.oknok_5_9_remark }}</td>
@@ -1435,7 +1435,7 @@ after check  levers back to home position</td>
 检查后，操纵杆回到原位</td>
 <td class="text-left">Träger vorne rechts A5E50033920A
 (siehe gleiche Prüfung wie oben)</td>
-<td class="drawing-cell"><img src="../static/images/5.10.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.10.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_10 }}</td>
 <td class="text-left">{{ protokol.oknok_5_10_remark }}</td>
@@ -1458,7 +1458,7 @@ after check  levers back to home position</td>
 检查后，操纵杆回到原位</td>
 <td class="text-left">Träger hinten links A5E50213833A
 (siehe gleiche Prüfung wie oben)</td>
-<td class="drawing-cell"><img src="../static/images/5.11.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.11.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_11 }}</td>
 <td class="text-left">{{ protokol.oknok_5_11_remark }}</td>
@@ -1481,7 +1481,7 @@ after check  levers back to home position</td>
 检查后，操纵杆回到原位</td>
 <td class="text-left">Träger hinten rechts A5E49854984A
 (siehe gleiche Prüfung wie oben)</td>
-<td class="drawing-cell"><img src="../static/images/5.12.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.12.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_12 }}</td>
 <td class="text-left">{{ protokol.oknok_5_12_remark }}</td>
@@ -1492,7 +1492,7 @@ after check  levers back to home position</td>
 <td class="text-left">Assemble Motor bracket assembly according drawing A5E53977763A</td>
 <td class="text-left">根据图纸A5E53977763A组装电机支架总成</td>
 <td class="text-left">Schwenkantriebsbaugruppe gemäß Zeichnung A5E53977763A montieren</td>
-<td class="drawing-cell"><img src="../static/images/5.13.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.13.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_13 }}</td>
 <td class="text-left">{{ protokol.oknok_5_13_remark }}</td>
@@ -1509,7 +1509,7 @@ Remove the transport safety device by pulling the safety tab 1 in the direction 
 <td class="text-left">Getriebeentlüftung aktivieren
 Druckentlastungsventil mit Sicherheitsgurt
 Transportsicherung durch Ziehen an Lasche 1 entfernen</td>
-<td class="drawing-cell"><img src="../static/images/5.14.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.14.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_14 }}</td>
 <td class="text-left">{{ protokol.oknok_5_14_remark }}</td>
@@ -1524,7 +1524,7 @@ and collect in box seperatley</td>
 <td class="text-left">Betriebsanleitung Schwenkmotoren demontieren
 2 x Beutel mit Befestiger
 Separat in Kiste sammeln</td>
-<td class="drawing-cell"><img src="../static/images/5.15.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.15.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_15 }}</td>
 <td class="text-left">{{ protokol.oknok_5_15_remark }}</td>
@@ -1535,7 +1535,7 @@ Separat in Kiste sammeln</td>
 <td class="text-left">Mount drip trays below pillow block bearings</td>
 <td class="text-left">在轴台轴承下方安装滴水盘</td>
 <td class="text-left">Auffangwannen unter Stehlagern montieren</td>
-<td class="drawing-cell"><img src="../static/images/5.16.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.16.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_16 }}</td>
 <td class="text-left">{{ protokol.oknok_5_16_remark }}</td>
@@ -1552,7 +1552,7 @@ Thighten screws M12x40-8.8-A2F, MA=93Nm</td>
 <td class="text-left">Stehlager:
 Schmierstoffe einschrauben, Schrauben anziehen
 Schrauben M12x40-8.8-A2F, MA=93Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.17.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.17.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_17 }}</td>
 <td class="text-left">{{ protokol.oknok_5_17_remark }}</td>
@@ -1566,7 +1566,7 @@ M12x45-8.8-A2F, MA=93Nm</td>
 M12x45-8.8-A2F，MA=93Nm</td>
 <td class="text-left">Auffangwanne und Motorhalterung an Schwenkrahmen montieren
 Schrauben M12x45-8.8-A2F, MA=93Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.18.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.18.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_18 }}</td>
 <td class="text-left">{{ protokol.oknok_5_18_remark }}</td>
@@ -1577,7 +1577,7 @@ Schrauben M12x45-8.8-A2F, MA=93Nm</td>
 <td class="text-left">Mount rubber bumper pre-tension to sketched dimensions</td>
 <td class="text-left">根据草图尺寸，对橡胶缓冲垫进行预紧</td>
 <td class="text-left">Gummipuffer vorgespannt nach Skizzenmaßen montieren</td>
-<td class="drawing-cell"><img src="../static/images/5.19.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.19.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_19 }}</td>
 <td class="text-left">{{ protokol.oknok_5_19_remark }}</td>
@@ -1588,7 +1588,7 @@ Schrauben M12x45-8.8-A2F, MA=93Nm</td>
 <td class="text-left">Mount roll over bar</td>
 <td class="text-left">安装防滚翻杆</td>
 <td class="text-left">Überschlagschutz montieren</td>
-<td class="drawing-cell"><img src="../static/images/5.20.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.20.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_20 }}</td>
 <td class="text-left">{{ protokol.oknok_5_20_remark }}</td>
@@ -1602,7 +1602,7 @@ Schrauben M12x45-8.8-A2F, MA=93Nm</td>
 2个M4螺钉，扭矩=2牛米</td>
 <td class="text-left">Schrauben an Paguflex-Kupplung bei beiden Encodern anziehen
 2 x M4 MA = 2 Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.21.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.21.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_21 }}</td>
 <td class="text-left">{{ protokol.oknok_5_21_remark }}</td>
@@ -1616,7 +1616,7 @@ See boreholes in fixation support depending to threaded holes on each encoder ty
 根据每种编码器类型上的螺纹孔，查看固定支架中的钻孔</td>
 <td class="text-left">Encoder in horizontaler Position fixiert prüfen?
 Bohrungen im Halter abhängig vom jeweiligen Encodertyp</td>
-<td class="drawing-cell"><img src="../static/images/5.22.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.22.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_22 }}</td>
 <td class="text-left">{{ protokol.oknok_5_22_remark }}</td>
@@ -1635,7 +1635,7 @@ CEV 582米
 （光学）</td>
 <td class="text-left">Vorderer Encoder in Förderrichtung
 Typ prüfen: CEV 582 M (optisch)</td>
-<td class="drawing-cell"><img src="../static/images/5.23.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.23.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_23 }}</td>
 <td class="text-left">{{ protokol.oknok_5_23_remark }}</td>
@@ -1654,7 +1654,7 @@ CMV 582米
 （磁性）</td>
 <td class="text-left">Hinterer Encoder in Förderrichtung
 Typ prüfen: CMV 582 M (magnetisch)</td>
-<td class="drawing-cell"><img src="../static/images/5.24.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.24.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_24 }}</td>
 <td class="text-left">{{ protokol.oknok_5_24_remark }}</td>
@@ -1673,7 +1673,7 @@ Loctite colour Green</td>
 Markierungsplatte (A5E54322669A) am Drehrahmen montieren
 Schraube M4 mit LOCTITE 243 sichern
 Loctite-Farbe Grün</td>
-<td class="drawing-cell"><img src="../static/images/5.25.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.25.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_25 }}</td>
 <td class="text-left">{{ protokol.oknok_5_25_remark }}</td>
@@ -1685,7 +1685,7 @@ Loctite-Farbe Grün</td>
 <td class="text-left">旋转架前方的“0度位置”指示器，颜色为RAL 3000/红色</td>
 <td class="text-left">Zeiger für „0-Grad-Position“ vor dem Schwenkrahmen montieren
 Farbe RAL 3000 / ROT prüfen</td>
-<td class="drawing-cell"><img src="../static/images/5.26.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.26.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_26 }}</td>
 <td>{{ protokol.oknok_5_26_lp }}</td>
@@ -1701,7 +1701,7 @@ Hint: Install window frame first. Mark with pen inner arera. Remove window. Stic
 提示：先安装窗框。用笔在内侧区域做标记。移除窗户。将反光带贴在窗框的中间</td>
 <td class="text-left">Reflexfolie REF 4-A-20x25 am Drehrahmen montieren und mit Schraubschutzfenster abdecken
 Hinweis: Fensterrahmen zuerst montieren, mit Stift markieren, abnehmen, Folie mittig kleben</td>
-<td class="drawing-cell"><img src="../static/images/5.27.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.27.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_27 }}</td>
 <td class="text-left">{{ protokol.oknok_5_27_remark }}</td>
@@ -1715,7 +1715,7 @@ Loctite colour Green</td>
 乐泰胶水：绿色</td>
 <td class="text-left">Schraubschutzfenster montieren und Schraube M4 mit LOCTITE 243 sichern
 Loctite-Farbe Grün</td>
-<td class="drawing-cell"><img src="../static/images/5.28.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.28.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_28 }}</td>
 <td class="text-left">{{ protokol.oknok_5_28_remark }}</td>
@@ -1734,7 +1734,7 @@ Adjusting at site</td>
 <td class="text-left">Halter mit Reflexlichtschranke PRK25C/4P-M12 montieren
 „0-Grad-Position“
 Justierung in Werk und vor Ort</td>
-<td class="drawing-cell"><img src="../static/images/5.29.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.29.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_29 }}</td>
 <td>{{ protokol.oknok_5_29_lp }}</td>
@@ -1752,7 +1752,7 @@ Mount and PE cable connected in front of swivel frame
 <td class="text-left">Erdkontakt (PE-Schleifkontakt) montieren
 PE-Kabel vorne am Schwenkrahmen anschließen
 (Justierung vor Ort)</td>
-<td class="drawing-cell"><img src="../static/images/5.30.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.30.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_30 }}</td>
 <td>{{ protokol.oknok_5_30_lp }}</td>
@@ -1772,7 +1772,7 @@ see conservation with protective wax</td>
 <td class="text-left">Kontaktfläche für Erdung geschliffen, farbfrei
 Riefen parallel zur Schwenkrichtung
 Siehe Konservierung mit Schutzwachs</td>
-<td class="drawing-cell"><img src="../static/images/5.31.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.31.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_31 }}</td>
 <td class="text-left">{{ protokol.oknok_5_31_remark }}</td>
@@ -1792,7 +1792,7 @@ anti-corrosion protection: e.g. spray PTFE</td>
 Unlackierte Fläche vorne und hinten am Drehrohr
 Fläche farbfrei
 Korrosionsschutz: z. B. PTFE-Spray</td>
-<td class="drawing-cell"><img src="../static/images/5.32.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.32.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_32 }}</td>
 <td class="text-left">{{ protokol.oknok_5_32_remark }}</td>
@@ -1803,7 +1803,7 @@ Korrosionsschutz: z. B. PTFE-Spray</td>
 <td class="text-left">Mount end stop and thighten screws M12x40-8.8-A2F, MA= 93Nm</td>
 <td class="text-left">安装端部挡块并拧紧M12x40-8.8-A2F螺钉，扭矩=93牛米</td>
 <td class="text-left">Endanschlag montieren, Schrauben M12x40-8.8-A2F anziehen, MA=93Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.33.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.33.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_33 }}</td>
 <td class="text-left">{{ protokol.oknok_5_33_remark }}</td>
@@ -1823,7 +1823,7 @@ thighten screws M8x40-8.8-A2F, MA=20 Nm</td>
 <td class="text-left">Zahnriemen gleichmäßig vorne und hinten aufziehen, einstellen, spannen
 Zahnriemenspannplatte:
 Schrauben M8x40-8.8-A2F, MA=20 Nm anziehen</td>
-<td class="drawing-cell"><img src="../static/images/5.34.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.34.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_5_34 }}</td>
 <td class="text-left">{{ protokol.oknok_5_34_remark }}</td>
@@ -1851,7 +1851,7 @@ Möglichkeiten zu richtigen oder falschen Einstellung.
 - Abstand der beiden montierten Schwenkbogenelemente in X
 - Position der Führungsrollen für Schwenkbogen in x
 - Position der Motorkonsole in X (Langlöcher im Rahmen)</td>
-<td class="drawing-cell"><img src="../static/images/5.35.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.35.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_35 }}</td>
 <td>{{ protokol.oknok_5_35_lp }}</td>
@@ -1868,7 +1868,7 @@ Attention !  MA=54Nm (plastic)</td>
 注意！最大扭矩=54牛米（塑料）</td>
 <td class="text-left">Riemenschutz um Zahnrad montieren
 Schrauben M12x70-8.8-A2F, MA=54Nm (Plastik)</td>
-<td class="drawing-cell"><img src="../static/images/5.36.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.36.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_36 }}</td>
 <td class="text-left">{{ protokol.oknok_5_36_remark }}</td>
@@ -1889,7 +1889,7 @@ Toothbelt should not scratch or should not be clamped !!</td>
 <td class="text-left">Abstand Zahnriemen zu Riemenschutz prüfen: 1 mm / +0,5 mm
 Bohrung zur Prüfung verwenden
 Kein Schleifen oder Klemmen!</td>
-<td class="drawing-cell"><img src="../static/images/5.37.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.37.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_37 }}</td>
 <td class="text-left">{{ protokol.oknok_5_37_remark }}</td>
@@ -1918,7 +1918,7 @@ Ablauf des Spannens:
 2. Gurt spannen, indem die 2 Bolzen mit gleichem Drehmoment gedreht werden, bis die Bandmarken auf 2002 /+ 1 mm gedehnt sind
 Achtung: Beide Bolzen sollten gleichmäßig angezogen werden
 Dehnung nach dem Spannen 2 mm / +1 mm</td>
-<td class="drawing-cell"><img src="../static/images/5.38.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.38.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_38 }}</td>
 <td>{{ protokol.oknok_5_38_lp }}</td>
@@ -1934,7 +1934,7 @@ Both ends shall have the same overlapping length, cut accordingly drawing (+ 20 
 两端应具有相同的重叠长度，根据图纸切割（+20毫米）</td>
 <td class="text-left">Beide Zahnriemenenden mit Überlappung in Halterung einführen
 Gleiche Überlappung, gemäß Zeichnung +20 mm zuschneiden</td>
-<td class="drawing-cell"><img src="../static/images/5.39.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.39.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_39 }}</td>
 <td class="text-left">{{ protokol.oknok_5_39_remark }}</td>
@@ -1965,7 +1965,7 @@ Gleiche Überlappung, gemäß Zeichnung +20 mm zuschneiden</td>
 (3) Hinten links: A5E50213833A
 
 (4) Hinten rechts: A5E49854984A</td>
-<td class="drawing-cell"><img src="../static/images/5.40.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.40.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_5_40 }}</td>
 <td class="text-left">{{ protokol.oknok_5_40_remark }}</td>
@@ -1982,7 +1982,7 @@ M10；MA=54牛米</td>
 <td class="text-left">Energiekette:
 Befestigung montieren
 M10, MA=54Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.41.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.41.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_41 }}</td>
 <td class="text-left">{{ protokol.oknok_5_41_remark }}</td>
@@ -1999,7 +1999,7 @@ M6；MA=11Nm</td>
 <td class="text-left">Energiekette:
 Trägerplatte montieren
 M6, MA=11Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.42.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.42.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_42 }}</td>
 <td class="text-left">{{ protokol.oknok_5_42_remark }}</td>
@@ -2018,7 +2018,7 @@ M5；扭矩=6.5牛米
 Energiekette montieren
 M5, MA=6,5Nm
 Montage nach IGUS-Zeichnung IQU52-00382956</td>
-<td class="drawing-cell"><img src="../static/images/5.43.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.43.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_5_43 }}</td>
 <td class="text-left">{{ protokol.oknok_5_43_remark }}</td>
@@ -2041,7 +2041,7 @@ Farben laut Bild:
 1 = LED-Lichtmodul 24VAC/DC CL, gelb
 2 = Wandhalterwinkel BK
 M6x16-8.8-A2F, MA=11Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.44.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.44.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>Leipzig</td>
 <td colspan="2">{{ protokol.oknok_5_44 }}</td>
 <td class="text-left">{{ protokol.oknok_5_44_remark }}</td>
@@ -2056,7 +2056,7 @@ Thighten counter nuts.</td>
 拧紧埋头螺母。</td>
 <td class="text-left">Spalt zwischen 4 Schrauben und Halterung für Relaisbox Bremse: 1 mm / +0,5 mm
 Kontermuttern anziehen</td>
-<td class="drawing-cell"><img src="../static/images/5.45.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.45.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_45 }}</td>
 <td class="text-left">{{ protokol.oknok_5_45_remark }}</td>
@@ -2071,7 +2071,7 @@ Bracket fits smoothly with its 4 keyholes smoothly into all 4 bolts</td>
 支架通过其4个锁孔与全部4个螺栓完美贴合</td>
 <td class="text-left">Befestigung der Relaisboxhalterung prüfen
 Halterung muss sauber in 4 Schrauben passen</td>
-<td class="drawing-cell"><img src="../static/images/5.46.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.46.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_46 }}</td>
 <td>{{ protokol.oknok_5_46_lp }}</td>
@@ -2094,7 +2094,7 @@ M16x220-8.8-A2F，MA=230Nm
 Nach Justierung anziehen
 M16x220-8.8-A2F, MA=230Nm
 Abstand zwischen Klemmenplatten und 90° prüfen</td>
-<td class="drawing-cell"><img src="../static/images/5.47.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.47.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_47 }}</td>
 <td>{{ protokol.oknok_5_47_lp }}</td>
@@ -2115,7 +2115,7 @@ M8，MA=27Nm</td>
 3 Seile über PA-Scheiben
 Seilrolle und Sicherungsplatte montieren
 Schraube M8, MA=27Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.48.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.48.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_48 }}</td>
 <td class="text-left">{{ protokol.oknok_5_48_remark }}</td>
@@ -2129,7 +2129,7 @@ Schraube M8, MA=27Nm</td>
 3个M8-8.8-A2F，扭矩=27牛米</td>
 <td class="text-left">Halterung für Seilencoder montiert und ausgerichtet für senkrechte Bewegung
 3x M8-8.8-A2F, MA=27Nm</td>
-<td class="drawing-cell"><img src="../static/images/5.49.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.49.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_5_49 }}</td>
 <td class="text-left">{{ protokol.oknok_5_49_remark }}</td>
@@ -2140,7 +2140,7 @@ Schraube M8, MA=27Nm</td>
 <td class="text-left">Screws are marked after thightening with torque marque, sealing paint. Red</td>
 <td class="text-left">螺丝拧紧后用扭矩标记、密封漆进行标记。红色</td>
 <td class="text-left">Schrauben nach dem Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
-<td class="drawing-cell"><img src="../static/images/5.50.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.50.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_50 }}</td>
 <td>{{ protokol.oknok_5_50_lp }}</td>
@@ -2158,7 +2158,7 @@ Special advice see file
 <td class="text-left">Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.
 Sonderhinweis siehe Datei
 <<250508_Loctite_TEMS_LPZ.xlsx>></td>
-<td class="drawing-cell"><img src="../static/images/5.51.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/5.51.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_5_51 }}</td>
 <td>{{ protokol.oknok_5_51_lp }}</td>
@@ -2177,7 +2177,7 @@ TEMS carrier RAL 7035 grey light</td>
 TEMS RAL 7035 灰光</td>
 <td class="text-left">Lackierung
 TEMS-Träger RAL 7035 lichtgrau</td>
-<td class="drawing-cell"><img src="../static/images/6.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_1 }}</td>
 <td class="text-left">{{ protokol.oknok_6_1_remark }}</td>
@@ -2188,7 +2188,7 @@ TEMS-Träger RAL 7035 lichtgrau</td>
 <td class="text-left">Is the paint qualified, visual inspection</td>
 <td class="text-left">通过目视检查，油漆是否合格</td>
 <td class="text-left">Ist die Lackierung qualifiziert? Sichtprüfung</td>
-<td class="drawing-cell"><img src="../static/images/6.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_2 }}</td>
 <td class="text-left">{{ protokol.oknok_6_2_remark }}</td>
@@ -2205,7 +2205,7 @@ base coat + top coat
 <td class="text-left">Schichtdicke per Sichtprüfung kontrollieren
 Grundierung + Decklack
 40+40 μm -> mind. 80 μm</td>
-<td class="drawing-cell"><img src="../static/images/6.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_3 }}</td>
 <td class="text-left">{{ protokol.oknok_6_3_remark }}</td>
@@ -2219,7 +2219,7 @@ type label of paint manufacturer ingredients</td>
 油漆制造商成分的类型标签</td>
 <td class="text-left">Prüfen, ob der Lack silikonfrei ist
 Typenetikett des Lackherstellers auf Inhaltsstoffe prüfen</td>
-<td class="drawing-cell"><img src="../static/images/6.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_4 }}</td>
 <td class="text-left">{{ protokol.oknok_6_4_remark }}</td>
@@ -2236,7 +2236,7 @@ Positions see A5E53621916A Page 4/4</td>
 <td class="text-left">Typenschild  A5E54370254A-TEMS
 1 xHeckbereich
 Positionen siehe A5E53621916A Seite 4/4</td>
-<td class="drawing-cell"><img src="../static/images/6.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_5 }}</td>
 <td class="text-left">{{ protokol.oknok_6_5_remark }}</td>
@@ -2256,7 +2256,7 @@ Positions see A5E53621916A Page 4/4</td>
 4x Unterrahmen Größe 110 x 200
 2x Oberrahmen Größe 80 x 145
 Positionen siehe A5E53621916A Seite 4/4</td>
-<td class="drawing-cell"><img src="../static/images/6.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_6 }}</td>
 <td class="text-left">{{ protokol.oknok_6_6_remark }}</td>
@@ -2273,7 +2273,7 @@ Positions see A5E53621916A Page 4/4</td>
 <td class="text-left">SIEMENS-Schilder:
 2x Unterrahmen rechts und links
 Positionen siehe A5E53621916A Seite 4/4</td>
-<td class="drawing-cell"><img src="../static/images/6.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_7 }}</td>
 <td class="text-left">{{ protokol.oknok_6_7_remark }}</td>
@@ -2290,7 +2290,7 @@ Positions see A5E53621916A Page 4/4</td>
 <td class="text-left">Nutzlastschild:
 2x Unterrahmen links und rechts
 Positionen siehe A5E53621916A Seite 4/4</td>
-<td class="drawing-cell"><img src="../static/images/6.8.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.8.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_8 }}</td>
 <td class="text-left">{{ protokol.oknok_6_8_remark }}</td>
@@ -2307,7 +2307,7 @@ Positions see A5E53621916A Page 4/4</td>
 <td class="text-left">Montageanleitungsschild A5E54347493A für Spannsatz an Abdeckung des Getriebeantriebs montieren
 1x aufkleben
 Positionen siehe A5E53621916A Seite 4/4</td>
-<td class="drawing-cell"><img src="../static/images/6.9.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.9.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_9 }}</td>
 <td class="text-left">{{ protokol.oknok_6_9_remark }}</td>
@@ -2327,7 +2327,7 @@ Positions see A5E53621916A Page 4/4</td>
 Schild A5E54464687A für INA RASEA40-XL-N Lager aufkleben
 2x aufkleben
 Positionen siehe A5E53621916A Seite 4/4</td>
-<td class="drawing-cell"><img src="../static/images/6.10.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.10.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_10 }}</td>
 <td class="text-left">{{ protokol.oknok_6_10_remark }}</td>
@@ -2347,7 +2347,7 @@ Positions see A5E53621916A Page 4/4</td>
 Schild A5E54368167A für Schrumpfscheibengetriebemotor der Hubvorrichtung aufkleben
 2x aufkleben
 Positionen siehe A5E53621916A Seite 4/4</td>
-<td class="drawing-cell"><img src="../static/images/6.11.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.11.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_6_11 }}</td>
 <td class="text-left">{{ protokol.oknok_6_11_remark }}</td>
@@ -2358,7 +2358,7 @@ Positionen siehe A5E53621916A Seite 4/4</td>
 <td class="text-left">Screws are marked after thightening with torque marque, sealing paint. Red</td>
 <td class="text-left">拧紧后，用扭矩标记和密封漆标记螺钉。红色</td>
 <td class="text-left">Schrauben nach dem Anziehen mit Drehmomentmarkierung und rotem Sicherungslack kennzeichnen</td>
-<td class="drawing-cell"><img src="../static/images/6.12.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.12.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_6_12 }}</td>
 <td>{{ protokol.oknok_6_12_lp }}</td>
@@ -2376,7 +2376,7 @@ Special advice see file
 <td class="text-left">Mit Loctite-Kleber befestigte Schrauben müssen grün markiert werden. Farbänderung nicht erlaubt.
 Sonderhinweis siehe Datei
 <<250508_Loctite_TEMS_LPZ.xlsx>></td>
-<td class="drawing-cell"><img src="../static/images/6.13.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/6.13.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_6_13 }}</td>
 <td>{{ protokol.oknok_6_13_lp }}</td>
@@ -2398,7 +2398,7 @@ Test Weight = 1760 kg</td>
 <td class="text-left">Lasttest mit Zuladung + 10 % statisch
 Zuladung 1600 kg + 160 kg
 Testgewicht = 1760 kg</td>
-<td class="drawing-cell"><img src="../static/images/7.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/7.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_7_1 }}</td>
 <td class="text-left">{{ protokol.oknok_7_1_remark }}</td>
@@ -2415,7 +2415,7 @@ Test Weight = 1760 kg</td>
 <td class="text-left">Lasttest mit Zuladung + 10 % dynamisch
 Zuladung 1600 kg + 160 kg
 Testgewicht = 1760 kg</td>
-<td class="drawing-cell"><img src="../static/images/7.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/7.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_7_2 }}</td>
 <td class="text-left">{{ protokol.oknok_7_2_remark }}</td>
@@ -2429,7 +2429,7 @@ Testgewicht = 1760 kg</td>
 1-40米/分钟</td>
 <td class="text-left">EMS-Träger manuell in X-Richtung fahren
 1–40 m/min</td>
-<td class="drawing-cell"><img src="../static/images/7.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/7.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_7_3 }}</td>
 <td class="text-left">{{ protokol.oknok_7_3_remark }}</td>
@@ -2443,7 +2443,7 @@ Testgewicht = 1760 kg</td>
 0-12米/分钟</td>
 <td class="text-left">Unteren EMS-Rahmen manuell in Z-Richtung anheben
 0–12 m/min</td>
-<td class="drawing-cell"><img src="../static/images/7.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/7.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_7_4 }}</td>
 <td class="text-left">{{ protokol.oknok_7_4_remark }}</td>
@@ -2457,7 +2457,7 @@ Deviation in Y direction (stroke ~4580 mm)</td>
 Y方向偏差（行程~4580 mm）</td>
 <td class="text-left">Vertikalbewegung des EMS-Trägers:
 Abweichung in Y-Richtung (Hubweg ~4580 mm)</td>
-<td class="drawing-cell"><img src="../static/images/7.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/7.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_7_5 }}</td>
 <td class="text-left">{{ protokol.oknok_7_5_remark }}</td>
@@ -2471,7 +2471,7 @@ Deviation in X direction (stroke ~4580 mm)</td>
 X方向偏差（行程~4580 mm）</td>
 <td class="text-left">Vertikalbewegung des EMS-Trägers:
 Abweichung in X-Richtung (Hubweg ~4580 mm)</td>
-<td class="drawing-cell"><img src="../static/images/7.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/7.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_7_6 }}</td>
 <td class="text-left">{{ protokol.oknok_7_6_remark }}</td>
@@ -2489,7 +2489,7 @@ max stroke 4.600 mm</td>
 最大行程4.600毫米</td>
 <td class="text-left">Funktionstest vollständiges Heben und Senken mit Kriechgeschwindigkeit bis zum maximalen Hubweg
 Maximaler Hub: 4.600 mm</td>
-<td class="drawing-cell"><img src="../static/images/8.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/8.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_8_1 }}</td>
 <td>{{ protokol.oknok_8_1_lp }}</td>
@@ -2503,7 +2503,7 @@ Maximaler Hub: 4.600 mm</td>
 <td class="text-left">测试完整的倾斜机构并调整端部止动器+/ - 110 °</td>
 <td class="text-left">Funktionstest der Schwenmechanik und Justierung der Endanschläge
 +/- 110°</td>
-<td class="drawing-cell"><img src="../static/images/8.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/8.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_8_2 }}</td>
 <td>{{ protokol.oknok_8_2_lp }}</td>
@@ -2521,7 +2521,7 @@ Right turned: 30°, 60°, 90°, 110°</td>
 <td class="text-left">Markierungen mit Bezug auf 0° prüfen
 Links gedreht: 30°, 60°, 90°, 110°
 Rechts gedreht: 30°, 60°, 90°, 110°</td>
-<td class="drawing-cell"><img src="../static/images/8.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/8.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_8_3 }}</td>
 <td>{{ protokol.oknok_8_3_lp }}</td>
@@ -2533,7 +2533,7 @@ Rechts gedreht: 30°, 60°, 90°, 110°</td>
 <td class="text-left">Check reflector folie position  at 0°</td>
 <td class="text-left">检查反射镜叶片在0°位置</td>
 <td class="text-left">Position der Reflexfolie bei 0° prüfen</td>
-<td class="drawing-cell"><img src="../static/images/8.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/8.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_8_4 }}</td>
 <td>{{ protokol.oknok_8_4_lp }}</td>
@@ -2545,7 +2545,7 @@ Rechts gedreht: 30°, 60°, 90°, 110°</td>
 <td class="text-left">Testing drive function</td>
 <td class="text-left">测试驱动功能</td>
 <td class="text-left">Funktionstest der Antriebseinheit</td>
-<td class="drawing-cell"><img src="../static/images/8.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/8.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN/<br>Leipzig</td>
 <td>{{ protokol.oknok_8_5 }}</td>
 <td>{{ protokol.oknok_8_5_lp }}</td>
@@ -2572,7 +2572,7 @@ FDAZS109-LE100ZLSA4P-L60/50NH
 2KJ3407-9FN23-4HD1-Z
 Anschlusskasten Position M64
 in Förderrichtung rechts</td>
-<td class="drawing-cell"><img src="../static/images/9.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_1 }}</td>
 <td class="text-left">{{ protokol.oknok_9_1_remark }}</td>
@@ -2596,7 +2596,7 @@ FDAZS109-LE100ZLSA4P-L60/50NH
 2KJ3407-9FN23-4HD1-Z
 Anschlusskasten Position M56
 in Förderrichtung links</td>
-<td class="drawing-cell"><img src="../static/images/9.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_2 }}</td>
 <td class="text-left">{{ protokol.oknok_9_2_remark }}</td>
@@ -2610,7 +2610,7 @@ KHF79-LE90ZLR4P-L8/6,3-IN</td>
 KHF79-LE90ZLR4P-L8/6,3英寸</td>
 <td class="text-left">Modell des Fahrmotors
 KHF79-LE90ZLR4P-L8/6,3-IN</td>
-<td class="drawing-cell"><img src="../static/images/9.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_3 }}</td>
 <td class="text-left">{{ protokol.oknok_9_3_remark }}</td>
@@ -2627,7 +2627,7 @@ SIMOGEAR FDAD49-LE80MH4P-L8/10NH
 <td class="text-left">Modell des Schwenkmotors
 SIMOGEAR FDAD49-LE80MH4P-L8/10NH
 in Förderrichtung → vorne</td>
-<td class="drawing-cell"><img src="../static/images/9.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_4 }}</td>
 <td class="text-left">{{ protokol.oknok_9_4_remark }}</td>
@@ -2644,7 +2644,7 @@ SIMOGEAR FDAD49-LE80MH4P-L8/10NH
 <td class="text-left">Modell des Schwenkmotors
 SIMOGEAR FDAD49-LE80MH4P-L8/10NH
 in Förderrichtung → hinten</td>
-<td class="drawing-cell"><img src="../static/images/9.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_5 }}</td>
 <td class="text-left">{{ protokol.oknok_9_5_remark }}</td>
@@ -2655,7 +2655,7 @@ in Förderrichtung → hinten</td>
 <td class="text-left">Fabrication No of lifting hoist</td>
 <td class="text-left">卷扬机制造编号</td>
 <td class="text-left">Fertigungsnummer des Hubwerks</td>
-<td class="drawing-cell"><img src="../static/images/9.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_6 }}</td>
 <td class="text-left">{{ protokol.oknok_9_6_remark }}</td>
@@ -2666,7 +2666,7 @@ in Förderrichtung → hinten</td>
 <td class="text-left">Welded parts marked with serial numbers for quality assurance according to EXC3 inspection (PT).</td>
 <td class="text-left">据EXC3检验（PT），标记有序列号的焊接部件用于质量保证。</td>
 <td class="text-left">Schweißteile mit laufenden Nummern gemäß EXC3-Prüfung (PT) für QS versehen:</td>
-<td class="drawing-cell"><img src="../static/images/9.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_remark }}</td>
@@ -2680,7 +2680,7 @@ Inner side of tube near welding plate</td>
 靠近焊接板的管子内侧</td>
 <td>Längstraverse des Schwenkbogens:
 Neben Schweißplatte auf Innenseite</td>
-<td class="drawing-cell"><img src="../static/images/9.7.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_1 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_1_remark }}</td>
@@ -2693,7 +2693,7 @@ at end of tilt bow</td>
 <td>在倾斜环的末端</td>
 <td>Schwenkbogen 
 in der Nähe der unteren Platte</td>
-<td class="drawing-cell"><img src="../static/images/9.7.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_2 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_2_remark }}</td>
@@ -2707,7 +2707,7 @@ at motor plate</td>
 在电机板上</td>
 <td>Fahrwerk: 
 an Motorplatte</td>
-<td class="drawing-cell"><img src="../static/images/9.7.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_3 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_3_remark }}</td>
@@ -2721,7 +2721,7 @@ Lower plate inner side</td>
 下板内侧</td>
 <td>Laufwerk: 
 Untere Platte Innenseite</td>
-<td class="drawing-cell"><img src="../static/images/9.7.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_4 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_4_remark }}</td>
@@ -2736,7 +2736,7 @@ outer side of plate for excentric rollers</td>
 <td>Oberrahmen
 Platte der Exzenterrollen
 Außenseite neben Exzenterrolle</td>
-<td class="drawing-cell"><img src="../static/images/9.7.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_5 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_5_remark }}</td>
@@ -2748,7 +2748,7 @@ Außenseite neben Exzenterrolle</td>
 <td>弯梁弧度</td>
 <td>Tragrollenbogen
 Mittig</td>
-<td class="drawing-cell"><img src="../static/images/9.7.6.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.6.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_6 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_6_remark }}</td>
@@ -2759,7 +2759,7 @@ Mittig</td>
 <td>Lower frame</td>
 <td>下框架</td>
 <td>Unterrahmen</td>
-<td class="drawing-cell"><img src="../static/images/9.7.7.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.7.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_7 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_7_remark }}</td>
@@ -2770,7 +2770,7 @@ Mittig</td>
 <td>Support frame</td>
 <td>支撑架</td>
 <td>Tragrahmen für Schwenkbogen</td>
-<td class="drawing-cell"><img src="../static/images/9.7.8.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/9.7.8.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_9_7_8 }}</td>
 <td class="text-left">{{ protokol.oknok_9_7_8_remark }}</td>
@@ -2788,7 +2788,7 @@ Same heigth for all carriers</td>
 所有发货的高度相同</td>
 <td class="text-left">Höhe der Holzklötze zwischen oberem und unterem Rahmen.
 Gleiche Höhe für alle Träger</td>
-<td class="drawing-cell"><img src="../static/images/10.1.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/10.1.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_10_1 }}</td>
 <td class="text-left">{{ protokol.oknok_10_1_remark }}</td>
@@ -2802,7 +2802,7 @@ Same heigth for all carriers</td>
 所有发货的高度相同</td>
 <td class="text-left">Höhe der Holzklötze zwischen Unterseite der Traversen und Oberkante von oberem und unterem Rahmen (vorne und hinten).
 Gleiche Höhe für alle Träger</td>
-<td class="drawing-cell"><img src="../static/images/10.2.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/10.2.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_10_2 }}</td>
 <td class="text-left">{{ protokol.oknok_10_2_remark }}</td>
@@ -2813,7 +2813,7 @@ Gleiche Höhe für alle Träger</td>
 <td class="text-left">The scattered components of each bracket are packed into cardboard box, and materials are placed in labeled plastic bag, added with english packing list including bracket number and parts position</td>
 <td class="text-left">将每个支架的零散组件装入纸箱，材料放入贴有标签的塑料袋中，并添加英文装箱单，包括支架编号和零件位置</td>
 <td class="text-left">Die zerlegten Komponenten jeder Halterung werden in einen Karton verpackt, Materialien in beschriftete Kunststoffbeutel gelegt und mit einer englischen Packliste versehen, die Halterungsnummer und Position der Teile enthält</td>
-<td class="drawing-cell"><img src="../static/images/10.3.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/10.3.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_10_3 }}</td>
 <td class="text-left">{{ protokol.oknok_10_3_remark }}</td>
@@ -2833,7 +2833,7 @@ see seperate file
 Wichtig in Zusammenhang mit Punkt 3.30
 Siehe separate Datei
 << Marking Guide Rollers for Transport.pdf >></td>
-<td class="drawing-cell"><img src="../static/images/10.4.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/10.4.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_10_4 }}</td>
 <td class="text-left">{{ protokol.oknok_10_4_remark }}</td>
@@ -2850,7 +2850,7 @@ Pivot bow disasembled parts must be numbered with carrier number and positon whe
 <td class="text-left">Nummerierung / Markierung
 Zerlegte Teile des Drehrahmens müssen mit Trägernummer und Einbauposition nummeriert werden, inklusive Ausgleichsbleche für einfaches Wiederzusammenbauen
 ← = Förderrichtung</td>
-<td class="drawing-cell"><img src="../static/images/10.5.png" class="drawing-img" alt="Drawing"></td>
+<td class="drawing-cell"><img src="{% static 'images/10.5.png' %}" class="drawing-img" alt="Drawing"></td>
 <td>CN</td>
 <td colspan="2">{{ protokol.oknok_10_5 }}</td>
 <td class="text-left">{{ protokol.oknok_10_5_remark }}</td>
