@@ -78,37 +78,40 @@
             <tbody>
               <!-- 10.2 row -->
               <tr>
-                <td>1.1</td>
-                <td>Front and rear buffer installed, Screws 12x30, </td>
-                <td>前后缓冲垫已安装，螺丝规格为12x30</td>
-                <td>Pufferanbauten vorne und hinten montiert, Schrauben 12x30</td>
+                <td>1.4</td>
+                <td>Carriage Check thightening of the clamping set travel drive unit to the drive wheel. Ringfeder RFN7012-55x85, MA=41Nm follow the assembly instructions RfN 7012. All screws at locking assembly are marked after thightening with torque marque, sealing paint</td>
+                <td>将夹紧装置的行程驱动单元拧紧到驱动轮上。环形齿轮 RFN7012-55x85，扭矩=41牛米 遵循装配说明RfN 7012 锁紧组件上的所有螺钉在拧紧后都会用扭矩标记和密封漆进行标记</td>
+                <td>"Fahrwerk Anzug des Spannsatzes des Fahrantriebs an das Antriebsrad prüfen. Ringfeder RFN7012-55x85, MA=41Nm Montageanleitung RFN 7012 befolgen. Alle Schrauben des Spannsatzes nach dem Anziehen mit Drehmomentmarkierung und Sicherungslack kennzeichnen</td>
                 <td class="thumb-cell">
                   <img src="{% static 'images/1.1.png' %}" alt="Drawing">
-                  <p>{{ protokol.oknok_1_1_soll }}</p>
+                  <p>{{ protokol.oknok_1_4_soll }}</p>
                 </td>
                 <td>CN</td>
                 <td>
-                  <input type="number" id="oknok_1_1_soll" name="oknok_1_1_soll"
+                  <input type="number" id="oknok_1_4_soll" name="oknok_1_4_soll"
                          class="form-control">
                 </td>
                 <td></td>
               </tr>
               
               <tr>
-                <td>1.2</td>
-                <td>Tighten Screws M10x50 /lubricated,after adjusting upper frame. </td>
-                <td>调整上框架后，拧紧M10x50螺钉</td>
-                <td>Schrauben M10x50 anziehen / geschmiert,nach Justierung des oberen Rahmens</td>
+                <td>3.7</td>
+                <td>Rope rocker centered,  distance between buffer and rocker on each side approx. 10mm tolerance  ±3mm. Attention: Correction only according to the adjustment instructions in the operating instructions</td>
+                <td>钢丝绳摇杆居中， 每侧缓冲器和摇杆之间的距离约为10mm. 公差±3mm. 注意：仅根据操作说明中的调整说明进行校正</td>
+                <td>Seilwippe zentriert, Abstand zwischen Puffer und Wippe auf beiden Seiten ca. 10mm. Toleranz ±3mm. Achtung: Korrektur nur gemäß Einstellanweisung in der Betriebsanleitung</td>
                 <td class="thumb-cell">
                   <img src="{% static 'images/1.2.png' %}" alt="Drawing">
-                  <p>{{ protokol.oknok_1_2_soll }}</p>
+                  <p> ~{{ protokol.check_size_3_7_soll}}mm +/- {{protokol.check_size_3_7_soll_avr}}</p>
                 </td>
                 <td>CN</td>
                 <td>
-                  <input type="number" id="oknok_1_2_soll" name="oknok_1_2_soll"
+                  <input type="number" id="check_size_3_7_soll" name="check_size_3_7_soll"
                          class="form-control">
                 </td>
-                <td></td>
+                <td>
+                  <input type="number" id="check_size_3_7_soll_avr" name="check_size_3_7_soll_avr"
+                    class="form-control">
+                </td>
               </tr>
               
               <tr>

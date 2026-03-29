@@ -20,7 +20,7 @@ class ProtocolHubzugLiftingHost(models.Model):
     oknok_1_3_soll = models.TextField(null=True, blank=True)
     oknok_1_3_remark = models.TextField(null=True, blank=True)
     oknok_1_4 = models.TextField(null=True, blank=True)
-    oknok_1_4_soll = models.TextField(null=True, blank=True)
+    oknok_1_4_soll = models.TextField(default = "461", null=True, blank=True)
     oknok_1_4_remark = models.TextField(null=True, blank=True)
     oknok_1_5 = models.TextField(null=True, blank=True)
     oknok_1_5_soll = models.TextField(null=True, blank=True)

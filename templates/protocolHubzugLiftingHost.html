@@ -202,7 +202,7 @@
                 <td>"Fahrwerk Anzug des Spannsatzes des Fahrantriebs an das Antriebsrad prüfen. Ringfeder RFN7012-55x85, MA=41Nm Montageanleitung RFN 7012 befolgen. Alle Schrauben des Spannsatzes nach dem Anziehen mit Drehmomentmarkierung und Sicherungslack kennzeichnen</td>
                 <td class="thumb-cell">
                   <img src="{% static 'images/1.4.png' %}" alt="Drawing">
-                  <p>MA=41 Nm</p>
+                  <p>MA={{protokol.oknok_1_4_soll}}</p>
                 </td>
                 <td>CN</td>
                 <td>
@@ -2080,7 +2080,7 @@
                 <td>Seilwippe zentriert, Abstand zwischen Puffer und Wippe auf beiden Seiten ca. 10mm. Toleranz ±3mm. Achtung: Korrektur nur gemäß Einstellanweisung in der Betriebsanleitung</td>
                 <td class="thumb-cell">
                   <img src="{% static 'images/3.7.png' %}" alt="Drawing">
-                  <p> ~10mm +/- 3</p>
+                  <p> ~{{ protokol.check_size_3_7_soll}}mm +/- {{protokol.check_size_3_7_soll_avr}}</p>
                 </td>
                 <td>CN</td>
                   <td>

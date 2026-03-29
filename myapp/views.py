@@ -1521,6 +1521,8 @@ def protocolHubzugLiftingHostSollWertUpdate(request, protocol_id):
         ('oknok_10_4_soll','oknok_10_4_soll'),
         ('oknok_10_5_soll','oknok_10_5_soll'),
 
+        ('check_size_3_7_soll', 'check_size_3_7_soll_avr'),
+
 
 
 
@@ -1591,6 +1593,14 @@ def protocolHubzugLiftingHostSollWertOffentlich(request, protocol_id):
         protokol = get_object_or_404(ProtocolHubzugLiftingHost, pk=protocol.id)
         print(protokol.isPermanentDone)
         protokol.isPermanentDone = protokol1.isPermanentDone
+
+        protokol.oknok_1_4_soll = protokol1.oknok_1_4_soll
+
+        protokol.check_size_3_7_soll = protokol1.check_size_3_7_soll
+        protokol.check_size_3_7_soll_avr = protokol1.check_size_3_7_soll_avr
+
+
+
 
         protokol.oknok_3_6_soll = protokol1.oknok_3_6_soll
         protokol.oknok_1_10_soll = protokol1.oknok_1_10_soll
