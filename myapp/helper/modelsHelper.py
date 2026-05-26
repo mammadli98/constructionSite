@@ -668,7 +668,7 @@ class ProtocolHubzugLaufSeiltrommel(models.Model):
     isExported = models.BooleanField(default=False)
     isCorrecturNeeded = models.BooleanField(default=False)
 
-    protocolName  = models.CharField(max_length=255, default="Lauf Seiltrommel")
+    protocolName  = models.CharField(max_length=255, default="Seperate parts list for each carrier")
     drawing = models.TextField(verbose_name="Zeichnung-Nr / Drawing No.", null=True, blank=True)
     rev = models.TextField(verbose_name="Rev", null=True, blank=True)
     order = models.TextField(verbose_name="Auftragsnr. / Order No.", null=True, blank=True)
@@ -699,7 +699,7 @@ class ProtocolHubzugMassSeiltrommel(models.Model):
     isExported = models.BooleanField(default=False)
     isCorrecturNeeded = models.BooleanField(default=False)
 
-    protocolName  = models.CharField(max_length=255, default="Mass Seiltrommel")
+    protocolName  = models.CharField(max_length=255, default="Checklist  TILT EMS - LAM Inspection Dimensions Assembly")
     drawing = models.TextField(verbose_name="Zeichnung-Nr / Drawing No.", null=True, blank=True)
     rev = models.TextField(verbose_name="Rev", null=True, blank=True)
     order = models.TextField(verbose_name="Auftragsnr. / Order No.", null=True, blank=True)

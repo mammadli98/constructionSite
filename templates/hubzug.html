@@ -115,6 +115,64 @@
             </td>
           </tr>
 
+          <!-- Protocol 3 -->
+          <tr class="protokol-container">
+            <td class="protokol-name">{{ hubzug.protocol2.protocolName }}</td>
+            <td>
+
+                <button class="protokol-button"
+                        onclick="location.href='{% url 'protocolHubzugLaufSeiltrommel' hubzug.protocol2.id %}?fahrzeugId={{ fahrzeug_id }}'">
+                  Bearbeiten
+                </button>
+            </td>
+            <td class="status-indicator">
+              {% if not hubzug.protocol2.isPermanentDone %}
+                <span class="circle black" title="Wartet auf Admin-Bestätigung"></span>
+              {% elif hubzug.protocol2.isExported %}
+                <span class="circle green" title="Abgeschlossen"></span>
+              {% elif hubzug.protocol2.isNacharbeitNeeded %}
+                <span class="circle orange" title="Nacharbeit erforderlich"></span>
+              {% elif hubzug.protocol2.isClosed %}
+              <span class="circle yellow" title="Zur Überprüfung"></span>
+              {% elif hubzug.protocol2.isCorrecturNeeded %}
+                <span class="circle red" title="Korrektur erforderlich"></span>
+              {% elif hubzug.protocol2.isSaved %}
+                <span class="circle blue" title="In Bearbeitung"></span>
+              {% else %}
+                <span class="circle gray" title="Offen"></span>
+              {% endif %}
+            </td>
+          </tr>
+
+          <!-- Protocol 4 -->
+          <tr class="protokol-container">
+            <td class="protokol-name">{{ hubzug.protocol3.protocolName }}</td>
+            <td>
+
+                <button class="protokol-button"
+                        onclick="location.href='{% url 'protocolHubzugMassSeiltrommel' hubzug.protocol3.id %}?fahrzeugId={{ fahrzeug_id }}'">
+                  Bearbeiten
+                </button>
+            </td>
+            <td class="status-indicator">
+              {% if not hubzug.protocol3.isPermanentDone %}
+                <span class="circle black" title="Wartet auf Admin-Bestätigung"></span>
+              {% elif hubzug.protocol3.isExported %}
+                <span class="circle green" title="Abgeschlossen"></span>
+              {% elif hubzug.protocol3.isNacharbeitNeeded %}
+                <span class="circle orange" title="Nacharbeit erforderlich"></span>
+              {% elif hubzug.protocol3.isClosed %}
+              <span class="circle yellow" title="Zur Überprüfung"></span>
+              {% elif hubzug.protocol3.isCorrecturNeeded %}
+                <span class="circle red" title="Korrektur erforderlich"></span>
+              {% elif hubzug.protocol3.isSaved %}
+                <span class="circle blue" title="In Bearbeitung"></span>
+              {% else %}
+                <span class="circle gray" title="Offen"></span>
+              {% endif %}
+            </td>
+          </tr>
+
         </tbody>
       </table>
     </div>
