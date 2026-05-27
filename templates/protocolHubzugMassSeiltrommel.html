@@ -83,6 +83,10 @@
             </thead>
             <tbody>
 
+              <tr class="section-header">
+    <td colspan="6"><strong>1. General</strong></td>
+</tr>
+
              
                 <tr>
                     <td>1.1</td>
@@ -110,11 +114,848 @@
                       </td>
                     <td>OBC</td>
                   </tr>
-                  
+
+                  <tr class="section-header">
+    <td colspan="6"><strong>2. Paint and Marking</strong></td>
+</tr>
+
+                  <tr>
+    <td>2.1</td>
+    <td>Colour:<br>RAL 7035 </td>
+    <td><br>RAL 7035<br></td>
+    <td>
+        <select id="oknok_2_1" name="oknok_2_1" class="select-control">
+          <option value="" {% if protokol.oknok_2_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_2_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_2_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_2_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_2_1_remark_1"
+               name="oknok_2_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_2_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>2.2</td>
+    <td>paint quality; visual inspection<br>油漆质量；目视检查</td>
+    <td>equally</td>
+    <td>
+        <select id="oknok_2_2" name="oknok_2_2" class="select-control">
+          <option value="" {% if protokol.oknok_2_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_2_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_2_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_2_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_2_2_remark_1"
+               name="oknok_2_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_2_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>2.3</td>
+    <td>Layer thickness, visual inspection<br>油漆厚度</td>
+    <td>40 µm Priming coat<br>40 µm Lack</td>
+    <td>
+        <select id="oknok_2_3" name="oknok_2_3" class="select-control">
+          <option value="" {% if protokol.oknok_2_3 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_2_3 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_2_3 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_2_3 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_2_3_remark_1"
+               name="oknok_2_3_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_2_3_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+  <tr class="section-header">
+    <td colspan="6"><strong>3. Carrier Arms (Load carrying device)</strong></td>
+</tr>
 
 
-              
-              
+<tr>
+    <td>3.1</td>
+    <td>Support Assembly assembly front left<br>左前支架总成 A5E50206207A</td>
+    <td></td>
+    <td>
+        <select id="oknok_3_1" name="oknok_3_1" class="select-control">
+          <option value="" {% if protokol.oknok_3_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_3_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_3_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_3_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_3_1_remark_1"
+               name="oknok_3_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_3_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>3.2</td>
+    <td>Support Assembly assembly front right<br>右前支架总成 A5E50033920A</td>
+    <td></td>
+    <td>
+        <select id="oknok_3_2" name="oknok_3_2" class="select-control">
+          <option value="" {% if protokol.oknok_3_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_3_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_3_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_3_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_3_2_remark_1"
+               name="oknok_3_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_3_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>3.3</td>
+    <td>Support Assembly assembly rear left<br>左后支架总成 A5E50213833A</td>
+    <td></td>
+    <td>
+        <select id="oknok_3_3" name="oknok_3_3" class="select-control">
+          <option value="" {% if protokol.oknok_3_3 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_3_3 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_3_3 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_3_3 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_3_3_remark_1"
+               name="oknok_3_3_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_3_3_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>3.4</td>
+    <td>Support Assembly assembly rear right <br>右后支架总成 A5E49854984A</td>
+    <td></td>
+    <td>
+        <select id="oknok_3_4" name="oknok_3_4" class="select-control">
+          <option value="" {% if protokol.oknok_3_4 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_3_4 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_3_4 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_3_4 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_3_4_remark_1"
+               name="oknok_3_4_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_3_4_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>3.1</td>
+    <td>Visual inspection of welding seams<br>焊缝目视检查</td>
+    <td>acc. Drawing</td>
+    <td>
+        <select id="oknok_3_1_2" name="oknok_3_1_2" class="select-control">
+          <option value="" {% if protokol.oknok_3_1_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_3_1_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_3_1_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_3_1_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_3_1_2_remark_1"
+               name="oknok_3_1_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_3_1_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>3.2</td>
+    <td>Inspection demension welding and machined parts<br>检查焊接和机加工零件的尺寸</td>
+    <td>acc. Drawing</td>
+    <td>
+        <select id="oknok_3_2_2" name="oknok_3_2_2" class="select-control">
+          <option value="" {% if protokol.oknok_3_2_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_3_2_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_3_2_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_3_2_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_3_2_2_remark_1"
+               name="oknok_3_2_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_3_2_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+  <tr class="section-header">
+    <td colspan="6"><strong>4. Inspection Dimension Load carrying device for car body type F40, F54</strong></td>
+</tr>
+
+<tr>
+    <td>4.1</td>
+    <td>Load carrying device y-direction<br>承载装置y方向</td>
+    <td>1244±1</td>
+    <td>
+        <select id="oknok_4_1" name="oknok_4_1" class="select-control">
+          <option value="" {% if protokol.oknok_4_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_1_remark_1"
+               name="oknok_4_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>4.2</td>
+    <td>Load carrying device y-direction<br>承载装置y方向</td>
+    <td>1244 ±1</td>
+    <td>
+        <select id="oknok_4_2" name="oknok_4_2" class="select-control">
+          <option value="" {% if protokol.oknok_4_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_2_remark_1"
+               name="oknok_4_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>4.3</td>
+    <td>Load carrying device x-direction<br>承载装置x方向</td>
+    <td>2610 ±1</td>
+    <td>
+        <select id="oknok_4_3" name="oknok_4_3" class="select-control">
+          <option value="" {% if protokol.oknok_4_3 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_3 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_3 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_3 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_3_remark_1"
+               name="oknok_4_3_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_3_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>4.4</td>
+    <td>Load carrying device x-direction<br>承载装置x方向</td>
+    <td>2610 ±1</td>
+    <td>
+        <select id="oknok_4_4" name="oknok_4_4" class="select-control">
+          <option value="" {% if protokol.oknok_4_4 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_4 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_4 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_4 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_4_remark_1"
+               name="oknok_4_4_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_4_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>4.5</td>
+    <td>Load carrying device diagonal</td>
+    <td>2891±1,5</td>
+    <td>
+        <select id="oknok_4_5" name="oknok_4_5" class="select-control">
+          <option value="" {% if protokol.oknok_4_5 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_5 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_5 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_5 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_5_remark_1"
+               name="oknok_4_5_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_5_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>4.6</td>
+    <td>Load carrying device diagonal</td>
+    <td>2891±1,5</td>
+    <td>
+        <select id="oknok_4_6" name="oknok_4_6" class="select-control">
+          <option value="" {% if protokol.oknok_4_6 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_6 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_6 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_6 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_6_remark_1"
+               name="oknok_4_6_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_6_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>4.7</td>
+    <td>Load carrying device diagonal<br>承载装置对角线</td>
+    <td>2948±1,5</td>
+    <td>
+        <select id="oknok_4_7" name="oknok_4_7" class="select-control">
+          <option value="" {% if protokol.oknok_4_7 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_7 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_7 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_7 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_7_remark_1"
+               name="oknok_4_7_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_7_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>4.8</td>
+    <td>Load carrying device diagonal<br>承载装置对角线</td>
+    <td>2948±1,5</td>
+    <td>
+        <select id="oknok_4_8" name="oknok_4_8" class="select-control">
+          <option value="" {% if protokol.oknok_4_8 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_4_8 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_4_8 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_4_8 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_4_8_remark_1"
+               name="oknok_4_8_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_4_8_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+
+<tr class="section-header">
+    <td colspan="6"><strong>5. Inspection Support Assembly</strong></td>
+</tr>
+
+<tr>
+    <td>5.1</td>
+    <td>rotation angle right<br>向右旋转角度</td>
+    <td>110°</td>
+    <td>
+        <select id="oknok_5_1" name="oknok_5_1" class="select-control">
+          <option value="" {% if protokol.oknok_5_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_5_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_5_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_5_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_5_1_remark_1"
+               name="oknok_5_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_5_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>5.2</td>
+    <td>rotation angle left<br>向左旋转角度</td>
+    <td>110°</td>
+    <td>
+        <select id="oknok_5_2" name="oknok_5_2" class="select-control">
+          <option value="" {% if protokol.oknok_5_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_5_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_5_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_5_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_5_2_remark_1"
+               name="oknok_5_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_5_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+  <tr class="section-header">
+    <td colspan="6"><strong>6. Inspection of the height in the direction of the shots towards each other</strong></td>
+</tr>
+
+<tr>
+    <td>6.1</td>
+    <td>all 4 holders must be mounted flat to each other with a tolerance of ±1mm<br>所有4个支架必须彼此平齐安装，公差为±1mm</td>
+    <td>Level ±1</td>
+    <td>
+        <select id="oknok_6_1" name="oknok_6_1" class="select-control">
+          <option value="" {% if protokol.oknok_6_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_6_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_6_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_6_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_6_1_remark_1"
+               name="oknok_6_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_6_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+  <tr class="section-header">
+    <td colspan="6"><strong>7. Inspection distance clamping the paint bar through the Support Assembly assembly</strong></td>
+</tr>
+
+<tr>
+    <td>7.1</td>
+    <td>Support Assembly assembly front left<br>左前支架总成 A5E50206207A</td>
+    <td>44,8 0/+1</td>
+    <td>
+        <select id="oknok_7_1" name="oknok_7_1" class="select-control">
+          <option value="" {% if protokol.oknok_7_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_1_remark_1"
+               name="oknok_7_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>7.1</td>
+    <td>Support Assembly assembly front right <br>右前支架总成  A5E50033920A</td>
+    <td>44,8 0/+1</td>
+    <td>
+        <select id="oknok_7_1_2" name="oknok_7_1_2" class="select-control">
+          <option value="" {% if protokol.oknok_7_1_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_1_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_1_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_1_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_1_2_remark_1"
+               name="oknok_7_1_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_1_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>7.1</td>
+    <td>Support Assembly assembly rear left<br>左后支架总成 A5E50213833A</td>
+    <td>44,8 0/+1</td>
+    <td>
+        <select id="oknok_7_1_3" name="oknok_7_1_3" class="select-control">
+          <option value="" {% if protokol.oknok_7_1_3 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_1_3 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_1_3 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_1_3 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_1_3_remark_1"
+               name="oknok_7_1_3_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_1_3_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>7.1</td>
+    <td>Support Assembly assembly rear right<br>右后支架总成 A5E49854984A</td>
+    <td>44,8 0/+1</td>
+    <td>
+        <select id="oknok_7_1_4" name="oknok_7_1_4" class="select-control">
+          <option value="" {% if protokol.oknok_7_1_4 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_1_4 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_1_4 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_1_4 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_1_4_remark_1"
+               name="oknok_7_1_4_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_1_4_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>7.2</td>
+    <td>Support Assembly assembly front left <br>左前支架总成A5E50206207A</td>
+    <td>1,5 0/+0,5</td>
+    <td>
+        <select id="oknok_7_2" name="oknok_7_2" class="select-control">
+          <option value="" {% if protokol.oknok_7_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_2_remark_1"
+               name="oknok_7_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>7.2</td>
+    <td>Support Assembly assembly front right  <br>右前支架总成A5E50033920A</td>
+    <td>1,5 0/+0,5</td>
+    <td>
+        <select id="oknok_7_2_2" name="oknok_7_2_2" class="select-control">
+          <option value="" {% if protokol.oknok_7_2_2 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_2_2 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_2_2 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_2_2 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_2_2_remark_1"
+               name="oknok_7_2_2_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_2_2_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>7.2</td>
+    <td>Support Assembly assembly rear left <br>左后支架总成A5E50213833A</td>
+    <td>1,5 0/+0,5</td>
+    <td>
+        <select id="oknok_7_2_3" name="oknok_7_2_3" class="select-control">
+          <option value="" {% if protokol.oknok_7_2_3 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_2_3 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_2_3 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_2_3 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_2_3_remark_1"
+               name="oknok_7_2_3_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_2_3_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>7.2</td>
+    <td>Support Assembly assembly rear right <br>右后支架总成A5E49854984A</td>
+    <td>1,5 0/+0,5</td>
+    <td>
+        <select id="oknok_7_2_4" name="oknok_7_2_4" class="select-control">
+          <option value="" {% if protokol.oknok_7_2_4 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_7_2_4 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_7_2_4 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_7_2_4 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_7_2_4_remark_1"
+               name="oknok_7_2_4_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_7_2_4_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+  <tr class="section-header">
+    <td colspan="6"><strong>8. Dokumentation</strong></td>
+</tr>
+
+<tr>
+    <td>8.1</td>
+    <td>This checklist is supplied filled out<br>此检查表已填写</td>
+    <td></td>
+    <td>
+        <select id="oknok_8_1" name="oknok_8_1" class="select-control">
+          <option value="" {% if protokol.oknok_8_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_8_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_8_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_8_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_8_1_remark_1"
+               name="oknok_8_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_8_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+  <tr class="section-header">
+    <td colspan="6"><strong>9. Versand</strong></td>
+</tr>
+
+<tr>
+    <td>9.1</td>
+    <td>individual components per hanger packed in cardboard boxes, material in labeled bags, packing list with LAM number and position of the parts<br>每个吊架的单个组件装在纸箱中，材料装在标签袋中，装箱单上有LAM编号和零件位置</td>
+    <td></td>
+    <td>
+        <select id="oknok_9_1" name="oknok_9_1" class="select-control">
+          <option value="" {% if protokol.oknok_9_1 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_9_1 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_9_1 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_9_1 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_9_1_remark_1"
+               name="oknok_9_1_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_9_1_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+<tr>
+    <td>9.3</td>
+    <td>Shiny parts preserved<br>亮光部分保存</td>
+    <td></td>
+    <td>
+        <select id="oknok_9_3" name="oknok_9_3" class="select-control">
+          <option value="" {% if protokol.oknok_9_3 is none %}selected{% endif %}></option>
+          <option value="OK" {% if protokol.oknok_9_3 == 'OK' %}selected{% endif %}>OK</option>
+          <option value="NOK" {% if protokol.oknok_9_3 == 'NOK' %}selected{% endif %}>NOK</option>
+          {% if current_user.pruefer == True %}
+          <option value="AOK" {% if protokol.oknok_9_3 == 'AOK' %}selected{% endif %}>AOK</option>
+          {% endif %}
+        </select>
+      </td>
+      <td>
+        <input type="text"
+               id="oknok_9_3_remark_1"
+               name="oknok_9_3_remark_1"
+               minlength="3"
+               maxlength="20"
+               class="form-control"
+               value="{{ protokol.oknok_9_3_remark_1|default_if_none:'' }}">
+      </td>
+    <td>OBC</td>
+  </tr>
+
+
 
               <tr>
                 <td><input type="text" id="korrektur" name="korrektur" style="display:none;" value=""></td>

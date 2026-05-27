@@ -94,50 +94,32 @@
             <tbody>
 
              
-                <tr>
-                    <td>1</td>
-                    <td>Hanger assembly</td>
-                  
-                    <!-- Packing no gilt für 2 Zeilen -->
-                    <td rowspan="4" class="packing-no">1</td>
-                  
-                    <td>A5E54397236A-1</td>
-                    <td>holder-controlbox</td>
-                    <td>1</td>
-                    <td>OBC bracket</td>
-                    <td rowspan="4" class="packing-no">Screw assembly on the bracket  螺丝装在支架上</td>
-                    <td rowspan="4" class="packing-no thumb-cell">
-                        <img src="{% static 'images/1.2.png' %}" alt="Drawing">
-                    </td>
-                    <td>
-                        <select id="oknok_1_1" name="oknok_1_1" class="select-control">
-                          <option value="" {% if protokol.oknok_1_1 is none %}selected{% endif %}></option>
-                          <option value="OK" {% if protokol.oknok_1_1 == 'OK' %}selected{% endif %}>OK</option>
-                          <option value="NOK" {% if protokol.oknok_1_1 == 'NOK' %}selected{% endif %}>NOK</option>
-                          {% if current_user.pruefer == True %}
-                          <option value="AOK" {% if protokol.oknok_1_1 == 'AOK' %}selected{% endif %}>AOK</option>
-                          {% endif %}
-                        </select>
-                      </td>
-                    <td>
-                      <input type="text"
-                             id="oknok_1_1_remark_1"
-                             name="oknok_1_1_remark_1"
-                             minlength="3"
-                             maxlength="20"
-                             class="form-control"
-                             value="{{ protokol.oknok_1_1_remark_1|default_if_none:'' }}">
-                    </td>
-                  </tr>
+                                  <!-- CSS für Excel-ähnliche mittige rowspan-Zellen -->
+<style>
+.rowspan-middle {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.thumb-cell img {
+    display: block;
+    margin: auto;
+}
+</style>
 
                   <tr>
                     <td>1</td>
                     <td>Hanger assembly</td>
+                    <td rowspan="4" class="packing-no rowspan-middle">1</td>
                     <td>A5E54397236A-1</td>
                     <td>holder-controlbox</td>
                     <td>1</td>
-                    <td>OBC</td>
-                    <td>
+                    <td>OBC bracket</td>
+                    <td rowspan="4" class="packing-no rowspan-middle">Screw assembly on the bracket<br><br>螺丝装在支架上</td>
+                    <td rowspan="4" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/1.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="4" class="rowspan-middle">
                         <select id="oknok_1_1" name="oknok_1_1" class="select-control">
                           <option value="" {% if protokol.oknok_1_1 is none %}selected{% endif %}></option>
                           <option value="OK" {% if protokol.oknok_1_1 == 'OK' %}selected{% endif %}>OK</option>
@@ -146,8 +128,8 @@
                           <option value="AOK" {% if protokol.oknok_1_1 == 'AOK' %}selected{% endif %}>AOK</option>
                           {% endif %}
                         </select>
-                      </td>
-                    <td>
+                    </td>
+                    <td rowspan="4" class="rowspan-middle">
                       <input type="text"
                              id="oknok_1_1_remark_1"
                              name="oknok_1_1_remark_1"
@@ -157,8 +139,488 @@
                              value="{{ protokol.oknok_1_1_remark_1|default_if_none:'' }}">
                     </td>
                   </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E54397236A-2</td>
+                    <td>holder-controlbox</td>
+                    <td>1</td>
+                    <td>OBC bracket</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E54397236A-3</td>
+                    <td>holder-controlbox</td>
+                    <td>1</td>
+                    <td>OBC bracket</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E54397236A-4</td>
+                    <td>holder-controlbox</td>
+                    <td>1</td>
+                    <td>OBC bracket</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Hanger assembly</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">2</td>
+                    <td>A5E46801453A-1</td>
+                    <td>bracket-inverter</td>
+                    <td>1</td>
+                    <td>Frequency converter bracket</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">Screw assembly on the bracket<br><br>螺丝装在支架上</td>
+                    <td rowspan="2" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/2.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                        <select id="oknok_5_1" name="oknok_5_1" class="select-control">
+                          <option value="" {% if protokol.oknok_5_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_5_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_5_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_5_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_5_1_remark_1"
+                             name="oknok_5_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_5_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E46801453A-2</td>
+                    <td>handle</td>
+                    <td>2</td>
+                    <td>Frequency converter bracket</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Hanger assembly</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">3</td>
+                    <td>A5E54495606A-1</td>
+                    <td>bracket-SMGM</td>
+                    <td>1</td>
+                    <td>SMGM bracket</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">Screw assembly on the bracket<br><br>螺丝装在支架上</td>
+                    <td rowspan="2" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/3.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                        <select id="oknok_7_1" name="oknok_7_1" class="select-control">
+                          <option value="" {% if protokol.oknok_7_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_7_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_7_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_7_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_7_1_remark_1"
+                             name="oknok_7_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_7_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E54495606A-2</td>
+                    <td>bracket-SMGM</td>
+                    <td>2</td>
+                    <td>SMGM bracket</td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>Hanger assembly</td>
+                    <td rowspan="3" class="packing-no rowspan-middle">4</td>
+                    <td>A5E54019957A-1</td>
+                    <td>Bracket for IR Box</td>
+                    <td>1</td>
+                    <td>IR bracket</td>
+                    <td rowspan="3" class="packing-no rowspan-middle">Screw assembly on the bracket<br><br>螺丝装在支架上</td>
+                    <td rowspan="3" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/4.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="3" class="rowspan-middle">
+                        <select id="oknok_9_1" name="oknok_9_1" class="select-control">
+                          <option value="" {% if protokol.oknok_9_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_9_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_9_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_9_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="3" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_9_1_remark_1"
+                             name="oknok_9_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_9_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E54019957A-2</td>
+                    <td>Bracket for IR Box</td>
+                    <td>2</td>
+                    <td>IR bracket</td>
+                  </tr>
+                  <tr>
+                    <td>11</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E54019957A-3</td>
+                    <td>Bracket for IR Box</td>
+                    <td>1</td>
+                    <td>IR bracket</td>
+                  </tr>
+                  <tr>
+                    <td>12</td>
+                    <td>Hanger assembly</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">5</td>
+                    <td>A5E53860814A-1</td>
+                    <td>bracket-inverter</td>
+                    <td>1</td>
+                    <td>Frequency converter bracket</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">Screw assembly on the bracket<br><br>螺丝装在支架上</td>
+                    <td rowspan="2" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/5.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                        <select id="oknok_12_1" name="oknok_12_1" class="select-control">
+                          <option value="" {% if protokol.oknok_12_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_12_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_12_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_12_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_12_1_remark_1"
+                             name="oknok_12_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_12_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>13</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E53860814A-2</td>
+                    <td>handle</td>
+                    <td>2</td>
+                    <td>Frequency converter bracket</td>
+                  </tr>
+                  <tr>
+                    <td>14</td>
+                    <td>Hanger assembly</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">6</td>
+                    <td>A5E53860824A-1</td>
+                    <td>bracket-inverter</td>
+                    <td>2</td>
+                    <td>Frequency converter bracket</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">Screw assembly on the bracket<br><br>螺丝装在支架上</td>
+                    <td rowspan="2" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/6.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                        <select id="oknok_14_1" name="oknok_14_1" class="select-control">
+                          <option value="" {% if protokol.oknok_14_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_14_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_14_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_14_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_14_1_remark_1"
+                             name="oknok_14_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_14_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>15</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E53860824A-2</td>
+                    <td>handle</td>
+                    <td>4</td>
+                    <td>Frequency converter bracket</td>
+                  </tr>
+                  <tr>
+                    <td>16</td>
+                    <td>Hanger assembly</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">7</td>
+                    <td>A5E54356739A-1</td>
+                    <td>Bracket for brake relay</td>
+                    <td>1</td>
+                    <td>Relay bracket</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">Screw assembly on the bracket<br><br>螺丝装在支架上</td>
+                    <td rowspan="2" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/7.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                        <select id="oknok_16_1" name="oknok_16_1" class="select-control">
+                          <option value="" {% if protokol.oknok_16_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_16_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_16_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_16_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_16_1_remark_1"
+                             name="oknok_16_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_16_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>17</td>
+                    <td>Hanger assembly</td>
+                    <td>A5E54356739A-2</td>
+                    <td>Roundbar </td>
+                    <td>2</td>
+                    <td>Relay bracket</td>
+                  </tr>
+                  <tr>
+                    <td>18</td>
+                    <td>Swivel frame assembly</td>
+                    <td class="packing-no rowspan-middle">8</td>
+                    <td>A5E53754417A</td>
+                    <td>Stiffener</td>
+                    <td>2</td>
+                    <td>Bow  support</td>
+                    <td class="packing-no rowspan-middle">separate packing<br>散件打包</td>
+                    <td class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/8.2.png' %}" alt="Drawing">
+                    </td>
+                    <td class="rowspan-middle">
+                        <select id="oknok_18_1" name="oknok_18_1" class="select-control">
+                          <option value="" {% if protokol.oknok_18_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_18_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_18_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_18_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_18_1_remark_1"
+                             name="oknok_18_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_18_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>19</td>
+                    <td>Swivel frame assembly</td>
+                    <td rowspan="3" class="packing-no rowspan-middle">9</td>
+                    <td>A5E53754260A</td>
+                    <td>Bow</td>
+                    <td>2</td>
+                    <td>Bow</td>
+                    <td rowspan="3" class="packing-no rowspan-middle">separate wooden box<br>单独木箱</td>
+                    <td rowspan="3" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/9.2.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="3" class="rowspan-middle">
+                        <select id="oknok_19_1" name="oknok_19_1" class="select-control">
+                          <option value="" {% if protokol.oknok_19_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_19_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_19_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_19_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="3" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_19_1_remark_1"
+                             name="oknok_19_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_19_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>20</td>
+                    <td>Swivel frame assembly</td>
+                    <td>A5E30131877A</td>
+                    <td>pressing plate</td>
+                    <td>4</td>
+                    <td>plate</td>
+                  </tr>
+                  <tr>
+                    <td>21</td>
+                    <td>Swivel frame assembly</td>
+                    <td>A5E30131581A</td>
+                    <td>clamping plate</td>
+                    <td>4</td>
+                    <td>plate</td>
+                  </tr>
+                  <tr>
+                    <td>22</td>
+                    <td>Swivel frame assembly</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">10</td>
+                    <td>A5E54321640A</td>
+                    <td>bumper plate</td>
+                    <td>4</td>
+                    <td>bumper</td>
+                    <td rowspan="2" class="packing-no rowspan-middle">separate packing<br>散件打包</td>
+                    <td rowspan="2" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/sep/image10.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                        <select id="oknok_22_1" name="oknok_22_1" class="select-control">
+                          <option value="" {% if protokol.oknok_22_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_22_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_22_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_22_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="2" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_22_1_remark_1"
+                             name="oknok_22_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_22_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>23</td>
+                    <td>Swivel frame assembly</td>
+                    <td>A5E54486904A</td>
+                    <td>belt</td>
+                    <td>2</td>
+                    <td>belt</td>
+                  </tr>
+                  <tr>
+                    <td>24</td>
+                    <td>Swivel frame assembly</td>
+                    <td rowspan="4" class="packing-no rowspan-middle">11</td>
+                    <td>A5E49854984A</td>
+                    <td>backside right</td>
+                    <td>1</td>
+                    <td>Tilt</td>
+                    <td rowspan="4" class="packing-no rowspan-middle">assembly with screw<br>散件打包</td>
+                    <td rowspan="4" class="packing-no rowspan-middle thumb-cell">
+                        <img src="{% static 'images/sep/image11.png' %}" alt="Drawing">
+                    </td>
+                    <td rowspan="4" class="rowspan-middle">
+                        <select id="oknok_24_1" name="oknok_24_1" class="select-control">
+                          <option value="" {% if protokol.oknok_24_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_24_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_24_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_24_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td rowspan="4" class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_24_1_remark_1"
+                             name="oknok_24_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_24_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>25</td>
+                    <td>Swivel frame assembly</td>
+                    <td>A5E50033920A</td>
+                    <td>front right</td>
+                    <td>1</td>
+                    <td>Tilt</td>
+                  </tr>
+                  <tr>
+                    <td>26</td>
+                    <td>Swivel frame assembly</td>
+                    <td>A5E50206207A</td>
+                    <td>front left</td>
+                    <td>1</td>
+                    <td>Tilt</td>
+                  </tr>
+                  <tr>
+                    <td>27</td>
+                    <td>Swivel frame assembly</td>
+                    <td>A5E50213833A</td>
+                    <td>backside left</td>
+                    <td>1</td>
+                    <td>Tilt</td>
+                  </tr>
+                  <tr>
+                    <td>28</td>
+                    <td>upper frame roller</td>
+                    <td class="packing-no rowspan-middle">12</td>
+                    
+                    <td>A5E53211091A</td>
+                    <td>Guide roller</td>
+                    <td>4</td>
+                    <td>Roller</td>
+                    <td class="packing-no rowspan-middle">assembly with screw<br>螺丝已安装好<br>散件打包</td>
+                    <td rowspan="4" class="rowspan-middle thumb-cell">
+                       <img src="{% static 'images/sep/image12.png' %}" alt="Drawing">
+                    </td>
+                    <td class="rowspan-middle">
+                        <select id="oknok_28_1" name="oknok_28_1" class="select-control">
+                          <option value="" {% if protokol.oknok_28_1 is none %}selected{% endif %}></option>
+                          <option value="OK" {% if protokol.oknok_28_1 == 'OK' %}selected{% endif %}>OK</option>
+                          <option value="NOK" {% if protokol.oknok_28_1 == 'NOK' %}selected{% endif %}>NOK</option>
+                          {% if current_user.pruefer == True %}
+                          <option value="AOK" {% if protokol.oknok_28_1 == 'AOK' %}selected{% endif %}>AOK</option>
+                          {% endif %}
+                        </select>
+                    </td>
+                    <td class="rowspan-middle">
+                      <input type="text"
+                             id="oknok_28_1_remark_1"
+                             name="oknok_28_1_remark_1"
+                             minlength="3"
+                             maxlength="20"
+                             class="form-control"
+                             value="{{ protokol.oknok_28_1_remark_1|default_if_none:'' }}">
+                    </td>
+                  </tr>
                   
-
 
               
               
